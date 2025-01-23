@@ -5,6 +5,7 @@ import { ImageCss } from "../image/Image";
 import { TextInput } from "../inputs/input";
 import { Text } from "../text/text";
 import useSound from "use-sound";
+import { useStore } from "@/lib/store";
 
 export type TGuessCard = {
   audioSrc: string;
@@ -18,6 +19,8 @@ export const GuessCard = ({ card }: { card: TGuessCard }) => {
   const [play] = useSound(card.audioSrc);
   const [value, setValue] = useState("");
   const [alert, setAlert] = useState<AlertStatus>("neutral");
+  const setLife = useStore((store) => store.setLife);
+  const setScore = useStore((store) => store.setScore);
 
   function handleEnter() {
     if (
@@ -26,8 +29,10 @@ export const GuessCard = ({ card }: { card: TGuessCard }) => {
       )
     ) {
       setAlert("ok");
+      setScore();
     } else {
       setAlert("nok");
+      setLife("sub");
     }
     setValue("");
   }

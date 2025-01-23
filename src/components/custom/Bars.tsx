@@ -4,7 +4,7 @@ import { FlexR } from "@/components/containers/flex";
 
 export const Bars = () => {
   return (
-    <ButtonClean>
+    <ButtonClean css={{ marginLeft: "auto" }}>
       <FlexR
         css={{
           justifyContent: "center",

@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <Container css={{ padding: "8px", height: "4000px" }}>
       <FlexC css={{ gap: "22px" }}>
-        <FlexR css={{ justifyContent: "space-between" }}>
+        <FlexR css={{ justifyContent: "flex-start" }}>
           <Hearts />
           <Text css={{ textTransform: "uppercase" }} weight={"700"} size={"b"}>
             Nome do Jogo
