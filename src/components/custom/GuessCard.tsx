@@ -11,18 +11,21 @@ import { storageBaseUrl, TGuess } from "@/lib/supabase";
 type AlertStatus = "ok" | "nok" | "neutral";
 
 export const GuessCard = ({ card }: { card: TGuess }) => {
-  const [play] = useSound(`${storageBaseUrl}/${card.audio_src}`);
+  const [play, aux] = useSound(`${storageBaseUrl}/${card.audio_src}`);
   const [value, setValue] = useState("");
   const [alert, setAlert] = useState<AlertStatus>("neutral");
   const setLife = useStore((store) => store.setLife);
   const setScore = useStore((store) => store.setScore);
+  const setHitIds = useStore((store) => store.setHitIds);
 
   function handleEnter() {
+    aux.stop();
     if (
       card
         .correct_answers!.split(",")
         .some((ans) => value.toLocaleLowerCase().trim().includes(ans))
     ) {
+      setTimeout(() => setHitIds(card.id), 1500);
       setAlert("ok");
       setScore();
     } else {
@@ -38,9 +41,14 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
     setValue(e.target.value);
   }
 
+  function handlePlay() {
+    aux.stop();
+    play();
+  }
+
   return (
     <FlexC css={{ gap: "8px", flex: 1, padding: "4px", alignItems: "center" }}>
-      <ButtonClean onClick={() => play()}>
+      <ButtonClean onClick={handlePlay}>
         <ImageCss
           src={`${storageBaseUrl}/${card.image_src}`}
           width={100}
