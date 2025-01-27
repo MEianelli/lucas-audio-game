@@ -22,7 +22,7 @@ export default function Home() {
             Adivinhe de que filme são essas falas.
           </Text>
           <Text css={{ textAlign: "center" }}>
-            Basta dar um etner depois da sua resposta.
+            Basta dar um enter depois da sua resposta.
           </Text>
           <Text css={{ textAlign: "center" }}>
             cadastre-se para entrar no ranking

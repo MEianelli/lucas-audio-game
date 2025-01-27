@@ -2,7 +2,7 @@ import { ButtonClean } from "@/components/buttons/buttons";
 import { Div } from "@/components/containers/div";
 import { FlexR } from "@/components/containers/flex";
 
-export const Bars = () => {
+export function Bars() {
   return (
     <ButtonClean css={{ marginLeft: "auto" }}>
       <FlexR
@@ -23,4 +23,4 @@ export const Bars = () => {
       </FlexR>
     </ButtonClean>
   );
-};
+}

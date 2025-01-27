@@ -19,8 +19,8 @@ export const Hearts = () => {
   return (
     <FlexR css={{ width: "33%" }}>
       <Div>
-        {Array.from(Array(life)).map((i) => {
-          return <HeartIcon key={i} />;
+        {Array.from(Array(life)).map((_, i) => {
+          return <HeartIcon key={"heart_" + i} />;
         })}
       </Div>
     </FlexR>

@@ -18,6 +18,9 @@ export const Text = styled("p", {
       grey: {
         color: "$grey",
       },
+      text: {
+        color: "$text",
+      },
     },
     size: {
       s: {

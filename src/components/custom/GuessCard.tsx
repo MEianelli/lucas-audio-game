@@ -6,17 +6,12 @@ import { TextInput } from "../inputs/input";
 import { Text } from "../text/text";
 import useSound from "use-sound";
 import { useStore } from "@/lib/store";
-
-export type TGuessCard = {
-  audioSrc: string;
-  imgSrc: string;
-  correctAnswers: string[];
-};
+import { storageBaseUrl, TGuess } from "@/lib/supabase";
 
 type AlertStatus = "ok" | "nok" | "neutral";
 
-export const GuessCard = ({ card }: { card: TGuessCard }) => {
-  const [play] = useSound(card.audioSrc);
+export const GuessCard = ({ card }: { card: TGuess }) => {
+  const [play] = useSound(`${storageBaseUrl}/${card.audio_src}`);
   const [value, setValue] = useState("");
   const [alert, setAlert] = useState<AlertStatus>("neutral");
   const setLife = useStore((store) => store.setLife);
@@ -24,9 +19,9 @@ export const GuessCard = ({ card }: { card: TGuessCard }) => {
 
   function handleEnter() {
     if (
-      card.correctAnswers.some((ans) =>
-        value.toLocaleLowerCase().trim().includes(ans)
-      )
+      card
+        .correct_answers!.split(",")
+        .some((ans) => value.toLocaleLowerCase().trim().includes(ans))
     ) {
       setAlert("ok");
       setScore();
@@ -47,7 +42,7 @@ export const GuessCard = ({ card }: { card: TGuessCard }) => {
     <FlexC css={{ gap: "8px", flex: 1, padding: "4px", alignItems: "center" }}>
       <ButtonClean onClick={() => play()}>
         <ImageCss
-          src={card.imgSrc}
+          src={`${storageBaseUrl}/${card.image_src}`}
           width={100}
           height={100}
           alt="caneca-mauricio"
