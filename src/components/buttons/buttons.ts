@@ -1,11 +1,13 @@
 import { styled } from "@/styles/stitches.config";
 
 export const DefaultButtonStyle = {
-  backgroundColor: "$primary",
   color: "$white",
+  backgroundColor: "$primary",
   borderRadius: "4px",
   padding: "$16 $24",
   border: "none",
+  height: "fit-content",
+  width: "fit-content",
   cursor: "pointer",
   "&:hover": {
     backgroundColor: "$secondary",
@@ -19,6 +21,17 @@ export const DefaultButtonStyle = {
 
 export const Button = styled("button", {
   ...DefaultButtonStyle,
+  variants: {
+    variant: {
+      delete: {
+        color: "$white",
+        backgroundColor: "$red",
+        "&:hover": {
+          backgroundColor: "$darkRed",
+        },
+      },
+    },
+  },
 });
 
 export const ButtonClean = styled("button", {

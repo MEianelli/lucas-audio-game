@@ -1,7 +1,8 @@
 import { Button } from "@/components/buttons/buttons";
 import { Center } from "@/components/containers/containers";
-import { Input } from "@/components/containers/div";
+import { Input } from "@/components/inputs/input";
 import { FlexC, FlexR } from "@/components/containers/flex";
+import { PreviewLatest } from "@/components/custom/PreviewLatest";
 import { Text } from "@/components/text/text";
 import { TBuckets, uploadDataSupabase, uploadToGuesses } from "@/lib/supabase";
 import { useMemo, useRef, useState } from "react";
@@ -104,8 +105,15 @@ const Admin = () => {
         </Center>
       </FlexC>
       <FlexR
-        css={{ border: "10px solid purple", padding: "40px", gap: "16px" }}
-      ></FlexR>
+        css={{
+          border: "10px solid cyan",
+          padding: "40px",
+          gap: "16px",
+          backgroundColor: "$black",
+        }}
+      >
+        <PreviewLatest reload={saving} />
+      </FlexR>
     </>
   );
 };

@@ -22,7 +22,9 @@ export const {
       black: "#000",
       green: "#0BAE6B",
       red: "#EC364C",
+      darkRed: "#bC364C",
       grey: "#333",
+      lightGrey: "#aaa",
       pink: "#B82ABE",
     },
     fonts: {

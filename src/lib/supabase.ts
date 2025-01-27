@@ -45,6 +45,26 @@ export async function getAllGuesses(): Promise<TGuess[]> {
   throw Error(`${error?.message}`);
 }
 
+export async function getLatest(): Promise<TGuess[]> {
+  const { data, error } = await supabase
+    .from("guesses")
+    .select()
+    .order("created_at", { ascending: false })
+    .limit(1);
+  if (data?.length) {
+    return data;
+  }
+  throw Error(`${error?.message}`);
+}
+
+export async function deleteOne(id: number): Promise<boolean> {
+  const { status } = await supabase.from("guesses").delete().eq("id", id);
+  if (status === 204) {
+    return true;
+  }
+  return false;
+}
+
 export type TGuess = {
   audio_src: string | null;
   correct_answers: string | null;
