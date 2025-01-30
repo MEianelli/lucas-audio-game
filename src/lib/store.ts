@@ -7,9 +7,17 @@ export type TStore = {
   setLife: (action: "add" | "sub") => void;
   hitIds: Set<number>;
   setHitIds: (id: number) => void;
+  name: string;
+  password: string;
+  setName: (name: string) => void;
+  setPassword: (password: string) => void;
 };
 
 export const useStore = create<TStore>((set) => ({
+  name: "",
+  password: "",
+  setName: (name) => set(() => ({ name })),
+  setPassword: (password) => set(() => ({ password })),
   score: 0,
   life: 3,
   hitIds: new Set(),

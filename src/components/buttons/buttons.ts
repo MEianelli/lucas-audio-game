@@ -31,6 +31,11 @@ export const Button = styled("button", {
         },
       },
     },
+    size: {
+      full: {
+        width: "100%",
+      },
+    },
   },
 });
 

@@ -58,11 +58,39 @@ export async function getLatest(): Promise<TGuess[]> {
 }
 
 export async function deleteOne(id: number): Promise<boolean> {
-  const { status } = await supabase.from("guesses").delete().eq("id", id);
+  const { status, error } = await supabase
+    .from("guesses")
+    .delete()
+    .eq("id", id);
   if (status === 204) {
     return true;
   }
-  return false;
+  throw Error(`${error?.message}`);
+}
+
+export async function addOneUser(data: { name: string; pass: string }) {
+  const { status, error } = await supabase.from("users").insert(data);
+  if (status === 201) {
+    return true;
+  }
+  throw Error(`${error?.message}`);
+}
+
+export async function getOneUser({
+  field,
+  value,
+}: {
+  field: "name" | "pass";
+  value: string;
+}) {
+  const { data, status } = await supabase
+    .from("users")
+    .select()
+    .eq(field, value);
+  if (status === 200) {
+    return data;
+  }
+  return [];
 }
 
 export type TGuess = {
@@ -71,4 +99,12 @@ export type TGuess = {
   created_at: string;
   id: number;
   image_src: string | null;
+};
+
+export type User = {
+  name: string;
+  pass: string;
+  hits?: string[];
+  lifes?: number;
+  score?: number;
 };

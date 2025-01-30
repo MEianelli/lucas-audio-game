@@ -14,7 +14,11 @@ export function Bars() {
         }}
       >
         <Div
-          css={{ width: "8px", height: "15px", backgroundColor: "DarkViolet" }}
+          css={{
+            width: "8px",
+            height: "15px",
+            backgroundColor: "DarkViolet",
+          }}
         />
         <Div
           css={{ width: "8px", height: "20px", backgroundColor: "Yellow" }}
