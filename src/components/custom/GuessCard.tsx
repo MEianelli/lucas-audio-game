@@ -7,6 +7,7 @@ import { Text } from "../text/text";
 import useSound from "use-sound";
 import { useStore } from "@/lib/store";
 import { storageBaseUrl, TGuess } from "@/lib/supabase";
+import { Div } from "../containers/div";
 
 type AlertStatus = "ok" | "nok" | "neutral";
 
@@ -48,14 +49,40 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
 
   return (
     <FlexC css={{ gap: "8px", flex: 1, padding: "4px", alignItems: "center" }}>
-      <ButtonClean onClick={handlePlay}>
+      <ButtonClean onClick={handlePlay} css={{position:"relative",  "&:active": { scale: 0.9 }, transition: "scale 0.1s linear", borderRadius:"10px", overflow:"hidden"}}>
         <ImageCss
           src={`${storageBaseUrl}/${card.image_src}`}
           width={100}
           height={100}
-          alt="caneca-mauricio"
-          css={{ "&:hover": { scale: 1.1 }, transition: "scale 0.1s linear" }}
+          alt={card.id}
+          css={{}}
         />
+        <Div
+        css={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "40px",
+          height: "40px",
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
+          borderRadius: "50%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Div
+          css={{
+            width: 0,
+            height: 0,
+            borderLeft: "12px solid white",
+            borderTop: "6px solid transparent",
+            borderBottom: "6px solid transparent",
+            marginLeft: "3px",
+          }}
+        />
+      </Div>
       </ButtonClean>
       <TextInput
         type="text"

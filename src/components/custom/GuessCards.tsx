@@ -31,6 +31,7 @@ export const GuessCards = () => {
         gap: "16px",
         width: "100%",
         flexWrap: "wrap",
+        background: "red"
       }}
     >
       {filtered?.map((it, i) => (
