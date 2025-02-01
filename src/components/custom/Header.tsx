@@ -2,12 +2,13 @@ import { FlexC, FlexR } from "@/components/containers/flex";
 import { Bars } from "@/components/custom/Bars";
 import { Hearts } from "@/components/custom/Hearts";
 import { Text } from "@/components/text/text";
+import { Menu } from "@/components/custom/Menu";
 
 export function Header() {
   return (
     <>
       <FlexR css={{ justifyContent: "flex-start" }}>
-        <Hearts />
+        <Menu />
         <Text css={{ textTransform: "uppercase" }} weight={"700"} size={"b"}>
           {`Guess the Movie`}
         </Text>
@@ -21,8 +22,9 @@ export function Header() {
           Basta dar um enter depois da sua resposta.
         </Text>
         <Text css={{ textAlign: "center" }}>
-          cadastre-se para entrar no ranking
+          Cadastre-se para entrar no ranking
         </Text>
+        <Hearts />
       </FlexC>
     </>
   );

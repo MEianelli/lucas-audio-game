@@ -49,11 +49,14 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
 
   return (
     <FlexC css={{ gap: "8px", flex: 1, padding: "4px", alignItems: "center" }}>
-      <ButtonClean onClick={handlePlay} css={{position:"relative",  "&:active": { scale: 0.9 }, transition: "scale 0.1s linear", borderRadius:"10px", overflow:"hidden"}}>
+      <ButtonClean onClick={handlePlay}
+      css={{position:"relative",
+        "&:active": { scale: 0.9 }, transition: "scale 0.1s linear",
+        borderRadius:"10px", overflow:"hidden"}}>
         <ImageCss
           src={`${storageBaseUrl}/${card.image_src}`}
-          width={100}
-          height={100}
+          width={120}
+          height={120}
           alt={card.id}
           css={{}}
         />
@@ -91,6 +94,7 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
         onChange={handleChange}
         onKeyUp={(event) => event.key === "Enter" && handleEnter()}
       />
+      
       <AlertPoint status={alert} />
     </FlexC>
   );

@@ -16,7 +16,7 @@ export default function Home() {
         <GuessCards />
         <DialogModal
           ref={dialogRef}
-          css={{ maxWidth: "500px" }}
+          css={{ maxWidth: "400px" }}
           openAtStart={true}
         >
           <Login onLogin={() => dialogRef.current?.close()} />

@@ -19,7 +19,7 @@ export const {
       text: "#333333",
       muted: "#999999",
       white: "#FFFFFF",
-      black: "#000",
+      black: "#141111",
       green: "#0BAE6B",
       red: "#EC364C",
       darkRed: "#bC364C",
@@ -28,7 +28,7 @@ export const {
       pink: "#B82ABE",
     },
     fonts: {
-      sans: "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
+      sans: "Bellota, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
       mono: 'Menlo, Monaco, Consolas, "Courier New", monospace',
     },
     space: {

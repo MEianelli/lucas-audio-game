@@ -24,6 +24,7 @@ export function Bars() {
           css={{ width: "8px", height: "20px", backgroundColor: "Yellow" }}
         />
         <Div css={{ width: "8px", height: "25px", backgroundColor: "Green" }} />
+        
       </FlexR>
     </ButtonClean>
   );
