@@ -1,6 +1,15 @@
 // stitches.config.ts
 import { createStitches } from "@stitches/react";
 
+export const cardDimentions = {
+  width: 200,
+  height: 180,
+  widthPadding: 0,
+  padding: 8,
+};
+
+cardDimentions.widthPadding = cardDimentions.width - cardDimentions.padding * 2;
+
 export const {
   styled,
   css,
@@ -19,16 +28,22 @@ export const {
       text: "#333333",
       muted: "#999999",
       white: "#FFFFFF",
+      dirtWhite: "#F6F2F0",
       black: "#000",
+      lightblack: "#111",
       green: "#0BAE6B",
+      brightGreen: "#02BF46",
+      darkGreen: "#257D46",
       red: "#EC364C",
       darkRed: "#bC364C",
-      grey: "#333",
+      grey: "#303030",
       lightGrey: "#aaa",
+      mediumGrey: "#D1D1D1",
       pink: "#B82ABE",
+      brightPink: "#BD27B8",
     },
     fonts: {
-      sans: "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
+      sans: "Bellota, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
       mono: 'Menlo, Monaco, Consolas, "Courier New", monospace',
     },
     space: {
@@ -45,6 +60,9 @@ export const {
       container: "960px",
       cell: "640px",
       button: "40px",
+      cardWidth: `${cardDimentions.width}px`,
+      cardWidthPadding: `${cardDimentions.widthPadding}px`,
+      cardHeight: `${cardDimentions.height}px`,
     },
     radii: {
       0: "0px",
@@ -104,6 +122,16 @@ export const globalStyles = globalCss({
     boxSizing: "border-box",
   },
   "*": {
-    boxSizing: "inherit",
+    boxSizing: "border-box",
   },
 });
+
+export const randomColors = [
+  "#A57E53",
+  "#7F4F4F",
+  "#3A32A5",
+  "#BBFFEC",
+  "#333333",
+  "#FF7676",
+  "#2A8C41",
+];

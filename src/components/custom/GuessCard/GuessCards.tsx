@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { FlexR } from "../containers/flex";
+import { FlexC } from "../../containers/flex";
 import { GuessCard } from "./GuessCard";
 import { getAllGuesses, TGuess } from "@/lib/supabase";
 import { useStore } from "@/lib/store";
+import { cardDimentions } from "@/styles/stitches.config";
 
 export const GuessCards = () => {
   const [guesses, setGuesses] = useState<TGuess[] | null>(null);
@@ -10,7 +11,7 @@ export const GuessCards = () => {
   const hitIds = useStore((store) => store.hitIds);
 
   const filtered = useMemo(() => {
-    return guesses?.filter((it) => !hitIds.has(it.id)).slice(0, 3);
+    return guesses?.filter((it) => !hitIds.has(it.id));
   }, [hitIds, guesses]);
 
   useEffect(() => {
@@ -26,16 +27,17 @@ export const GuessCards = () => {
   }, []);
 
   return (
-    <FlexR
+    <FlexC
       css={{
         gap: "16px",
         width: "100%",
         flexWrap: "wrap",
+        maxHeight: `${cardDimentions.width * 2 + 32}px`,
       }}
     >
       {filtered?.map((it, i) => (
         <GuessCard key={it.image_src! + i} card={it} />
       ))}
-    </FlexR>
+    </FlexC>
   );
 };

@@ -1,6 +1,6 @@
 import { useStore } from "@/lib/store";
 import { FlexC } from "../containers/flex";
-import { Input } from "../inputs/input";
+import { LoginInput } from "../inputs/input";
 import { Text } from "../text/text";
 import { Button } from "../buttons/buttons";
 import { addOneUser, getOneUser } from "@/lib/supabase";
@@ -49,28 +49,34 @@ export const Login = ({ onLogin }: { onLogin?: () => void }) => {
   }
 
   return (
-    <FlexC css={{ gap: 16 }}>
+    <FlexC css={{ gap: 8 }}>
       <Text
         color={"text"}
         size={"b"}
+        css={{ marginBottom: 8, fontFamily: "$sans", fontWeight: 700 }}
       >{`Cadastre-se para participar do ranking e ganhar prêmios:`}</Text>
       {status === "" && (
         <>
-          <Input
+          <LoginInput
             type="text"
             placeholder="Nome"
             value={name}
             name="name"
             onChange={handleChange}
           />
-          <Input
+          <LoginInput
             type="text"
             placeholder="Senha"
             value={password}
             name="password"
             onChange={handleChange}
           />
-          <Button size={"full"} onClick={handleCadastrar} disabled={loading}>
+          <Button
+            variant={"login"}
+            size={"full"}
+            onClick={handleCadastrar}
+            disabled={loading}
+          >
             {loading ? "Processing..." : "Cadastrar / Entrar"}
           </Button>
         </>

@@ -1,0 +1,95 @@
+import React, { useState } from "react";
+import { ButtonClean } from "../../buttons/buttons";
+import { ImageCss } from "../../image/Image";
+import { DarkTextInput } from "../../inputs/input";
+import useSound from "use-sound";
+import { useStore } from "@/lib/store";
+import { storageBaseUrl, TGuess } from "@/lib/supabase";
+import { PlayButton } from "../PlayButton";
+import { AlertPoint, AlertStatus } from "./AlertMessage";
+import { ProgressBar } from "./ProgressBar";
+import { cardDimentions } from "@/styles/stitches.config";
+
+export const GuessCard = ({ card }: { card: TGuess }) => {
+  const soundUrl = `${storageBaseUrl}/${card.audio_src}`;
+  const [value, setValue] = useState("");
+  const [alert, setAlert] = useState<AlertStatus>("neutral");
+  const setLife = useStore((store) => store.setLife);
+  const setScore = useStore((store) => store.setScore);
+  const setHitIds = useStore((store) => store.setHitIds);
+
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const [play, { stop, duration }] = useSound(soundUrl, {
+    onplay: () => setIsPlaying(true),
+    onstop: () => setIsPlaying(false),
+    onend: () => setIsPlaying(false),
+  });
+
+  const handleToggle = () => {
+    if (isPlaying) {
+      stop();
+    } else {
+      play();
+    }
+  };
+
+  function handleEnter() {
+    stop();
+    if (
+      card
+        .correct_answers!.split(",")
+        .some((ans) => value.toLocaleLowerCase().trim().includes(ans))
+    ) {
+      setTimeout(() => setHitIds(card.id), 1500);
+      setAlert("ok");
+      setScore();
+    } else {
+      setAlert("nok");
+      setLife("sub");
+    }
+    setValue("");
+  }
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    e.preventDefault();
+    setAlert("neutral");
+    setValue(e.target.value);
+  }
+
+  return (
+    <ButtonClean
+      onClick={handleToggle}
+      css={{
+        position: "relative",
+        "&:active img": { scale: 0.9 },
+        transition: "scale 0.1s linear",
+        borderRadius: "10px",
+        overflow: "hidden",
+        width: "$cardWidth",
+        height: "$cardHeight",
+        backgroundColor: "$darkRed",
+      }}
+    >
+      <ProgressBar duration={duration} isPlaying={isPlaying} />
+      <ImageCss
+        src={`${storageBaseUrl}/${card.image_src}`}
+        width={cardDimentions.width}
+        height={cardDimentions.height}
+        alt={card.audio_src ?? ""}
+        css={{ borderRadius: "10px" }}
+      />
+      <PlayButton />
+
+      <DarkTextInput
+        type="text"
+        placeholder="Type a movie"
+        value={value}
+        onChange={handleChange}
+        onKeyUp={(event) => event.key === "Enter" && handleEnter()}
+        css={{ position: "absolute", zIndex: "4", left: 8, bottom: 8 }}
+      />
+      <AlertPoint status={alert} />
+    </ButtonClean>
+  );
+};

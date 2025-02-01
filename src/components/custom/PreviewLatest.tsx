@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FlexC } from "../containers/flex";
-import { GuessCard } from "./GuessCard";
+import { GuessCard } from "./GuessCard/GuessCard";
 import { deleteOne, getLatest, TGuess } from "@/lib/supabase";
 import { Button } from "../buttons/buttons";
 import { Text } from "../text/text";

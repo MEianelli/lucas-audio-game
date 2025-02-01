@@ -1,29 +1,22 @@
-import { FlexC, FlexR } from "@/components/containers/flex";
+import { FlexR } from "@/components/containers/flex";
 import { Bars } from "@/components/custom/Bars";
-import { Hearts } from "@/components/custom/Hearts";
+import { Menu } from "@/components/custom/Menu";
 import { Text } from "@/components/text/text";
+import { Div } from "../containers/div";
 
 export function Header() {
   return (
-    <>
-      <FlexR css={{ justifyContent: "flex-start" }}>
-        <Hearts />
+    <FlexR css={{ justifyContent: "space-between", alignItems: "center" }}>
+      <Menu />
+      <Div>
         <Text css={{ textTransform: "uppercase" }} weight={"700"} size={"b"}>
           {`Guess the Movie`}
         </Text>
-        <Bars />
-      </FlexR>
-      <FlexC css={{ justifyContent: "center" }}>
-        <Text css={{ textAlign: "center" }} weight={"700"}>
-          Adivinhe de que filme são essas falas.
+        <Text size={"s"} weight={"normal"} css={{ textAlign: "center" }}>
+          Guess from what movie is each audio quote
         </Text>
-        <Text css={{ textAlign: "center" }}>
-          Basta dar um enter depois da sua resposta.
-        </Text>
-        <Text css={{ textAlign: "center" }}>
-          cadastre-se para entrar no ranking
-        </Text>
-      </FlexC>
-    </>
+      </Div>
+      <Bars />
+    </FlexR>
   );
 }

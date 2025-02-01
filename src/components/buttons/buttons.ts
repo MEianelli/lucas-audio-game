@@ -2,6 +2,8 @@ import { styled } from "@/styles/stitches.config";
 
 export const DefaultButtonStyle = {
   color: "$white",
+  fontWeight: "700",
+  fontFamily: "$sans",
   backgroundColor: "$primary",
   borderRadius: "4px",
   padding: "$16 $24",
@@ -24,10 +26,15 @@ export const Button = styled("button", {
   variants: {
     variant: {
       delete: {
-        color: "$white",
         backgroundColor: "$red",
         "&:hover": {
           backgroundColor: "$darkRed",
+        },
+      },
+      login: {
+        backgroundColor: "$brightGreen",
+        "&:hover": {
+          backgroundColor: "$darkGreen",
         },
       },
     },
