@@ -53,6 +53,10 @@ export const Login = ({ onLogin }: { onLogin?: () => void }) => {
       <Text
         color={"text"}
         size={"b"}
+<<<<<<< Updated upstream
+=======
+        css={{ marginBottom: 8, fontFamily: "$sans", fontSize: "27px", fontWeight: 700 }}
+>>>>>>> Stashed changes
       >{`Cadastre-se para participar do ranking e ganhar prêmios:`}</Text>
       {status === "" && (
         <>
@@ -70,7 +74,16 @@ export const Login = ({ onLogin }: { onLogin?: () => void }) => {
             name="password"
             onChange={handleChange}
           />
+<<<<<<< Updated upstream
           <Button size={"full"} onClick={handleCadastrar} disabled={loading}>
+=======
+          <Button css={{ fontSize: "22px"}}
+            variant={"login"}
+            size={"full"}
+            onClick={handleCadastrar}
+            disabled={loading}
+          >
+>>>>>>> Stashed changes
             {loading ? "Processing..." : "Cadastrar / Entrar"}
           </Button>
         </>

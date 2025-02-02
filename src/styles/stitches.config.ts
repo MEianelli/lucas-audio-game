@@ -21,10 +21,19 @@ export const {
       white: "#FFFFFF",
       black: "#141111",
       green: "#0BAE6B",
+<<<<<<< Updated upstream
+=======
+      brightGreen: "#02BF46",
+      darkGreen: "#00822f",
+>>>>>>> Stashed changes
       red: "#EC364C",
       darkRed: "#bC364C",
       grey: "#333",
       lightGrey: "#aaa",
+<<<<<<< Updated upstream
+=======
+      mediumGrey: "#c2c2c2",
+>>>>>>> Stashed changes
       pink: "#B82ABE",
     },
     fonts: {
