@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { ButtonClean } from "../../buttons/buttons";
 import { ImageCss } from "../../image/Image";
 import { DarkTextInput } from "../../inputs/input";
@@ -14,9 +14,12 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
   const soundUrl = `${storageBaseUrl}/${card.audio_src}`;
   const [value, setValue] = useState("");
   const [alert, setAlert] = useState<AlertStatus>("neutral");
+  const [showInput, setShowInput] = useState(false);
   const setLife = useStore((store) => store.setLife);
   const setScore = useStore((store) => store.setScore);
   const setHitIds = useStore((store) => store.setHitIds);
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -27,6 +30,8 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
   });
 
   const handleToggle = () => {
+    inputRef.current?.focus();
+    setShowInput(true);
     if (isPlaying) {
       stop();
     } else {
@@ -57,6 +62,10 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
     setValue(e.target.value);
   }
 
+  function handleBlur() {
+    setShowInput(false);
+  }
+
   return (
     <ButtonClean
       onClick={handleToggle}
@@ -82,13 +91,22 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
       <PlayButton />
 
       <DarkTextInput
+        ref={inputRef}
         type="text"
         placeholder="Type a movie"
         value={value}
         onChange={handleChange}
+        onBlur={handleBlur}
         onKeyUp={(event) => event.key === "Enter" && handleEnter()}
-        css={{ position: "absolute", zIndex: "4", left: 8, bottom: 8 }}
+        css={{
+          position: "absolute",
+          zIndex: "4",
+          left: 8,
+          bottom: 8,
+          opacity: showInput ? "1" : "0",
+        }}
       />
+
       <AlertPoint status={alert} />
     </ButtonClean>
   );

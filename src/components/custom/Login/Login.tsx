@@ -57,6 +57,7 @@ export const Login = ({ onLogin }: { onLogin?: () => void }) => {
         setStatus("unavailable");
       }
       if (added) {
+        setCryptoCookie({ name, password });
         setStatus("created");
         setTimeout(() => onLogin?.(), TIME_TO_CLOSE_MODAL);
       }
