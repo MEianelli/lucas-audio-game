@@ -6,10 +6,21 @@ import { PreviewLatest } from "@/components/custom/PreviewLatest";
 import { Text } from "@/components/text/text";
 import { TBuckets, uploadDataSupabase, uploadToGuesses } from "@/lib/supabase";
 import { useMemo, useRef, useState } from "react";
+import { GetServerSideProps } from "next";
 
 const initialFiles = { audio: null, images: null };
 
-const Admin = () => {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const allowed = query.s === process.env.ADMIN_KEY;
+
+  return {
+    props: {
+      allowed,
+    },
+  };
+};
+
+const Admin = (props: { allowed: boolean }) => {
   const [files, setFiles] = useState(initialFiles);
   const [answers, setAnswers] = useState("");
   const [saving, setSaving] = useState(false);
@@ -19,6 +30,10 @@ const Admin = () => {
   const disableSave = useMemo(() => {
     return !(Object.values(files).length === 2 && !!answers);
   }, [files, answers]);
+
+  if (!props.allowed) {
+    return <p>SAI DAQUI SEU MERDA</p>;
+  }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();

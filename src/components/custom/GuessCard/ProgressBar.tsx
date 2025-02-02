@@ -1,22 +1,14 @@
 import { Div } from "@/components/containers/div";
 import { keyframes } from "@/styles/stitches.config";
 
-export const ProgressBar = ({
-  duration,
-  isPlaying,
-}: {
-  duration: number | null;
-  isPlaying: boolean;
-}) => {
+export const ProgressBar = ({ duration }: { duration: number | null }) => {
   const widthAnimation = keyframes({
     "0%": { width: 0 },
     "100%": { width: "100%" },
   });
 
   const animationDuration = duration ? duration + "ms" : "";
-  const animation = isPlaying
-    ? `${widthAnimation} ${animationDuration} linear`
-    : "none";
+  const animation = `${widthAnimation} ${animationDuration} linear`;
 
   return (
     <Div

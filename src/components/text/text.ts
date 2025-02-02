@@ -49,3 +49,12 @@ export const Text = styled("p", {
     size: "m",
   },
 });
+
+export const TextWarning = styled("p", {
+  margin: 0,
+  color: "$red",
+  fontFamily: "sans-serif",
+  fontWeight: "bolder",
+  textTransform: "uppercase",
+  fontSize: 12,
+});

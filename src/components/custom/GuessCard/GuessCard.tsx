@@ -71,7 +71,7 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
         backgroundColor: "$darkRed",
       }}
     >
-      <ProgressBar duration={duration} isPlaying={isPlaying} />
+      {isPlaying && <ProgressBar duration={duration} />}
       <ImageCss
         src={`${storageBaseUrl}/${card.image_src}`}
         width={cardDimentions.width}

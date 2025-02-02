@@ -3,7 +3,7 @@ import { FlexC } from "@/components/containers/flex";
 import { Header } from "@/components/custom/Header";
 import { DialogModal } from "@/components/containers/modal";
 import { useRef } from "react";
-import { Login } from "@/components/custom/Login";
+import { Login } from "@/components/custom/Login/Login";
 import { Content } from "@/components/custom/Content";
 
 export default function Home() {
@@ -21,6 +21,7 @@ export default function Home() {
             backgroundColor: "$dirtWhite",
             border: "none",
             outline: "none",
+            marginTop: 12,
           }}
           openAtStart={true}
         >

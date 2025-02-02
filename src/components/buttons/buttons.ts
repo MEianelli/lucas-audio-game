@@ -4,6 +4,7 @@ export const DefaultButtonStyle = {
   color: "$white",
   fontWeight: "700",
   fontFamily: "$sans",
+  fontSize: 24,
   backgroundColor: "$primary",
   borderRadius: "4px",
   padding: "$16 $24",
@@ -31,10 +32,16 @@ export const Button = styled("button", {
           backgroundColor: "$darkRed",
         },
       },
-      login: {
+      cadastrar: {
         backgroundColor: "$brightGreen",
         "&:hover": {
           backgroundColor: "$darkGreen",
+        },
+      },
+      login: {
+        backgroundColor: "$lightBlue",
+        "&:hover": {
+          backgroundColor: "$darkBlue",
         },
       },
     },

@@ -41,6 +41,8 @@ export const {
       mediumGrey: "#D1D1D1",
       pink: "#B82ABE",
       brightPink: "#BD27B8",
+      lightBlue: "#1A90CA",
+      darkBlue: "#1A7DA4",
     },
     fonts: {
       sans: "Bellota, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif",

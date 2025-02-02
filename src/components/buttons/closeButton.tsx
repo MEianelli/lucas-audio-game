@@ -1,3 +1,4 @@
+import { CloseIcon } from "../icons/close";
 import { ButtonClean } from "./buttons";
 
 export const CloseButton = (
@@ -8,7 +9,7 @@ export const CloseButton = (
       css={{ position: "absolute", top: "5%", right: "5%" }}
       {...props}
     >
-      X
+      <CloseIcon />
     </ButtonClean>
   );
 };
