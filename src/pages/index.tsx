@@ -3,8 +3,8 @@ import { FlexC } from "@/components/containers/flex";
 import { Header } from "@/components/custom/Header";
 import { DialogModal } from "@/components/containers/modal";
 import { useRef } from "react";
-import { Login } from "@/components/custom/Login/Login";
 import { Content } from "@/components/custom/Content";
+import { LoginContainer } from "@/components/custom/Login/LoginContainer";
 
 export default function Home() {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -25,7 +25,7 @@ export default function Home() {
           }}
           openAtStart={true}
         >
-          <Login onLogin={() => dialogRef.current?.close()} />
+          <LoginContainer onLogin={() => dialogRef.current?.close()} />
         </DialogModal>
       </FlexC>
     </Container>

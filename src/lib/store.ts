@@ -1,4 +1,6 @@
 import { create } from "zustand";
+import { updateHits } from "./supabase";
+import { crypto } from "@/utils/crypto";
 
 export type TStore = {
   score: number;
@@ -6,28 +8,39 @@ export type TStore = {
   life: number;
   setLife: (action: "add" | "sub") => void;
   hitIds: Set<number>;
-  setHitIds: (id: number) => void;
+  setHitIds: (id: number[]) => Promise<void | boolean>;
   name: string;
-  password: string;
+  pass: string;
   setName: (name: string) => void;
-  setPassword: (password: string) => void;
+  setPass: (pass: string) => void;
 };
 
-export const useStore = create<TStore>((set) => ({
+export const useStore = create<TStore>((set, get) => ({
   name: "",
-  password: "",
+  pass: "",
   setName: (name) => set(() => ({ name })),
-  setPassword: (password) => set(() => ({ password })),
+  setPass: (pass) => set(() => ({ pass })),
   score: 0,
   life: 3,
   hitIds: new Set(),
-  setHitIds: (id) =>
-    set((store) => {
-      const updatedIds = new Set(store.hitIds);
-      updatedIds.add(id);
-      return { hitIds: updatedIds };
-    }),
-  setScore: () => set((store) => ({ score: store.score + 1 })),
+  setHitIds: async (ids) => {
+    const { hitIds, name, pass } = get();
+    console.log("hitIds :", hitIds);
+    ids.forEach((id) => hitIds.add(id));
+    const error = await updateHits({
+      name,
+      pass: crypto({ name, pass }),
+      hitIds: Array.from(hitIds),
+    });
+    console.log("error :", error);
+    if (error) throw Error(error);
+    set({ hitIds });
+  },
+  setScore: () => {
+    const { score } = get();
+    const newScore = score + 1;
+    set({ score: newScore });
+  },
   setLife: (action: "add" | "sub") => {
     if (action === "add") {
       set((store) => ({ life: store.life + 1 }));

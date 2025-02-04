@@ -3,11 +3,25 @@ import { FlexR } from "@/components/containers/flex";
 import { ImageCss } from "@/components/image/Image";
 import { Text } from "@/components/text/text";
 import ranking1Icon from "../../../../public/imgs/ranking-up-1.png";
+import { keyframes } from "@/styles/stitches.config";
+import { useMemo } from "react";
 
 export type AlertStatus = "ok" | "nok" | "neutral";
 
+const sizeAnimation = keyframes({
+  "0%": { transform: "scale(1)" },
+  "50%": { transform: "scale(1.3)" },
+  "100%": { transform: "scale(1)" },
+});
+
 export const AlertPoint = ({ status }: { status: AlertStatus }) => {
-  console.log("status :", status);
+  const animation = useMemo(() => {
+    if (status !== "neutral") {
+      return `${sizeAnimation} 0.3s ease-in-out`;
+    }
+    return "none";
+  }, [status]);
+
   return (
     <FlexR
       css={{
@@ -18,6 +32,7 @@ export const AlertPoint = ({ status }: { status: AlertStatus }) => {
         overflow: "hidden",
         zIndex: 50,
         borderRadius: 8,
+        animation,
       }}
     >
       <AlertPointContent status={status} />
@@ -45,4 +60,5 @@ export const AlertPointContent = ({ status }: { status: AlertStatus }) => {
       </Div>
     );
   }
+  return null;
 };

@@ -1,36 +1,34 @@
 import { LoginInput } from "../../inputs/input";
 import { Text } from "../../text/text";
 import { Button } from "../../buttons/buttons";
-import { TStatus } from "./LoginContainer";
 import { Warning } from "./Messages";
-import { JSX } from "react";
+import { TStatus } from "./LoginContainer";
 
-export interface LoginProps {
+export interface CadastroProps {
   name: string;
   pass: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleLogin: () => void;
+  handleCadastrar: () => void;
+
   status: TStatus;
   loading: boolean;
-  children: JSX.Element | JSX.Element[];
 }
 
-export const Login = ({
+export const Cadastro = ({
   name,
   pass,
   loading,
   handleChange,
-  handleLogin,
+  handleCadastrar,
   status,
-  children,
-}: LoginProps) => {
+}: CadastroProps) => {
   return (
     <>
       <Text
         color={"text"}
         size={"b"}
         css={{ marginBottom: 8, fontFamily: "$sans", fontWeight: 700 }}
-      >{`Faça login para participar do ranking:`}</Text>
+      >{`Cadastre-se para participar do ranking e ganhar prêmios:`}</Text>
 
       <LoginInput
         type="text"
@@ -49,15 +47,17 @@ export const Login = ({
         onChange={handleChange}
       />
       {status === "wrongPass" && <Warning text="senha errada!" />}
+      {status === "empty" && (
+        <Warning text="Nome e senha não podem estar vazios" />
+      )}
       <Button
-        variant={"login"}
+        variant={"cadastrar"}
         size={"full"}
-        onClick={handleLogin}
+        onClick={handleCadastrar}
         disabled={loading}
       >
-        {loading ? "Processing..." : "Login"}
+        {loading ? "Processing..." : "Cadastrar"}
       </Button>
-      {children}
     </>
   );
 };

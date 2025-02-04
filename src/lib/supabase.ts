@@ -76,6 +76,24 @@ export async function addOneUser(data: { name: string; pass: string }) {
   throw Error(`${error?.message}`);
 }
 
+export async function updateHits(data: {
+  name: string;
+  pass: string;
+  hitIds: number[];
+}) {
+  const { name, pass, hitIds } = data;
+  const { status, error } = await supabase
+    .from("users")
+    .update({ hitIds })
+    .eq("name", name)
+    .eq("pass", pass);
+  console.log("status :", status);
+  if (status === 204) {
+    return;
+  }
+  return `${error?.message}`;
+}
+
 export async function getOneUser({
   field,
   value,
@@ -104,7 +122,7 @@ export type TGuess = {
 export type User = {
   name: string;
   pass: string;
-  hits?: string[];
+  hitIds?: number[];
   lifes?: number;
   score?: number;
 };
