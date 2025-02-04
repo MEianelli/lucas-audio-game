@@ -1,6 +1,6 @@
 import { Div } from "../containers/div";
 
-export function PlayButton() {
+export function PlayButton({ isPlaying }: { readonly isPlaying: boolean }) {
   return (
     <Div
       css={{
@@ -17,16 +17,22 @@ export function PlayButton() {
         justifyContent: "center",
       }}
     >
-      <Div
-        css={{
-          width: 0,
-          height: 0,
-          borderLeft: "24px solid white",
-          borderTop: "12px solid transparent",
-          borderBottom: "12px solid transparent",
-          marginLeft: "6px",
-        }}
-      />
+      {!isPlaying ? (
+        <Div
+          css={{
+            width: 0,
+            height: 0,
+            borderLeft: "24px solid white",
+            borderTop: "12px solid transparent",
+            borderBottom: "12px solid transparent",
+            marginLeft: "6px",
+          }}
+        />
+      ) : (
+        <Div
+          css={{ width: "22px", height: "22px", backgroundColor: "white" }}
+        />
+      )}
     </Div>
   );
 }

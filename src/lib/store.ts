@@ -21,7 +21,7 @@ export const useStore = create<TStore>((set, get) => ({
   setName: (name) => set(() => ({ name })),
   setPass: (pass) => set(() => ({ pass })),
   score: 0,
-  life: 3,
+  life: 5,
   hitIds: new Set(),
   setHitIds: async (ids) => {
     const { hitIds, name, pass } = get();

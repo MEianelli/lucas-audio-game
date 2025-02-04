@@ -92,7 +92,7 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
         alt={card.audio_src ?? ""}
         css={{ borderRadius: "10px" }}
       />
-      {alert === "neutral" && <PlayButton />}
+      {alert === "neutral" && <PlayButton isPlaying={isPlaying} />}
 
       <DarkTextInput
         ref={inputRef}
