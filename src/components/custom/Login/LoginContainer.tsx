@@ -9,7 +9,7 @@ import { Login } from "./Login";
 import { Cadastro } from "./Cadastro";
 import { Button } from "@/components/buttons/buttons";
 
-const TIME_TO_CLOSE_MODAL = 3000; //ms
+const TIME_TO_CLOSE_MODAL = 1500; //ms
 
 export type TStatus = "unavailable" | "unexistant" | "wrongPass" | "empty" | "";
 
@@ -26,6 +26,7 @@ export const LoginContainer = ({ onLogin }: LoginContainerProps) => {
   const pass = useStore((store) => store.pass);
   const setName = useStore((store) => store.setName);
   const setPass = useStore((store) => store.setPass);
+  const updateUserFromDB = useStore((store) => store.updateUserFromDB);
   const [status, setStatus] = useState<TStatus>("");
   const [screen, setScreen] = useState<TScreen>("login");
   const [loading, setLoading] = useState(false);
@@ -36,6 +37,8 @@ export const LoginContainer = ({ onLogin }: LoginContainerProps) => {
     setName(cookie?.name);
     setPass(cookie?.pass);
     setScreen("logged");
+    updateUserFromDB();
+    setTimeout(() => onLogin?.(), TIME_TO_CLOSE_MODAL);
   }, []);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -93,6 +96,7 @@ export const LoginContainer = ({ onLogin }: LoginContainerProps) => {
         return;
       }
 
+      updateUserFromDB();
       setCryptoCookie({ name, pass });
       setScreen("logged");
       setTimeout(() => onLogin?.(), TIME_TO_CLOSE_MODAL);

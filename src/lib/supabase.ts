@@ -87,7 +87,23 @@ export async function updateHits(data: {
     .update({ hitIds })
     .eq("name", name)
     .eq("pass", pass);
-  console.log("status :", status);
+  if (status === 204) {
+    return;
+  }
+  return `${error?.message}`;
+}
+
+export async function updateLifes(data: {
+  name: string;
+  pass: string;
+  lifes: number;
+}) {
+  const { name, pass, lifes } = data;
+  const { status, error } = await supabase
+    .from("users")
+    .update({ lifes })
+    .eq("name", name)
+    .eq("pass", pass);
   if (status === 204) {
     return;
   }
@@ -100,7 +116,7 @@ export async function getOneUser({
 }: {
   field: "name" | "pass";
   value: string;
-}) {
+}): Promise<User[] | null> {
   const { data, status } = await supabase
     .from("users")
     .select()

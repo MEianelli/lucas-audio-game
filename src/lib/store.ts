@@ -1,18 +1,20 @@
 import { create } from "zustand";
-import { updateHits } from "./supabase";
+import { getOneUser, updateHits, updateLifes } from "./supabase";
 import { crypto } from "@/utils/crypto";
 
 export type TStore = {
   score: number;
   setScore: () => void;
-  life: number;
-  setLife: (action: "add" | "sub") => void;
-  hitIds: Set<number>;
+  lifes: number;
+  setAddLife: (number?: number) => Promise<void>;
+  setSubLife: (number?: number) => Promise<void>;
+  hitIds: number[];
   setHitIds: (id: number[]) => Promise<void | boolean>;
   name: string;
   pass: string;
   setName: (name: string) => void;
   setPass: (pass: string) => void;
+  updateUserFromDB: () => Promise<void>;
 };
 
 export const useStore = create<TStore>((set, get) => ({
@@ -21,35 +23,48 @@ export const useStore = create<TStore>((set, get) => ({
   setName: (name) => set(() => ({ name })),
   setPass: (pass) => set(() => ({ pass })),
   score: 0,
-  life: 5,
-  hitIds: new Set(),
+  lifes: 5,
+  hitIds: [],
+  updateUserFromDB: async () => {
+    const { name } = get();
+    const user = await getOneUser({ field: "name", value: name });
+    if (!user?.length) return;
+    const { lifes, hitIds } = user[0];
+    set({ lifes, hitIds });
+  },
   setHitIds: async (ids) => {
     const { hitIds, name, pass } = get();
-    console.log("hitIds :", hitIds);
-    ids.forEach((id) => hitIds.add(id));
+    const newHitIds = [...hitIds, ...ids];
     const error = await updateHits({
       name,
       pass: crypto({ name, pass }),
-      hitIds: Array.from(hitIds),
+      hitIds: newHitIds,
     });
     console.log("error :", error);
     if (error) throw Error(error);
-    set({ hitIds });
+    set({ hitIds: newHitIds });
   },
   setScore: () => {
     const { score } = get();
     const newScore = score + 1;
     set({ score: newScore });
   },
-  setLife: (action: "add" | "sub") => {
-    if (action === "add") {
-      set((store) => ({ life: store.life + 1 }));
-    }
-    if (action === "sub") {
-      set((store) => {
-        const newlife = Math.max(0, store.life - 1);
-        return { life: newlife };
-      });
-    }
+  setAddLife: async (number = 1) => {
+    set((store) => {
+      const newlife = Math.max(0, store.lifes + number);
+      return { lifes: newlife };
+    });
+  },
+  setSubLife: async (number = 1) => {
+    const { lifes, name, pass } = get();
+    const newLifes = Math.max(0, lifes - number);
+    const error = await updateLifes({
+      name,
+      pass: crypto({ name, pass }),
+      lifes: newLifes,
+    });
+    console.log("error :", error);
+    if (error) throw Error(error);
+    set({ lifes: newLifes });
   },
 }));

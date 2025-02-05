@@ -11,7 +11,7 @@ export const GuessCards = () => {
   const hitIds = useStore((store) => store.hitIds);
 
   const filtered = useMemo(() => {
-    return guesses?.filter((it) => !hitIds.has(it.id));
+    return guesses?.filter((it) => !hitIds.includes(it.id));
   }, [hitIds, guesses]);
 
   useEffect(() => {
@@ -30,8 +30,10 @@ export const GuessCards = () => {
     <FlexC
       css={{
         gap: "16px",
-        width: "100%",
+        width: "fit-content",
         flexWrap: "wrap",
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
         maxHeight: `${cardDimentions.width * 2 + 32}px`,
       }}
     >

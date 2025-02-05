@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { HeartExploding } from "../icons/heartexploding";
 
 export const Hearts = () => {
-  const life = useStore((store) => store.life);
+  const life = useStore((store) => store.lifes);
   const [animate, setAnimate] = useState(false);
   const hearRef = useRef(life);
 

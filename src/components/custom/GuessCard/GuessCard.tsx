@@ -9,14 +9,13 @@ import { PlayButton } from "../PlayButton";
 import { AlertPoint, AlertStatus } from "./AlertMessage";
 import { ProgressBar } from "./ProgressBar";
 import { cardDimentions } from "@/styles/stitches.config";
-import { wait } from "@/utils/wait";
 
 export const GuessCard = ({ card }: { card: TGuess }) => {
   const soundUrl = `${storageBaseUrl}/${card.audio_src}`;
   const [value, setValue] = useState("");
   const [alert, setAlert] = useState<AlertStatus>("neutral");
   const [showInput, setShowInput] = useState(false);
-  const setLife = useStore((store) => store.setLife);
+  const setSubLife = useStore((store) => store.setSubLife);
   const setHitIds = useStore((store) => store.setHitIds);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -48,14 +47,13 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
     ) {
       try {
         setAlert("ok");
-        await wait(1500);
         await setHitIds([card.id]);
       } catch (error) {
         console.log(error);
       }
     } else {
       setAlert("nok");
-      setLife("sub");
+      setSubLife();
     }
     setValue("");
   }
