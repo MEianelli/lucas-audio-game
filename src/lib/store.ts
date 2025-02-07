@@ -34,7 +34,7 @@ export const useStore = create<TStore>((set, get) => ({
   },
   sethitids: async (ids) => {
     const { hitids, name, pass } = get();
-    const newhitids = [...hitids, ...ids];
+    const newhitids = [...new Set([...hitids, ...ids])];
     const error = await updateHits({
       name,
       pass: crypto({ name, pass }),
