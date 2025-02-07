@@ -4,6 +4,7 @@ import { GuessCard } from "./GuessCard";
 import { getAllGuesses, TGuess } from "@/lib/supabase";
 import { useStore } from "@/lib/store";
 import { cardDimentions } from "@/styles/stitches.config";
+import * as motion from "motion/react-client";
 
 const NUMBER_OF_CARDS = 3;
 
@@ -13,7 +14,11 @@ export const GuessCards = () => {
   const hitids = useStore((store) => store.hitids);
 
   const filtered = useMemo(() => {
-    return guesses?.filter((it) => !hitids?.includes(it.id));
+    return guesses?.toSorted((a, b) => {
+      const aInHitids = hitids.includes(a.id) ? 1 : 0;
+      const bInHitids = hitids.includes(b.id) ? 1 : 0;
+      return aInHitids - bInHitids;
+    });
   }, [hitids, guesses]);
 
   useEffect(() => {
@@ -37,13 +42,23 @@ export const GuessCards = () => {
         justifyContent: "flex-start",
         alignItems: "flex-start",
         maxHeight: `${
-          cardDimentions.width * NUMBER_OF_CARDS + 16 * NUMBER_OF_CARDS
+          cardDimentions.width * NUMBER_OF_CARDS + 32 * NUMBER_OF_CARDS
         }px`,
-        paddingBottom: 16,
+        padding: 16,
       }}
     >
-      {filtered?.map((it, i) => (
-        <GuessCard key={it.image_src! + i} card={it} />
+      {filtered?.map((it) => (
+        <motion.div
+          key={it.id}
+          layout
+          transition={{
+            type: "spring",
+            damping: 20,
+            stiffness: 300,
+          }}
+        >
+          <GuessCard card={it} />
+        </motion.div>
       ))}
     </FlexC>
   );

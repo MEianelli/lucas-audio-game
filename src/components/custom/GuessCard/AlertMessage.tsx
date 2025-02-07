@@ -45,10 +45,10 @@ export const AlertPointContent = ({ status }: { status: AlertStatus }) => {
     return (
       <>
         <Div css={{ backgroundColor: "$grey", padding: 10 }}>
-          <Text>Correct!</Text>
+          <Text css={{ fontSize: 14 }}>Correct!</Text>
         </Div>
         <FlexR css={{ backgroundColor: "$brightGreen", padding: 10 }}>
-          <ImageCss src={ranking1Icon} width={30} height={20} alt="ranking" />
+          <ImageCss src={ranking1Icon} width={20} height={16} alt="ranking" />
         </FlexR>
       </>
     );
@@ -56,7 +56,7 @@ export const AlertPointContent = ({ status }: { status: AlertStatus }) => {
   if (status === "nok") {
     return (
       <Div css={{ backgroundColor: "$red", padding: 10 }}>
-        <Text>Wrong!</Text>
+        <Text css={{ fontSize: 14 }}>Wrong!</Text>
       </Div>
     );
   }
