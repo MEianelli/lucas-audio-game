@@ -8,8 +8,8 @@ export type TStore = {
   lifes: number;
   setAddLife: (number?: number) => Promise<void>;
   setSubLife: (number?: number) => Promise<void>;
-  hitIds: number[];
-  setHitIds: (id: number[]) => Promise<void | boolean>;
+  hitids: number[];
+  sethitids: (id: number[]) => Promise<void | boolean>;
   name: string;
   pass: string;
   setName: (name: string) => void;
@@ -24,25 +24,24 @@ export const useStore = create<TStore>((set, get) => ({
   setPass: (pass) => set(() => ({ pass })),
   score: 0,
   lifes: 5,
-  hitIds: [],
+  hitids: [],
   updateUserFromDB: async () => {
     const { name } = get();
     const user = await getOneUser({ field: "name", value: name });
     if (!user?.length) return;
-    const { lifes, hitIds } = user[0];
-    set({ lifes, hitIds });
+    const { lifes, hitids } = user[0];
+    set({ lifes, hitids });
   },
-  setHitIds: async (ids) => {
-    const { hitIds, name, pass } = get();
-    const newHitIds = [...hitIds, ...ids];
+  sethitids: async (ids) => {
+    const { hitids, name, pass } = get();
+    const newhitids = [...hitids, ...ids];
     const error = await updateHits({
       name,
       pass: crypto({ name, pass }),
-      hitIds: newHitIds,
+      hitids: newhitids,
     });
-    console.log("error :", error);
     if (error) throw Error(error);
-    set({ hitIds: newHitIds });
+    set({ hitids: newhitids });
   },
   setScore: () => {
     const { score } = get();
@@ -63,7 +62,6 @@ export const useStore = create<TStore>((set, get) => ({
       pass: crypto({ name, pass }),
       lifes: newLifes,
     });
-    console.log("error :", error);
     if (error) throw Error(error);
     set({ lifes: newLifes });
   },

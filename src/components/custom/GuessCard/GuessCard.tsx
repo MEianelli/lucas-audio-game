@@ -16,7 +16,7 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
   const [alert, setAlert] = useState<AlertStatus>("neutral");
   const [showInput, setShowInput] = useState(false);
   const setSubLife = useStore((store) => store.setSubLife);
-  const setHitIds = useStore((store) => store.setHitIds);
+  const sethitids = useStore((store) => store.sethitids);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -38,7 +38,7 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
     }
   };
 
-  async function handleEnter() {
+  function handleEnter() {
     stop();
     if (
       card
@@ -47,7 +47,7 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
     ) {
       try {
         setAlert("ok");
-        await setHitIds([card.id]);
+        setTimeout(() => sethitids([card.id]), 1500);
       } catch (error) {
         console.log(error);
       }
@@ -73,13 +73,16 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
       onClick={handleToggle}
       css={{
         position: "relative",
-        "&:active img": { scale: 0.9 },
-        transition: "scale 0.1s linear",
         borderRadius: "10px",
         overflow: "hidden",
         width: "$cardWidth",
         height: "$cardHeight",
         backgroundColor: "$darkRed",
+        boxShadow: "4px 4px 0px $dirtWhite",
+        "&:active": {
+          translate: "3px 3px",
+          boxShadow: "1px 1px 0px $dirtWhite",
+        },
       }}
     >
       {isPlaying && <ProgressBar duration={duration} />}

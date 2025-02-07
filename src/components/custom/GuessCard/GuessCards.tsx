@@ -5,14 +5,16 @@ import { getAllGuesses, TGuess } from "@/lib/supabase";
 import { useStore } from "@/lib/store";
 import { cardDimentions } from "@/styles/stitches.config";
 
+const NUMBER_OF_CARDS = 3;
+
 export const GuessCards = () => {
   const [guesses, setGuesses] = useState<TGuess[] | null>(null);
 
-  const hitIds = useStore((store) => store.hitIds);
+  const hitids = useStore((store) => store.hitids);
 
   const filtered = useMemo(() => {
-    return guesses?.filter((it) => !hitIds.includes(it.id));
-  }, [hitIds, guesses]);
+    return guesses?.filter((it) => !hitids?.includes(it.id));
+  }, [hitids, guesses]);
 
   useEffect(() => {
     async function getData() {
@@ -34,7 +36,10 @@ export const GuessCards = () => {
         flexWrap: "wrap",
         justifyContent: "flex-start",
         alignItems: "flex-start",
-        maxHeight: `${cardDimentions.width * 2 + 32}px`,
+        maxHeight: `${
+          cardDimentions.width * NUMBER_OF_CARDS + 16 * NUMBER_OF_CARDS
+        }px`,
+        paddingBottom: 16,
       }}
     >
       {filtered?.map((it, i) => (

@@ -2,13 +2,38 @@
 import { createStitches } from "@stitches/react";
 
 export const cardDimentions = {
-  width: 200,
-  height: 180,
+  width: 140,
+  height: 125,
   widthPadding: 0,
   padding: 8,
 };
 
 cardDimentions.widthPadding = cardDimentions.width - cardDimentions.padding * 2;
+
+const colors = {
+  primary: "#0070f3",
+  secondary: "#1A1A1A",
+  background: "#F5F5F5",
+  text: "#333333",
+  muted: "#999999",
+  white: "#FFFFFF",
+  dirtWhite: "#F6F2F0",
+  black: "#000",
+  lightblack: "#111",
+  green: "#0BAE6B",
+  brightGreen: "#02BF46",
+  darkGreen: "#257D46",
+  red: "#EC364C",
+  darkRed: "#bC364C",
+  darkerRed: "#4D2A25",
+  grey: "#303030",
+  lightGrey: "#aaa",
+  mediumGrey: "#D1D1D1",
+  pink: "#B82ABE",
+  brightPink: "#BD27B8",
+  lightBlue: "#1A90CA",
+  darkBlue: "#1A7DA4",
+};
 
 export const {
   styled,
@@ -21,29 +46,7 @@ export const {
   config,
 } = createStitches({
   theme: {
-    colors: {
-      primary: "#0070f3",
-      secondary: "#1A1A1A",
-      background: "#F5F5F5",
-      text: "#333333",
-      muted: "#999999",
-      white: "#FFFFFF",
-      dirtWhite: "#F6F2F0",
-      black: "#000",
-      lightblack: "#111",
-      green: "#0BAE6B",
-      brightGreen: "#02BF46",
-      darkGreen: "#257D46",
-      red: "#EC364C",
-      darkRed: "#bC364C",
-      grey: "#303030",
-      lightGrey: "#aaa",
-      mediumGrey: "#D1D1D1",
-      pink: "#B82ABE",
-      brightPink: "#BD27B8",
-      lightBlue: "#1A90CA",
-      darkBlue: "#1A7DA4",
-    },
+    colors,
     fonts: {
       sans: "Bellota, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
       mono: 'Menlo, Monaco, Consolas, "Courier New", monospace',
@@ -74,6 +77,7 @@ export const {
       full: "9999px",
     },
     shadows: {
+      ...colors,
       sm: "0px 2px 5px rgba(0, 0, 0, 0.1)",
       md: "0px 4px 10px rgba(0, 0, 0, 0.15)",
       lg: "0px 10px 20px rgba(0, 0, 0, 0.2)",

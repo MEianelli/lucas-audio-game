@@ -15,12 +15,14 @@ interface DialogModalProps
   ref: React.RefObject<HTMLDialogElement | null>;
   css?: CSS;
   openAtStart?: boolean;
+  onClose?: () => void;
 }
 
 export const DialogModal = ({
   ref,
   css,
   openAtStart,
+  onClose,
   ...props
 }: DialogModalProps) => {
   useEffect(() => {
@@ -29,10 +31,30 @@ export const DialogModal = ({
     }
   }, [openAtStart, ref]);
 
+  function handleClose() {
+    if (onClose) {
+      onClose();
+      return;
+    }
+    return ref?.current?.close();
+  }
+
   return (
-    <Dialog ref={ref} css={{ ...css }} {...props}>
+    <Dialog
+      ref={ref}
+      css={{
+        ...css,
+        maxWidth: "400px",
+        backgroundColor: "$dirtWhite",
+        border: "none",
+        outline: "none",
+        marginTop: 12,
+        paddingTop: 32,
+      }}
+      {...props}
+    >
       {props.children}
-      <CloseButton onClick={() => ref?.current?.close()} />
+      <CloseButton onClick={handleClose} />
     </Dialog>
   );
 };

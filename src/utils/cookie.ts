@@ -22,8 +22,6 @@ export function deleteCookie(param: string = "d187yd") {
 }
 
 export function setCryptoCookie(data?: Record<string, string>) {
-  console.log("ENTROU");
-  console.log(data);
   if (!data) {
     setCookie("");
   } else {

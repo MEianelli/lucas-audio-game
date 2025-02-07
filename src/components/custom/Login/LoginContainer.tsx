@@ -109,7 +109,7 @@ export const LoginContainer = ({ onLogin }: LoginContainerProps) => {
   }
 
   return (
-    <FlexC css={{ gap: 8, paddingTop: "20px" }}>
+    <FlexC css={{ gap: 8 }}>
       {screen === "logged" && (
         <TextMessage text={`Bem vindo de volta, ${name}`} />
       )}

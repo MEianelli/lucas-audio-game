@@ -79,12 +79,12 @@ export async function addOneUser(data: { name: string; pass: string }) {
 export async function updateHits(data: {
   name: string;
   pass: string;
-  hitIds: number[];
+  hitids: number[];
 }) {
-  const { name, pass, hitIds } = data;
+  const { name, pass, hitids } = data;
   const { status, error } = await supabase
     .from("users")
-    .update({ hitIds })
+    .update({ hitids })
     .eq("name", name)
     .eq("pass", pass);
   if (status === 204) {
@@ -127,6 +127,15 @@ export async function getOneUser({
   return [];
 }
 
+export async function getAllUsers(): Promise<User[] | null> {
+  const { data, status } = await supabase.from("users").select();
+
+  if (status === 200) {
+    return data;
+  }
+  return [];
+}
+
 export type TGuess = {
   audio_src: string | null;
   correct_answers: string | null;
@@ -138,7 +147,7 @@ export type TGuess = {
 export type User = {
   name: string;
   pass: string;
-  hitIds?: number[];
+  hitids?: number[];
   lifes?: number;
   score?: number;
 };
