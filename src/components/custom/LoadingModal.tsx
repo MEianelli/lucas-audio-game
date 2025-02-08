@@ -8,7 +8,8 @@ const spin = keyframes({
 
 const Loader = styled("div", {
   borderRadius: "50%",
-  borderWidth: "4px",
+  scale: 3,
+  borderWidth: "px",
   borderStyle: "solid",
   borderColor: "#0070f3 transparent #0070f3 transparent",
   animation: `${spin} 1s linear infinite`,
@@ -25,7 +26,7 @@ const Loader = styled("div", {
     },
   },
   defaultVariants: {
-    size: "medium",
+    size: "large",
     color: "primary",
   },
 });
@@ -56,7 +57,7 @@ export const LoadingModal = ({
         width: "100%",
         height: "100%",
         zIndex: 500,
-        backgroundColor: "#000000ee",
+        backgroundColor: "#000000ef",
         justifyContent: "center",
         alignItems: "center",
       }}

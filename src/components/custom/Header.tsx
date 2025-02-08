@@ -9,7 +9,15 @@ export function Header() {
     <FlexR css={{ justifyContent: "space-between", alignItems: "center" }}>
       <Menu />
       <Div>
-        <Text css={{ textTransform: "uppercase" }} weight={"700"} size={"b"}>
+        <Text
+          css={{
+            textTransform: "uppercase",
+            whiteSpace: "nowrap",
+            textAlign: "center",
+          }}
+          weight={"700"}
+          size={"b"}
+        >
           {`Guess the Movie`}
         </Text>
         <Text size={"s"} weight={"normal"} css={{ textAlign: "center" }}>

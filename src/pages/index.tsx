@@ -5,20 +5,12 @@ import { DialogModal } from "@/components/containers/modal";
 import { useRef } from "react";
 import { Content } from "@/components/custom/Content";
 import { LoginContainer } from "@/components/custom/Login/LoginContainer";
-// import { GetServerSideProps } from "next";
-// import { decryptData } from "@/utils/crypto";
-
-// export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-//   const cook = req.cookies;
-//   const decrypted = decryptData(cook?.["d187yd"]);
-
-//   return {
-//     props: {},
-//   };
-// };
+import { LoadingModal } from "@/components/custom/LoadingModal";
+import { useStore } from "@/lib/store";
 
 export default function Home() {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const loadingDB = useStore((store) => store.loadingDB);
 
   return (
     <Container css={{ padding: "8px", height: "100vh" }}>
@@ -28,6 +20,7 @@ export default function Home() {
         <DialogModal ref={dialogRef} openAtStart={true}>
           <LoginContainer onLogin={() => dialogRef.current?.close()} />
         </DialogModal>
+        {loadingDB && <LoadingModal />}
       </FlexC>
     </Container>
   );

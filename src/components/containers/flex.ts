@@ -9,6 +9,16 @@ export const Flex = styled("div", {
         justifyContent: "center",
       },
     },
+    sb: {
+      true: {
+        justifyContent: "space-between",
+      },
+    },
+    s: {
+      true: {
+        justifyContent: "flex-start",
+      },
+    },
   },
 });
 

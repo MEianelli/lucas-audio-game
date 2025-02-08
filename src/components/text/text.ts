@@ -31,6 +31,9 @@ export const Text = styled("p", {
       },
       b: {
         fontSize: "32px",
+        "@sm": {
+          fontSize: "24px",
+        },
       },
     },
     weight: {

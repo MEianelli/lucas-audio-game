@@ -4,6 +4,7 @@ import { crypto } from "@/utils/crypto";
 
 export type TStore = {
   score: number;
+  loadingDB: boolean;
   setScore: () => void;
   lifes: number;
   setAddLife: (number?: number) => Promise<void>;
@@ -15,22 +16,26 @@ export type TStore = {
   setName: (name: string) => void;
   setPass: (pass: string) => void;
   updateUserFromDB: () => Promise<void>;
+  lastLifeChange: "added" | "subbed" | "none";
 };
 
 export const useStore = create<TStore>((set, get) => ({
   name: "",
   pass: "",
+  loadingDB: false,
   setName: (name) => set(() => ({ name })),
   setPass: (pass) => set(() => ({ pass })),
   score: 0,
   lifes: 5,
+  lastLifeChange: "none",
   hitids: [],
   updateUserFromDB: async () => {
     const { name } = get();
+    set({ loadingDB: true });
     const user = await getOneUser({ field: "name", value: name });
     if (!user?.length) return;
     const { lifes, hitids } = user[0];
-    set({ lifes, hitids });
+    set({ lifes, hitids, lastLifeChange: "none", loadingDB: false });
   },
   sethitids: async (ids) => {
     const { hitids, name, pass } = get();
@@ -51,7 +56,7 @@ export const useStore = create<TStore>((set, get) => ({
   setAddLife: async (number = 1) => {
     set((store) => {
       const newlife = Math.max(0, store.lifes + number);
-      return { lifes: newlife };
+      return { lifes: newlife, lastLifeChange: "added" };
     });
   },
   setSubLife: async (number = 1) => {
@@ -63,6 +68,6 @@ export const useStore = create<TStore>((set, get) => ({
       lifes: newLifes,
     });
     if (error) throw Error(error);
-    set({ lifes: newLifes });
+    set({ lifes: newLifes, lastLifeChange: "subbed" });
   },
 }));

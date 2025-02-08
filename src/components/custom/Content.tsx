@@ -6,7 +6,7 @@ import { Hearts } from "./Hearts";
 export const Content = () => {
   return (
     <FlexC css={{ backgroundColor: "$lightblack" }}>
-      <FlexR c css={{ marginBottom: "12px" }}>
+      <FlexR sb css={{ paddingX: 16 }}>
         <Hearts />
       </FlexR>
       <Carrousel>
