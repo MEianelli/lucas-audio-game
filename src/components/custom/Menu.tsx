@@ -18,8 +18,8 @@ export function Menu() {
           css={{
             justifyContent: "center",
             alignItems: "end",
-            gap: "$4",
-            margin: "4px",
+            gap: "7px",
+            margin: "8px",
             height: "min-content",
           }}
         >
@@ -31,10 +31,10 @@ export function Menu() {
             }}
           />
           <Div
-            css={{ width: "25px", height: "6px", backgroundColor: "White" }}
+            css={{ width: "38px", height: "8px", backgroundColor: "White" }}
           />
           <Div
-            css={{ width: "25px", height: "6px", backgroundColor: "White" }}
+            css={{ width: "38px", height: "8px", backgroundColor: "White" }}
           />
         </FlexC>
       </ButtonClean>{" "}
