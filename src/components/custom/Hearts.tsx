@@ -1,25 +1,42 @@
 import { useStore } from "@/lib/store";
 import { FlexR } from "../containers/flex";
-import { JSX, useMemo } from "react";
-import {
-  HeartIcon,
-  HeartEmptyIcon,
-  HeartFillingIcon,
-  ExplodingHeart,
-} from "../icons/hearts";
+import { JSX, useEffect, useMemo, useRef } from "react";
+import { HeartIcon, HeartEmptyIcon, ExplodingHeart } from "../icons/hearts";
+import { MAX_LIFE_CAP, TIME_TO_GAIN_HEART } from "@/lib/contants";
 
 export type THeartState = "full" | "filling" | "empty" | "exploding";
 
 export const heartsMapper: Record<THeartState, (i: number) => JSX.Element> = {
   empty: (i: number) => <HeartEmptyIcon key={`empty${i}`} />,
   exploding: (i: number) => <ExplodingHeart key={`exploding${i}`} />,
-  filling: (i: number) => <HeartFillingIcon key={`filling${i}`} />,
+  filling: (i: number) => <ExplodingHeart key={`filling${i}`} />,
   full: (i: number) => <HeartIcon key={`full${i}`} />,
 };
 
 export const Hearts = () => {
   const life = useStore((store) => store.lifes);
+  const setAddLife = useStore((store) => store.setAddLife);
   const lastLifeChange = useStore((store) => store.lastLifeChange);
+  const lastheartgain = useStore((store) => store.lastheartgain);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (life >= MAX_LIFE_CAP) return;
+    intervalRef.current = setInterval(() => {
+      const currentTime = Date.now();
+      const elapsedTime = currentTime - lastheartgain;
+
+      if (elapsedTime >= TIME_TO_GAIN_HEART) {
+        console.log("elapsedTime", elapsedTime / 1000);
+        setAddLife();
+      }
+    }, 500);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [life]);
 
   const heartsArray = useMemo(() => {
     return buildStateArray(life, lastLifeChange);

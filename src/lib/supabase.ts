@@ -76,32 +76,15 @@ export async function addOneUser(data: { name: string; pass: string }) {
   throw Error(`${error?.message}`);
 }
 
-export async function updateHits(data: {
+export async function updateProperty(data: {
   name: string;
   pass: string;
-  hitids: number[];
+  updates: Partial<User>;
 }) {
-  const { name, pass, hitids } = data;
+  const { name, pass, updates } = data;
   const { status, error } = await supabase
     .from("users")
-    .update({ hitids })
-    .eq("name", name)
-    .eq("pass", pass);
-  if (status === 204) {
-    return;
-  }
-  return `${error?.message}`;
-}
-
-export async function updateLifes(data: {
-  name: string;
-  pass: string;
-  lifes: number;
-}) {
-  const { name, pass, lifes } = data;
-  const { status, error } = await supabase
-    .from("users")
-    .update({ lifes })
+    .update(updates)
     .eq("name", name)
     .eq("pass", pass);
   if (status === 204) {
@@ -150,4 +133,5 @@ export type User = {
   hitids?: number[];
   lifes?: number;
   score?: number;
+  lastheartgain?: number;
 };

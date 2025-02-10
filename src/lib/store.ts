@@ -1,6 +1,7 @@
 import { create } from "zustand";
-import { getOneUser, updateHits, updateLifes } from "./supabase";
+import { getOneUser, updateProperty } from "./supabase";
 import { crypto } from "@/utils/crypto";
+import { MAX_LIFE_CAP } from "./contants";
 
 export type TStore = {
   score: number;
@@ -13,6 +14,7 @@ export type TStore = {
   sethitids: (id: number[]) => Promise<void | boolean>;
   name: string;
   pass: string;
+  lastheartgain: number;
   setName: (name: string) => void;
   setPass: (pass: string) => void;
   updateUserFromDB: () => Promise<void>;
@@ -22,6 +24,7 @@ export type TStore = {
 export const useStore = create<TStore>((set, get) => ({
   name: "",
   pass: "",
+  lastheartgain: 0,
   loadingDB: false,
   setName: (name) => set(() => ({ name })),
   setPass: (pass) => set(() => ({ pass })),
@@ -34,16 +37,24 @@ export const useStore = create<TStore>((set, get) => ({
     set({ loadingDB: true });
     const user = await getOneUser({ field: "name", value: name });
     if (!user?.length) return;
-    const { lifes, hitids } = user[0];
-    set({ lifes, hitids, lastLifeChange: "none", loadingDB: false });
+    const { lifes, hitids, lastheartgain } = user[0];
+    set({
+      lifes,
+      hitids,
+      lastLifeChange: "none",
+      loadingDB: false,
+      lastheartgain,
+    });
   },
   sethitids: async (ids) => {
     const { hitids, name, pass } = get();
     const newhitids = [...new Set([...hitids, ...ids])];
-    const error = await updateHits({
+    const error = await updateProperty({
       name,
       pass: crypto({ name, pass }),
-      hitids: newhitids,
+      updates: {
+        hitids: newhitids,
+      },
     });
     if (error) throw Error(error);
     set({ hitids: newhitids });
@@ -54,18 +65,33 @@ export const useStore = create<TStore>((set, get) => ({
     set({ score: newScore });
   },
   setAddLife: async (number = 1) => {
-    set((store) => {
-      const newlife = Math.max(0, store.lifes + number);
-      return { lifes: newlife, lastLifeChange: "added" };
+    const { lifes, name, pass } = get();
+    const newLifes = Math.min(MAX_LIFE_CAP, lifes + number);
+    const heartGainTime = Date.now();
+    const error = await updateProperty({
+      name,
+      pass: crypto({ name, pass }),
+      updates: {
+        lifes: newLifes,
+        lastheartgain: heartGainTime,
+      },
+    });
+    if (error) throw Error(error);
+    set({
+      lifes: newLifes,
+      lastLifeChange: "added",
+      lastheartgain: heartGainTime,
     });
   },
   setSubLife: async (number = 1) => {
     const { lifes, name, pass } = get();
     const newLifes = Math.max(0, lifes - number);
-    const error = await updateLifes({
+    const error = await updateProperty({
       name,
       pass: crypto({ name, pass }),
-      lifes: newLifes,
+      updates: {
+        lifes: newLifes,
+      },
     });
     if (error) throw Error(error);
     set({ lifes: newLifes, lastLifeChange: "subbed" });

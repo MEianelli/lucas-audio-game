@@ -10,6 +10,7 @@ import { AlertPoint, AlertStatus } from "./AlertMessage";
 import { ProgressBar } from "./ProgressBar";
 import { cardDimentions } from "@/styles/stitches.config";
 import * as motion from "motion/react-client";
+import { rightAnswerCheck } from "@/lib/helpers/rightAnswerCheck";
 
 export const GuessCard = ({ card }: { card: TGuess }) => {
   const soundUrl = `${storageBaseUrl}/${card.audio_src}`;
@@ -48,11 +49,7 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
 
   function handleEnter() {
     stop();
-    if (
-      card
-        .correct_answers!.split(",")
-        .some((ans) => value.toLocaleLowerCase().trim().includes(ans))
-    ) {
+    if (rightAnswerCheck(card.correct_answers?.split(",") ?? [], value)) {
       try {
         setAlert("ok");
         setTimeout(() => sethitids([card.id]), 1500);
@@ -96,6 +93,7 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
           height={cardDimentions.height}
           alt={card.audio_src ?? ""}
           css={{ borderRadius: "10px" }}
+          priority
         />
         {alert === "neutral" && <PlayButton isPlaying={isPlaying} />}
 
