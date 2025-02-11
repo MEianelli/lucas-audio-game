@@ -15,6 +15,7 @@ export function PlayButton({ isPlaying }: { readonly isPlaying: boolean }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        opacity: 0.8,
       }}
     >
       {!isPlaying ? (
