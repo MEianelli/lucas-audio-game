@@ -5,8 +5,7 @@ import { getAllGuesses, TGuess } from "@/lib/supabase";
 import { useStore } from "@/lib/store";
 import { cardDimentions } from "@/styles/stitches.config";
 import * as motion from "motion/react-client";
-
-const NUMBER_OF_CARDS = 3;
+import { NUMBER_OF_CARDS_PER_COLUMN } from "@/lib/contants";
 
 export const GuessCards = () => {
   const [guesses, setGuesses] = useState<TGuess[] | null>(null);
@@ -42,7 +41,8 @@ export const GuessCards = () => {
         justifyContent: "flex-start",
         alignItems: "flex-start",
         maxHeight: `${
-          cardDimentions.width * NUMBER_OF_CARDS + 32 * NUMBER_OF_CARDS
+          cardDimentions.width * NUMBER_OF_CARDS_PER_COLUMN +
+          32 * NUMBER_OF_CARDS_PER_COLUMN
         }px`,
         padding: 16,
       }}

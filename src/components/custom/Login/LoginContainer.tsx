@@ -2,7 +2,7 @@ import { useStore } from "@/lib/store";
 import { FlexC } from "../../containers/flex";
 import { addOneUser, getOneUser } from "@/lib/supabase";
 import { crypto } from "@/utils/crypto";
-import { useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 import { TextMessage } from "./Messages";
 import { getCryptoCookie, setCryptoCookie } from "@/utils/cookie";
 import { Login } from "./Login";
@@ -16,12 +16,12 @@ export type TStatus = "unavailable" | "unexistant" | "wrongPass" | "empty" | "";
 export type TScreen = "login" | "cadastro" | "created" | "logged";
 
 export interface LoginContainerProps {
-  onLogin?: () => void;
+  ref: RefObject<HTMLDialogElement | null>;
 }
 
 const allowedPattern = /^[A-Za-z0-9!@#$%^&]*$/;
 
-export const LoginContainer = ({ onLogin }: LoginContainerProps) => {
+export const LoginContainer = ({ ref }: LoginContainerProps) => {
   const name = useStore((store) => store.name);
   const pass = useStore((store) => store.pass);
   const setName = useStore((store) => store.setName);
@@ -31,6 +31,10 @@ export const LoginContainer = ({ onLogin }: LoginContainerProps) => {
   const [screen, setScreen] = useState<TScreen>("login");
   const [loading, setLoading] = useState(false);
 
+  function onLogin() {
+    ref?.current?.close();
+  }
+
   useEffect(() => {
     const cookie = getCryptoCookie();
     if (!cookie?.name || !cookie?.pass) return;
@@ -38,7 +42,7 @@ export const LoginContainer = ({ onLogin }: LoginContainerProps) => {
     setPass(cookie?.pass);
     setScreen("logged");
     updateUserFromDB();
-    setTimeout(() => onLogin?.(), TIME_TO_CLOSE_MODAL);
+    setTimeout(onLogin, TIME_TO_CLOSE_MODAL);
   }, []);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -72,7 +76,7 @@ export const LoginContainer = ({ onLogin }: LoginContainerProps) => {
       if (added) {
         setCryptoCookie({ name, pass });
         setScreen("created");
-        setTimeout(() => onLogin?.(), TIME_TO_CLOSE_MODAL);
+        setTimeout(onLogin, TIME_TO_CLOSE_MODAL);
       }
     } catch (error) {
       console.log(JSON.stringify(error));
@@ -99,7 +103,7 @@ export const LoginContainer = ({ onLogin }: LoginContainerProps) => {
       updateUserFromDB();
       setCryptoCookie({ name, pass });
       setScreen("logged");
-      setTimeout(() => onLogin?.(), TIME_TO_CLOSE_MODAL);
+      setTimeout(onLogin, TIME_TO_CLOSE_MODAL);
       return;
     } catch (error) {
       console.log(JSON.stringify(error));

@@ -2,12 +2,15 @@ import { create } from "zustand";
 import { getOneUser, updateProperty } from "./supabase";
 import { crypto } from "@/utils/crypto";
 import { MAX_LIFE_CAP } from "./contants";
+import { ModalOptions } from "@/components/containers/modal";
 
 export type TStore = {
   score: number;
   loadingDB: boolean;
   setScore: () => void;
   lifes: number;
+  modalOption: ModalOptions;
+  setModalOption: (option: ModalOptions) => void;
   setAddLife: (number?: number) => Promise<void>;
   setSubLife: (number?: number) => Promise<void>;
   hitids: number[];
@@ -16,6 +19,7 @@ export type TStore = {
   pass: string;
   lastheartgain: number;
   setName: (name: string) => void;
+  setLastheartgain: (lastheartgain: number) => void;
   setPass: (pass: string) => void;
   updateUserFromDB: () => Promise<void>;
   lastLifeChange: "added" | "subbed" | "none";
@@ -24,14 +28,17 @@ export type TStore = {
 export const useStore = create<TStore>((set, get) => ({
   name: "",
   pass: "",
+  modalOption: "login",
   lastheartgain: 0,
   loadingDB: false,
-  setName: (name) => set(() => ({ name })),
-  setPass: (pass) => set(() => ({ pass })),
+  setName: (name) => set({ name }),
+  setLastheartgain: (lastheartgain) => set({ lastheartgain }),
+  setPass: (pass) => set({ pass }),
   score: 0,
   lifes: 5,
   lastLifeChange: "none",
   hitids: [],
+  setModalOption: (option: ModalOptions) => set({ modalOption: option }),
   updateUserFromDB: async () => {
     const { name } = get();
     set({ loadingDB: true });

@@ -14,33 +14,38 @@ export const heartsMapper: Record<THeartState, (i: number) => JSX.Element> = {
 };
 
 export const Hearts = () => {
-  const life = useStore((store) => store.lifes);
+  const lifes = useStore((store) => store.lifes);
   const setAddLife = useStore((store) => store.setAddLife);
   const lastLifeChange = useStore((store) => store.lastLifeChange);
   const lastheartgain = useStore((store) => store.lastheartgain);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const setModalOption = useStore((store) => store.setModalOption);
 
   useEffect(() => {
-    if (life >= MAX_LIFE_CAP) return;
+    if (lifes >= MAX_LIFE_CAP) return;
     intervalRef.current = setInterval(() => {
       const currentTime = Date.now();
       const elapsedTime = currentTime - lastheartgain;
 
       if (elapsedTime >= TIME_TO_GAIN_HEART) {
-        console.log("elapsedTime", elapsedTime / 1000);
         setAddLife();
       }
     }, 500);
+
+    if (lifes <= 0) {
+      setModalOption("nolifes");
+    }
+
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
       }
     };
-  }, [life]);
+  }, [lifes]);
 
   const heartsArray = useMemo(() => {
-    return buildStateArray(life, lastLifeChange);
-  }, [life, lastLifeChange]);
+    return buildStateArray(lifes, lastLifeChange);
+  }, [lifes, lastLifeChange]);
 
   return (
     <FlexR css={{ justifyContent: "center", marginTop: "16px" }}>

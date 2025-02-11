@@ -11,6 +11,7 @@ import { ProgressBar } from "./ProgressBar";
 import { cardDimentions } from "@/styles/stitches.config";
 import * as motion from "motion/react-client";
 import { rightAnswerCheck } from "@/lib/helpers/rightAnswerCheck";
+import { MAX_LIFE_CAP } from "@/lib/contants";
 
 export const GuessCard = ({ card }: { card: TGuess }) => {
   const soundUrl = `${storageBaseUrl}/${card.audio_src}`;
@@ -20,7 +21,9 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
   const setSubLife = useStore((store) => store.setSubLife);
   const sethitids = useStore((store) => store.sethitids);
   const hitids = useStore((store) => store.hitids);
-
+  const setLastheartgain = useStore((store) => store.setLastheartgain);
+  const setModalOption = useStore((store) => store.setModalOption);
+  const lifes = useStore((store) => store.lifes);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -49,18 +52,28 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
 
   function handleEnter() {
     stop();
-    if (rightAnswerCheck(card.correct_answers?.split(",") ?? [], value)) {
-      try {
-        setAlert("ok");
-        setTimeout(() => sethitids([card.id]), 1500);
-      } catch (error) {
-        console.log(error);
+    setValue("");
+
+    if (lifes <= 0) {
+      setModalOption("none");
+      return;
+    }
+
+    if (!rightAnswerCheck(card.correct_answers?.split(",") ?? [], value)) {
+      if (lifes >= MAX_LIFE_CAP) {
+        setLastheartgain(Date.now());
       }
-    } else {
       setAlert("nok");
       setSubLife();
+      return;
     }
-    setValue("");
+
+    try {
+      setAlert("ok");
+      setTimeout(() => sethitids([card.id]), 1500);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
