@@ -25,9 +25,13 @@ export const Hearts = () => {
     intervalRef.current = setInterval(() => {
       const currentTime = Date.now();
       const elapsedTime = currentTime - lastheartgain;
+      const timesToGain = Math.min(
+        MAX_LIFE_CAP - lifes,
+        Math.floor(elapsedTime / TIME_TO_GAIN_HEART)
+      );
 
       if (elapsedTime >= TIME_TO_GAIN_HEART) {
-        setAddLife();
+        setAddLife(timesToGain);
       }
     }, 500);
 
