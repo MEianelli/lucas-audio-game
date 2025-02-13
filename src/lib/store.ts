@@ -12,8 +12,9 @@ export type TStore = {
   modalOption: ModalOptions;
   setModalOption: (option: ModalOptions) => void;
   setAddLife: (number?: number) => Promise<void>;
-  setSubLife: (number?: number) => Promise<void>;
+  setSubLife: (ids?: number[], number?: number) => Promise<void>;
   hitids: number[];
+  missids: number[];
   sethitids: (id: number[]) => Promise<void | boolean>;
   name: string;
   pass: string;
@@ -38,16 +39,18 @@ export const useStore = create<TStore>((set, get) => ({
   lifes: 5,
   lastLifeChange: "none",
   hitids: [],
+  missids: [],
   setModalOption: (option: ModalOptions) => set({ modalOption: option }),
   updateUserFromDB: async () => {
     const { name } = get();
     set({ loadingDB: true });
     const user = await getOneUser({ field: "name", value: name });
     if (!user?.length) return;
-    const { lifes, hitids, lastheartgain } = user[0];
+    const { lifes, hitids, lastheartgain, missids } = user[0];
     set({
       lifes,
       hitids,
+      missids,
       lastLifeChange: "none",
       loadingDB: false,
       lastheartgain,
@@ -90,17 +93,19 @@ export const useStore = create<TStore>((set, get) => ({
       lastheartgain: heartGainTime,
     });
   },
-  setSubLife: async (number = 1) => {
-    const { lifes, name, pass } = get();
+  setSubLife: async (ids, number = 1) => {
+    const { lifes, name, pass, missids } = get();
+    const newMissIds = [...new Set([...missids, ...(ids ?? [])])];
     const newLifes = Math.max(0, lifes - number);
     const error = await updateProperty({
       name,
       pass: crypto({ name, pass }),
       updates: {
         lifes: newLifes,
+        missids: newMissIds,
       },
     });
     if (error) throw Error(error);
-    set({ lifes: newLifes, lastLifeChange: "subbed" });
+    set({ lifes: newLifes, lastLifeChange: "subbed", missids: newMissIds });
   },
 }));

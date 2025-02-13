@@ -57,6 +57,16 @@ export async function getLatest(): Promise<TGuess[]> {
   throw Error(`${error?.message}`);
 }
 
+export async function updateGuesses(updates: Partial<TGuess>[]) {
+  const { status, error } = await supabase
+    .from("guesses")
+    .upsert(updates, { onConflict: "id" });
+  if (status === 200) {
+    return true;
+  }
+  throw Error(`${error?.message}`);
+}
+
 export async function deleteOne(id: number): Promise<boolean> {
   const { status, error } = await supabase
     .from("guesses")
@@ -125,12 +135,14 @@ export type TGuess = {
   created_at: string;
   id: number;
   image_src: string | null;
+  difficulty: "normal" | "easy" | "hard";
 };
 
 export type User = {
   name: string;
   pass: string;
   hitids?: number[];
+  missids?: number[];
   lifes?: number;
   score?: number;
   lastheartgain?: number;

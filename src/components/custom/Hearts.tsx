@@ -19,7 +19,6 @@ export const Hearts = () => {
   const lastLifeChange = useStore((store) => store.lastLifeChange);
   const lastheartgain = useStore((store) => store.lastheartgain);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const setModalOption = useStore((store) => store.setModalOption);
 
   useEffect(() => {
     if (lifes >= MAX_LIFE_CAP) return;
@@ -31,10 +30,6 @@ export const Hearts = () => {
         setAddLife();
       }
     }, 500);
-
-    if (lifes <= 0) {
-      setModalOption("nolifes");
-    }
 
     return () => {
       if (intervalRef.current) {
