@@ -7,12 +7,12 @@ import { useStore } from "@/lib/store";
 import { storageBaseUrl, TGuess } from "@/lib/supabase";
 import { PlayButton } from "../PlayButton";
 import { AlertPoint, AlertStatus } from "./AlertMessage";
-import { ProgressBar } from "./ProgressBar";
-import { cardDimentions } from "@/styles/stitches.config";
+import { OverLayOpacity } from "./ProgressBar";
 import * as motion from "motion/react-client";
 import { rightAnswerCheck } from "@/lib/helpers/rightAnswerCheck";
 import { MAX_LIFE_CAP } from "@/lib/contants";
 import { Text } from "@/components/text/text";
+import { Div } from "@/components/containers/div";
 
 export const GuessCard = ({ card }: { card: TGuess }) => {
   const soundUrl = `${storageBaseUrl}/${card.audio_src}`;
@@ -22,6 +22,7 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
   const setSubLife = useStore((store) => store.setSubLife);
   const sethitids = useStore((store) => store.sethitids);
   const missids = useStore((store) => store.missids);
+  const ignoreids = useStore((store) => store.ignoreids);
   const hitids = useStore((store) => store.hitids);
   const setLastheartgain = useStore((store) => store.setLastheartgain);
   const setModalOption = useStore((store) => store.setModalOption);
@@ -33,10 +34,10 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
       setAlert("ok");
     }
 
-    if (missids?.includes(card.id)) {
-      setAlert("nok");
+    if (missids?.includes(card.id) || ignoreids?.includes(card.id)) {
+      setAlert("retry");
     }
-  }, [hitids, missids]);
+  }, [hitids, missids, ignoreids]);
 
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -64,13 +65,17 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
   function handleEnter() {
     stop();
     setValue("");
+    setShowInput(false);
 
     if (!rightAnswerCheck(card.correct_answers?.split(",") ?? [], value)) {
       if (lifes >= MAX_LIFE_CAP) {
         setLastheartgain(Date.now());
       }
       setAlert("nok");
-      setSubLife([card.id]);
+      setTimeout(() => {
+        setAlert("retry");
+        setSubLife([card.id]);
+      }, 2000);
       return;
     }
 
@@ -84,58 +89,83 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
-    setAlert("neutral");
     setValue(e.target.value);
   }
 
   function handleBlur() {
+    stop();
     setShowInput(false);
   }
 
   return (
-    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.8 }}>
-      <Text>#{card.id}</Text>
-      <ButtonClean
-        onClick={handleToggle}
+    <>
+      <Div
         css={{
-          position: "relative",
+          position: "absolute",
+          left: 0,
+          top: -50,
+          width: "100%",
+          padding: "2px",
           borderRadius: "10px",
-          overflow: "hidden",
-          width: "$cardWidth",
-          height: "$cardHeight",
-          backgroundColor: "$darkRed",
+          backgroundColor: "$lightGrey",
+          opacity: showInput ? "1" : "0",
         }}
       >
-        {isPlaying && <ProgressBar duration={duration} />}
-        <ImageCss
-          src={`${storageBaseUrl}/${card.image_src}`}
-          width={cardDimentions.width}
-          height={cardDimentions.height}
-          alt={card.audio_src ?? ""}
-          css={{ borderRadius: "10px" }}
-          priority
-        />
-        {alert === "neutral" && <PlayButton isPlaying={isPlaying} />}
-
         <DarkTextInput
           ref={inputRef}
           type="text"
-          placeholder="Type a movie"
+          placeholder="Which movie is that quote from?"
           value={value}
           onChange={handleChange}
           onBlur={handleBlur}
           onKeyUp={(event) => event.key === "Enter" && handleEnter()}
           css={{
-            position: "absolute",
-            zIndex: "4",
-            left: 8,
-            bottom: 8,
-            opacity: showInput ? "1" : "0",
+            width: "100%",
           }}
         />
+      </Div>
 
-        <AlertPoint status={alert} />
-      </ButtonClean>
-    </motion.div>
+      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.8 }}>
+        <ButtonClean
+          onClick={handleToggle}
+          css={{
+            position: "relative",
+            borderRadius: "10px",
+            overflow: "hidden",
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <Text
+            css={{
+              color: "$lightGrey",
+              fontSize: 12,
+              position: "absolute",
+              top: 2,
+              left: 2,
+            }}
+          >
+            #{card.id}
+          </Text>
+          {isPlaying && <OverLayOpacity duration={duration} />}
+          <ImageCss
+            src={`${storageBaseUrl}/${card.image_src}`}
+            alt={card.audio_src ?? ""}
+            width={200}
+            height={200}
+            css={{
+              borderRadius: "10px",
+              width: "100%",
+              height: "auto",
+              aspectRatio: 28 / 25,
+              objectFit: "cover",
+            }}
+            priority
+          />
+          {alert === "neutral" && <PlayButton isPlaying={isPlaying} />}
+          <AlertPoint status={alert} id={card.id} />
+        </ButtonClean>
+      </motion.div>
+    </>
   );
 };

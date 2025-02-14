@@ -8,12 +8,11 @@ import { useStore } from "@/lib/store";
 
 export default function Home() {
   const loadingDB = useStore((store) => store.loadingDB);
-
   return (
-    <Container css={{ padding: "8px", height: "100vh" }}>
+    <Container css={{ padding: "8px", height: "auto" }}>
       <FlexC css={{ gap: "22px" }}>
         <Header />
-        <Content />
+        {!loadingDB && <Content />}
         <DialogModal />
         {loadingDB && <LoadingModal />}
       </FlexC>

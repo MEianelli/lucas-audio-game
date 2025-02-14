@@ -29,3 +29,7 @@ export const FlexC = styled(Flex, {
 export const FlexR = styled(Flex, {
   flexFlow: "row",
 });
+
+export const Grid = styled("div", {
+  display: "grid",
+});

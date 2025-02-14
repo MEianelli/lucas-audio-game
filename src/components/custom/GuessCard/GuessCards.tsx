@@ -1,30 +1,24 @@
 import { useEffect, useMemo, useState } from "react";
-import { FlexC } from "../../containers/flex";
+import { Grid } from "../../containers/flex";
 import { GuessCard } from "./GuessCard";
 import { getAllGuesses, TGuess } from "@/lib/supabase";
 import { useStore } from "@/lib/store";
-import { cardDimentions } from "@/styles/stitches.config";
 import * as motion from "motion/react-client";
-import { NUMBER_OF_CARDS_PER_COLUMN } from "@/lib/contants";
+import { shuffleArray } from "@/utils/random";
 
 export const GuessCards = () => {
   const [guesses, setGuesses] = useState<TGuess[] | null>(null);
 
   const hitids = useStore((store) => store.hitids);
-
-  const filtered = useMemo(() => {
-    return guesses?.toSorted((a, b) => {
-      const aInHitids = hitids.includes(a.id) ? 1 : 0;
-      const bInHitids = hitids.includes(b.id) ? 1 : 0;
-      return aInHitids - bInHitids;
-    });
-  }, [hitids, guesses]);
+  const ignoreids = useStore((store) => store.ignoreids);
 
   useEffect(() => {
     async function getData() {
       try {
         const data = await getAllGuesses();
-        setGuesses(data);
+        if (data.length) {
+          setGuesses(shuffleArray(data));
+        }
       } catch (error) {
         alert(error);
       }
@@ -32,19 +26,24 @@ export const GuessCards = () => {
     getData();
   }, []);
 
+  const filtered = useMemo(() => {
+    return guesses
+      ?.filter(({ id }) => !hitids.includes(id) && !ignoreids.includes(id))
+      .slice(0, 9);
+  }, [hitids, ignoreids, guesses]);
+
   return (
-    <FlexC
+    <Grid
       css={{
-        gap: "16px",
-        width: "fit-content",
-        flexWrap: "wrap",
-        justifyContent: "flex-start",
-        alignItems: "flex-start",
-        maxHeight: `${
-          cardDimentions.width * NUMBER_OF_CARDS_PER_COLUMN +
-          32 * NUMBER_OF_CARDS_PER_COLUMN
-        }px`,
-        padding: 16,
+        display: "grid",
+        position: "relative",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gridTemplateRows: "repeat(3, 1fr)",
+        gap: "15px",
+        width: "100%",
+        aspectRatio: "1 / 1",
+        margin: "0 auto",
+        padding: "16px 8px",
       }}
     >
       {filtered?.map((it) => (
@@ -60,6 +59,6 @@ export const GuessCards = () => {
           <GuessCard card={it} />
         </motion.div>
       ))}
-    </FlexC>
+    </Grid>
   );
 };

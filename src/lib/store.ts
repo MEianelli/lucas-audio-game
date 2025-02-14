@@ -15,7 +15,9 @@ export type TStore = {
   setSubLife: (ids?: number[], number?: number) => Promise<void>;
   hitids: number[];
   missids: number[];
+  ignoreids: number[];
   sethitids: (id: number[]) => Promise<void | boolean>;
+  setIgnoreids: (id: number[]) => Promise<void | boolean>;
   name: string;
   pass: string;
   lastheartgain: number;
@@ -31,7 +33,7 @@ export const useStore = create<TStore>((set, get) => ({
   pass: "",
   modalOption: "login",
   lastheartgain: 0,
-  loadingDB: false,
+  loadingDB: true,
   setName: (name) => set({ name }),
   setLastheartgain: (lastheartgain) => set({ lastheartgain }),
   setPass: (pass) => set({ pass }),
@@ -40,21 +42,39 @@ export const useStore = create<TStore>((set, get) => ({
   lastLifeChange: "none",
   hitids: [],
   missids: [],
+  ignoreids: [],
   setModalOption: (option: ModalOptions) => set({ modalOption: option }),
   updateUserFromDB: async () => {
     const { name } = get();
     set({ loadingDB: true });
-    const user = await getOneUser({ field: "name", value: name });
+    const user = await getOneUser({
+      field: "name",
+      value: name,
+    });
     if (!user?.length) return;
-    const { lifes, hitids, lastheartgain, missids } = user[0];
+    const { lifes, hitids, lastheartgain, missids, ignoreids } = user[0];
     set({
       lifes,
       hitids,
       missids,
+      ignoreids,
       lastLifeChange: "none",
       loadingDB: false,
       lastheartgain,
     });
+  },
+  setIgnoreids: async (ids) => {
+    const { ignoreids, name, pass } = get();
+    const newIgnore = [...new Set([...ignoreids, ...ids])];
+    const error = await updateProperty({
+      name,
+      pass: crypto({ name, pass }),
+      updates: {
+        ignoreids: newIgnore,
+      },
+    });
+    if (error) throw Error(error);
+    set({ ignoreids: newIgnore });
   },
   sethitids: async (ids) => {
     const { hitids, name, pass } = get();

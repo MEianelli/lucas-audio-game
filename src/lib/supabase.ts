@@ -1,3 +1,4 @@
+import { getRandomIds } from "@/utils/random";
 import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = "https://hiinnoepvfmkkdioyanc.supabase.co";
@@ -39,10 +40,55 @@ export async function uploadToGuesses(payload: {
 
 export async function getAllGuesses(): Promise<TGuess[]> {
   const { data, error } = await supabase.from("guesses").select();
+
   if (data?.length) {
     return data;
   }
   throw Error(`${error?.message}`);
+}
+
+export async function getRndCount(
+  row_count: number,
+  exclude_ids: number[]
+): Promise<TGuess[]> {
+  const { data, error } = await supabase.rpc("get_random_rows", {
+    exclude_ids,
+    row_count,
+  });
+
+  if (error) {
+    throw Error(`${error?.message}`);
+  }
+
+  return data;
+}
+
+export async function getRandomNumberGuesses(
+  number: number,
+  ids: number[]
+): Promise<TGuess[]> {
+  const { data: onlyIds, error: IdsError } = await supabase
+    .from("guesses")
+    .select("id");
+
+  if (IdsError) {
+    throw Error(`${IdsError?.message}`);
+  }
+
+  const allIds = onlyIds.map(({ id }) => id);
+  const filtered = allIds.filter((id) => !ids.includes(id));
+  const randomIds = getRandomIds(filtered, number);
+
+  const { data, error } = await supabase
+    .from("guesses")
+    .select("*")
+    .in("id", randomIds);
+
+  if (error) {
+    throw Error(`${error?.message}`);
+  }
+
+  return data;
 }
 
 export async function getLatest(): Promise<TGuess[]> {
@@ -143,6 +189,7 @@ export type User = {
   pass: string;
   hitids?: number[];
   missids?: number[];
+  ignoreids?: number[];
   lifes?: number;
   score?: number;
   lastheartgain?: number;

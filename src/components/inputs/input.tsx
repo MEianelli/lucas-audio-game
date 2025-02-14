@@ -15,9 +15,8 @@ export const Input = styled("input", {
 
 export const DarkTextInput = styled(Input, {
   backgroundColor: "$grey",
-  maxWidth: "$cardWidthPadding",
   color: "$white",
-  fontSize: "14px",
+  fontSize: "24px",
 });
 
 export const LoginInput = styled(Input, {
