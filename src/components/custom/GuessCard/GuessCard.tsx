@@ -14,6 +14,7 @@ import { MAX_LIFE_CAP } from "@/lib/contants";
 import { Text } from "@/components/text/text";
 import { Div } from "@/components/containers/div";
 import { keyframes } from "@/styles/stitches.config";
+import { DifficultyIcons } from "./DifficultyIcons";
 
 export const GuessCard = ({ card }: { card: TGuess }) => {
   const soundUrl = `${storageBaseUrl}/${card.audio_src}`;
@@ -180,6 +181,7 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
           />
           {alert === "neutral" && <PlayButton isPlaying={isPlaying} />}
           <AlertPoint status={alert} id={card.id} />
+          <DifficultyIcons difficulty={card.difficulty} />
         </ButtonClean>
       </motion.div>
     </>

@@ -5,9 +5,10 @@ import { Text } from "@/components/text/text";
 import ranking1Icon from "../../../../public/imgs/ranking-up-1.png";
 import { keyframes } from "@/styles/stitches.config";
 import { useMemo } from "react";
-import { FileIcon, RetryIcon } from "@/components/icons/file";
+import { RetryIcon } from "@/components/icons/file";
 import * as motion from "motion/react-client";
 import { useStore } from "@/lib/store";
+import { CloseIcon } from "@/components/icons/close";
 
 export type AlertStatus = "ok" | "nok" | "neutral" | "retry";
 
@@ -98,14 +99,14 @@ export const AlertPointContent = ({
               height: "45px",
               borderRadius: "50%",
               padding: "8px",
-              backgroundColor: "#5400BF",
-              boxShadow: "0px 4px rgb(38, 6, 80)",
+              backgroundColor: "$red",
+              boxShadow: "0px 4px rgb(65, 5, 5)",
               "& svg path": {
                 fill: "white",
               },
             }}
           >
-            <FileIcon />
+            <CloseIcon fill="#fff" size="30px" />
           </Div>
         </motion.div>
         <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>

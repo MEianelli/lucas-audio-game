@@ -35,6 +35,7 @@ const colors = {
   brightPink: "#BD27B8",
   lightBlue: "#1A90CA",
   darkBlue: "#1A7DA4",
+  yellow: "#ffce00",
 };
 
 export const {

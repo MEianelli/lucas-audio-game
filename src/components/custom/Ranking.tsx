@@ -38,7 +38,7 @@ export const Ranking = () => {
   if (loading) return <Text color={"text"}>Loading...</Text>;
 
   return (
-    <FlexC css={{ gap: 8 }}>
+    <FlexC css={{ gap: 8, minWidth: "90%" }}>
       <Text
         color={"text"}
         size={"b"}
