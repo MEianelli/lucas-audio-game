@@ -13,12 +13,6 @@ export const Input = styled("input", {
   },
 });
 
-export const DarkTextInput = styled(Input, {
-  backgroundColor: "$grey",
-  color: "$white",
-  fontSize: "24px",
-});
-
 export const LoginInput = styled(Input, {
   backgroundColor: "$mediumGrey",
   color: "$lightblack",

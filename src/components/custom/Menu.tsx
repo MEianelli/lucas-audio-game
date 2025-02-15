@@ -2,6 +2,13 @@ import { ButtonClean } from "@/components/buttons/buttons";
 import { Div } from "@/components/containers/div";
 import { FlexC } from "@/components/containers/flex";
 import { useStore } from "@/lib/store";
+import { styled } from "@/styles/stitches.config";
+
+const BaseBar = styled(Div, {
+  width: "38px",
+  height: "7px",
+  borderRadius: "2px",
+});
 
 export function Menu() {
   const setModalOption = useStore((store) => store.setModalOption);
@@ -11,40 +18,17 @@ export function Menu() {
       css={{ marginLeft: "left", "&:active div": { background: "red" } }}
       onClick={() => setModalOption("menu")}
     >
-      {/* <svg 
-      viewBox="0 0 40 40" 
-      width="40" 
-      height="40" 
-      xmlns="http://www.w3.org/2000/svg"
-      >
-      <rect x="5" y="5" width="30" height="7" rx="2" ry="2" fill="#901dff">
-      </rect>
-
-      <rect x="5" y="16.5" width="30" height="7" rx="2" ry="2" fill="#6b0eda">
-      </rect>
-
-      <rect x="5" y="28" width="30" height="7" rx="2" ry="2" fill="#4600b5">
-      </rect>
-      </svg> */}
-
       <FlexC
         css={{
           justifyContent: "center",
           alignItems: "end",
           gap: "7px",
-          margin: "8px",
           height: "min-content",
         }}
       >
-        <Div
-          css={{
-            width: "25px",
-            height: "6px",
-            backgroundColor: "White",
-          }}
-        />
-        <Div css={{ width: "38px", height: "8px", backgroundColor: "White" }} />
-        <Div css={{ width: "38px", height: "8px", backgroundColor: "White" }} />
+        <BaseBar css={{ backgroundColor: "#901dff" }} />
+        <BaseBar css={{ backgroundColor: "#6b0eda" }} />
+        <BaseBar css={{ backgroundColor: "#4600b5" }} />
       </FlexC>
     </ButtonClean>
   );

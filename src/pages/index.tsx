@@ -9,7 +9,7 @@ import { useStore } from "@/lib/store";
 export default function Home() {
   const loadingDB = useStore((store) => store.loadingDB);
   return (
-    <Container css={{ padding: "8px", height: "auto" }}>
+    <Container css={{ padding: "8px", height: "100vh" }}>
       <FlexC css={{ gap: "6px" }}>
         <Header />
         {!loadingDB && <Content />}

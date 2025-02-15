@@ -7,10 +7,15 @@ import { Hearts } from "./Hearts";
 
 export function Header() {
   return (
-    <FlexR css={{ justifyContent: "space-between", alignItems: "center" }}>
-      
+    <FlexR
+      css={{
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: "8px 0",
+      }}
+    >
       <Menu />
-      
+
       <Div>
         <Text
           css={{
@@ -22,8 +27,7 @@ export function Header() {
         >
           {`Audio Guesser`}
         </Text>
-        <Text size={"s"} weight={"normal"} css={{ textAlign: "center" }}>
-        </Text>
+        <Text size={"s"} weight={"normal"} css={{ textAlign: "center" }}></Text>
       </Div>
       <Hearts />
       <Bars />

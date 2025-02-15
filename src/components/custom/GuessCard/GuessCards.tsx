@@ -39,11 +39,8 @@ export const GuessCards = () => {
         position: "relative",
         gridTemplateColumns: "repeat(3, 1fr)",
         gridTemplateRows: "repeat(3, 1fr)",
-        gap: "0px 2%",
+        gap: "2%",
         width: "100%",
-        aspectRatio: "1 / 1",
-        margin: "0 auto",
-        padding: "0",
       }}
     >
       {filtered?.map((it) => (
@@ -53,8 +50,9 @@ export const GuessCards = () => {
           transition={{
             type: "spring",
             damping: 20,
-            stiffness: 300,
+            stiffness: 100,
           }}
+          style={{ height: "fit-content" }}
         >
           <GuessCard card={it} />
         </motion.div>

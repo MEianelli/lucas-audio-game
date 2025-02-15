@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ButtonClean } from "../../buttons/buttons";
 import { ImageCss } from "../../image/Image";
-import { DarkTextInput } from "../../inputs/input";
+import { Input } from "../../inputs/input";
 import useSound from "use-sound";
 import { useStore } from "@/lib/store";
 import { storageBaseUrl, TGuess } from "@/lib/supabase";
@@ -13,6 +13,7 @@ import { rightAnswerCheck } from "@/lib/helpers/rightAnswerCheck";
 import { MAX_LIFE_CAP } from "@/lib/contants";
 import { Text } from "@/components/text/text";
 import { Div } from "@/components/containers/div";
+import { keyframes } from "@/styles/stitches.config";
 
 export const GuessCard = ({ card }: { card: TGuess }) => {
   const soundUrl = `${storageBaseUrl}/${card.audio_src}`;
@@ -97,21 +98,32 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
     setShowInput(false);
   }
 
+  const enterAnimation = keyframes({
+    "0%": { opacity: 1, scale: 0 },
+    "100%": { opacity: 1, scale: 1 },
+  });
+
+  const animation = showInput ? `${enterAnimation} 0.2s linear` : "";
+
   return (
     <>
       <Div
         css={{
           position: "absolute",
           left: 0,
-          top: -50,
+          top: -60,
           width: "100%",
           padding: "2px",
           borderRadius: "10px",
           backgroundColor: "$lightGrey",
+          transformOrigin: "center",
+          animation,
           opacity: showInput ? "1" : "0",
+          scale: showInput ? "1" : "0",
+          zIndex: "100",
         }}
       >
-        <DarkTextInput
+        <Input
           ref={inputRef}
           type="text"
           placeholder="Which movie is that quote from?"
@@ -120,6 +132,9 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
           onBlur={handleBlur}
           onKeyUp={(event) => event.key === "Enter" && handleEnter()}
           css={{
+            backgroundColor: "$grey",
+            color: "$white",
+            fontSize: "24px",
             width: "100%",
           }}
         />
