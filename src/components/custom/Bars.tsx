@@ -8,7 +8,7 @@ export function Bars() {
 
   return (
     <ButtonClean onClick={() => setModalOption("ranking")}>
-      <svg 
+      {/* <svg 
       viewBox="0 0 40 40" 
       width="40" 
       height="40" 
@@ -22,7 +22,23 @@ export function Bars() {
 
       <rect x="28" y="5" width="7" height="30" rx="2" ry="2" fill="#00dd6e">
       </rect>
-      </svg>
+      </svg> */}
+      <FlexR
+        css={{
+          justifyContent: "center",
+          alignItems: "end",
+          gap: "$4",
+          height: "min-content",
+        }}
+      >
+        <Div
+          css={{ width: "8px", height: "15px", backgroundColor: "DarkViolet" }}
+        />
+        <Div
+          css={{ width: "8px", height: "20px", backgroundColor: "Yellow" }}
+        />
+        <Div css={{ width: "8px", height: "25px", backgroundColor: "Green" }} />
+      </FlexR>
     </ButtonClean>
   );
 }

@@ -43,7 +43,7 @@ export const GuessCards = () => {
         width: "100%",
         aspectRatio: "1 / 1",
         margin: "0 auto",
-        padding: "0px 0px 0% 0",
+        padding: "0",
       }}
     >
       {filtered?.map((it) => (

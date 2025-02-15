@@ -9,7 +9,7 @@ import { Login } from "./Login";
 import { Cadastro } from "./Cadastro";
 import { Button } from "@/components/buttons/buttons";
 
-const TIME_TO_CLOSE_MODAL = 91500; //ms
+const TIME_TO_CLOSE_MODAL = 1500; //ms
 
 export type TStatus = "unavailable" | "unexistant" | "wrongPass" | "empty" | "";
 

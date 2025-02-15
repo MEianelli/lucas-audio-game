@@ -8,10 +8,10 @@ export function Menu() {
 
   return (
     <ButtonClean
-      css={{ marginLeft: "left", "&:active div":{background:"red"} }}
+      css={{ marginLeft: "left", "&:active div": { background: "red" } }}
       onClick={() => setModalOption("menu")}
     >
-      <svg 
+      {/* <svg 
       viewBox="0 0 40 40" 
       width="40" 
       height="40" 
@@ -25,9 +25,27 @@ export function Menu() {
 
       <rect x="5" y="28" width="30" height="7" rx="2" ry="2" fill="#4600b5">
       </rect>
-      </svg>
+      </svg> */}
 
-      
+      <FlexC
+        css={{
+          justifyContent: "center",
+          alignItems: "end",
+          gap: "7px",
+          margin: "8px",
+          height: "min-content",
+        }}
+      >
+        <Div
+          css={{
+            width: "25px",
+            height: "6px",
+            backgroundColor: "White",
+          }}
+        />
+        <Div css={{ width: "38px", height: "8px", backgroundColor: "White" }} />
+        <Div css={{ width: "38px", height: "8px", backgroundColor: "White" }} />
+      </FlexC>
     </ButtonClean>
   );
 }
