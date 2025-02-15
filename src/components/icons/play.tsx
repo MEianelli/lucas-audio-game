@@ -1,6 +1,6 @@
 export const PlayIcon = () => {
   return (
-    <svg width="19px" height="19px" viewBox="0 0 7 7" version="1.1">
+    <svg width="16px" height="16px" viewBox="0 0 7 7" version="1.1">
       <g
         id="Page-1"
         stroke="none"

@@ -1,0 +1,33 @@
+/* Base style for the paths */
+.st0 {
+    fill: #000;            /* or whatever color you want */
+    transform-origin: 50% 50%; /* Center the transform for scaling */
+    transition: transform 0.3s ease;
+  }
+  
+  /* When .wave is on the SVG, animate each path in a staggered fashion */
+  .wave .st0:nth-of-type(1) {
+    animation: wave 0.4s ease-in-out forwards;
+  }
+  
+  .wave .st0:nth-of-type(2) {
+    animation: wave 0.4s ease-in-out forwards 0.05s; /* slight delay */
+  }
+  
+  .wave .st0:nth-of-type(3) {
+    animation: wave 0.4s ease-in-out forwards 0.1s;  /* slight delay */
+  }
+  
+  /* The "wave" keyframes: shrink horizontally, then expand back */
+  @keyframes wave {
+    0% {
+      transform: scaleX(1);
+    }
+    50% {
+      transform: scaleX(0.7); /* shrink to 70% width */
+    }
+    100% {
+      transform: scaleX(1);
+    }
+  }
+  

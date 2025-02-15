@@ -27,7 +27,7 @@ export function MenuContainer() {
   }
 
   return (
-    <FlexC css={{ gap: 16 }}>
+    <FlexC css={{ gap: 16, width: "100%" }}>
       <Logout />
       <BuyLifes />
       <Button onClick={handleCalculate} disabled={loading}>
