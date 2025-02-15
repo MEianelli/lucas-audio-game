@@ -10,7 +10,7 @@ export default function Home() {
   const loadingDB = useStore((store) => store.loadingDB);
   return (
     <Container css={{ padding: "8px", height: "auto" }}>
-      <FlexC css={{ gap: "22px" }}>
+      <FlexC css={{ gap: "6px" }}>
         <Header />
         {!loadingDB && <Content />}
         <DialogModal />

@@ -30,7 +30,7 @@ export const Text = styled("p", {
         fontSize: "20px",
       },
       b: {
-        fontSize: "32px",
+        fontSize: "27px",
         "@sm": {
           fontSize: "24px",
         },

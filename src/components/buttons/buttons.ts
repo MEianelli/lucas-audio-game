@@ -6,11 +6,11 @@ export const DefaultButtonStyle = {
   fontFamily: "$sans",
   fontSize: 24,
   backgroundColor: "$primary",
-  borderRadius: "4px",
+  borderRadius: "9px",
   padding: "$16 $24",
   border: "none",
   height: "fit-content",
-  width: "fit-content",
+  width: "100%",
   cursor: "pointer",
   "&:hover": {
     backgroundColor: "$secondary",

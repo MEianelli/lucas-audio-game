@@ -47,7 +47,7 @@ export const Hearts = () => {
   }, [lifes, lastLifeChange]);
 
   return (
-    <FlexR css={{ justifyContent: "center", marginTop: "16px" }}>
+    <FlexR css={{ justifyContent: "center", marginTop: "0px" }}>
       {heartsArray.map((heart, i) => heartsMapper[heart](i))}
     </FlexR>
   );

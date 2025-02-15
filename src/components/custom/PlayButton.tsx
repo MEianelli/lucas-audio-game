@@ -10,15 +10,15 @@ export function PlayButton({ isPlaying }: { readonly isPlaying: boolean }) {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: "50px",
-        height: "50px",
-        backgroundColor: "$green2",
+        width: "40px",
+        height: "40px",
+        backgroundColor: "#00af47",
         borderRadius: "50%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         boxShadow: "0px 3px 0px 0px $darkGreen2",
-        opacity: 0.7,
+        opacity: 1,
       }}
     >
       <PlayIcon />

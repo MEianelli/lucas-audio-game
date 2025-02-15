@@ -39,11 +39,11 @@ export const GuessCards = () => {
         position: "relative",
         gridTemplateColumns: "repeat(3, 1fr)",
         gridTemplateRows: "repeat(3, 1fr)",
-        gap: "15px",
+        gap: "0px 2%",
         width: "100%",
         aspectRatio: "1 / 1",
         margin: "0 auto",
-        padding: "16px 8px",
+        padding: "0",
       }}
     >
       {filtered?.map((it) => (

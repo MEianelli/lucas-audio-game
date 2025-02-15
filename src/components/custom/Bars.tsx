@@ -8,6 +8,21 @@ export function Bars() {
 
   return (
     <ButtonClean onClick={() => setModalOption("ranking")}>
+      {/* <svg 
+      viewBox="0 0 40 40" 
+      width="40" 
+      height="40" 
+      xmlns="http://www.w3.org/2000/svg"
+      >
+      <rect x="5" y="15" width="7" height="20" rx="2" ry="2" fill="#ea3d3d">
+      </rect>
+
+      <rect x="16.5" y="10" width="7" height="25" rx="2" ry="2" fill="#ffce00">
+      </rect>
+
+      <rect x="28" y="5" width="7" height="30" rx="2" ry="2" fill="#00dd6e">
+      </rect>
+      </svg> */}
       <FlexR
         css={{
           justifyContent: "center",
