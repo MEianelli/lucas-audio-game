@@ -1,3 +1,4 @@
+import { Div } from "@/components/containers/div";
 import { EasyIcon, HardIcon, NormalIcon } from "@/components/icons/faces";
 
 export function DifficultyIcons({
@@ -5,17 +6,31 @@ export function DifficultyIcons({
 }: {
   readonly difficulty: "normal" | "easy" | "hard";
 }) {
-  if (difficulty === "easy") {
-    return <EasyIcon />;
+  let icon;
+
+  switch (difficulty) {
+    case "easy":
+      icon = <EasyIcon />;
+      break;
+    case "normal":
+      icon = <NormalIcon />;
+      break;
+    case "hard":
+      icon = <HardIcon />;
+      break;
+    default:
+      icon = <NormalIcon />;
   }
 
-  if (difficulty === "normal") {
-    return <NormalIcon />;
-  }
-
-  if (difficulty === "hard") {
-    return <HardIcon />;
-  }
-
-  return <NormalIcon />;
+  return (
+    <Div
+      css={{
+        position: "absolute",
+        top: 2,
+        right: 2,
+      }}
+    >
+      {icon}
+    </Div>
+  );
 }

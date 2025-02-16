@@ -2,28 +2,45 @@ import { Div } from "@/components/containers/div";
 
 const Tests = () => {
   return (
-    <>
-      <Div css={{ backgroundColor: "green" }}>BBBB</Div>
+    <Div
+      css={{
+        background: "$black",
+        width: "900px",
+        height: "900px",
+        alignContent: "center",
+      }}
+    >
       <Div
         css={{
-          backgroundColor: "red",
-          position: "relative",
-          width: "400px",
-          height: "400px",
+          background: "$white",
+          width: "90px",
+          height: "90px",
+          margin: "0 auto",
         }}
       >
-        <Div
-          css={{
-            position: "absolute",
-            top: -20,
-            left: 0,
-            backgroundColor: "blue",
-          }}
-        >
-          AAA
-        </Div>
+        <svg width="10px" height="10px">
+          <circle fill="#0000ff" cx="10" cy="10" r="10" />
+        </svg>
       </Div>
-    </>
+      <Div
+        css={{
+          background: "$green",
+          width: "150px",
+          height: "150px",
+          margin: "0 auto",
+        }}
+      >
+        <svg viewBox="0 0 10 10" width="10px" height="10px">
+          <path d="M 5 10 A 1 1 0 0 0 5 0 A 1 1 0 0 0 5 10" fill="#ff0000" />
+        </svg>
+        <svg viewBox="0 0 10 10" width="20px" height="20px">
+          <path d="M 5 10 A 1 1 0 0 0 5 0 A 1 1 0 0 0 5 10" fill="#ff0000" />
+        </svg>
+        <svg viewBox="0 0 10 10" width="40px" height="40px">
+          <path d="M 5 10 A 1 1 0 0 0 5 0 A 1 1 0 0 0 5 10" fill="#ff0000" />
+        </svg>
+      </Div>
+    </Div>
   );
 };
 

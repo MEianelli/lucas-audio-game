@@ -11,7 +11,6 @@ import { OverLayOpacity } from "./ProgressBar";
 import * as motion from "motion/react-client";
 import { rightAnswerCheck } from "@/lib/helpers/rightAnswerCheck";
 import { MAX_LIFE_CAP } from "@/lib/contants";
-import { Text } from "@/components/text/text";
 import { Div } from "@/components/containers/div";
 import { keyframes } from "@/styles/stitches.config";
 import { DifficultyIcons } from "./DifficultyIcons";
@@ -152,7 +151,7 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
             height: "100%",
           }}
         >
-          <Text
+          {/* <Text
             css={{
               fontFamily: "Barlow",
               color: "$lightGrey",
@@ -163,7 +162,7 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
             }}
           >
             #{card.id}
-          </Text>
+          </Text> */}
           {isPlaying && <OverLayOpacity duration={duration} />}
           <ImageCss
             src={`${storageBaseUrl}/${card.image_src}`}

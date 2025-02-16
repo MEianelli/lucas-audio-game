@@ -51,7 +51,10 @@ export const useStore = create<TStore>((set, get) => ({
       field: "name",
       value: name,
     });
-    if (!user?.length) return;
+    if (!user?.length) {
+      set({ loadingDB: false });
+      return;
+    }
     const { lifes, hitids, lastheartgain, missids, ignoreids } = user[0];
     set({
       lifes,

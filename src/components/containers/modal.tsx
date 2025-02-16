@@ -17,7 +17,7 @@ export const Dialog = styled("dialog", {
   position: "relative",
   padding: "16px",
   borderRadius: "8px",
-  maxWidth: "400px",
+  width: "600px",
   backgroundColor: "$dirtWhite",
   border: "none",
   outline: "none",
@@ -27,6 +27,9 @@ export const Dialog = styled("dialog", {
   animation: `${grow} 0.3s ease-out forwards`,
   "&[open]": {
     animation: `${grow} 0.3s ease-out forwards`,
+  },
+  "@s": {
+    width: "90vw",
   },
 });
 
