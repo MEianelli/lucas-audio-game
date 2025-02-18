@@ -1,4 +1,4 @@
-import { Button } from "@/components/buttons/buttons";
+import { ButtonG } from "@/components/buttons/buttons";
 import { deleteCookie } from "@/utils/cookie";
 
 export const Logout = () => {
@@ -6,5 +6,5 @@ export const Logout = () => {
     deleteCookie();
     window.location.reload();
   }
-  return <Button onClick={handleClick}>Logout</Button>;
+  return <ButtonG onClick={handleClick}>Logout</ButtonG>;
 };

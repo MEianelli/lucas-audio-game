@@ -69,3 +69,25 @@ export const ButtonClean = styled("button", {
   width: "fit-content",
   cursor: "pointer",
 });
+
+export const ButtonG = styled("button", {
+  color: "$green",
+  fontWeight: "700",
+  fontSize: "14px",
+  lineHeight: "16px",
+  backgroundColor: "$darkgrey",
+  borderRadius: "8px",
+  padding: "8px",
+  border: "3px solid $green",
+  flex: 1,
+  whiteSpace: "nowrap",
+
+  variants: {
+    notSelected: {
+      true: {
+        color: "$grey",
+        borderColor: "$grey",
+      },
+    },
+  },
+});

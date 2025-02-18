@@ -1,4 +1,4 @@
-import { TGuess, User } from "../supabase";
+import { TDifficulty, TGuess, User } from "../supabase";
 
 export type TIdsArray = (number[] | undefined)[] | undefined;
 
@@ -9,7 +9,7 @@ export type TScores = {
 
 export type TDificulties = {
   id: number;
-  difficulty: "normal" | "easy" | "hard";
+  difficulty: TDifficulty;
 }[];
 
 export function calcDificulty(allGuesses: TGuess[], allUsers: User[]) {

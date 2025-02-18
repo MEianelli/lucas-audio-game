@@ -1,6 +1,6 @@
 import { FlexR } from "@/components/containers/flex";
 import { Bars } from "@/components/custom/Bars";
-import { Menu } from "@/components/custom/Menu";
+import { Menu } from "@/components/custom/Menu/Menu";
 import { Text } from "@/components/text/text";
 import { Div } from "../containers/div";
 import { Hearts } from "./Hearts";
@@ -21,11 +21,15 @@ export function Header() {
           css={{
             whiteSpace: "nowrap",
             textAlign: "center",
+            color: "$green",
+            fontSize: "36px",
+            "@s": {
+              fontSize: "22px",
+            },
           }}
           weight={"700"}
-          size={"b"}
         >
-          {`Audio Guesser`}
+          {`MovieGuess`}
         </Text>
         <Text size={"s"} weight={"normal"} css={{ textAlign: "center" }}></Text>
       </Div>

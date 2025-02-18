@@ -5,15 +5,16 @@ import { getAllUsers, User } from "@/lib/supabase";
 import { Span } from "../containers/div";
 import { useStore } from "@/lib/store";
 import LoadingSkeleton from "./LoadingBars";
+import { ButtonClean, ButtonG } from "../buttons/buttons";
 
-const RANK_BAR_WIDTH = 200;
-const RANK_BAR_WIDTH_OFFSET = 100;
+// const RANK_BAR_WIDTH = 200;
+// const RANK_BAR_WIDTH_OFFSET = 100;
 
 type RankUser = {
   position: number;
-  width: number;
   name: string;
   score: number;
+  width: number;
 };
 
 export const Ranking = () => {
@@ -39,7 +40,7 @@ export const Ranking = () => {
       return {
         ...rank,
         position: index + 1,
-        width: (RANK_BAR_WIDTH * rank.score) / maxScore + RANK_BAR_WIDTH_OFFSET,
+        width: rank.score / maxScore,
       };
     });
     const user = ranks?.find(
@@ -51,15 +52,20 @@ export const Ranking = () => {
   return (
     <FlexC css={{ gap: 8 }}>
       <Text
-        color={"text"}
         size={"b"}
         css={{
-          marginBottom: 8,
+          marginBottom: 20,
           fontFamily: "$mono",
           fontWeight: 700,
+          color: "$green",
         }}
       >{`Rankings`}</Text>
       {loading && <LoadingSkeleton />}
+      <FlexR css={{ gap: 4 }}>
+        <ButtonG>Weekly</ButtonG>
+        <ButtonG notSelected>Alltime</ButtonG>
+        <ButtonG notSelected>Most Impossible</ButtonG>
+      </FlexR>
       {!loading && (
         <FlexC css={{ gap: 8, width: "100%" }}>
           {ranks?.slice(0, 5).map((it) => {
@@ -68,6 +74,22 @@ export const Ranking = () => {
           <RankRow key={user?.name} user={user} isSolo />
         </FlexC>
       )}
+      <FlexR sb>
+        <ButtonClean>
+          <Text
+            css={{
+              fontSize: 12,
+              color: "white",
+              textDecoration: "underline",
+              textDecorationColor: "$grey",
+              textUnderlineOffset: "3px",
+            }}
+          >
+            Show All Rank and Prizes
+          </Text>
+        </ButtonClean>
+        <Text css={{ fontSize: 12, color: "white" }}>Resets in 78:51:33</Text>
+      </FlexR>
     </FlexC>
   );
 };
@@ -82,25 +104,33 @@ const RankRow = ({
   return (
     <FlexR
       css={{
+        justifyContent: "flex-start",
         alignItems: "center",
-        gap: 8,
+        backgroundColor: "$darkgrey",
+        border: `2px solid ${isSolo ? "$pink" : "$green"}`,
+        color: "$white",
+        fontWeight: 700,
+        borderRadius: 6,
+        padding: "8px 12px",
+        width: "100%",
         marginTop: isSolo ? "20px" : "unset",
+        gap: 8,
+        background: `linear-gradient(to right, ${isSolo ? "$pink" : "$green"} ${
+          user.width * 100
+        }%, transparent ${user.width * 100 + 2}%)`,
       }}
     >
-      <Text css={{ color: "$text", width: "30px" }}>#{user?.position}</Text>
-      <FlexR
+      <Text>{user?.position}</Text>
+      <Span>{user?.name[0].toUpperCase() + user?.name.slice(1)}</Span>
+      <Span>{isSolo ? "(You)" : ""}</Span>
+      <Span
         css={{
-          justifyContent: "space-between",
-          backgroundColor: isSolo ? "$pink" : "$brightGreen",
-          color: "$white",
-          borderRadius: 4,
-          padding: "8px 12px",
-          width: `${user?.width}px`,
+          fontSize: 14,
+          color: "$grey",
         }}
       >
-        <Span>{user?.name}</Span>
-        <Span>{user?.score}</Span>
-      </FlexR>
+        {user?.score + "Points"}
+      </Span>
     </FlexR>
   );
 };

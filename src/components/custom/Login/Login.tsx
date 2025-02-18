@@ -29,26 +29,31 @@ export const Login = ({
       <Text
         color={"text"}
         size={"b"}
-        css={{ marginBottom: 8, fontFamily: "$sans", fontWeight: 700 }}
-      >{`Faça login para participar do ranking:`}</Text>
+        css={{
+          marginBottom: 8,
+          fontFamily: "$sans",
+          fontWeight: 700,
+          color: "$green",
+          maxWidth: "90%",
+        }}
+      >{`Login to score points and show up on rank`}</Text>
 
       <LoginInput
         type="text"
-        placeholder="Nome"
+        placeholder="Name"
         value={name}
         name="name"
         onChange={handleChange}
       />
-      {status === "unavailable" && <Warning text="Nome ja existe!" />}
-      {status === "unexistant" && <Warning text="Nome não encontrado!" />}
+      {status === "unexistant" && <Warning text="No user with that name!" />}
       <LoginInput
         type="text"
-        placeholder="Senha"
+        placeholder="Password"
         value={pass}
         name="pass"
         onChange={handleChange}
       />
-      {status === "wrongPass" && <Warning text="senha errada!" />}
+      {status === "wrongPass" && <Warning text="wrong password!" />}
       <Button
         variant={"login"}
         size={"full"}

@@ -175,13 +175,15 @@ export async function getAllUsers(): Promise<User[] | null> {
   return [];
 }
 
+export type TDifficulty = "normal" | "easy" | "hard";
+
 export type TGuess = {
   audio_src: string | null;
   correct_answers: string | null;
   created_at: string;
   id: number;
   image_src: string | null;
-  difficulty: "normal" | "easy" | "hard";
+  difficulty: TDifficulty;
 };
 
 export type User = {

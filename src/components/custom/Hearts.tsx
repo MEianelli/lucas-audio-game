@@ -1,15 +1,15 @@
 import { useStore } from "@/lib/store";
 import { FlexR } from "../containers/flex";
 import { JSX, useEffect, useMemo, useRef } from "react";
-import { HeartIcon, HeartEmptyIcon, ExplodingHeart } from "../icons/hearts";
+import { HeartIcon, HeartEmptyIcon, HeartFillingIcon } from "../icons/hearts";
 import { MAX_LIFE_CAP, TIME_TO_GAIN_HEART } from "@/lib/contants";
 
 export type THeartState = "full" | "filling" | "empty" | "exploding";
 
 export const heartsMapper: Record<THeartState, (i: number) => JSX.Element> = {
   empty: (i: number) => <HeartEmptyIcon key={`empty${i}`} />,
-  exploding: (i: number) => <ExplodingHeart key={`exploding${i}`} />,
-  filling: (i: number) => <ExplodingHeart key={`filling${i}`} />,
+  exploding: (i: number) => <HeartFillingIcon key={`exploding${i}`} />,
+  filling: (i: number) => <HeartFillingIcon key={`filling${i}`} />,
   full: (i: number) => <HeartIcon key={`full${i}`} />,
 };
 

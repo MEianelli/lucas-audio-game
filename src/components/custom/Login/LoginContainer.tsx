@@ -3,13 +3,13 @@ import { FlexC } from "../../containers/flex";
 import { addOneUser, getOneUser } from "@/lib/supabase";
 import { crypto } from "@/utils/crypto";
 import { RefObject, useEffect, useState } from "react";
-import { TextMessage } from "./Messages";
 import { getCryptoCookie, setCryptoCookie } from "@/utils/cookie";
 import { Login } from "./Login";
 import { Cadastro } from "./Cadastro";
 import { Button } from "@/components/buttons/buttons";
+import { Text } from "@/components/text/text";
 
-const TIME_TO_CLOSE_MODAL = 1500; //ms
+const TIME_TO_CLOSE_MODAL = 1111500; //ms
 
 export type TStatus = "unavailable" | "unexistant" | "wrongPass" | "empty" | "";
 
@@ -26,6 +26,7 @@ export const LoginContainer = ({ ref }: LoginContainerProps) => {
   const pass = useStore((store) => store.pass);
   const setName = useStore((store) => store.setName);
   const setPass = useStore((store) => store.setPass);
+  const setLoadingDB = useStore((store) => store.setLoadingDB);
   const updateUserFromDB = useStore((store) => store.updateUserFromDB);
   const [status, setStatus] = useState<TStatus>("");
   const [screen, setScreen] = useState<TScreen>("login");
@@ -76,6 +77,7 @@ export const LoginContainer = ({ ref }: LoginContainerProps) => {
       if (added) {
         setCryptoCookie({ name, pass });
         setScreen("created");
+        setLoadingDB(false);
         setTimeout(onLogin, TIME_TO_CLOSE_MODAL);
       }
     } catch (error) {
@@ -115,10 +117,12 @@ export const LoginContainer = ({ ref }: LoginContainerProps) => {
   return (
     <FlexC css={{ gap: 8 }}>
       {screen === "logged" && (
-        <TextMessage text={`Bem vindo de volta, ${name}`} />
+        <Text
+          css={{ color: "$green", fontWeight: 700 }}
+        >{`Welcome back ${name}`}</Text>
       )}
       {screen === "created" && (
-        <TextMessage text={`Obrigado por cadastrar, ${name}`} />
+        <Text css={{ color: "$green" }}>{"Register completed."}</Text>
       )}
       {screen === "login" && (
         <Login
@@ -132,7 +136,7 @@ export const LoginContainer = ({ ref }: LoginContainerProps) => {
           <Button
             variant={"link"}
             onClick={() => setScreen("cadastro")}
-          >{`Não tenho conta`}</Button>
+          >{`register`}</Button>
         </Login>
       )}
       {screen === "cadastro" && (
@@ -143,7 +147,12 @@ export const LoginContainer = ({ ref }: LoginContainerProps) => {
           handleCadastrar={handleCadastrar}
           status={status}
           loading={loading}
-        />
+        >
+          <Button
+            variant={"link"}
+            onClick={() => setScreen("login")}
+          >{`Have account? Login`}</Button>
+        </Cadastro>
       )}
     </FlexC>
   );

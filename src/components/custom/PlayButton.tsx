@@ -1,7 +1,20 @@
+import { TDifficulty } from "@/lib/supabase";
 import { Div } from "../containers/div";
 import { PlayIcon } from "../icons/play";
 
-export function PlayButton({ isPlaying }: { readonly isPlaying: boolean }) {
+export const difficultyToColor: Record<TDifficulty, string> = {
+  normal: "$green",
+  easy: "$purple",
+  hard: "$pink",
+};
+
+export function PlayButton({
+  isPlaying,
+  difficulty,
+}: {
+  readonly isPlaying: boolean;
+  readonly difficulty: TDifficulty;
+}) {
   if (isPlaying) return null;
   return (
     <Div
@@ -10,15 +23,21 @@ export function PlayButton({ isPlaying }: { readonly isPlaying: boolean }) {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: "40px",
-        height: "40px",
-        backgroundColor: "#00af47",
-        borderRadius: "50%",
+        width: "45px",
+        height: "38px",
+        backgroundColor: "$darkgrey",
+        color: difficultyToColor[difficulty],
+        border: `2px solid ${difficultyToColor[difficulty]}`,
+        borderRadius: "12px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        boxShadow: "0px 3px 0px 0px $darkGreen2",
-        opacity: 1,
+        "& svg": {
+          translate: "1px",
+        },
+        "& svg path": {
+          stroke: difficultyToColor[difficulty],
+        },
       }}
     >
       <PlayIcon />

@@ -1,10 +1,11 @@
 import { Div } from "@/components/containers/div";
 import { EasyIcon, HardIcon, NormalIcon } from "@/components/icons/faces";
+import { TDifficulty } from "@/lib/supabase";
 
 export function DifficultyIcons({
   difficulty,
 }: {
-  readonly difficulty: "normal" | "easy" | "hard";
+  readonly difficulty: TDifficulty;
 }) {
   let icon;
 

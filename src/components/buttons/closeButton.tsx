@@ -6,10 +6,15 @@ export const CloseButton = (
 ) => {
   return (
     <ButtonClean
-      css={{ position: "absolute", top: "5%", right: "5%" }}
+      css={{
+        position: "absolute",
+        top: "11px",
+        right: "11px",
+        "& svg path": { fill: "$green" },
+      }}
       {...props}
     >
-      <CloseIcon />
+      <CloseIcon size={"30px"} />
     </ButtonClean>
   );
 };

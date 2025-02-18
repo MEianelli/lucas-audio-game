@@ -6,8 +6,9 @@ import { styled } from "@/styles/stitches.config";
 
 const BaseBar = styled(Div, {
   width: "38px",
-  height: "7px",
+  height: "4px",
   borderRadius: "2px",
+  backgroundColor: "$pink",
 });
 
 export function Menu() {
@@ -22,13 +23,13 @@ export function Menu() {
         css={{
           justifyContent: "center",
           alignItems: "end",
-          gap: "7px",
+          gap: "9px",
           height: "min-content",
         }}
       >
-        <BaseBar css={{ backgroundColor: "#901dff" }} />
-        <BaseBar css={{ backgroundColor: "#6b0eda" }} />
-        <BaseBar css={{ backgroundColor: "#4600b5" }} />
+        <BaseBar />
+        <BaseBar />
+        <BaseBar />
       </FlexC>
     </ButtonClean>
   );

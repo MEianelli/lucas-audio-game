@@ -7,6 +7,7 @@ import { ModalOptions } from "@/components/containers/modal";
 export type TStore = {
   score: number;
   loadingDB: boolean;
+  setLoadingDB: (loadingDB: boolean) => void;
   setScore: () => void;
   lifes: number;
   modalOption: ModalOptions;
@@ -34,6 +35,7 @@ export const useStore = create<TStore>((set, get) => ({
   modalOption: "login",
   lastheartgain: 0,
   loadingDB: true,
+  setLoadingDB: (loadingDB) => set({ loadingDB }),
   setName: (name) => set({ name }),
   setLastheartgain: (lastheartgain) => set({ lastheartgain }),
   setPass: (pass) => set({ pass }),

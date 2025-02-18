@@ -3,15 +3,16 @@ import { Text } from "../../text/text";
 import { Button } from "../../buttons/buttons";
 import { Warning } from "./Messages";
 import { TStatus } from "./LoginContainer";
+import { JSX } from "react";
 
 export interface CadastroProps {
   name: string;
   pass: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleCadastrar: () => void;
-
   status: TStatus;
   loading: boolean;
+  children: JSX.Element | JSX.Element[];
 }
 
 export const Cadastro = ({
@@ -21,24 +22,30 @@ export const Cadastro = ({
   handleChange,
   handleCadastrar,
   status,
+  children,
 }: CadastroProps) => {
   return (
     <>
       <Text
         color={"text"}
         size={"b"}
-        css={{ marginBottom: 8, fontFamily: "$sans", fontWeight: 700 }}
-      >{`Cadastre-se para participar do ranking e ganhar prêmios:`}</Text>
+        css={{
+          marginBottom: 8,
+          fontFamily: "$sans",
+          fontWeight: 700,
+          maxWidth: "90%",
+          color: "$green",
+        }}
+      >{`Register to show on rank and win rewards!`}</Text>
 
       <LoginInput
         type="text"
-        placeholder="Nome"
+        placeholder="Name"
         value={name}
         name="name"
         onChange={handleChange}
       />
-      {status === "unavailable" && <Warning text="Nome ja existe!" />}
-      {status === "unexistant" && <Warning text="Nome não encontrado!" />}
+      {status === "unavailable" && <Warning text="Name already taken!" />}
       <LoginInput
         type="text"
         placeholder="Senha"
@@ -46,9 +53,8 @@ export const Cadastro = ({
         name="pass"
         onChange={handleChange}
       />
-      {status === "wrongPass" && <Warning text="senha errada!" />}
       {status === "empty" && (
-        <Warning text="Nome e senha não podem estar vazios" />
+        <Warning text="Name and Password cant be empty!" />
       )}
       <Button
         variant={"cadastrar"}
@@ -56,8 +62,9 @@ export const Cadastro = ({
         onClick={handleCadastrar}
         disabled={loading}
       >
-        {loading ? "Processing..." : "Cadastrar"}
+        {loading ? "Processing..." : "Register"}
       </Button>
+      {children}
     </>
   );
 };

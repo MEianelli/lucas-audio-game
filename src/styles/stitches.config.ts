@@ -20,7 +20,7 @@ const colors = {
   dirtWhite: "#F6F2F0",
   black: "#000",
   lightblack: "#111",
-  green: "#0BAE6B",
+  green: "#43B971",
   green2: "#08B73E",
   darkGreen2: "#09520F",
   brightGreen: "#00dd6e",
@@ -28,14 +28,16 @@ const colors = {
   red: "#EC364C",
   darkRed: "#bC364C",
   darkerRed: "#4D2A25",
-  grey: "#303030",
+  grey: "#333333",
+  darkgrey: "#1A1A1A",
   lightGrey: "#aaa",
   mediumGrey: "#D1D1D1",
-  pink: "#B82ABE",
+  pink: "#ED5987",
   brightPink: "#BD27B8",
   lightBlue: "#1A90CA",
   darkBlue: "#1A7DA4",
-  yellow: "#ffce00",
+  yellow: "#F7FE9D",
+  purple: "#9057DC",
 };
 
 export const {

@@ -14,10 +14,10 @@ export const Input = styled("input", {
 });
 
 export const LoginInput = styled(Input, {
-  backgroundColor: "$mediumGrey",
-  color: "$lightblack",
+  backgroundColor: "$grey",
+  color: "$white",
   fontSize: "24px",
   "&::placeholder": {
-    color: "$white",
+    color: "#ffffff44",
   },
 });

@@ -15,14 +15,13 @@ const grow = keyframes({
 
 export const Dialog = styled("dialog", {
   position: "relative",
-  padding: "16px",
-  borderRadius: "8px",
+  padding: "18px",
+  borderRadius: "16px",
   width: "600px",
-  backgroundColor: "$dirtWhite",
-  border: "none",
+  backgroundColor: "$darkgrey",
+  border: "3px solid $green",
   outline: "none",
   marginTop: 12,
-  paddingTop: 32,
   transformOrigin: "center",
   animation: `${grow} 0.3s ease-out forwards`,
   "&[open]": {

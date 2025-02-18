@@ -1,10 +1,11 @@
 import { FlexC } from "@/components/containers/flex";
 import { BuyLifes } from "./BuyLifes";
 import { Logout } from "./Logout";
-import { Button } from "@/components/buttons/buttons";
+import { ButtonG } from "@/components/buttons/buttons";
 import { useState } from "react";
 import { getAllGuesses, getAllUsers, updateGuesses } from "@/lib/supabase";
 import { calcDificulty } from "@/lib/helpers/dificultyCalculator";
+import { Text } from "@/components/text/text";
 
 export function MenuContainer() {
   const [loading, setLoading] = useState(false);
@@ -27,12 +28,22 @@ export function MenuContainer() {
   }
 
   return (
-    <FlexC css={{ gap: 16, width: "100%" }}>
+    <FlexC css={{ gap: 6, width: "100%" }}>
+      <Text
+        css={{
+          fontSize: "28px",
+          color: "$green",
+          fontWeight: 700,
+          marginBottom: 4,
+        }}
+      >
+        Menu
+      </Text>
       <Logout />
       <BuyLifes />
-      <Button onClick={handleCalculate} disabled={loading}>
+      <ButtonG onClick={handleCalculate} disabled={loading}>
         Recalculate Dificulty
-      </Button>
+      </ButtonG>
     </FlexC>
   );
 }

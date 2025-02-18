@@ -5,15 +5,13 @@ import { Input } from "../../inputs/input";
 import useSound from "use-sound";
 import { useStore } from "@/lib/store";
 import { storageBaseUrl, TGuess } from "@/lib/supabase";
-import { PlayButton } from "../PlayButton";
+import { difficultyToColor, PlayButton } from "../PlayButton";
 import { AlertPoint, AlertStatus } from "./AlertMessage";
 import { OverLayOpacity } from "./ProgressBar";
 import * as motion from "motion/react-client";
 import { rightAnswerCheck } from "@/lib/helpers/rightAnswerCheck";
 import { MAX_LIFE_CAP } from "@/lib/contants";
-import { Div } from "@/components/containers/div";
 import { keyframes } from "@/styles/stitches.config";
-import { DifficultyIcons } from "./DifficultyIcons";
 
 export const GuessCard = ({ card }: { card: TGuess }) => {
   const soundUrl = `${storageBaseUrl}/${card.audio_src}`;
@@ -38,6 +36,7 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
     if (missids?.includes(card.id) || ignoreids?.includes(card.id)) {
       setAlert("retry");
     }
+    //eslint-disable-next-line
   }, [hitids, missids, ignoreids]);
 
   const [isPlaying, setIsPlaying] = useState(false);
@@ -107,7 +106,7 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
 
   return (
     <>
-      <Div
+      {/* <Div
         css={{
           position: "absolute",
           left: 0,
@@ -116,8 +115,8 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
           padding: "2px",
           borderRadius: "10px",
           backgroundColor: "$lightGrey",
-          transformOrigin: "center",
           animation,
+          transformOrigin: "center",
           opacity: showInput ? "1" : "0",
           scale: showInput ? "1" : "0",
           zIndex: "100",
@@ -138,7 +137,7 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
             width: "100%",
           }}
         />
-      </Div>
+      </Div> */}
 
       <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.9 }}>
         <ButtonClean
@@ -149,20 +148,12 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
             overflow: "hidden",
             width: "100%",
             height: "100%",
+            aspectRatio: 28 / 25,
+            border: `4px solid ${difficultyToColor[card.difficulty]}`,
+            padding: "3px",
+            boxSizing: "border-box",
           }}
         >
-          {/* <Text
-            css={{
-              fontFamily: "Barlow",
-              color: "$lightGrey",
-              fontSize: 12,
-              position: "absolute",
-              top: 4,
-              left: 4,
-            }}
-          >
-            #{card.id}
-          </Text> */}
           {isPlaying && <OverLayOpacity duration={duration} />}
           <ImageCss
             src={`${storageBaseUrl}/${card.image_src}`}
@@ -170,7 +161,7 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
             width={200}
             height={200}
             css={{
-              borderRadius: "10px",
+              borderRadius: "6px",
               width: "100%",
               height: "auto",
               aspectRatio: 28 / 25,
@@ -178,9 +169,37 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
             }}
             priority
           />
-          {alert === "neutral" && <PlayButton isPlaying={isPlaying} />}
+          {alert === "neutral" && (
+            <PlayButton isPlaying={isPlaying} difficulty={card.difficulty} />
+          )}
           <AlertPoint status={alert} id={card.id} />
-          <DifficultyIcons difficulty={card.difficulty} />
+          {/* <DifficultyIcons difficulty={card.difficulty} /> */}
+          <Input
+            ref={inputRef}
+            type="text"
+            placeholder="Type a movie"
+            value={value}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            onKeyUp={(event) => event.key === "Enter" && handleEnter()}
+            css={{
+              position: "absolute",
+              bottom: 8,
+              left: 8,
+              backgroundColor: "$darkgrey",
+              color: "$white",
+              fontSize: "18px",
+              width: "90%",
+              transformOrigin: "center",
+              opacity: showInput ? "1" : "0",
+              scale: showInput ? "1" : "0",
+              zIndex: "100",
+              animation,
+              "&::placeholder": {
+                color: "$grey",
+              },
+            }}
+          />
         </ButtonClean>
       </motion.div>
     </>
