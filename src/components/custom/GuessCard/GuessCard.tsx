@@ -8,12 +8,17 @@ import { storageBaseUrl, TGuess } from "@/lib/supabase";
 import { difficultyToColor, PlayButton } from "../PlayButton";
 import { AlertPoint, AlertStatus } from "./AlertMessage";
 import { OverLayOpacity } from "./ProgressBar";
-import * as motion from "motion/react-client";
 import { rightAnswerCheck } from "@/lib/helpers/rightAnswerCheck";
 import { MAX_LIFE_CAP } from "@/lib/contants";
 import { keyframes } from "@/styles/stitches.config";
 
-export const GuessCard = ({ card }: { card: TGuess }) => {
+export const GuessCard = ({
+  card,
+  isInView,
+}: {
+  card: TGuess;
+  isInView: boolean;
+}) => {
   const soundUrl = `${storageBaseUrl}/${card.audio_src}`;
   const [value, setValue] = useState("");
   const [alert, setAlert] = useState<AlertStatus>("neutral");
@@ -105,103 +110,66 @@ export const GuessCard = ({ card }: { card: TGuess }) => {
   const animation = showInput ? `${enterAnimation} 0.2s linear` : "";
 
   return (
-    <>
-      {/* <Div
+    <ButtonClean
+      onClick={handleToggle}
+      css={{
+        position: "relative",
+        borderRadius: "10px",
+        overflow: "hidden",
+        width: "100%",
+        height: !isInView ? "80%" : "100%",
+        aspectRatio: 28 / 25,
+        border: `4px solid ${difficultyToColor[card.difficulty]}`,
+        padding: "3px",
+        boxSizing: "border-box",
+        transition: "height 0.5s ease",
+      }}
+    >
+      {isPlaying && <OverLayOpacity duration={duration} />}
+      <ImageCss
+        src={`${storageBaseUrl}/${card.image_src}`}
+        alt={card.audio_src ?? ""}
+        width={200}
+        height={200}
+        css={{
+          borderRadius: "6px",
+          width: "100%",
+          height: "auto",
+          aspectRatio: 28 / 25,
+          objectFit: "cover",
+        }}
+        priority
+      />
+      {alert === "neutral" && (
+        <PlayButton isPlaying={isPlaying} difficulty={card.difficulty} />
+      )}
+      <AlertPoint status={alert} id={card.id} />
+      <Input
+        ref={inputRef}
+        type="text"
+        placeholder="Type a movie"
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        onKeyUp={(event) => event.key === "Enter" && handleEnter()}
         css={{
           position: "absolute",
-          left: 0,
-          top: -60,
-          width: "100%",
-          padding: "2px",
-          borderRadius: "10px",
-          backgroundColor: "$lightGrey",
-          animation,
+          bottom: 8,
+          left: 8,
+          backgroundColor: "$darkgrey",
+          color: "$white",
+          fontSize: "18px",
+          width: "90%",
           transformOrigin: "center",
           opacity: showInput ? "1" : "0",
           scale: showInput ? "1" : "0",
           zIndex: "100",
+          animation,
+          "&::placeholder": {
+            color: "$grey",
+          },
         }}
-      >
-        <Input
-          ref={inputRef}
-          type="text"
-          placeholder="Which movie is that quote from?"
-          value={value}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onKeyUp={(event) => event.key === "Enter" && handleEnter()}
-          css={{
-            backgroundColor: "$grey",
-            color: "$white",
-            fontSize: "24px",
-            width: "100%",
-          }}
-        />
-      </Div> */}
-
-      <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.9 }}>
-        <ButtonClean
-          onClick={handleToggle}
-          css={{
-            position: "relative",
-            borderRadius: "10px",
-            overflow: "hidden",
-            width: "100%",
-            height: "100%",
-            aspectRatio: 28 / 25,
-            border: `4px solid ${difficultyToColor[card.difficulty]}`,
-            padding: "3px",
-            boxSizing: "border-box",
-          }}
-        >
-          {isPlaying && <OverLayOpacity duration={duration} />}
-          <ImageCss
-            src={`${storageBaseUrl}/${card.image_src}`}
-            alt={card.audio_src ?? ""}
-            width={200}
-            height={200}
-            css={{
-              borderRadius: "6px",
-              width: "100%",
-              height: "auto",
-              aspectRatio: 28 / 25,
-              objectFit: "cover",
-            }}
-            priority
-          />
-          {alert === "neutral" && (
-            <PlayButton isPlaying={isPlaying} difficulty={card.difficulty} />
-          )}
-          <AlertPoint status={alert} id={card.id} />
-          {/* <DifficultyIcons difficulty={card.difficulty} /> */}
-          <Input
-            ref={inputRef}
-            type="text"
-            placeholder="Type a movie"
-            value={value}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            onKeyUp={(event) => event.key === "Enter" && handleEnter()}
-            css={{
-              position: "absolute",
-              bottom: 8,
-              left: 8,
-              backgroundColor: "$darkgrey",
-              color: "$white",
-              fontSize: "18px",
-              width: "90%",
-              transformOrigin: "center",
-              opacity: showInput ? "1" : "0",
-              scale: showInput ? "1" : "0",
-              zIndex: "100",
-              animation,
-              "&::placeholder": {
-                color: "$grey",
-              },
-            }}
-          />
-        </ButtonClean>
-      </motion.div>
-    </>
+      />
+    </ButtonClean>
   );
 };

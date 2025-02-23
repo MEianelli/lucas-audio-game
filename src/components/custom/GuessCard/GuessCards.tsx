@@ -1,13 +1,17 @@
-import { useEffect, useMemo, useState } from "react";
-import { Grid } from "../../containers/flex";
+import React, { useEffect, useMemo, useState } from "react";
 import { GuessCard } from "./GuessCard";
 import { getAllGuesses, TGuess } from "@/lib/supabase";
 import { useStore } from "@/lib/store";
-import * as motion from "motion/react-client";
 import { shuffleArray } from "@/utils/random";
+import {
+  EmblaCarousel,
+  EmblaCarouselSlide,
+  useEmbla,
+} from "@/components/containers/EmblaCarousel";
 
 export const GuessCards = () => {
   const [guesses, setGuesses] = useState<TGuess[] | null>(null);
+  const { current, emblaRef } = useEmbla();
 
   const hitids = useStore((store) => store.hitids);
   const ignoreids = useStore((store) => store.ignoreids);
@@ -33,30 +37,15 @@ export const GuessCards = () => {
   }, [hitids, ignoreids, guesses]);
 
   return (
-    <Grid
-      css={{
-        display: "grid",
-        position: "relative",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gridTemplateRows: "repeat(3, 1fr)",
-        gap: "2%",
-        width: "100%",
-      }}
-    >
-      {filtered?.map((it) => (
-        <motion.div
-          key={it.id}
-          layout
-          transition={{
-            type: "spring",
-            damping: 20,
-            stiffness: 100,
-          }}
-          style={{ height: "fit-content" }}
-        >
-          <GuessCard card={it} />
-        </motion.div>
-      ))}
-    </Grid>
+    <EmblaCarousel emblaRef={emblaRef}>
+      {filtered?.map((it, index) => {
+        const isInView = current === index;
+        return (
+          <EmblaCarouselSlide key={it.id}>
+            <GuessCard card={it} isInView={isInView} />
+          </EmblaCarouselSlide>
+        );
+      })}
+    </EmblaCarousel>
   );
 };
