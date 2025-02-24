@@ -1,16 +1,18 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { GuessCard } from "./GuessCard";
-import { getAllGuesses, TGuess } from "@/lib/supabase";
+import { getRandomMoviesWithMedia, RndMovie } from "@/lib/supabase";
 import { useStore } from "@/lib/store";
-import { shuffleArray } from "@/utils/random";
 import {
   EmblaCarousel,
   EmblaCarouselSlide,
   useEmbla,
 } from "@/components/containers/EmblaCarousel";
+import { FlexC } from "@/components/containers/flex";
+import { getRndArrElements, shuffleArray } from "@/utils/random";
+import { ButtonG } from "@/components/buttons/buttons";
 
 export const GuessCards = () => {
-  const [guesses, setGuesses] = useState<TGuess[] | null>(null);
+  const [guesses, setGuesses] = useState<RndMovie[] | null>(null);
   const { current, emblaRef } = useEmbla();
 
   const hitids = useStore((store) => store.hitids);
@@ -19,9 +21,12 @@ export const GuessCards = () => {
   useEffect(() => {
     async function getData() {
       try {
-        const data = await getAllGuesses();
-        if (data.length) {
-          setGuesses(shuffleArray(data));
+        const data = await getRandomMoviesWithMedia(
+          [...hitids, ...ignoreids],
+          8
+        );
+        if (data?.length) {
+          setGuesses(data);
         }
       } catch (error) {
         alert(error);
@@ -30,22 +35,45 @@ export const GuessCards = () => {
     getData();
   }, []);
 
-  const filtered = useMemo(() => {
-    return guesses
-      ?.filter(({ id }) => !hitids.includes(id) && !ignoreids.includes(id))
-      .slice(0, 9);
-  }, [hitids, ignoreids, guesses]);
-
   return (
-    <EmblaCarousel emblaRef={emblaRef}>
-      {filtered?.map((it, index) => {
-        const isInView = current === index;
-        return (
-          <EmblaCarouselSlide key={it.id}>
-            <GuessCard card={it} isInView={isInView} />
-          </EmblaCarouselSlide>
-        );
-      })}
-    </EmblaCarousel>
+    <>
+      <EmblaCarousel emblaRef={emblaRef}>
+        {guesses?.map((it, index) => {
+          const isInView = current === index;
+          return (
+            <EmblaCarouselSlide key={it.movie_id}>
+              <GuessCard card={it} isInView={isInView} />
+            </EmblaCarouselSlide>
+          );
+        })}
+      </EmblaCarousel>
+      <FlexC css={{ padding: "25px 0px", alignItems: "center", gap: 6 }}>
+        {guesses?.map((it, index) => {
+          const isInView = current === index;
+
+          return <>{isInView && <Answers card={it} key={it.movie_id} />}</>;
+        })}
+      </FlexC>
+    </>
   );
 };
+
+function Answers({ card }: { readonly card: RndMovie }) {
+  const options = useMemo(() => {
+    const rndWrongs = getRndArrElements(card?.movie_data.wrongs);
+    rndWrongs.push(card?.movie_data.correct);
+    return shuffleArray(rndWrongs);
+  }, [card]);
+
+  if (!options?.length) return null;
+
+  return (
+    <>
+      {options?.map((option) => (
+        <ButtonG key={option} css={{ width: "85%" }}>
+          {option}
+        </ButtonG>
+      ))}
+    </>
+  );
+}

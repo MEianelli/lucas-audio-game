@@ -41,7 +41,7 @@ export const PreviewLatest = ({ reload }: { reload: boolean }) => {
     >
       <Text size={"b"}>PREVIEW ultimo adicionado:</Text>
       {guess?.map((it, i) => (
-        <GuessCard key={it.image_src! + i} card={it} />
+        <GuessCard key={it.image_src! + i} card={it} isInView={true} />
       ))}
       <Button variant={"delete"} onClick={handleDelete}>
         DELETAR

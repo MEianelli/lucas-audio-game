@@ -1,25 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
-import { ButtonClean } from "../../buttons/buttons";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Button, ButtonClean } from "../../buttons/buttons";
 import { ImageCss } from "../../image/Image";
 import { Input } from "../../inputs/input";
 import useSound from "use-sound";
 import { useStore } from "@/lib/store";
-import { storageBaseUrl, TGuess } from "@/lib/supabase";
+import { RndMovie, storageBaseUrl } from "@/lib/supabase";
 import { difficultyToColor, PlayButton } from "../PlayButton";
 import { AlertPoint, AlertStatus } from "./AlertMessage";
 import { OverLayOpacity } from "./ProgressBar";
 import { rightAnswerCheck } from "@/lib/helpers/rightAnswerCheck";
 import { MAX_LIFE_CAP } from "@/lib/contants";
 import { keyframes } from "@/styles/stitches.config";
+import { FlexC } from "@/components/containers/flex";
+import { getRndArrElements, shuffleArray } from "@/utils/random";
 
 export const GuessCard = ({
   card,
   isInView,
 }: {
-  card: TGuess;
+  card: RndMovie;
   isInView: boolean;
 }) => {
-  const soundUrl = `${storageBaseUrl}/${card.audio_src}`;
+  const soundUrl = `${storageBaseUrl}/${card?.audio_data?.src}`;
   const [value, setValue] = useState("");
   const [alert, setAlert] = useState<AlertStatus>("neutral");
   const [showInput, setShowInput] = useState(false);
@@ -34,11 +36,14 @@ export const GuessCard = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (hitids?.includes(card.id)) {
+    if (hitids?.includes(card?.audio_data.id)) {
       setAlert("ok");
     }
 
-    if (missids?.includes(card.id) || ignoreids?.includes(card.id)) {
+    if (
+      missids?.includes(card?.audio_data.id) ||
+      ignoreids?.includes(card?.audio_data.id)
+    ) {
       setAlert("retry");
     }
     //eslint-disable-next-line
@@ -72,21 +77,21 @@ export const GuessCard = ({
     setValue("");
     setShowInput(false);
 
-    if (!rightAnswerCheck(card.correct_answers?.split(",") ?? [], value)) {
+    if (!rightAnswerCheck(card?.correct_answers?.split(",") ?? [], value)) {
       if (lifes >= MAX_LIFE_CAP) {
         setLastheartgain(Date.now());
       }
       setAlert("nok");
       setTimeout(() => {
         setAlert("retry");
-        setSubLife([card.id]);
+        setSubLife([card?.id]);
       }, 2000);
       return;
     }
 
     try {
       setAlert("ok");
-      setTimeout(() => sethitids([card.id]), 1500);
+      setTimeout(() => sethitids([card?.id]), 1500);
     } catch (error) {
       console.log(error);
     }
@@ -119,7 +124,7 @@ export const GuessCard = ({
         width: "100%",
         height: !isInView ? "80%" : "100%",
         aspectRatio: 28 / 25,
-        border: `4px solid ${difficultyToColor[card.difficulty]}`,
+        border: `4px solid ${difficultyToColor[card?.audio_data.difficulty]}`,
         padding: "3px",
         boxSizing: "border-box",
         transition: "height 0.5s ease",
@@ -127,8 +132,8 @@ export const GuessCard = ({
     >
       {isPlaying && <OverLayOpacity duration={duration} />}
       <ImageCss
-        src={`${storageBaseUrl}/${card.image_src}`}
-        alt={card.audio_src ?? ""}
+        src={`${storageBaseUrl}/${card?.image_data.src}`}
+        alt={card?.image_data.created_at ?? ""}
         width={200}
         height={200}
         css={{
@@ -141,10 +146,13 @@ export const GuessCard = ({
         priority
       />
       {alert === "neutral" && (
-        <PlayButton isPlaying={isPlaying} difficulty={card.difficulty} />
+        <PlayButton
+          isPlaying={isPlaying}
+          difficulty={card?.audio_data.difficulty}
+        />
       )}
-      <AlertPoint status={alert} id={card.id} />
-      <Input
+      <AlertPoint status={alert} id={card?.audio_data.id} />
+      {/* <Input
         ref={inputRef}
         type="text"
         placeholder="Type a movie"
@@ -169,7 +177,7 @@ export const GuessCard = ({
             color: "$grey",
           },
         }}
-      />
+      /> */}
     </ButtonClean>
   );
 };

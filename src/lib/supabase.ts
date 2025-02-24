@@ -10,6 +10,15 @@ export const storageBaseUrl =
 
 export type TBuckets = "audio" | "images";
 
+export async function uploadMany(files: File[], folder: TBuckets) {
+  const pathList = [];
+  for (const file of files) {
+    const path = await uploadDataSupabase(file, folder);
+    if (path) pathList.push(path);
+  }
+  return pathList;
+}
+
 export async function uploadDataSupabase(file: File, folder: TBuckets) {
   try {
     const res = await supabase.storage
@@ -24,6 +33,40 @@ export async function uploadDataSupabase(file: File, folder: TBuckets) {
     return res.data.fullPath;
   } catch (error: unknown) {
     throw Error(`${error}`);
+  }
+}
+
+export async function uploadMovie(
+  payload: TMoviesDTO & { audios_src: string[]; images_src: string[] }
+) {
+  const { audios_src, images_src, ...rest } = payload;
+  const { data, error } = await supabase.from("movies").insert(rest).select();
+  if (error) {
+    throw Error(`${error.message}`);
+  }
+  if (!data.length) {
+    throw Error(`Didnt return data with lenght and id`);
+  }
+
+  const { id } = data[0];
+
+  const audioDto: TAudiosDTO[] = audios_src.map((src) => ({
+    src,
+    movie_id: id,
+  }));
+  const imagesDto: TImagesDTO[] = images_src.map((src) => ({
+    src,
+    movie_id: id,
+  }));
+
+  await uploadToTable<TAudiosDTO[]>(audioDto, "audios");
+  await uploadToTable<TImagesDTO[]>(imagesDto, "images");
+}
+
+export async function uploadToTable<T>(payload: T, table: Tables) {
+  const { error } = await supabase.from(table).insert(payload);
+  if (error) {
+    throw Error(`${table}: ${error.message}`);
   }
 }
 
@@ -58,6 +101,23 @@ export async function getRndCount(
 
   if (error) {
     throw Error(`${error?.message}`);
+  }
+
+  return data;
+}
+
+export async function getRandomMoviesWithMedia(
+  exclude_ids: number[] = [],
+  row_count = 1
+): Promise<RndMovie[] | null> {
+  const { data, error } = await supabase.rpc("get_random_movies_with_media", {
+    exclude_ids: exclude_ids,
+    row_count: row_count,
+  });
+
+  if (error) {
+    console.error("Error fetching random movies with media:", error);
+    return null;
   }
 
   return data;
@@ -175,16 +235,41 @@ export async function getAllUsers(): Promise<User[] | null> {
   return [];
 }
 
-export type TDifficulty = "normal" | "easy" | "hard";
+type Tables = "audios" | "images" | "movies" | "users" | "guesses";
+
+export type TDifficulty = 0 | 1 | 2 | 3 | 4;
 
 export type TGuess = {
   audio_src: string | null;
   correct_answers: string | null;
-  created_at: string;
-  id: number;
   image_src: string | null;
   difficulty: TDifficulty;
+} & Base;
+
+export type TMoviesDTO = {
+  correct: string;
+  wrongs: string[];
+  tags: string[];
 };
+
+export type TMovies = {
+  difficulty: number;
+} & TMoviesDTO &
+  Base;
+
+export type TAudiosDTO = {
+  movie_id: number;
+  src: string;
+};
+
+export type TAudios = { difficulty: number } & Base & TAudiosDTO;
+
+export type TImagesDTO = {
+  movie_id: number;
+  src: string;
+};
+
+export type TImages = Base & TImagesDTO;
 
 export type User = {
   name: string;
@@ -196,3 +281,39 @@ export type User = {
   score?: number;
   lastheartgain?: number;
 };
+
+export type Base = {
+  id: number;
+  created_at: string;
+};
+
+export interface RndMovie {
+  movie_id: number;
+  movie_data: MovieData;
+  audio_data: AudioData;
+  image_data: ImageData;
+}
+
+export interface MovieData {
+  id: number;
+  tags: string[];
+  wrongs: string[];
+  correct: string;
+  created_at: string;
+  difficulty: number;
+}
+
+export interface AudioData {
+  id: number;
+  src: string;
+  movie_id: number;
+  created_at: string;
+  difficulty: TDifficulty;
+}
+
+export interface ImageData {
+  id: number;
+  src: string;
+  movie_id: number;
+  created_at: string;
+}

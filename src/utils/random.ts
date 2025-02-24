@@ -15,3 +15,15 @@ export function shuffleArray<T>(arr: T[]) {
   }
   return arr;
 }
+
+export function getRndArrElements<T>(arr: T[], amount = 3) {
+  if (!arr?.length) return [];
+  const copy = [...arr];
+  const result = [];
+  for (let i = 0; i < amount; i++) {
+    const rndIndex = Math.floor(Math.random() * arr.length);
+    result.push(arr[rndIndex]);
+    copy.splice(rndIndex, 1);
+  }
+  return result;
+}

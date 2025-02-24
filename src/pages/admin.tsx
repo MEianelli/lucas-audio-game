@@ -26,6 +26,7 @@ const Admin = (props: { allowed: boolean }) => {
   const [saving, setSaving] = useState(false);
   const audioRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
+  console.log("imageRef :", imageRef);
 
   const disableSave = useMemo(() => {
     return !(Object.values(files).length === 2 && !!answers);
@@ -98,6 +99,7 @@ const Admin = (props: { allowed: boolean }) => {
             type="file"
             onChange={(e) => handleFileUpload(e, "audio")}
             ref={audioRef}
+            css={{ width: "200px" }}
           />
         </Center>
         <Center>
@@ -106,11 +108,17 @@ const Admin = (props: { allowed: boolean }) => {
             type="file"
             onChange={(e) => handleFileUpload(e, "images")}
             ref={imageRef}
+            css={{ width: "200px" }}
           />
         </Center>
         <Center>
           <Text color={"text"}>Respostas certas (separadas for virgula):</Text>
-          <Input type="text" value={answers} onChange={handleChange} />
+          <Input
+            type="text"
+            value={answers}
+            onChange={handleChange}
+            css={{ border: "1px solid $red" }}
+          />
         </Center>
         <Center>
           <Button onClick={() => reset()}>NEW</Button>

@@ -3,9 +3,11 @@ import { Div } from "../containers/div";
 import { PlayIcon } from "../icons/play";
 
 export const difficultyToColor: Record<TDifficulty, string> = {
-  normal: "$green",
-  easy: "$purple",
-  hard: "$pink",
+  0: "$green",
+  1: "$green",
+  2: "$green",
+  3: "$purple",
+  4: "$pink",
 };
 
 export function PlayButton({

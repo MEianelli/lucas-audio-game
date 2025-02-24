@@ -9,5 +9,6 @@ export const Container = styled("div", {
 
 export const Center = styled(FlexR, {
   justifyContent: "center",
+  alignItems: "center",
   gap: "20px",
 });

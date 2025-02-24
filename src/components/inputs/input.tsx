@@ -21,3 +21,5 @@ export const LoginInput = styled(Input, {
     color: "#ffffff44",
   },
 });
+
+export const Textarea = styled("textarea", {});
