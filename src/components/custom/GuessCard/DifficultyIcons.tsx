@@ -10,13 +10,13 @@ export function DifficultyIcons({
   let icon;
 
   switch (difficulty) {
-    case "easy":
+    case 0:
       icon = <EasyIcon />;
       break;
-    case "normal":
+    case 1:
       icon = <NormalIcon />;
       break;
-    case "hard":
+    case 2:
       icon = <HardIcon />;
       break;
     default:

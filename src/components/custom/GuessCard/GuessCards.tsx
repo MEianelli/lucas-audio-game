@@ -32,6 +32,7 @@ export const GuessCards = () => {
       }
     }
     getData();
+    //eslint-disable-next-line
   }, []);
 
   return (

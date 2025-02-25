@@ -1,18 +1,12 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Button, ButtonClean } from "../../buttons/buttons";
+import React, { useEffect, useRef, useState } from "react";
+import { ButtonClean } from "../../buttons/buttons";
 import { ImageCss } from "../../image/Image";
-import { Input } from "../../inputs/input";
 import useSound from "use-sound";
 import { useStore } from "@/lib/store";
 import { RndMovie, storageBaseUrl } from "@/lib/supabase";
 import { difficultyToColor, PlayButton } from "../PlayButton";
 import { AlertPoint, AlertStatus } from "./AlertMessage";
 import { OverLayOpacity } from "./ProgressBar";
-import { rightAnswerCheck } from "@/lib/helpers/rightAnswerCheck";
-import { MAX_LIFE_CAP } from "@/lib/contants";
-import { keyframes } from "@/styles/stitches.config";
-import { FlexC } from "@/components/containers/flex";
-import { getRndArrElements, shuffleArray } from "@/utils/random";
 
 export const GuessCard = ({
   card,
@@ -22,15 +16,11 @@ export const GuessCard = ({
   isInView: boolean;
 }) => {
   const soundUrl = `${storageBaseUrl}/${card?.audio_data?.src}`;
-  const [value, setValue] = useState("");
   const [alert, setAlert] = useState<AlertStatus>("neutral");
-  const [showInput, setShowInput] = useState(false);
-  const setSubLife = useStore((store) => store.setSubLife);
-  const sethitids = useStore((store) => store.sethitids);
   const missids = useStore((store) => store.missids);
   const ignoreids = useStore((store) => store.ignoreids);
   const hitids = useStore((store) => store.hitids);
-  const setLastheartgain = useStore((store) => store.setLastheartgain);
+
   const setModalOption = useStore((store) => store.setModalOption);
   const lifes = useStore((store) => store.lifes);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -64,55 +54,12 @@ export const GuessCard = ({
     }
 
     inputRef.current?.focus();
-    setShowInput(true);
     if (isPlaying) {
       stop();
     } else {
       play();
     }
   };
-
-  function handleEnter() {
-    stop();
-    setValue("");
-    setShowInput(false);
-
-    if (!rightAnswerCheck(card?.correct_answers?.split(",") ?? [], value)) {
-      if (lifes >= MAX_LIFE_CAP) {
-        setLastheartgain(Date.now());
-      }
-      setAlert("nok");
-      setTimeout(() => {
-        setAlert("retry");
-        setSubLife([card?.id]);
-      }, 2000);
-      return;
-    }
-
-    try {
-      setAlert("ok");
-      setTimeout(() => sethitids([card?.id]), 1500);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    e.preventDefault();
-    setValue(e.target.value);
-  }
-
-  function handleBlur() {
-    stop();
-    setShowInput(false);
-  }
-
-  const enterAnimation = keyframes({
-    "0%": { opacity: 1, scale: 0 },
-    "100%": { opacity: 1, scale: 1 },
-  });
-
-  const animation = showInput ? `${enterAnimation} 0.2s linear` : "";
 
   return (
     <ButtonClean
@@ -152,32 +99,6 @@ export const GuessCard = ({
         />
       )}
       <AlertPoint status={alert} id={card?.audio_data.id} />
-      {/* <Input
-        ref={inputRef}
-        type="text"
-        placeholder="Type a movie"
-        value={value}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        onKeyUp={(event) => event.key === "Enter" && handleEnter()}
-        css={{
-          position: "absolute",
-          bottom: 8,
-          left: 8,
-          backgroundColor: "$darkgrey",
-          color: "$white",
-          fontSize: "18px",
-          width: "90%",
-          transformOrigin: "center",
-          opacity: showInput ? "1" : "0",
-          scale: showInput ? "1" : "0",
-          zIndex: "100",
-          animation,
-          "&::placeholder": {
-            color: "$grey",
-          },
-        }}
-      /> */}
     </ButtonClean>
   );
 };

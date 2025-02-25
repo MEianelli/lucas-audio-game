@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { FlexC } from "../containers/flex";
-import { GuessCard } from "./GuessCard/GuessCard";
 import { deleteOne, getLatest, TGuess } from "@/lib/supabase";
 import { Button } from "../buttons/buttons";
 import { Text } from "../text/text";
@@ -40,9 +39,9 @@ export const PreviewLatest = ({ reload }: { reload: boolean }) => {
       }}
     >
       <Text size={"b"}>PREVIEW ultimo adicionado:</Text>
-      {guess?.map((it, i) => (
+      {/* {guess?.map((it, i) => (
         <GuessCard key={it.image_src! + i} card={it} isInView={true} />
-      ))}
+      ))} */}
       <Button variant={"delete"} onClick={handleDelete}>
         DELETAR
       </Button>

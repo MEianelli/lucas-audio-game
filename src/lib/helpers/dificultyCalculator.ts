@@ -45,11 +45,11 @@ export function calculateThresholdsAndCategorize(
   // Step 3: Categorize the scores
   return scores.map(({ id, score }) => {
     if (score < threshold1) {
-      return { id, difficulty: "hard" };
+      return { id, difficulty: 3 };
     } else if (score >= threshold1 && score <= threshold2) {
-      return { id, difficulty: "normal" };
+      return { id, difficulty: 2 };
     } else {
-      return { id, difficulty: "easy" };
+      return { id, difficulty: 1 };
     }
   });
 }

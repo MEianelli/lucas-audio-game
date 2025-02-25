@@ -44,6 +44,7 @@ export const LoginContainer = ({ ref }: LoginContainerProps) => {
     setScreen("logged");
     updateUserFromDB();
     setTimeout(onLogin, TIME_TO_CLOSE_MODAL);
+    //eslint-disable-next-line
   }, []);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {

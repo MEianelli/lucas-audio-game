@@ -7,9 +7,6 @@ import { useStore } from "@/lib/store";
 import LoadingSkeleton from "./LoadingBars";
 import { ButtonClean, ButtonG } from "../buttons/buttons";
 
-// const RANK_BAR_WIDTH = 200;
-// const RANK_BAR_WIDTH_OFFSET = 100;
-
 type RankUser = {
   position: number;
   name: string;
@@ -47,6 +44,7 @@ export const Ranking = () => {
       ({ name: userName }) => userName === name
     ) as RankUser;
     return { ranks, user };
+    //eslint-disable-next-line
   }, [users]);
 
   return (

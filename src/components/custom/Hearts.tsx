@@ -40,6 +40,7 @@ export const Hearts = () => {
         clearInterval(intervalRef.current);
       }
     };
+    //eslint-disable-next-line
   }, [lifes]);
 
   const heartsArray = useMemo(() => {
