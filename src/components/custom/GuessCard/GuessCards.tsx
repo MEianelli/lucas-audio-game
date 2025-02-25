@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GuessCard } from "./GuessCard";
 import { getRandomMoviesWithMedia, RndMovie } from "@/lib/supabase";
 import { useStore } from "@/lib/store";
@@ -8,8 +8,7 @@ import {
   useEmbla,
 } from "@/components/containers/EmblaCarousel";
 import { FlexC } from "@/components/containers/flex";
-import { getRndArrElements, shuffleArray } from "@/utils/random";
-import { ButtonG } from "@/components/buttons/buttons";
+import { Answers } from "./Answers";
 
 export const GuessCards = () => {
   const [guesses, setGuesses] = useState<RndMovie[] | null>(null);
@@ -51,29 +50,11 @@ export const GuessCards = () => {
         {guesses?.map((it, index) => {
           const isInView = current === index;
 
-          return <>{isInView && <Answers card={it} key={it.movie_id} />}</>;
+          return (
+            <>{isInView && <Answers card={it} key={it.movie_id + index} />}</>
+          );
         })}
       </FlexC>
     </>
   );
 };
-
-function Answers({ card }: { readonly card: RndMovie }) {
-  const options = useMemo(() => {
-    const rndWrongs = getRndArrElements(card?.movie_data.wrongs);
-    rndWrongs.push(card?.movie_data.correct);
-    return shuffleArray(rndWrongs);
-  }, [card]);
-
-  if (!options?.length) return null;
-
-  return (
-    <>
-      {options?.map((option) => (
-        <ButtonG key={option} css={{ width: "85%" }}>
-          {option}
-        </ButtonG>
-      ))}
-    </>
-  );
-}

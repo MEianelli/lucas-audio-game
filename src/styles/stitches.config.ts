@@ -18,25 +18,33 @@ const colors = {
   muted: "#999999",
   white: "#FFFFFF",
   dirtWhite: "#F6F2F0",
+
   black: "#000",
   lightblack: "#111",
+
   green: "#43B971",
   green2: "#08B73E",
+  darkGreen: "#257D46",
   darkGreen2: "#09520F",
   brightGreen: "#00dd6e",
-  darkGreen: "#257D46",
+
   red: "#EC364C",
   darkRed: "#bC364C",
   darkerRed: "#4D2A25",
-  grey: "#333333",
-  darkgrey: "#1A1A1A",
+
   lightGrey: "#aaa",
+  grey: "#333333",
   mediumGrey: "#D1D1D1",
+  darkgrey: "#1A1A1A",
+
   pink: "#ED5987",
   brightPink: "#BD27B8",
+
   lightBlue: "#1A90CA",
   darkBlue: "#1A7DA4",
+
   yellow: "#F7FE9D",
+
   purple: "#9057DC",
 };
 

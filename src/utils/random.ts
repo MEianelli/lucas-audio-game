@@ -16,14 +16,12 @@ export function shuffleArray<T>(arr: T[]) {
   return arr;
 }
 
-export function getRndArrElements<T>(arr: T[], amount = 3) {
+export function getRndArrElements(arr: string[], amount = 3): string[] {
   if (!arr?.length) return [];
-  const copy = [...arr];
-  const result = [];
-  for (let i = 0; i < amount; i++) {
+  const result: Set<string> = new Set();
+  while (result.size < amount) {
     const rndIndex = Math.floor(Math.random() * arr.length);
-    result.push(arr[rndIndex]);
-    copy.splice(rndIndex, 1);
+    result.add(arr[rndIndex]);
   }
-  return result;
+  return [...result];
 }
