@@ -1,5 +1,6 @@
 // stitches.config.ts
 import { createStitches } from "@stitches/react";
+import { linearGradient } from "motion/react-client";
 
 export const cardDimentions = {
   width: 140,
@@ -22,7 +23,7 @@ const colors = {
   black: "#000",
   lightblack: "#111",
 
-  green: "#43B971",
+  green: "#8857ff",
   green2: "#08B73E",
   darkGreen: "#257D46",
   darkGreen2: "#09520F",

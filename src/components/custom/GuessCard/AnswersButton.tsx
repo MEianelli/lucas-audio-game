@@ -53,7 +53,7 @@ const glitch = keyframes({
   "25%": {
     borderColor: "$red",
     color: "$red",
-    textShadow: "2px 0 $red, -2px 0 $green",
+    textShadow: "2px 0 $red, -2px 0 $green2",
   },
   "50%": {
     borderColor: "#F6F2F0",
@@ -61,13 +61,13 @@ const glitch = keyframes({
     textShadow: "-2px 0 #F6F2F0, 2px 0 $purple",
   },
   "75%": {
-    borderColor: "$green",
-    color: "$green",
+    borderColor: "$green2",
+    color: "$green2",
     textShadow: "2px 0 $green, -2px 0 $red",
   },
   "100%": {
-    borderColor: "$green",
-    color: "$green",
+    borderColor: "$green2",
+    color: "$green2",
     textShadow: "none",
   },
 });
@@ -87,11 +87,11 @@ const glitchGhost = keyframes({
   },
   "75%": {
     transform: "translate(-4px, -4px)",
-    borderColor: "$green",
-  },
+    borderColor: "$green2",
+  },  
   "100%": {
     transform: "translate(0, 0)",
-    borderColor: "$green",
+    borderColor: "$green2",
   },
 });
 
@@ -148,14 +148,16 @@ const glitchGhostWrong = keyframes({
 
 const ButtonAns = styled("button", {
   color: "$purple",
-  fontWeight: "700",
-  fontSize: "14px",
-  lineHeight: "16px",
-  backgroundColor: "$darkgrey",
-  borderRadius: "8px",
-  padding: "8px",
-  border: "3px solid $purple",
+  fontWeight: "800",
+  fontSize: "21px",
+  lineHeight: "26px",
+  fontFamily: "Parkinsans",
+  backgroundColor: "#00000000",
+  borderRadius: "22px",
+  padding: "18px",
+  border: "6px solid $purple",
   flex: 1,
+  margin: 3,
   whiteSpace: "nowrap",
   cursor: "pointer",
   transition: "all 0.3s ease",

@@ -5,7 +5,7 @@ import { GuessCards } from "./GuessCard/GuessCards";
 
 export const Content = () => {
   return (
-    <FlexC css={{ backgroundColor: "$lightblack" }}>
+    <FlexC css={{ backgroundColor: "#000" }}>
       <FlexR sb>
       </FlexR>
       <Div>

@@ -1,4 +1,6 @@
 /* styles/fonts.css */
+@import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap');
+
 @font-face {
   font-family: 'Bellota';
   src: url('/fonts/bellota-regular.woff2') format('woff2'),
@@ -24,4 +26,10 @@
   font-weight: 300;
   font-style: normal;
   font-display: swap;
+}
+
+.parkfont {
+  font-family: "Parkinsans", sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }

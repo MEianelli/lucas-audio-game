@@ -19,6 +19,8 @@ export function Header() {
       <Div>
         <Text
           css={{
+            fontFamily: "Parkinsans",
+            fontWeight: "600",
             whiteSpace: "nowrap",
             textAlign: "center",
             color: "$green",
@@ -31,7 +33,8 @@ export function Header() {
         >
           {`MovieGuess`}
         </Text>
-        <Text size={"s"} weight={"normal"} css={{ textAlign: "center" }}></Text>
+        <Text
+        size={"s"} weight={"normal"} css={{ textAlign: "center" }}></Text>
       </Div>
       <Hearts />
       <Bars />
