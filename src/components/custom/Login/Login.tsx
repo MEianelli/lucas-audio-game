@@ -1,9 +1,9 @@
 import { LoginInput } from "../../inputs/input";
 import { Text } from "../../text/text";
 import { Button } from "../../buttons/buttons";
-import { TStatus } from "./LoginContainer";
 import { Warning } from "./Messages";
 import { JSX } from "react";
+import { TStatus } from "@/types/types";
 
 export interface LoginProps {
   name: string;

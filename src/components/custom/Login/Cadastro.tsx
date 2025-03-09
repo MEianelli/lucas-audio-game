@@ -2,8 +2,8 @@ import { LoginInput } from "../../inputs/input";
 import { Text } from "../../text/text";
 import { Button } from "../../buttons/buttons";
 import { Warning } from "./Messages";
-import { TStatus } from "./LoginContainer";
 import { JSX } from "react";
+import { TStatus } from "@/types/types";
 
 export interface CadastroProps {
   name: string;

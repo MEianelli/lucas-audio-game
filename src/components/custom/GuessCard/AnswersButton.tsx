@@ -6,12 +6,16 @@ export interface AnswersButtonPros
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   correct: string;
+  onRight: () => void;
+  onWrong: () => void;
   onclick: () => void;
   css?: CSS;
 }
 
 export function AnswersButton({
   text,
+  onRight,
+  onWrong,
   onclick,
   correct,
   css,
@@ -23,10 +27,11 @@ export function AnswersButton({
   const handleClick = () => {
     onclick();
     if (text === correct) {
+      onRight();
       setAnimateRight(true);
       return;
     }
-
+    onWrong();
     setAnimateWrong(true);
     return;
   };

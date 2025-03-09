@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { FlexC } from "../containers/flex";
 import { GuessCard } from "./GuessCard/GuessCard";
-import { getRandomMoviesWithMedia, RndMovie } from "@/lib/supabase";
+import { getRandomMoviesWithMedia } from "@/lib/supabase";
 import { Button } from "../buttons/buttons";
 import { Text } from "../text/text";
+import { RndMovie } from "@/types/types";
 
 export const GenerateRandomCard = () => {
   const [guess, setGuess] = useState<RndMovie | null>(null);

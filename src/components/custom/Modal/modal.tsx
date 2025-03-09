@@ -1,12 +1,14 @@
 import { keyframes, styled } from "@/styles/stitches.config";
-import { CloseButton } from "../buttons/closeButton";
+import { CloseButton } from "../../buttons/closeButton";
 import { CSS } from "@stitches/react";
-import { JSX, RefObject, useEffect, useRef } from "react";
-import { LoginContainer } from "../custom/Login/LoginContainer";
-import { MenuContainer } from "../custom/Menu/MenuContainer";
-import { Ranking } from "../custom/Ranking";
+import { JSX, useEffect, useRef } from "react";
+
+import { MenuContainer } from "../Header/Menu/MenuContainer";
+
 import { useStore } from "@/lib/store";
-import { NoLifes } from "../custom/Nolifes";
+import { NoLifes } from "./Nolifes";
+import { LoginResult, RegisterResult } from "../Login/LoginResult";
+import { Ranking } from "../Header/Ranking";
 
 const grow = keyframes({
   "0%": { transform: "scale(0.1)" },
@@ -37,7 +39,13 @@ interface DialogModalProps
   css?: CSS;
 }
 
-export type ModalOptions = "login" | "menu" | "ranking" | "nolifes" | "none";
+export type ModalOptions =
+  | "registerResult"
+  | "loginResult"
+  | "menu"
+  | "ranking"
+  | "nolifes"
+  | "none";
 
 export const DialogModal = ({ css, ...props }: DialogModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -59,19 +67,17 @@ export const DialogModal = ({ css, ...props }: DialogModalProps) => {
 
   return (
     <Dialog ref={dialogRef} css={{ ...css }} {...props}>
-      {ModalContentMapper[modalOption](dialogRef)}
+      {ModalContentMapper[modalOption]}
       <CloseButton onClick={handleClose} />
     </Dialog>
   );
 };
 
-const ModalContentMapper: Record<
-  ModalOptions,
-  (ref: RefObject<HTMLDialogElement | null>) => JSX.Element | null
-> = {
-  login: (ref) => <LoginContainer ref={ref} />,
-  menu: () => <MenuContainer />,
-  ranking: () => <Ranking />,
-  nolifes: () => <NoLifes />,
-  none: () => null,
+const ModalContentMapper: Record<ModalOptions, JSX.Element | null> = {
+  loginResult: <LoginResult />,
+  registerResult: <RegisterResult />,
+  menu: <MenuContainer />,
+  ranking: <Ranking />,
+  nolifes: <NoLifes />,
+  none: <></>,
 };

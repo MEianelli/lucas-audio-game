@@ -1,6 +1,6 @@
-import { ButtonG } from "../buttons/buttons";
-import { FlexC } from "../containers/flex";
-import { Text } from "../text/text";
+import { ButtonG } from "../../buttons/buttons";
+import { FlexC } from "../../containers/flex";
+import { Text } from "../../text/text";
 
 export const NoLifes = () => {
   return (

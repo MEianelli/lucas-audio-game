@@ -1,12 +1,13 @@
 import { useStore } from "@/lib/store";
 import { FlexC } from "../../containers/flex";
+import { addOneUser, getOneUser } from "@/lib/supabase";
 import { crypto } from "@/utils/crypto";
 import { useState } from "react";
+import { setCryptoCookie } from "@/utils/cookie";
 import { Login } from "./Login";
 import { Cadastro } from "./Cadastro";
 import { Button } from "@/components/buttons/buttons";
-import { Response, TStatus } from "@/types/types";
-import api from "@/utils/api";
+import { TStatus } from "@/types/types";
 
 const allowedPattern = /^[A-Za-z0-9!@#$%^&]*$/;
 
@@ -15,7 +16,9 @@ export const LoginContainer = () => {
   const pass = useStore((store) => store.pass);
   const setName = useStore((store) => store.setName);
   const setPass = useStore((store) => store.setPass);
-  const updateUserData = useStore((store) => store.updateUserData);
+  const setLoadingDB = useStore((store) => store.setLoadingDB);
+  const setScreen = useStore((store) => store.setScreen);
+  const setModalOption = useStore((store) => store.setModalOption);
 
   const [status, setStatus] = useState<TStatus>("");
   const [display, setDisplay] = useState<"login" | "register">("login");
@@ -35,18 +38,26 @@ export const LoginContainer = () => {
 
   async function handleCadastrar() {
     setLoading(true);
+    if (!name || !pass) {
+      setStatus("empty");
+      setLoading(false);
+      return;
+    }
     try {
       const encryptedPass = crypto({ name, pass });
-      const data: Response = await api("http://localhost:3000/api/register", {
-        method: "POST",
-        body: JSON.stringify({ name, pass: encryptedPass }),
-      });
-
-      setStatus(data.res);
-      if (data.res === "registered") {
-        updateUserData(data.user, "register");
+      const data = await getOneUser({ name });
+      let added = false;
+      if (!data?.id) {
+        added = await addOneUser({ name, pass: encryptedPass });
+      } else {
+        setStatus("unavailable");
       }
-      return;
+      if (added) {
+        setCryptoCookie({ name });
+        setModalOption("registerResult");
+        setScreen("content");
+        setLoadingDB(false);
+      }
     } catch (error) {
       console.log(JSON.stringify(error));
     } finally {
@@ -58,15 +69,20 @@ export const LoginContainer = () => {
     setLoading(true);
     try {
       const encryptedPass = crypto({ name, pass });
-      const data: Response = await api("http://localhost:3000/api/login", {
-        method: "POST",
-        body: JSON.stringify({ name, pass: encryptedPass }),
-      });
-
-      setStatus(data.res);
-      if (data.res === "logged") {
-        updateUserData(data.user, "login");
+      const data = await getOneUser({ name });
+      if (!data?.id) {
+        setStatus("unexistant");
+        return;
       }
+
+      if (data.pass !== encryptedPass) {
+        setStatus("wrongPass");
+        return;
+      }
+
+      setCryptoCookie({ name });
+      setModalOption("loginResult");
+      setScreen("content");
       return;
     } catch (error) {
       console.log(JSON.stringify(error));

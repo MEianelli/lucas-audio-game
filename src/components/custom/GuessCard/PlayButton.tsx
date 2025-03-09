@@ -1,6 +1,6 @@
-import { TDifficulty } from "@/lib/supabase";
-import { Div } from "../containers/div";
-import { PlayIcon } from "../icons/play";
+import { TDifficulty } from "@/types/types";
+import { Div } from "../../containers/div";
+import { PlayIcon } from "../../icons/play";
 
 export const difficultyToColor: Record<TDifficulty, string> = {
   0: "$green",

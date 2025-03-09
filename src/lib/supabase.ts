@@ -1,14 +1,24 @@
+import {
+  RndMovie,
+  Tables,
+  TAudiosDTO,
+  TBuckets,
+  TGuess,
+  TImagesDTO,
+  TMoviesDTO,
+  User,
+} from "@/types/types";
 import { getRandomIds } from "@/utils/random";
 import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = "https://hiinnoepvfmkkdioyanc.supabase.co";
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
+const supabaseKey =
+  process.env.SUPABASE_ANON_KEY ||
+  (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string);
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
 export const storageBaseUrl =
-  "https://hiinnoepvfmkkdioyanc.supabase.co/storage/v1/object/public/";
-
-export type TBuckets = "audio" | "images";
+  "https://hiinnoepvfmkkdioyanc.supabase.co/storage/v1/object/public";
 
 export async function uploadMany(files: File[], folder: TBuckets) {
   const pathList = [];
@@ -210,20 +220,19 @@ export async function updateProperty(data: {
 }
 
 export async function getOneUser({
-  field,
-  value,
+  name,
 }: {
-  field: "name" | "pass";
-  value: string;
-}): Promise<User[] | null> {
+  name: string;
+}): Promise<User | null> {
   const { data, status } = await supabase
     .from("users")
     .select()
-    .eq(field, value);
+    .eq("name", name)
+    .single();
   if (status === 200) {
     return data;
   }
-  return [];
+  return null;
 }
 
 export async function getAllUsers(): Promise<User[] | null> {
@@ -233,87 +242,4 @@ export async function getAllUsers(): Promise<User[] | null> {
     return data;
   }
   return [];
-}
-
-type Tables = "audios" | "images" | "movies" | "users" | "guesses";
-
-export type TDifficulty = 0 | 1 | 2 | 3 | 4;
-
-export type TGuess = {
-  audio_src: string | null;
-  correct_answers: string | null;
-  image_src: string | null;
-  difficulty: TDifficulty;
-} & Base;
-
-export type TMoviesDTO = {
-  correct: string;
-  wrongs: string[];
-  tags: string[];
-};
-
-export type TMovies = {
-  difficulty: number;
-} & TMoviesDTO &
-  Base;
-
-export type TAudiosDTO = {
-  movie_id: number;
-  src: string;
-};
-
-export type TAudios = { difficulty: number } & Base & TAudiosDTO;
-
-export type TImagesDTO = {
-  movie_id: number;
-  src: string;
-};
-
-export type TImages = Base & TImagesDTO;
-
-export type User = {
-  name: string;
-  pass: string;
-  hitids?: number[];
-  missids?: number[];
-  ignoreids?: number[];
-  lifes?: number;
-  score?: number;
-  lastheartgain?: number;
-};
-
-export type Base = {
-  id: number;
-  created_at: string;
-};
-
-export interface RndMovie {
-  movie_id: number;
-  movie_data: MovieData;
-  audio_data: AudioData;
-  image_data: ImageData;
-}
-
-export interface MovieData {
-  id: number;
-  tags: string[];
-  wrongs: string[];
-  correct: string;
-  created_at: string;
-  difficulty: number;
-}
-
-export interface AudioData {
-  id: number;
-  src: string;
-  movie_id: number;
-  created_at: string;
-  difficulty: TDifficulty;
-}
-
-export interface ImageData {
-  id: number;
-  src: string;
-  movie_id: number;
-  created_at: string;
 }

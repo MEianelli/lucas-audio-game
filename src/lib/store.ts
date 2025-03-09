@@ -1,8 +1,9 @@
 import { create } from "zustand";
-import { getOneUser, updateProperty } from "./supabase";
+import { updateProperty } from "./supabase";
 import { crypto } from "@/utils/crypto";
 import { MAX_LIFE_CAP } from "./contants";
-import { ModalOptions } from "@/components/containers/modal";
+import { ModalOptions } from "@/components/custom/Modal/modal";
+import { TScreen, User } from "@/types/types";
 
 export type TStore = {
   score: number;
@@ -25,14 +26,16 @@ export type TStore = {
   setName: (name: string) => void;
   setLastheartgain: (lastheartgain: number) => void;
   setPass: (pass: string) => void;
-  updateUserFromDB: () => Promise<void>;
+  updateUserData: (user: User, event: "login" | "register") => Promise<void>;
   lastLifeChange: "added" | "subbed" | "none";
+  screen: TScreen;
+  setScreen: (screen: TScreen) => void;
 };
 
 export const useStore = create<TStore>((set, get) => ({
   name: "",
   pass: "",
-  modalOption: "login",
+  modalOption: "none",
   lastheartgain: 0,
   loadingDB: true,
   setLoadingDB: (loadingDB) => set({ loadingDB }),
@@ -46,19 +49,11 @@ export const useStore = create<TStore>((set, get) => ({
   missids: [],
   ignoreids: [],
   setModalOption: (option: ModalOptions) => set({ modalOption: option }),
-  updateUserFromDB: async () => {
-    const { name } = get();
-    set({ loadingDB: true });
-    const user = await getOneUser({
-      field: "name",
-      value: name,
-    });
-    if (!user?.length) {
-      set({ loadingDB: false });
-      return;
-    }
-    const { lifes, hitids, lastheartgain, missids, ignoreids } = user[0];
+  updateUserData: async (user, event) => {
+    if (!user?.id) return;
+    const { lifes, hitids, lastheartgain, missids, ignoreids, name } = user;
     set({
+      name,
       lifes,
       hitids,
       missids,
@@ -66,6 +61,8 @@ export const useStore = create<TStore>((set, get) => ({
       lastLifeChange: "none",
       loadingDB: false,
       lastheartgain,
+      screen: "content",
+      modalOption: event === "login" ? "loginResult" : "registerResult",
     });
   },
   setIgnoreids: async (ids) => {
@@ -133,4 +130,6 @@ export const useStore = create<TStore>((set, get) => ({
     if (error) throw Error(error);
     set({ lifes: newLifes, lastLifeChange: "subbed", missids: newMissIds });
   },
+  screen: "login",
+  setScreen: (screen: TScreen) => set({ screen }),
 }));

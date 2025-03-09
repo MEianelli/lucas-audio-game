@@ -13,9 +13,9 @@ export const decrypt = (data: string) => {
   return CryptoJS.enc.Base64.parse(data).toString(CryptoJS.enc.Utf8);
 };
 
-export const encryptData = (text: string) => {
+export const encryptData = (data: Record<string, string>) => {
   return CryptoJS.AES.encrypt(
-    JSON.stringify(text),
+    JSON.stringify(data),
     "K8kuFzU1BT72SHZfl9VUNA=="
   ).toString();
 };

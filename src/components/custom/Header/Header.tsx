@@ -1,6 +1,6 @@
 import { FlexR } from "@/components/containers/flex";
 import { Bars } from "@/components/custom/Bars";
-import { Menu } from "@/components/custom/Menu/Menu";
+import { Menu } from "@/components/custom/Header/Menu/Menu";
 import { Text } from "@/components/text/text";
 import { Div } from "../containers/div";
 import { Hearts } from "./Hearts";

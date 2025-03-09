@@ -1,12 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ButtonClean } from "../../buttons/buttons";
 import { ImageCss } from "../../image/Image";
 import useSound from "use-sound";
 import { useStore } from "@/lib/store";
-import { RndMovie, storageBaseUrl } from "@/lib/supabase";
-import { difficultyToColor, PlayButton } from "../PlayButton";
+import { storageBaseUrl } from "@/lib/supabase";
+import { difficultyToColor, PlayButton } from "./PlayButton";
 import { AlertPoint, AlertStatus } from "./AlertMessage";
 import { OverLayOpacity } from "./ProgressBar";
+import { RndMovie } from "@/types/types";
 
 export const GuessCard = ({
   card,
@@ -20,16 +21,10 @@ export const GuessCard = ({
   const missids = useStore((store) => store.missids);
   const ignoreids = useStore((store) => store.ignoreids);
   const hitids = useStore((store) => store.hitids);
-
   const setModalOption = useStore((store) => store.setModalOption);
   const lifes = useStore((store) => store.lifes);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (hitids?.includes(card?.audio_data.id)) {
-      setAlert("ok");
-    }
-
     if (
       missids?.includes(card?.audio_data.id) ||
       ignoreids?.includes(card?.audio_data.id)
@@ -52,8 +47,6 @@ export const GuessCard = ({
       setModalOption("nolifes");
       return;
     }
-
-    inputRef.current?.focus();
     if (isPlaying) {
       stop();
     } else {
