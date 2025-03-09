@@ -83,6 +83,12 @@ export const ButtonG = styled("button", {
   whiteSpace: "nowrap",
   cursor: "pointer",
 
+  "&:disabled": {
+    borderColor: "$lightGrey",
+    color: "$lightGrey",
+    opacity: "0.5",
+  },
+
   variants: {
     notSelected: {
       true: {

@@ -7,6 +7,7 @@ import { Cadastro } from "./Cadastro";
 import { Button } from "@/components/buttons/buttons";
 import { Response, TStatus } from "@/types/types";
 import api from "@/utils/api";
+import { LoginResult, RegisterResult } from "./LoginResult";
 
 const allowedPattern = /^[A-Za-z0-9!@#$%^&]*$/;
 
@@ -16,9 +17,9 @@ export const LoginContainer = () => {
   const setName = useStore((store) => store.setName);
   const setPass = useStore((store) => store.setPass);
   const updateUserData = useStore((store) => store.updateUserData);
-
+  const loginState = useStore((store) => store.loginState);
+  const setLoginState = useStore((store) => store.setLoginState);
   const [status, setStatus] = useState<TStatus>("");
-  const [display, setDisplay] = useState<"login" | "register">("login");
   const [loading, setLoading] = useState(false);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -44,11 +45,12 @@ export const LoginContainer = () => {
 
       setStatus(data.res);
       if (data.res === "registered") {
-        updateUserData(data.user, "register");
+        updateUserData(data.user);
+        setLoginState("registered");
       }
       return;
     } catch (error) {
-      console.log(JSON.stringify(error));
+      console.log(JSON.stringify(error, null, 2));
     } finally {
       setLoading(false);
     }
@@ -65,11 +67,12 @@ export const LoginContainer = () => {
 
       setStatus(data.res);
       if (data.res === "logged") {
-        updateUserData(data.user, "login");
+        updateUserData(data.user);
+        setLoginState("logged");
       }
       return;
     } catch (error) {
-      console.log(JSON.stringify(error));
+      console.log(JSON.stringify(error, null, 2));
     } finally {
       setLoading(false);
     }
@@ -77,7 +80,9 @@ export const LoginContainer = () => {
 
   return (
     <FlexC css={{ gap: 8 }}>
-      {display === "login" && (
+      {loginState === "logged" && <LoginResult />}
+      {loginState === "registered" && <RegisterResult />}
+      {loginState === "login" && (
         <Login
           name={name}
           pass={pass}
@@ -88,11 +93,11 @@ export const LoginContainer = () => {
         >
           <Button
             variant={"link"}
-            onClick={() => setDisplay("register")}
+            onClick={() => setLoginState("register")}
           >{`register`}</Button>
         </Login>
       )}
-      {display === "register" && (
+      {loginState === "register" && (
         <Cadastro
           name={name}
           pass={pass}
@@ -103,7 +108,7 @@ export const LoginContainer = () => {
         >
           <Button
             variant={"link"}
-            onClick={() => setDisplay("login")}
+            onClick={() => setLoginState("login")}
           >{`Have account? Login`}</Button>
         </Cadastro>
       )}

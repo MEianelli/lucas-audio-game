@@ -43,6 +43,7 @@ export const Cadastro = ({
         placeholder="Name"
         value={name}
         name="name"
+        autoComplete="off"
         onChange={handleChange}
       />
       {status === "unavailable" && <Warning text="Name already taken!" />}
@@ -51,6 +52,7 @@ export const Cadastro = ({
         placeholder="Senha"
         value={pass}
         name="pass"
+        autoComplete="off"
         onChange={handleChange}
       />
       {status === "empty" && (

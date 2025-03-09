@@ -3,7 +3,7 @@ import { updateProperty } from "./supabase";
 import { crypto } from "@/utils/crypto";
 import { MAX_LIFE_CAP } from "./contants";
 import { ModalOptions } from "@/components/custom/Modal/modal";
-import { TScreen, User } from "@/types/types";
+import { LoginState, TScreen, User } from "@/types/types";
 
 export type TStore = {
   score: number;
@@ -26,10 +26,12 @@ export type TStore = {
   setName: (name: string) => void;
   setLastheartgain: (lastheartgain: number) => void;
   setPass: (pass: string) => void;
-  updateUserData: (user: User, event: "login" | "register") => Promise<void>;
+  updateUserData: (user: User) => Promise<void>;
   lastLifeChange: "added" | "subbed" | "none";
   screen: TScreen;
   setScreen: (screen: TScreen) => void;
+  loginState: LoginState;
+  setLoginState: (loginState: LoginState) => void;
 };
 
 export const useStore = create<TStore>((set, get) => ({
@@ -49,7 +51,7 @@ export const useStore = create<TStore>((set, get) => ({
   missids: [],
   ignoreids: [],
   setModalOption: (option: ModalOptions) => set({ modalOption: option }),
-  updateUserData: async (user, event) => {
+  updateUserData: async (user) => {
     if (!user?.id) return;
     const { lifes, hitids, lastheartgain, missids, ignoreids, name } = user;
     set({
@@ -61,8 +63,6 @@ export const useStore = create<TStore>((set, get) => ({
       lastLifeChange: "none",
       loadingDB: false,
       lastheartgain,
-      screen: "content",
-      modalOption: event === "login" ? "loginResult" : "registerResult",
     });
   },
   setIgnoreids: async (ids) => {
@@ -132,4 +132,6 @@ export const useStore = create<TStore>((set, get) => ({
   },
   screen: "login",
   setScreen: (screen: TScreen) => set({ screen }),
+  loginState: "login",
+  setLoginState: (loginState) => set({ loginState }),
 }));

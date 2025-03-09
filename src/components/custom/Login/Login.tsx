@@ -43,6 +43,7 @@ export const Login = ({
         placeholder="Name"
         value={name}
         name="name"
+        autoComplete="off"
         onChange={handleChange}
       />
       {status === "unexistant" && <Warning text="No user with that name!" />}
@@ -51,6 +52,7 @@ export const Login = ({
         placeholder="Password"
         value={pass}
         name="pass"
+        autoComplete="off"
         onChange={handleChange}
       />
       {status === "wrongPass" && <Warning text="wrong password!" />}
