@@ -81,6 +81,7 @@ export const ButtonG = styled("button", {
   border: "3px solid $green",
   flex: 1,
   whiteSpace: "nowrap",
+  cursor: "pointer",
 
   variants: {
     notSelected: {

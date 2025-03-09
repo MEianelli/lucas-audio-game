@@ -11,6 +11,7 @@
   "dependencies": {
     "@stitches/react": "^1.2.8",
     "@supabase/supabase-js": "^2.48.1",
+    "babel-plugin-react-compiler": "^19.0.0-beta-40c6c23-20250301",
     "cookies-next": "^5.1.0",
     "crypto-js": "^4.2.0",
     "embla-carousel-react": "^8.5.2",
