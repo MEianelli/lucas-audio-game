@@ -1,4 +1,4 @@
-import { TDifficulty, TGuess, User } from "../supabase";
+import { TDifficulty, TGuess, User } from "@/types/types";
 
 export type TIdsArray = (number[] | undefined)[] | undefined;
 
