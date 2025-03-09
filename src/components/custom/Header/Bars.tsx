@@ -3,7 +3,7 @@ import { Div } from "@/components/containers/div";
 import { FlexR } from "@/components/containers/flex";
 import { useStore } from "@/lib/store";
 import { styled } from "@/styles/stitches.config";
-import { Text } from "../text/text";
+import { Text } from "@/components/text/text";
 
 const Basebar = styled(Div, {
   width: "4px",

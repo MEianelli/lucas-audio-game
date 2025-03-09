@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import { FlexC, FlexR } from "../containers/flex";
-import { Text } from "../text/text";
+import { FlexC, FlexR } from "@/components/containers/flex";
+import { Text } from "@/components/text/text";
 import { getAllUsers } from "@/lib/supabase";
-import { Span } from "../containers/div";
+import { Span } from "@/components/containers/div";
 import { useStore } from "@/lib/store";
-import LoadingSkeleton from "./LoadingBars";
-import { ButtonClean, ButtonG } from "../buttons/buttons";
+import { ButtonClean, ButtonG } from "@/components/buttons/buttons";
 import { User } from "@/types/types";
+import LoadingSkeleton from "../Misc/LoadingBars";
 
 type RankUser = {
   position: number;

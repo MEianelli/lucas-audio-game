@@ -1,5 +1,5 @@
 import { keyframes, styled } from "@/styles/stitches.config";
-import { FlexC } from "../containers/flex";
+import { FlexC } from "@/components/containers/flex";
 
 const spin = keyframes({
   "0%": { transform: "rotate(0deg)" },

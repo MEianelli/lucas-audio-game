@@ -1,6 +1,6 @@
 import { Div } from "@/components/containers/div";
 import { EasyIcon, HardIcon, NormalIcon } from "@/components/icons/faces";
-import { TDifficulty } from "@/lib/supabase";
+import { TDifficulty } from "@/types/types";
 
 export function DifficultyIcons({
   difficulty,

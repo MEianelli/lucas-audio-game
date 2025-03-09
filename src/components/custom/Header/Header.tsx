@@ -1,9 +1,9 @@
 import { FlexR } from "@/components/containers/flex";
-import { Bars } from "@/components/custom/Bars";
 import { Menu } from "@/components/custom/Header/Menu/Menu";
 import { Text } from "@/components/text/text";
-import { Div } from "../containers/div";
+import { Div } from "@/components/containers/div";
 import { Hearts } from "./Hearts";
+import { Bars } from "./Bars";
 
 export function Header() {
   return (

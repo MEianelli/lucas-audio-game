@@ -1,7 +1,11 @@
 import { useStore } from "@/lib/store";
-import { FlexR } from "../containers/flex";
+import { FlexR } from "@/components/containers/flex";
 import { JSX, useEffect, useMemo, useRef } from "react";
-import { HeartIcon, HeartEmptyIcon, HeartFillingIcon } from "../icons/hearts";
+import {
+  HeartIcon,
+  HeartEmptyIcon,
+  HeartFillingIcon,
+} from "@/components/icons/hearts";
 import { MAX_LIFE_CAP, TIME_TO_GAIN_HEART } from "@/lib/contants";
 
 export type THeartState = "full" | "filling" | "empty" | "exploding";

@@ -2,11 +2,12 @@ import { Button } from "@/components/buttons/buttons";
 import { Center } from "@/components/containers/containers";
 import { Input } from "@/components/inputs/input";
 import { FlexC, FlexR } from "@/components/containers/flex";
-import { PreviewLatest } from "@/components/custom/PreviewLatest";
 import { Text } from "@/components/text/text";
-import { TBuckets, uploadDataSupabase, uploadToGuesses } from "@/lib/supabase";
+import { uploadDataSupabase, uploadToGuesses } from "@/lib/supabase";
 import { useMemo, useRef, useState } from "react";
 import { GetServerSideProps } from "next";
+import { TBuckets } from "@/types/types";
+import { PreviewLatest } from "@/components/custom/Admin/PreviewLatest";
 
 const initialFiles = { audio: null, images: null };
 

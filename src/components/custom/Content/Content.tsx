@@ -1,7 +1,7 @@
 import { Div } from "../../containers/div";
 import { FlexC, FlexR } from "../../containers/flex";
 import { GuessCards } from "../GuessCard/GuessCards";
-import { Header } from "./Header";
+import { Header } from "../Header/Header";
 
 export const Content = () => {
   return (

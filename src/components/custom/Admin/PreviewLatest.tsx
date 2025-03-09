@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { FlexC } from "../containers/flex";
-import { deleteOne, getLatest, TGuess } from "@/lib/supabase";
-import { Button } from "../buttons/buttons";
-import { Text } from "../text/text";
+import { FlexC } from "@/components/containers/flex";
+import { deleteOne, getLatest } from "@/lib/supabase";
+import { Button } from "@/components/buttons/buttons";
+import { Text } from "@/components/text/text";
+import { TGuess } from "@/types/types";
 
 export const PreviewLatest = ({ reload }: { reload: boolean }) => {
   const [guess, setGuess] = useState<TGuess[] | null>(null);

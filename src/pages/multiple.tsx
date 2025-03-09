@@ -3,10 +3,11 @@ import { Center } from "@/components/containers/containers";
 import { Input, Textarea } from "@/components/inputs/input";
 import { FlexC } from "@/components/containers/flex";
 import { Text } from "@/components/text/text";
-import { TBuckets, uploadMany, uploadMovie } from "@/lib/supabase";
+import { uploadMany, uploadMovie } from "@/lib/supabase";
 import { useMemo, useRef, useState } from "react";
 import { Span } from "@/components/containers/div";
-import { GenerateRandomCard } from "@/components/custom/GenerateRandomCard";
+import { TBuckets } from "@/types/types";
+import { GenerateRandomCard } from "@/components/custom/Admin/GenerateRandomCard";
 
 const initialFiles = { audio: null, images: null };
 

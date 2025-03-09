@@ -1,8 +1,8 @@
-import { RndMovie } from "@/lib/supabase";
 import { getRndArrElements, shuffleArray } from "@/utils/random";
 import { useMemo, useState } from "react";
 import { AnswersButton } from "./AnswersButton";
 import { useStore } from "@/lib/store";
+import { RndMovie } from "@/types/types";
 
 export function Answers({
   card,
