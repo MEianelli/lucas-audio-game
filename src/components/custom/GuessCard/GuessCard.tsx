@@ -59,13 +59,13 @@ export const GuessCard = ({
       onClick={handleToggle}
       css={{
         position: "relative",
-        borderRadius: "10px",
+        borderRadius: "30px",
         overflow: "hidden",
         width: "100%",
         height: !isInView ? "80%" : "100%",
         aspectRatio: 28 / 25,
-        border: `4px solid ${difficultyToColor[card?.audio_data.difficulty]}`,
-        padding: "3px",
+        border: `6px solid ${difficultyToColor[card?.audio_data.difficulty]}`,
+        padding: "0px",
         boxSizing: "border-box",
         transition: "height 0.5s ease",
       }}
@@ -77,7 +77,7 @@ export const GuessCard = ({
         width={200}
         height={200}
         css={{
-          borderRadius: "6px",
+          borderRadius: "20px",
           width: "100%",
           height: "auto",
           aspectRatio: 28 / 25,

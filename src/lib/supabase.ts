@@ -50,15 +50,19 @@ export async function uploadMovie(
   payload: TMoviesDTO & { audios_src: string[]; images_src: string[] }
 ) {
   const { audios_src, images_src, ...rest } = payload;
-  const { data, error } = await supabase.from("movies").insert(rest).select();
+  const { data, error } = await supabase
+    .from("movies")
+    .insert(rest)
+    .select()
+    .single();
   if (error) {
     throw Error(`${error.message}`);
   }
-  if (!data.length) {
+  if (!data.id) {
     throw Error(`Didnt return data with lenght and id`);
   }
 
-  const { id } = data[0];
+  const { id } = data;
 
   const audioDto: TAudiosDTO[] = audios_src.map((src) => ({
     src,

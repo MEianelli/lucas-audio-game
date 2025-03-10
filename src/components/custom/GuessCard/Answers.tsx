@@ -3,6 +3,14 @@ import { useMemo, useState } from "react";
 import { AnswersButton } from "./AnswersButton";
 import { useStore } from "@/lib/store";
 import { RndMovie } from "@/types/types";
+import { MAX_ANS_LEN } from "@/lib/contants";
+
+function reduceAnsSize(ans: string) {
+  if (ans.length > MAX_ANS_LEN) {
+    return ans.slice(0, MAX_ANS_LEN) + "...";
+  }
+  return ans;
+}
 
 export function Answers({
   card,
@@ -17,13 +25,10 @@ export function Answers({
 
   const options = useMemo(() => {
     const shorts = card?.movie_data.wrongs.map((ans) => {
-      if (ans.length > 30) {
-        return ans.slice(0, 30) + "...";
-      }
-      return ans;
+      return reduceAnsSize(ans);
     });
     const rndWrongs = getRndArrElements(shorts);
-    rndWrongs.push(card?.movie_data.correct);
+    rndWrongs.push(reduceAnsSize(card?.movie_data.correct));
     return shuffleArray(rndWrongs);
   }, [card]);
 

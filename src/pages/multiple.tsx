@@ -13,6 +13,7 @@ const initialFiles = { audio: null, images: null };
 
 const Multiple = () => {
   const [files, setFiles] = useState(initialFiles);
+  console.log("files :", files);
   const [correct, setCorrect] = useState("");
   const [wrongs, setWrongs] = useState("");
   const [tags, setTags] = useState("");
@@ -123,7 +124,7 @@ const Multiple = () => {
         </Span>
       </Center>
       <Center>
-        <Text color={"text"}>Respostas certa:</Text>
+        <Text color={"text"}>Respostas certa (nome do filme/musica):</Text>
         <Input
           type="text"
           value={correct}
@@ -145,7 +146,7 @@ const Multiple = () => {
           type="text"
           value={tags}
           onChange={handleChangeTags}
-          css={{ border: "1px solid $green" }}
+          css={{ border: "1px solid $purple" }}
         />
       </Center>
       <Center>

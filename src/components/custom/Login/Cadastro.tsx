@@ -34,7 +34,7 @@ export const Cadastro = ({
           fontFamily: "$sans",
           fontWeight: 700,
           maxWidth: "90%",
-          color: "$green",
+          color: "$purple",
         }}
       >{`Register to show on rank and win rewards!`}</Text>
 

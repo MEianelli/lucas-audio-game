@@ -21,7 +21,7 @@ export const Dialog = styled("dialog", {
   borderRadius: "16px",
   width: "600px",
   backgroundColor: "$darkgrey",
-  border: "3px solid $green",
+  border: "3px solid $purple",
   outline: "none",
   marginTop: 12,
   transformOrigin: "center",

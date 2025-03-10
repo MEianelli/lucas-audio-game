@@ -8,7 +8,7 @@ import { Text } from "@/components/text/text";
 const Basebar = styled(Div, {
   width: "4px",
   borderRadius: "2px",
-  backgroundColor: "$green",
+  backgroundColor: "$purple",
 });
 
 export function Bars() {
@@ -38,7 +38,7 @@ export function Bars() {
         </FlexR>
         <Text
           css={{
-            color: "$green",
+            color: "$purple",
             fontSize: "42px",
             fontWeight: "700",
           }}

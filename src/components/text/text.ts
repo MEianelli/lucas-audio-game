@@ -10,7 +10,7 @@ export const Text = styled("p", {
         color: "$white",
       },
       green: {
-        color: "$green",
+        color: "$purple",
       },
       red: {
         color: "$red",

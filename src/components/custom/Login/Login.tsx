@@ -33,7 +33,7 @@ export const Login = ({
           marginBottom: 8,
           fontFamily: "$sans",
           fontWeight: 700,
-          color: "$green",
+          color: "$purple",
           maxWidth: "90%",
         }}
       >{`Login to score points and show up on rank`}</Text>

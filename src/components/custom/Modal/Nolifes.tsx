@@ -8,7 +8,7 @@ export const NoLifes = () => {
       <Text
         css={{
           marginBottom: 8,
-          color: "$green",
+          color: "$purple",
           fontSize: "28px",
           fontWeight: 700,
           whiteSpace: "nowrap",

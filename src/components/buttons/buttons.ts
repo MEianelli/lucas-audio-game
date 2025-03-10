@@ -71,14 +71,14 @@ export const ButtonClean = styled("button", {
 });
 
 export const ButtonG = styled("button", {
-  color: "$green",
+  color: "$purple",
   fontWeight: "700",
   fontSize: "14px",
   lineHeight: "16px",
   backgroundColor: "$darkgrey",
   borderRadius: "8px",
   padding: "8px",
-  border: "3px solid $green",
+  border: "3px solid $purple",
   flex: 1,
   whiteSpace: "nowrap",
   cursor: "pointer",

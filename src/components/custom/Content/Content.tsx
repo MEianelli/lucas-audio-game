@@ -7,7 +7,7 @@ export const Content = () => {
   return (
     <>
       <Header />
-      <FlexC css={{ backgroundColor: "$lightblack" }}>
+      <FlexC css={{ backgroundColor: "#000" }}>
         <FlexR sb></FlexR>
         <Div>
           <GuessCards />

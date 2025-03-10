@@ -19,9 +19,11 @@ export function Header() {
       <Div>
         <Text
           css={{
+            fontFamily: "Parkinsans",
+            fontWeight: "600",
             whiteSpace: "nowrap",
             textAlign: "center",
-            color: "$green",
+            color: "$purple",
             fontSize: "36px",
             "@s": {
               fontSize: "22px",

@@ -10,7 +10,7 @@ export const CloseButton = (
         position: "absolute",
         top: "11px",
         right: "11px",
-        "& svg path": { fill: "$green" },
+        "& svg path": { fill: "$purple" },
       }}
       {...props}
     >

@@ -56,7 +56,7 @@ export const Ranking = () => {
           marginBottom: 20,
           fontFamily: "$mono",
           fontWeight: 700,
-          color: "$green",
+          color: "$purple",
         }}
       >{`Rankings`}</Text>
       {loading && <LoadingSkeleton />}
@@ -106,7 +106,7 @@ const RankRow = ({
         justifyContent: "flex-start",
         alignItems: "center",
         backgroundColor: "$darkgrey",
-        border: `2px solid ${isSolo ? "$pink" : "$green"}`,
+        border: `2px solid ${isSolo ? "$pink" : "$purple"}`,
         color: "$white",
         fontWeight: 700,
         borderRadius: 6,
@@ -114,9 +114,9 @@ const RankRow = ({
         width: "100%",
         marginTop: isSolo ? "20px" : "unset",
         gap: 8,
-        background: `linear-gradient(to right, ${isSolo ? "$pink" : "$green"} ${
-          user.width * 100
-        }%, transparent ${user.width * 100 + 2}%)`,
+        background: `linear-gradient(to right, ${
+          isSolo ? "$pink" : "$purple"
+        } ${user.width * 100}%, transparent ${user.width * 100 + 2}%)`,
       }}
     >
       <Text>{user?.position}</Text>

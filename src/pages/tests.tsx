@@ -24,7 +24,7 @@ const Tests = () => {
       </Div>
       <Div
         css={{
-          background: "$green",
+          background: "$purple",
           width: "150px",
           height: "150px",
           margin: "0 auto",

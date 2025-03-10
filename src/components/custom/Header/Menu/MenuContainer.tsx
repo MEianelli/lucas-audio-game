@@ -32,7 +32,7 @@ export function MenuContainer() {
       <Text
         css={{
           fontSize: "28px",
-          color: "$green",
+          color: "$purple",
           fontWeight: 700,
           marginBottom: 4,
         }}

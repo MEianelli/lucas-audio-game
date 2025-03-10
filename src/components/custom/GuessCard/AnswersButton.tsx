@@ -51,28 +51,28 @@ export function AnswersButton({
 
 const glitch = keyframes({
   "0%": {
-    borderColor: "$purple",
-    color: "$purple",
+    borderColor: "$purple2",
+    color: "$purple2",
     textShadow: "none",
   },
   "25%": {
     borderColor: "$red",
     color: "$red",
-    textShadow: "2px 0 $red, -2px 0 $green",
+    textShadow: "2px 0 $red, -2px 0 $purple2",
   },
   "50%": {
     borderColor: "#F6F2F0",
     color: "#F6F2F0",
-    textShadow: "-2px 0 #F6F2F0, 2px 0 $purple",
+    textShadow: "-2px 0 #F6F2F0, 2px 0 $purple2",
   },
   "75%": {
-    borderColor: "$green",
-    color: "$green",
-    textShadow: "2px 0 $green, -2px 0 $red",
+    borderColor: "$purple2",
+    color: "$purple2",
+    textShadow: "2px 0 $purple2, -2px 0 $red",
   },
   "100%": {
-    borderColor: "$green",
-    color: "$green",
+    borderColor: "$purple2",
+    color: "$purple2",
     textShadow: "none",
   },
 });
@@ -80,7 +80,7 @@ const glitch = keyframes({
 const glitchGhost = keyframes({
   "0%": {
     transform: "translate(0, 0)",
-    borderColor: "$purple",
+    borderColor: "$purple2",
   },
   "25%": {
     transform: "translate(-4px, 4px)",
@@ -92,34 +92,34 @@ const glitchGhost = keyframes({
   },
   "75%": {
     transform: "translate(-4px, -4px)",
-    borderColor: "$green",
+    borderColor: "$purple2",
   },
   "100%": {
     transform: "translate(0, 0)",
-    borderColor: "$green",
+    borderColor: "$purple2",
   },
 });
 
 const glitchWrong = keyframes({
   "0%": {
-    borderColor: "$purple",
-    color: "$purple",
+    borderColor: "$purple2",
+    color: "$purple2",
     textShadow: "none",
   },
   "25%": {
     borderColor: "$red",
     color: "$red",
-    textShadow: "2px 0 $red, -2px 0 $green",
+    textShadow: "2px 0 $red, -2px 0 $purple",
   },
   "50%": {
     borderColor: "#F6F2F0",
     color: "#F6F2F0",
-    textShadow: "-2px 0 #F6F2F0, 2px 0 $purple",
+    textShadow: "-2px 0 #F6F2F0, 2px 0 $purple2",
   },
   "75%": {
-    borderColor: "$green",
-    color: "$green",
-    textShadow: "2px 0 $green, -2px 0 $red",
+    borderColor: "$purple",
+    color: "$purple",
+    textShadow: "2px 0 $purple, -2px 0 $red",
   },
   "100%": {
     borderColor: "$red",
@@ -131,7 +131,7 @@ const glitchWrong = keyframes({
 const glitchGhostWrong = keyframes({
   "0%": {
     transform: "translate(0, 0)",
-    borderColor: "$purple",
+    borderColor: "$purple2",
   },
   "25%": {
     transform: "translate(-4px, 4px)",
@@ -143,7 +143,7 @@ const glitchGhostWrong = keyframes({
   },
   "75%": {
     transform: "translate(-4px, -4px)",
-    borderColor: "$green",
+    borderColor: "$purple",
   },
   "100%": {
     transform: "translate(0, 0)",
@@ -152,14 +152,15 @@ const glitchGhostWrong = keyframes({
 });
 
 const ButtonAns = styled("button", {
-  color: "$purple",
-  fontWeight: "700",
-  fontSize: "14px",
-  lineHeight: "16px",
-  backgroundColor: "$darkgrey",
-  borderRadius: "8px",
-  padding: "8px",
-  border: "3px solid $purple",
+  color: "$purple2",
+  fontWeight: "800",
+  fontSize: "18px",
+  lineHeight: "18px",
+  fontFamily: "Parkinsans",
+  backgroundColor: "#00000000",
+  borderRadius: "22px",
+  padding: "18px",
+  border: "6px solid $purple2",
   flex: 1,
   whiteSpace: "nowrap",
   cursor: "pointer",
@@ -187,7 +188,7 @@ const ButtonAns = styled("button", {
           zIndex: -1,
         },
         "&::after": {
-          borderColor: "$green",
+          borderColor: "$purple",
           zIndex: -2,
         },
       },
@@ -208,7 +209,7 @@ const ButtonAns = styled("button", {
           animation: `${glitchGhostWrong} 0.5s steps(2, end) forwards`,
         },
         "&::before": {
-          borderColor: "$green",
+          borderColor: "$purple",
           zIndex: -1,
         },
         "&::after": {
