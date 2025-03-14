@@ -21,6 +21,7 @@ const Tests = () => {
         <svg width="10px" height="10px">
           <circle fill="#0000ff" cx="10" cy="10" r="10" />
         </svg>
+        <Div>AAAA</Div>
       </Div>
       <Div
         css={{
