@@ -1,51 +1,26 @@
 import { useStore } from "@/lib/store";
 import { FlexC } from "../../containers/flex";
-import { addOneUser, getOneUser } from "@/lib/supabase";
 import { crypto } from "@/utils/crypto";
-import { RefObject, useEffect, useState } from "react";
-import { getCryptoCookie, setCryptoCookie } from "@/utils/cookie";
+import { useState } from "react";
 import { Login } from "./Login";
 import { Cadastro } from "./Cadastro";
 import { Button } from "@/components/buttons/buttons";
-import { Text } from "@/components/text/text";
-
-const TIME_TO_CLOSE_MODAL = 1111500; //ms
-
-export type TStatus = "unavailable" | "unexistant" | "wrongPass" | "empty" | "";
-
-export type TScreen = "login" | "cadastro" | "created" | "logged";
-
-export interface LoginContainerProps {
-  ref: RefObject<HTMLDialogElement | null>;
-}
+import { Response, TStatus } from "@/types/types";
+import api from "@/utils/api";
+import { LoginResult, RegisterResult } from "./LoginResult";
 
 const allowedPattern = /^[A-Za-z0-9!@#$%^&]*$/;
 
-export const LoginContainer = ({ ref }: LoginContainerProps) => {
-  const name = useStore((store) => store.name);
-  const pass = useStore((store) => store.pass);
-  const setName = useStore((store) => store.setName);
-  const setPass = useStore((store) => store.setPass);
-  const setLoadingDB = useStore((store) => store.setLoadingDB);
-  const updateUserFromDB = useStore((store) => store.updateUserFromDB);
+export const LoginContainer = () => {
+  const name = useStore((s) => s.name);
+  const pass = useStore((s) => s.pass);
+  const setName = useStore((s) => s.setName);
+  const setPass = useStore((s) => s.setPass);
+  const updateUserData = useStore((s) => s.updateUserData);
+  const loginState = useStore((s) => s.loginState);
+  const setLoginState = useStore((s) => s.setLoginState);
   const [status, setStatus] = useState<TStatus>("");
-  const [screen, setScreen] = useState<TScreen>("login");
   const [loading, setLoading] = useState(false);
-
-  function onLogin() {
-    ref?.current?.close();
-  }
-
-  useEffect(() => {
-    const cookie = getCryptoCookie();
-    if (!cookie?.name || !cookie?.pass) return;
-    setName(cookie?.name);
-    setPass(cookie?.pass);
-    setScreen("logged");
-    updateUserFromDB();
-    setTimeout(onLogin, TIME_TO_CLOSE_MODAL);
-    //eslint-disable-next-line
-  }, []);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (!allowedPattern.test(e.target.value)) {
@@ -61,28 +36,24 @@ export const LoginContainer = ({ ref }: LoginContainerProps) => {
 
   async function handleCadastrar() {
     setLoading(true);
-    if (!name || !pass) {
-      setStatus("empty");
-      setLoading(false);
-      return;
-    }
     try {
       const encryptedPass = crypto({ name, pass });
-      const data = await getOneUser({ field: "name", value: name });
-      let added = false;
-      if (!data?.length) {
-        added = await addOneUser({ name, pass: encryptedPass });
-      } else {
-        setStatus("unavailable");
+      const data: Response = await api(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/register`,
+        {
+          method: "POST",
+          body: JSON.stringify({ name, pass: encryptedPass }),
+        }
+      );
+
+      setStatus(data.res);
+      if (data.res === "registered") {
+        updateUserData(data.user);
+        setLoginState("registered");
       }
-      if (added) {
-        setCryptoCookie({ name, pass });
-        setScreen("created");
-        setLoadingDB(false);
-        setTimeout(onLogin, TIME_TO_CLOSE_MODAL);
-      }
+      return;
     } catch (error) {
-      console.log(JSON.stringify(error));
+      console.log(JSON.stringify(error, null, 2));
     } finally {
       setLoading(false);
     }
@@ -92,24 +63,22 @@ export const LoginContainer = ({ ref }: LoginContainerProps) => {
     setLoading(true);
     try {
       const encryptedPass = crypto({ name, pass });
-      const data = await getOneUser({ field: "name", value: name });
-      if (!data?.length) {
-        setStatus("unexistant");
-        return;
-      }
+      const data: Response = await api(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/login`,
+        {
+          method: "POST",
+          body: JSON.stringify({ name, pass: encryptedPass }),
+        }
+      );
 
-      if (data[0].pass !== encryptedPass) {
-        setStatus("wrongPass");
-        return;
+      setStatus(data.res);
+      if (data.res === "logged") {
+        updateUserData(data.user);
+        setLoginState("logged");
       }
-
-      updateUserFromDB();
-      setCryptoCookie({ name, pass });
-      setScreen("logged");
-      setTimeout(onLogin, TIME_TO_CLOSE_MODAL);
       return;
     } catch (error) {
-      console.log(JSON.stringify(error));
+      console.log(JSON.stringify(error, null, 2));
     } finally {
       setLoading(false);
     }
@@ -117,15 +86,9 @@ export const LoginContainer = ({ ref }: LoginContainerProps) => {
 
   return (
     <FlexC css={{ gap: 8 }}>
-      {screen === "logged" && (
-        <Text
-          css={{ color: "$green", fontWeight: 700 }}
-        >{`Welcome back ${name}`}</Text>
-      )}
-      {screen === "created" && (
-        <Text css={{ color: "$green" }}>{"Register completed."}</Text>
-      )}
-      {screen === "login" && (
+      {loginState === "logged" && <LoginResult />}
+      {loginState === "registered" && <RegisterResult />}
+      {loginState === "login" && (
         <Login
           name={name}
           pass={pass}
@@ -136,11 +99,11 @@ export const LoginContainer = ({ ref }: LoginContainerProps) => {
         >
           <Button
             variant={"link"}
-            onClick={() => setScreen("cadastro")}
+            onClick={() => setLoginState("register")}
           >{`register`}</Button>
         </Login>
       )}
-      {screen === "cadastro" && (
+      {loginState === "register" && (
         <Cadastro
           name={name}
           pass={pass}
@@ -151,7 +114,7 @@ export const LoginContainer = ({ ref }: LoginContainerProps) => {
         >
           <Button
             variant={"link"}
-            onClick={() => setScreen("login")}
+            onClick={() => setLoginState("login")}
           >{`Have account? Login`}</Button>
         </Cadastro>
       )}

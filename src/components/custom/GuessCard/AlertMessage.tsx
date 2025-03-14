@@ -7,7 +7,6 @@ import { keyframes } from "@/styles/stitches.config";
 import { useMemo } from "react";
 import { RetryIcon } from "@/components/icons/file";
 import * as motion from "motion/react-client";
-import { useStore } from "@/lib/store";
 import { CloseIcon } from "@/components/icons/close";
 
 export type AlertStatus = "ok" | "nok" | "neutral" | "retry";
@@ -50,13 +49,10 @@ export const AlertPoint = ({
 
 export const AlertPointContent = ({
   status,
-  id,
 }: {
   status: AlertStatus;
   id: number;
 }) => {
-  const setIgnoreids = useStore((store) => store.setIgnoreids);
-
   if (status === "ok") {
     return (
       <FlexR css={{ borderRadius: 8, overflow: "hidden" }}>
@@ -92,7 +88,6 @@ export const AlertPointContent = ({
             onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
-              setIgnoreids([id]);
             }}
             css={{
               width: "45px",

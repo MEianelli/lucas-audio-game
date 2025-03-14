@@ -1,9 +1,8 @@
 import { FlexR } from "@/components/containers/flex";
-import { Bars } from "@/components/custom/Bars";
-import { Menu } from "@/components/custom/Menu/Menu";
+import { Menu } from "@/components/custom/Header/Menu/Menu";
 import { Text } from "@/components/text/text";
-import { Div } from "../containers/div";
-import { Hearts } from "./Hearts";
+import { Div } from "@/components/containers/div";
+import { Bars } from "./Bars";
 
 export function Header() {
   return (
@@ -19,9 +18,11 @@ export function Header() {
       <Div>
         <Text
           css={{
+            fontFamily: "Parkinsans",
+            fontWeight: "600",
             whiteSpace: "nowrap",
             textAlign: "center",
-            color: "$green",
+            color: "$purple",
             fontSize: "36px",
             "@s": {
               fontSize: "22px",
@@ -33,7 +34,6 @@ export function Header() {
         </Text>
         <Text size={"s"} weight={"normal"} css={{ textAlign: "center" }}></Text>
       </Div>
-      <Hearts />
       <Bars />
     </FlexR>
   );

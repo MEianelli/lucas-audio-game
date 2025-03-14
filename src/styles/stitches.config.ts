@@ -45,7 +45,8 @@ const colors = {
 
   yellow: "#F7FE9D",
 
-  purple: "#9057DC",
+  purple: "#8857ff",
+  purple2: "#9057DC",
 };
 
 export const {

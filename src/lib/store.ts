@@ -1,136 +1,82 @@
 import { create } from "zustand";
-import { getOneUser, updateProperty } from "./supabase";
-import { crypto } from "@/utils/crypto";
-import { MAX_LIFE_CAP } from "./contants";
-import { ModalOptions } from "@/components/containers/modal";
+import { ModalOptions } from "@/components/custom/Modal/modal";
+import { LoginState, TScreen, User } from "@/types/types";
+import api from "@/utils/api";
 
-export type TStore = {
-  score: number;
-  loadingDB: boolean;
-  setLoadingDB: (loadingDB: boolean) => void;
-  setScore: () => void;
-  lifes: number;
-  modalOption: ModalOptions;
-  setModalOption: (option: ModalOptions) => void;
-  setAddLife: (number?: number) => Promise<void>;
-  setSubLife: (ids?: number[], number?: number) => Promise<void>;
-  hitids: number[];
-  missids: number[];
-  ignoreids: number[];
-  sethitids: (id: number[]) => Promise<void | boolean>;
-  setIgnoreids: (id: number[]) => Promise<void | boolean>;
+type TStoreValues = {
+  id: number | null;
   name: string;
   pass: string;
-  lastheartgain: number;
+  hitids: number[];
+  missids: string[];
+  screen: TScreen;
+  loginState: LoginState;
+  loadingDB: boolean;
+  modalOption: ModalOptions;
+};
+
+type TStoreFuncs = {
   setName: (name: string) => void;
-  setLastheartgain: (lastheartgain: number) => void;
   setPass: (pass: string) => void;
-  updateUserFromDB: () => Promise<void>;
-  lastLifeChange: "added" | "subbed" | "none";
+  setIds: (
+    id: number[] | string[],
+    type: "hitids" | "missids"
+  ) => Promise<void | boolean>;
+  updateUserData: (user: User) => Promise<void>;
+  setScreen: (screen: TScreen) => void;
+  setLoginState: (loginState: LoginState) => void;
+  setLoadingDB: (loadingDB: boolean) => void;
+  setModalOption: (option: ModalOptions) => void;
+  resetStore: () => void;
+};
+
+type TStore = TStoreValues & TStoreFuncs;
+
+const initialState: TStoreValues = {
+  id: null,
+  name: "",
+  pass: "",
+  modalOption: "none",
+  loadingDB: true,
+  hitids: [],
+  missids: [],
+  screen: "login",
+  loginState: "login",
 };
 
 export const useStore = create<TStore>((set, get) => ({
-  name: "",
-  pass: "",
-  modalOption: "login",
-  lastheartgain: 0,
-  loadingDB: true,
+  ...initialState,
   setLoadingDB: (loadingDB) => set({ loadingDB }),
   setName: (name) => set({ name }),
-  setLastheartgain: (lastheartgain) => set({ lastheartgain }),
   setPass: (pass) => set({ pass }),
-  score: 0,
-  lifes: 5,
-  lastLifeChange: "none",
-  hitids: [],
-  missids: [],
-  ignoreids: [],
   setModalOption: (option: ModalOptions) => set({ modalOption: option }),
-  updateUserFromDB: async () => {
-    const { name } = get();
-    set({ loadingDB: true });
-    const user = await getOneUser({
-      field: "name",
-      value: name,
-    });
-    if (!user?.length) {
-      set({ loadingDB: false });
-      return;
-    }
-    const { lifes, hitids, lastheartgain, missids, ignoreids } = user[0];
+  updateUserData: async (user) => {
+    if (!user?.id) return;
+    const { hitids, missids, name, id } = user;
     set({
-      lifes,
+      id,
+      name,
       hitids,
       missids,
-      ignoreids,
-      lastLifeChange: "none",
       loadingDB: false,
-      lastheartgain,
     });
   },
-  setIgnoreids: async (ids) => {
-    const { ignoreids, name, pass } = get();
-    const newIgnore = [...new Set([...ignoreids, ...ids])];
-    const error = await updateProperty({
-      name,
-      pass: crypto({ name, pass }),
-      updates: {
-        ignoreids: newIgnore,
-      },
-    });
-    if (error) throw Error(error);
-    set({ ignoreids: newIgnore });
+  setIds: async (ids, type) => {
+    const id = get().id;
+    const addArr = get()[type];
+    const newhitids = [...new Set([...addArr, ...ids])];
+    const payload = { [type]: newhitids };
+    try {
+      await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/data/users`, {
+        method: "PUT",
+        body: JSON.stringify({ id, data: payload }),
+      });
+      set(payload);
+    } catch (error: unknown) {
+      console.log("Erro ao atualizar usuario", error);
+    }
   },
-  sethitids: async (ids) => {
-    const { hitids, name, pass } = get();
-    const newhitids = [...new Set([...hitids, ...ids])];
-    const error = await updateProperty({
-      name,
-      pass: crypto({ name, pass }),
-      updates: {
-        hitids: newhitids,
-      },
-    });
-    if (error) throw Error(error);
-    set({ hitids: newhitids });
-  },
-  setScore: () => {
-    const { score } = get();
-    const newScore = score + 1;
-    set({ score: newScore });
-  },
-  setAddLife: async (number = 1) => {
-    const { lifes, name, pass } = get();
-    const newLifes = Math.min(MAX_LIFE_CAP, lifes + number);
-    const heartGainTime = Date.now();
-    const error = await updateProperty({
-      name,
-      pass: crypto({ name, pass }),
-      updates: {
-        lifes: newLifes,
-        lastheartgain: heartGainTime,
-      },
-    });
-    if (error) throw Error(error);
-    set({
-      lifes: newLifes,
-      lastLifeChange: "added",
-      lastheartgain: heartGainTime,
-    });
-  },
-  setSubLife: async (ids, number = 1) => {
-    const { lifes, name, pass, missids } = get();
-    const newMissIds = [...new Set([...missids, ...(ids ?? [])])];
-    const newLifes = Math.max(0, lifes - number);
-    const error = await updateProperty({
-      name,
-      pass: crypto({ name, pass }),
-      updates: {
-        lifes: newLifes,
-        missids: newMissIds,
-      },
-    });
-    if (error) throw Error(error);
-    set({ lifes: newLifes, lastLifeChange: "subbed", missids: newMissIds });
-  },
+  setScreen: (screen: TScreen) => set({ screen }),
+  setLoginState: (loginState) => set({ loginState }),
+  resetStore: () => set(initialState),
 }));

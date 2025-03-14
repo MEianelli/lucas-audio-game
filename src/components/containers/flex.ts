@@ -9,6 +9,12 @@ export const Flex = styled("div", {
         justifyContent: "center",
       },
     },
+    cc: {
+      true: {
+        justifyContent: "center",
+        alignItems: "center",
+      },
+    },
     sb: {
       true: {
         justifyContent: "space-between",

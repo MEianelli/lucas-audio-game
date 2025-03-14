@@ -1,5 +1,5 @@
 import { styled } from "@/styles/stitches.config";
-import { DefaultButtonStyle } from "../buttons/buttons";
+import { DefaultButtonStyle } from "@/components/buttons/buttons";
 
 export const Input = styled("input", {
   outline: "none",

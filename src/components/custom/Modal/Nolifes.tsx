@@ -1,6 +1,6 @@
-import { ButtonG } from "../buttons/buttons";
-import { FlexC } from "../containers/flex";
-import { Text } from "../text/text";
+import { ButtonG } from "../../buttons/buttons";
+import { FlexC } from "../../containers/flex";
+import { Text } from "../../text/text";
 
 export const NoLifes = () => {
   return (
@@ -8,7 +8,7 @@ export const NoLifes = () => {
       <Text
         css={{
           marginBottom: 8,
-          color: "$green",
+          color: "$purple",
           fontSize: "28px",
           fontWeight: 700,
           whiteSpace: "nowrap",

@@ -1,9 +1,9 @@
 import { LoginInput } from "../../inputs/input";
 import { Text } from "../../text/text";
 import { Button } from "../../buttons/buttons";
-import { TStatus } from "./LoginContainer";
 import { Warning } from "./Messages";
 import { JSX } from "react";
+import { TStatus } from "@/types/types";
 
 export interface LoginProps {
   name: string;
@@ -33,7 +33,7 @@ export const Login = ({
           marginBottom: 8,
           fontFamily: "$sans",
           fontWeight: 700,
-          color: "$green",
+          color: "$purple",
           maxWidth: "90%",
         }}
       >{`Login to score points and show up on rank`}</Text>
@@ -43,6 +43,7 @@ export const Login = ({
         placeholder="Name"
         value={name}
         name="name"
+        autoComplete="off"
         onChange={handleChange}
       />
       {status === "unexistant" && <Warning text="No user with that name!" />}
@@ -51,6 +52,7 @@ export const Login = ({
         placeholder="Password"
         value={pass}
         name="pass"
+        autoComplete="off"
         onChange={handleChange}
       />
       {status === "wrongPass" && <Warning text="wrong password!" />}

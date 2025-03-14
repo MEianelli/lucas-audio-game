@@ -1,40 +1,55 @@
-import { RndMovie } from "@/lib/supabase";
-import { getRndArrElements, shuffleArray } from "@/utils/random";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { AnswersButton } from "./AnswersButton";
+import { useStore } from "@/lib/store";
+import { type Card } from "@/types/types";
+import { useAnsState } from "@/lib/hooks";
 
-export function Answers({ card }: { readonly card: RndMovie }) {
+export function Answers({
+  card,
+  isInView,
+}: {
+  readonly card: Card;
+  readonly isInView: boolean;
+}) {
   const [disableAll, setDisableAll] = useState(false);
-  const options = useMemo(() => {
-    const shorts = card?.movie_data.wrongs.map((ans) => {
-      if (ans.length > 30) {
-        return ans.slice(0, 30) + "...";
-      }
-      return ans;
-    });
-    const rndWrongs = getRndArrElements(shorts);
-    rndWrongs.push(card?.movie_data.correct);
-    return shuffleArray(rndWrongs);
-  }, [card]);
+  const setIds = useStore((s) => s.setIds);
+  const { state, clickedIndex } = useAnsState(card.id);
+
+  if (!isInView || !card.options?.length) return null;
 
   function handleClick() {
     setDisableAll(true);
     return;
   }
 
-  if (!options?.length) return null;
+  function handleRight() {
+    setIds([card.id], "hitids");
+    return;
+  }
+
+  function handleWrong(index: number) {
+    setIds([card.id + "," + index], "missids");
+    return;
+  }
 
   return (
     <>
-      {options?.map((option) => (
-        <AnswersButton
-          key={option}
-          correct={card.movie_data.correct}
-          onclick={() => handleClick()}
-          text={option}
-          disabled={disableAll}
-        />
-      ))}
+      {card.options?.map((option, index) => {
+        return (
+          <AnswersButton
+            key={option}
+            correct={card.title}
+            onclick={handleClick}
+            onRight={handleRight}
+            onWrong={() => handleWrong(index)}
+            text={option}
+            disabled={disableAll}
+            state={state}
+            clickedIndex={clickedIndex}
+            index={index}
+          />
+        );
+      })}
     </>
   );
 }

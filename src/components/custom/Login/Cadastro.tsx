@@ -2,8 +2,8 @@ import { LoginInput } from "../../inputs/input";
 import { Text } from "../../text/text";
 import { Button } from "../../buttons/buttons";
 import { Warning } from "./Messages";
-import { TStatus } from "./LoginContainer";
 import { JSX } from "react";
+import { TStatus } from "@/types/types";
 
 export interface CadastroProps {
   name: string;
@@ -34,7 +34,7 @@ export const Cadastro = ({
           fontFamily: "$sans",
           fontWeight: 700,
           maxWidth: "90%",
-          color: "$green",
+          color: "$purple",
         }}
       >{`Register to show on rank and win rewards!`}</Text>
 
@@ -43,6 +43,7 @@ export const Cadastro = ({
         placeholder="Name"
         value={name}
         name="name"
+        autoComplete="off"
         onChange={handleChange}
       />
       {status === "unavailable" && <Warning text="Name already taken!" />}
@@ -51,6 +52,7 @@ export const Cadastro = ({
         placeholder="Senha"
         value={pass}
         name="pass"
+        autoComplete="off"
         onChange={handleChange}
       />
       {status === "empty" && (

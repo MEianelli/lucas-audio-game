@@ -13,15 +13,15 @@ export const decrypt = (data: string) => {
   return CryptoJS.enc.Base64.parse(data).toString(CryptoJS.enc.Utf8);
 };
 
-export const encryptData = (text: string) => {
+export const encryptData = (data: Record<string, string>) => {
   return CryptoJS.AES.encrypt(
-    JSON.stringify(text),
-    "K8kuFzU1BT72SHZfl9VUNA=="
+    JSON.stringify(data),
+    process.env.ENCRYPT_KEY as string
   ).toString();
 };
 
 export const decryptData = (text: unknown) => {
   if (!text || typeof text !== "string") return {};
-  const bytes = CryptoJS.AES.decrypt(text, "K8kuFzU1BT72SHZfl9VUNA==");
+  const bytes = CryptoJS.AES.decrypt(text, process.env.ENCRYPT_KEY as string);
   return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 };
