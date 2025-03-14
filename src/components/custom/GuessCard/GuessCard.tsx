@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ButtonClean } from "../../buttons/buttons";
 import { ImageCss } from "../../image/Image";
 import useSound from "use-sound";
-import { storageBaseUrl } from "@/lib/supabase";
+import { storageBaseUrl } from "@/lib/contants";
 import { PlayButton } from "./PlayButton";
 import { OverLayOpacity } from "./ProgressBar";
 import { type Card } from "@/types/types";

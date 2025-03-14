@@ -45,7 +45,6 @@ const AddMovie = () => {
     >
   ) {
     e.preventDefault();
-    console.log("e :", e.target.value);
     setData((data) => ({ ...data, [e.target.name]: e.target.value }));
   }
 
