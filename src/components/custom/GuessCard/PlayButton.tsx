@@ -1,21 +1,12 @@
-import { TDifficulty } from "@/types/types";
 import { Div } from "@/components/containers/div";
 import { PlayIcon } from "@/components/icons/play";
 
-export const difficultyToColor: Record<TDifficulty, string> = {
-  0: "$purple",
-  1: "$purple",
-  2: "$purple",
-  3: "$purple2",
-  4: "$pink",
-};
-
 export function PlayButton({
   isPlaying,
-  difficulty,
+  color = "$purple",
 }: {
-  readonly isPlaying: boolean;
-  readonly difficulty: TDifficulty;
+  isPlaying: boolean;
+  color: string;
 }) {
   if (isPlaying) return null;
   return (
@@ -28,8 +19,8 @@ export function PlayButton({
         width: "80px",
         height: "64px",
         backgroundColor: "$darkgrey",
-        color: difficultyToColor[difficulty],
-        border: `5px solid $purple`,
+        color,
+        border: `5px solid ${color}`,
         borderRadius: "14px",
         display: "flex",
         alignItems: "center",
@@ -38,7 +29,7 @@ export function PlayButton({
           translate: "2px",
         },
         "& svg path": {
-          stroke: difficultyToColor[difficulty],
+          stroke: color,
         },
       }}
     >

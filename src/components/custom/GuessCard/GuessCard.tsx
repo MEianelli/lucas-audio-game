@@ -1,38 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ButtonClean } from "../../buttons/buttons";
 import { ImageCss } from "../../image/Image";
 import useSound from "use-sound";
-import { useStore } from "@/lib/store";
 import { storageBaseUrl } from "@/lib/supabase";
-import { difficultyToColor, PlayButton } from "./PlayButton";
-import { AlertPoint, AlertStatus } from "./AlertMessage";
+import { PlayButton } from "./PlayButton";
 import { OverLayOpacity } from "./ProgressBar";
-import { RndMovie } from "@/types/types";
+import { type Card } from "@/types/types";
+import { colorPicker, useAnsState } from "@/lib/hooks";
 
 export const GuessCard = ({
   card,
   isInView,
 }: {
-  card: RndMovie;
+  card: Card;
   isInView: boolean;
 }) => {
-  const soundUrl = `${storageBaseUrl}/${card?.audio_data?.src}`;
-  const [alert, setAlert] = useState<AlertStatus>("neutral");
-  const missids = useStore((store) => store.missids);
-  const ignoreids = useStore((store) => store.ignoreids);
-  const hitids = useStore((store) => store.hitids);
-  const setModalOption = useStore((store) => store.setModalOption);
-  const lifes = useStore((store) => store.lifes);
+  const { state } = useAnsState(card.id);
+  const color = colorPicker(state, true, true);
 
-  useEffect(() => {
-    if (
-      missids?.includes(card?.audio_data.id) ||
-      ignoreids?.includes(card?.audio_data.id)
-    ) {
-      setAlert("retry");
-    }
-    //eslint-disable-next-line
-  }, [hitids, missids, ignoreids]);
+  const soundUrl = `${storageBaseUrl}/${card.audio_src}`;
 
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -43,10 +29,6 @@ export const GuessCard = ({
   });
 
   const handleToggle = () => {
-    if (lifes <= 0) {
-      setModalOption("nolifes");
-      return;
-    }
     if (isPlaying) {
       stop();
     } else {
@@ -64,7 +46,7 @@ export const GuessCard = ({
         width: "100%",
         height: !isInView ? "80%" : "100%",
         aspectRatio: 28 / 25,
-        border: `6px solid ${difficultyToColor[card?.audio_data.difficulty]}`,
+        border: `6px solid ${color}`,
         padding: "0px",
         boxSizing: "border-box",
         transition: "height 0.5s ease",
@@ -72,8 +54,8 @@ export const GuessCard = ({
     >
       {isPlaying && <OverLayOpacity duration={duration} />}
       <ImageCss
-        src={`${storageBaseUrl}/${card?.image_data.src}`}
-        alt={card?.image_data.created_at ?? ""}
+        src={`${storageBaseUrl}/${card.image_src}`}
+        alt={card.image_src ?? ""}
         width={200}
         height={200}
         css={{
@@ -85,13 +67,8 @@ export const GuessCard = ({
         }}
         priority
       />
-      {alert === "neutral" && (
-        <PlayButton
-          isPlaying={isPlaying}
-          difficulty={card?.audio_data.difficulty}
-        />
-      )}
-      <AlertPoint status={alert} id={card?.audio_data.id} />
+      <PlayButton isPlaying={isPlaying} color={color} />
+      {/* <AlertPoint status={alert} id={card.id} /> */}
     </ButtonClean>
   );
 };

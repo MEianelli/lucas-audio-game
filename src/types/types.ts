@@ -1,4 +1,4 @@
-export type Tables = "audios" | "images" | "movies" | "users" | "guesses";
+export type Tables = "media" | "users" | "cards";
 
 export type TBuckets = "audio" | "images";
 
@@ -29,48 +29,12 @@ export interface ResponseData {
 
 export type Response = ResponseError | ResponseData;
 
-export type TGuess = {
-  audio_src: string | null;
-  correct_answers: string | null;
-  image_src: string | null;
-  difficulty: TDifficulty;
-} & Base;
-
-export type TMoviesDTO = {
-  correct: string;
-  wrongs: string[];
-  tags: string[];
-};
-
-export type TMovies = {
-  difficulty: number;
-} & TMoviesDTO &
-  Base;
-
-export type TAudiosDTO = {
-  movie_id: number;
-  src: string;
-};
-
-export type TAudios = { difficulty: number } & Base & TAudiosDTO;
-
-export type TImagesDTO = {
-  movie_id: number;
-  src: string;
-};
-
-export type TImages = Base & TImagesDTO;
-
 export type User = {
   id: number;
   name: string;
   pass: string;
-  hitids?: number[];
-  missids?: number[];
-  ignoreids?: number[];
-  lifes?: number;
-  score?: number;
-  lastheartgain?: number;
+  hitids: number[];
+  missids: string[];
 };
 
 export type Base = {
@@ -78,33 +42,25 @@ export type Base = {
   created_at: string;
 };
 
-export interface RndMovie {
-  movie_id: number;
-  movie_data: MovieData;
-  audio_data: AudioData;
-  image_data: ImageData;
-}
-
-export interface MovieData {
-  id: number;
+export type Categories = "movie" | "music";
+export interface Media extends Base {
+  title: string;
   tags: string[];
   wrongs: string[];
-  correct: string;
-  created_at: string;
-  difficulty: number;
+  categorie: Categories;
 }
 
-export interface AudioData {
-  id: number;
-  src: string;
-  movie_id: number;
-  created_at: string;
-  difficulty: TDifficulty;
+export interface Card extends Base {
+  media_id: number;
+  title: string;
+  audio_src: string;
+  image_src: string;
+  options: string[];
 }
 
-export interface ImageData {
-  id: number;
-  src: string;
-  movie_id: number;
-  created_at: string;
+export interface CardDTO {
+  media_id: number;
+  audio_src: string;
+  image_src: string;
+  options: string[];
 }

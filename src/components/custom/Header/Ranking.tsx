@@ -1,52 +1,41 @@
 import { useEffect, useMemo, useState } from "react";
 import { FlexC, FlexR } from "@/components/containers/flex";
 import { Text } from "@/components/text/text";
-import { getAllUsers } from "@/lib/supabase";
 import { Span } from "@/components/containers/div";
 import { useStore } from "@/lib/store";
 import { ButtonClean, ButtonG } from "@/components/buttons/buttons";
 import { User } from "@/types/types";
 import LoadingSkeleton from "../Misc/LoadingBars";
+import api from "@/utils/api";
+import { calculateWinRates, sortByWinRate } from "@/lib/helpers/ranking";
 
 type RankUser = {
-  position: number;
   name: string;
-  score: number;
-  width: number;
+  winRate: string;
 };
 
 export const Ranking = () => {
-  const name = useStore((store) => store.name);
+  const name = useStore((s) => s.name);
+  console.log("name :", name);
   const [users, setUsers] = useState<User[] | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getUsers() {
-      const data = await getAllUsers();
-      setUsers(data);
+      const data = await api("http://localhost:3000/api/data/users", {
+        method: "GET",
+      });
+      setUsers(data as User[]);
+
       setLoading(false);
     }
     getUsers();
   }, []);
 
-  const { ranks, user } = useMemo(() => {
-    const sorted = users
-      ?.map(({ name, hitids }) => ({ name, score: hitids?.length ?? 0 }))
-      .sort((a, b) => b.score - a.score);
-    const maxScore = sorted?.[0].score ?? 1;
-    const ranks = sorted?.map((rank, index) => {
-      return {
-        ...rank,
-        position: index + 1,
-        width: rank.score / maxScore,
-      };
-    });
-    const user = ranks?.find(
-      ({ name: userName }) => userName === name
-    ) as RankUser;
-    return { ranks, user };
-    //eslint-disable-next-line
-  }, [users]);
+  const ranks = useMemo(
+    () => calculateWinRates(users).sort(sortByWinRate),
+    [users]
+  );
 
   return (
     <FlexC css={{ gap: 8 }}>
@@ -67,10 +56,9 @@ export const Ranking = () => {
       </FlexR>
       {!loading && (
         <FlexC css={{ gap: 8, width: "100%" }}>
-          {ranks?.slice(0, 5).map((it) => {
-            return <RankRow key={it.name} user={it} />;
+          {ranks?.slice(0, 5).map((it, index) => {
+            return <RankRow key={it.name} user={it} index={index} />;
           })}
-          <RankRow key={user?.name} user={user} isSolo />
         </FlexC>
       )}
       <FlexR sb>
@@ -93,43 +81,13 @@ export const Ranking = () => {
   );
 };
 
-const RankRow = ({
-  isSolo = false,
-  user,
-}: {
-  isSolo?: boolean;
-  user: RankUser;
-}) => {
+const RankRow = ({ user, index }: { user: RankUser; index: number }) => {
   return (
-    <FlexR
-      css={{
-        justifyContent: "flex-start",
-        alignItems: "center",
-        backgroundColor: "$darkgrey",
-        border: `2px solid ${isSolo ? "$pink" : "$purple"}`,
-        color: "$white",
-        fontWeight: 700,
-        borderRadius: 6,
-        padding: "8px 12px",
-        width: "100%",
-        marginTop: isSolo ? "20px" : "unset",
-        gap: 8,
-        background: `linear-gradient(to right, ${
-          isSolo ? "$pink" : "$purple"
-        } ${user.width * 100}%, transparent ${user.width * 100 + 2}%)`,
-      }}
-    >
-      <Text>{user?.position}</Text>
+    <FlexR css={{ color: "white", fontSize: "36px" }}>
+      <Text>{index + 1 + "."}</Text>
       <Span>{user?.name[0].toUpperCase() + user?.name.slice(1)}</Span>
-      <Span>{isSolo ? "(You)" : ""}</Span>
-      <Span
-        css={{
-          fontSize: 14,
-          color: "$grey",
-        }}
-      >
-        {user?.score + "Points"}
-      </Span>
+      <Span css={{ translate: "0px -10px" }}>●</Span>
+      <Span>{user.winRate + "%"}</Span>
     </FlexR>
   );
 };

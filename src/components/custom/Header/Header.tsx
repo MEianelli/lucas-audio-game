@@ -2,7 +2,6 @@ import { FlexR } from "@/components/containers/flex";
 import { Menu } from "@/components/custom/Header/Menu/Menu";
 import { Text } from "@/components/text/text";
 import { Div } from "@/components/containers/div";
-import { Hearts } from "./Hearts";
 import { Bars } from "./Bars";
 
 export function Header() {
@@ -35,7 +34,6 @@ export function Header() {
         </Text>
         <Text size={"s"} weight={"normal"} css={{ textAlign: "center" }}></Text>
       </Div>
-      <Hearts />
       <Bars />
     </FlexR>
   );

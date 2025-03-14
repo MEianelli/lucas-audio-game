@@ -49,8 +49,8 @@ export type ModalOptions =
 
 export const DialogModal = ({ css, ...props }: DialogModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const modalOption = useStore((store) => store.modalOption);
-  const setModalOption = useStore((store) => store.setModalOption);
+  const modalOption = useStore((s) => s.modalOption);
+  const setModalOption = useStore((s) => s.setModalOption);
 
   const handleClose = () => {
     dialogRef?.current?.close();

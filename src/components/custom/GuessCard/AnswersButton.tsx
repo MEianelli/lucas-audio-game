@@ -1,3 +1,4 @@
+import { colorPicker } from "@/lib/hooks";
 import { keyframes, styled } from "@/styles/stitches.config";
 import { CSS } from "@stitches/react";
 import { useState } from "react";
@@ -9,6 +10,9 @@ export interface AnswersButtonPros
   onRight: () => void;
   onWrong: () => void;
   onclick: () => void;
+  state: "ok" | "nok" | "neutral";
+  clickedIndex?: number;
+  index: number;
   css?: CSS;
 }
 
@@ -19,14 +23,21 @@ export function AnswersButton({
   onclick,
   correct,
   css,
+  state,
+  clickedIndex,
+  index,
   ...rest
 }: AnswersButtonPros) {
   const [animateRight, setAnimateRight] = useState(false);
   const [animateWrong, setAnimateWrong] = useState(false);
 
+  const isRight = text === correct;
+
+  const color = colorPicker(state, isRight, clickedIndex === index);
+
   const handleClick = () => {
     onclick();
-    if (text === correct) {
+    if (isRight) {
       onRight();
       setAnimateRight(true);
       return;
@@ -38,7 +49,7 @@ export function AnswersButton({
 
   return (
     <ButtonAns
-      css={{ width: "85%", ...css }}
+      css={{ width: "85%", color, borderColor: color, ...css }}
       onClick={handleClick}
       animate={animateRight}
       animateWrong={animateWrong}
@@ -71,8 +82,8 @@ const glitch = keyframes({
     textShadow: "2px 0 $purple2, -2px 0 $red",
   },
   "100%": {
-    borderColor: "$purple2",
-    color: "$purple2",
+    borderColor: "$green",
+    color: "$green",
     textShadow: "none",
   },
 });
@@ -96,7 +107,7 @@ const glitchGhost = keyframes({
   },
   "100%": {
     transform: "translate(0, 0)",
-    borderColor: "$purple2",
+    borderColor: "$green",
   },
 });
 
@@ -188,7 +199,7 @@ const ButtonAns = styled("button", {
           zIndex: -1,
         },
         "&::after": {
-          borderColor: "$purple",
+          borderColor: "$green",
           zIndex: -2,
         },
       },

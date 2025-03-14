@@ -12,8 +12,8 @@ const Basebar = styled(Div, {
 });
 
 export function Bars() {
-  const setModalOption = useStore((store) => store.setModalOption);
-  const hitids = useStore((store) => store.hitids);
+  const setModalOption = useStore((s) => s.setModalOption);
+  const hitids = useStore((s) => s.hitids);
 
   return (
     <ButtonClean onClick={() => setModalOption("ranking")}>

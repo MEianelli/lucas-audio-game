@@ -3,10 +3,11 @@ import { LoginContainer } from "./LoginContainer";
 import { Text } from "@/components/text/text";
 import { ButtonG } from "@/components/buttons/buttons";
 import { useStore } from "@/lib/store";
+import { useRouter } from "next/router";
 
 export const LoginPage = () => {
-  const setScreen = useStore((store) => store.setScreen);
-  const loginState = useStore((store) => store.loginState);
+  const loginState = useStore((s) => s.loginState);
+  const router = useRouter();
 
   const enableBtn = loginState === "logged" || loginState === "registered";
   return (
@@ -15,7 +16,7 @@ export const LoginPage = () => {
       <FlexC c css={{ height: "250px" }}>
         <LoginContainer />
       </FlexC>
-      <ButtonG onClick={() => setScreen("content")} disabled={!enableBtn}>
+      <ButtonG onClick={() => router.push("/content")} disabled={!enableBtn}>
         Play
       </ButtonG>
     </FlexC>

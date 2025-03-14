@@ -1,10 +1,9 @@
 import { Container } from "@/components/containers/containers";
 import { FlexC } from "@/components/containers/flex";
 import { DialogModal } from "@/components/custom/Modal/modal";
-import { Content } from "@/components/custom/Content/Content";
 import { COOKIE_NAME } from "@/lib/contants";
 import { useStore } from "@/lib/store";
-import { getOneUser } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
 import { User } from "@/types/types";
 import { parseCookies } from "@/utils/cookie";
 import { decryptData } from "@/utils/crypto";
@@ -19,15 +18,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (!decrypted.name) return { props: {} };
 
-  const user = await getOneUser({
-    name: decrypted.name,
-  });
+  const { data, error } = await supabase
+    .from("users")
+    .select()
+    .eq("name", decrypted.name)
+    .single();
 
-  if (!user?.id) return { props: {} };
+  if (!data?.id || error) return { props: {} };
 
   return {
     props: {
-      user,
+      user: data,
     },
   };
 };
@@ -37,9 +38,8 @@ interface HomeProps {
 }
 
 export default function Home(props: HomeProps) {
-  const updateUserData = useStore((store) => store.updateUserData);
-  const setLoginState = useStore((store) => store.setLoginState);
-  const screen = useStore((store) => store.screen);
+  const updateUserData = useStore((s) => s.updateUserData);
+  const setLoginState = useStore((s) => s.setLoginState);
 
   useEffect(() => {
     if (!props.user?.id) return;
@@ -51,8 +51,7 @@ export default function Home(props: HomeProps) {
   return (
     <Container css={{ padding: "8px", height: "100vh" }}>
       <FlexC css={{ gap: "6px" }}>
-        {screen === "login" && <LoginPage />}
-        {screen === "content" && <Content />}
+        <LoginPage />
         <DialogModal />
       </FlexC>
     </Container>

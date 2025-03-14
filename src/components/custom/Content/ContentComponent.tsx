@@ -1,17 +1,14 @@
-import { Div } from "../../containers/div";
-import { FlexC, FlexR } from "../../containers/flex";
+import { type Card } from "@/types/types";
+import { FlexC } from "../../containers/flex";
 import { GuessCards } from "../GuessCard/GuessCards";
 import { Header } from "../Header/Header";
 
-export const Content = () => {
+export const ContentComponent = ({ cards }: { cards: Card[] }) => {
   return (
     <>
       <Header />
       <FlexC css={{ backgroundColor: "#000" }}>
-        <FlexR sb></FlexR>
-        <Div>
-          <GuessCards />
-        </Div>
+        <GuessCards cards={cards} />
       </FlexC>
     </>
   );

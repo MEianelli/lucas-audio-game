@@ -12,13 +12,13 @@ import { LoginResult, RegisterResult } from "./LoginResult";
 const allowedPattern = /^[A-Za-z0-9!@#$%^&]*$/;
 
 export const LoginContainer = () => {
-  const name = useStore((store) => store.name);
-  const pass = useStore((store) => store.pass);
-  const setName = useStore((store) => store.setName);
-  const setPass = useStore((store) => store.setPass);
-  const updateUserData = useStore((store) => store.updateUserData);
-  const loginState = useStore((store) => store.loginState);
-  const setLoginState = useStore((store) => store.setLoginState);
+  const name = useStore((s) => s.name);
+  const pass = useStore((s) => s.pass);
+  const setName = useStore((s) => s.setName);
+  const setPass = useStore((s) => s.setPass);
+  const updateUserData = useStore((s) => s.updateUserData);
+  const loginState = useStore((s) => s.loginState);
+  const setLoginState = useStore((s) => s.setLoginState);
   const [status, setStatus] = useState<TStatus>("");
   const [loading, setLoading] = useState(false);
 

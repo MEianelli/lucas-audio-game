@@ -12,7 +12,7 @@ const BaseBar = styled(Div, {
 });
 
 export function Menu() {
-  const setModalOption = useStore((store) => store.setModalOption);
+  const setModalOption = useStore((s) => s.setModalOption);
 
   return (
     <ButtonClean

@@ -55,7 +55,7 @@ export const AlertPointContent = ({
   status: AlertStatus;
   id: number;
 }) => {
-  const setIgnoreids = useStore((store) => store.setIgnoreids);
+  const setIgnoreids = useStore((s) => s.setIgnoreids);
 
   if (status === "ok") {
     return (
