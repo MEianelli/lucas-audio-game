@@ -38,10 +38,13 @@ export const LoginContainer = () => {
     setLoading(true);
     try {
       const encryptedPass = crypto({ name, pass });
-      const data: Response = await api("http://localhost:3000/api/register", {
-        method: "POST",
-        body: JSON.stringify({ name, pass: encryptedPass }),
-      });
+      const data: Response = await api(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/register`,
+        {
+          method: "POST",
+          body: JSON.stringify({ name, pass: encryptedPass }),
+        }
+      );
 
       setStatus(data.res);
       if (data.res === "registered") {
@@ -60,10 +63,13 @@ export const LoginContainer = () => {
     setLoading(true);
     try {
       const encryptedPass = crypto({ name, pass });
-      const data: Response = await api("http://localhost:3000/api/login", {
-        method: "POST",
-        body: JSON.stringify({ name, pass: encryptedPass }),
-      });
+      const data: Response = await api(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/login`,
+        {
+          method: "POST",
+          body: JSON.stringify({ name, pass: encryptedPass }),
+        }
+      );
 
       setStatus(data.res);
       if (data.res === "logged") {

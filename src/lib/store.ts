@@ -67,7 +67,7 @@ export const useStore = create<TStore>((set, get) => ({
     const newhitids = [...new Set([...addArr, ...ids])];
     const payload = { [type]: newhitids };
     try {
-      await api("http://localhost:3000/api/data/users", {
+      await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/data/users`, {
         method: "PUT",
         body: JSON.stringify({ id, data: payload }),
       });

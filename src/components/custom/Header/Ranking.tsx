@@ -22,9 +22,12 @@ export const Ranking = () => {
 
   useEffect(() => {
     async function getUsers() {
-      const data = await api("http://localhost:3000/api/data/users", {
-        method: "GET",
-      });
+      const data = await api(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/data/users`,
+        {
+          method: "GET",
+        }
+      );
       setUsers(data as User[]);
 
       setLoading(false);

@@ -67,7 +67,7 @@ export class Cards {
     this.createCards();
     if (!this.cards.length) return;
     try {
-      await api("http://localhost:3000/api/data/cards", {
+      await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/data/cards`, {
         method: "POST",
         body: JSON.stringify({ data: this.cards }),
       });

@@ -8,7 +8,7 @@ export function middleware(request) {
   // Check if the user is trying to access /content
   if (url.pathname === "/content") {
     // If the referer is not the home page, redirect to home
-    if (!referer || !referer.includes("http://localhost:3000/")) {
+    if (!referer || !referer.includes(process.env.NEXT_PUBLIC_APP_URL)) {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }

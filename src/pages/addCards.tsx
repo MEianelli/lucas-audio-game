@@ -12,7 +12,7 @@ import { Cards } from "@/lib/classes/Cards";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const media = await api<Media[]>(
-    "http://localhost:3000/api/data/media?select=id,title,wrongs",
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/data/media?select=id,title,wrongs`,
     {
       method: "GET",
     }

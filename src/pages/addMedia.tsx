@@ -58,7 +58,7 @@ const AddMovie = () => {
         tags: commaStringToArr(data.tags),
         categorie: data.cat,
       };
-      await api("http://localhost:3000/api/data/media", {
+      await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/data/media`, {
         method: "POST",
         body: JSON.stringify({ data: payload }),
       });
