@@ -4,16 +4,11 @@ import { LoginState, TScreen, User } from "@/types/types";
 import api from "@/utils/api";
 
 type TStoreValues = {
-  id: number | null;
-  name: string;
-  pass: string;
-  hitids: number[];
-  missids: string[];
   screen: TScreen;
   loginState: LoginState;
   loadingDB: boolean;
   modalOption: ModalOptions;
-};
+} & User;
 
 type TStoreFuncs = {
   setName: (name: string) => void;
@@ -33,9 +28,11 @@ type TStoreFuncs = {
 type TStore = TStoreValues & TStoreFuncs;
 
 const initialState: TStoreValues = {
-  id: null,
+  id: 0,
   name: "",
   pass: "",
+  currentstreak: 0,
+  maxstreak: 0,
   modalOption: "none",
   loadingDB: true,
   hitids: [],
@@ -52,20 +49,25 @@ export const useStore = create<TStore>((set, get) => ({
   setModalOption: (option: ModalOptions) => set({ modalOption: option }),
   updateUserData: async (user) => {
     if (!user?.id) return;
-    const { hitids, missids, name, id } = user;
     set({
-      id,
-      name,
-      hitids,
-      missids,
+      ...user,
       loadingDB: false,
     });
   },
   setIds: async (ids, type) => {
     const id = get().id;
+    const newCurrentStreak = get().currentstreak + 1;
+    const maxstreak = get().maxstreak;
     const addArr = get()[type];
     const newhitids = [...new Set([...addArr, ...ids])];
-    const payload = { [type]: newhitids };
+    const payload = {
+      [type]: newhitids,
+      ...(type === "hitids" && {
+        currentstreak: newCurrentStreak,
+        ...(newCurrentStreak > maxstreak && { maxstreak: newCurrentStreak }),
+      }),
+      ...(type === "missids" && { currentstreak: 0 }),
+    };
     try {
       await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/data/users`, {
         method: "PUT",

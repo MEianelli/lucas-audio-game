@@ -35,6 +35,8 @@ export type User = {
   pass: string;
   hitids: number[];
   missids: string[];
+  currentstreak: number;
+  maxstreak: number;
 };
 
 export type Base = {
