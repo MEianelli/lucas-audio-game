@@ -62,24 +62,24 @@ export function AnswersButton({
 
 const glitch = keyframes({
   "0%": {
-    borderColor: "$purple2",
-    color: "$purple2",
+    borderColor: "$purple",
+    color: "$purple",
     textShadow: "none",
   },
   "25%": {
     borderColor: "$red",
     color: "$red",
-    textShadow: "2px 0 $red, -2px 0 $purple2",
+    textShadow: "2px 0 $red, -2px 0 $purple",
   },
   "50%": {
     borderColor: "#F6F2F0",
     color: "#F6F2F0",
-    textShadow: "-2px 0 #F6F2F0, 2px 0 $purple2",
+    textShadow: "-2px 0 #F6F2F0, 2px 0 $purple",
   },
   "75%": {
-    borderColor: "$purple2",
-    color: "$purple2",
-    textShadow: "2px 0 $purple2, -2px 0 $red",
+    borderColor: "$purple",
+    color: "$purple",
+    textShadow: "2px 0 $purple, -2px 0 $red",
   },
   "100%": {
     borderColor: "$green",
@@ -91,7 +91,7 @@ const glitch = keyframes({
 const glitchGhost = keyframes({
   "0%": {
     transform: "translate(0, 0)",
-    borderColor: "$purple2",
+    borderColor: "$purple",
   },
   "25%": {
     transform: "translate(-4px, 4px)",
@@ -103,7 +103,7 @@ const glitchGhost = keyframes({
   },
   "75%": {
     transform: "translate(-4px, -4px)",
-    borderColor: "$purple2",
+    borderColor: "$purple",
   },
   "100%": {
     transform: "translate(0, 0)",
@@ -113,8 +113,8 @@ const glitchGhost = keyframes({
 
 const glitchWrong = keyframes({
   "0%": {
-    borderColor: "$purple2",
-    color: "$purple2",
+    borderColor: "$purple",
+    color: "$purple",
     textShadow: "none",
   },
   "25%": {
@@ -125,7 +125,7 @@ const glitchWrong = keyframes({
   "50%": {
     borderColor: "#F6F2F0",
     color: "#F6F2F0",
-    textShadow: "-2px 0 #F6F2F0, 2px 0 $purple2",
+    textShadow: "-2px 0 #F6F2F0, 2px 0 $purple",
   },
   "75%": {
     borderColor: "$purple",
@@ -142,7 +142,7 @@ const glitchWrong = keyframes({
 const glitchGhostWrong = keyframes({
   "0%": {
     transform: "translate(0, 0)",
-    borderColor: "$purple2",
+    borderColor: "$purple",
   },
   "25%": {
     transform: "translate(-4px, 4px)",
@@ -163,7 +163,7 @@ const glitchGhostWrong = keyframes({
 });
 
 const ButtonAns = styled("button", {
-  color: "$purple2",
+  color: "$purple",
   fontWeight: "800",
   fontSize: "18px",
   lineHeight: "18px",
@@ -171,7 +171,7 @@ const ButtonAns = styled("button", {
   backgroundColor: "#00000000",
   borderRadius: "22px",
   padding: "18px",
-  border: "6px solid $purple2",
+  border: "6px solid $purple",
   flex: 1,
   whiteSpace: "nowrap",
   cursor: "pointer",

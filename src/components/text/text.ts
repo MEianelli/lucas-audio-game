@@ -2,54 +2,50 @@ import { styled } from "@/styles/stitches.config";
 
 export const Text = styled("p", {
   margin: 0,
-  fontFamily: "$sans",
+  fontFamily: "$Parkinsans",
+  fontWeight: "600",
+  whiteSpace: "nowrap",
+  textAlign: "center",
+  color: "$white",
+  fontSize: "24px",
 
   variants: {
-    color: {
-      white: {
-        color: "$white",
-      },
-      green: {
-        color: "$purple",
-      },
-      red: {
-        color: "$red",
-      },
-      grey: {
-        color: "$grey",
-      },
-      text: {
-        color: "$text",
+    s: {
+      true: {
+        fontSize: "18px",
       },
     },
-    size: {
-      s: {
-        fontSize: "14px",
-      },
-      m: {
+    ms: {
+      true: {
         fontSize: "20px",
       },
-      b: {
-        fontSize: "27px",
-        "@sm": {
-          fontSize: "24px",
-        },
+    },
+    m: {
+      true: {
+        fontSize: "28px",
       },
     },
-    weight: {
-      normal: {
-        fontWeight: "normal",
-      },
-      700: {
-        fontWeight: 700,
+    g: {
+      true: {
+        fontSize: "36px",
       },
     },
-  },
-
-  defaultVariants: {
-    color: "white",
-    weight: "normal",
-    size: "m",
+    u: {
+      true: {
+        textDecoration: "underline",
+        textUnderlineOffset: "8px",
+      },
+    },
+    w: {
+      true: {
+        fontWeight: "700",
+      },
+    },
+    cg: {
+      true: {
+        color: "$green",
+      },
+    },
   },
 });
 

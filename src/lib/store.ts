@@ -33,10 +33,10 @@ const initialState: TStoreValues = {
   pass: "",
   currentstreak: 0,
   maxstreak: 0,
-  modalOption: "none",
-  loadingDB: true,
   hitids: [],
   missids: [],
+  loadingDB: true,
+  modalOption: "none",
   screen: "login",
   loginState: "login",
 };

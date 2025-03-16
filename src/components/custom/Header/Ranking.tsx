@@ -43,7 +43,6 @@ export const Ranking = () => {
   return (
     <FlexC css={{ gap: 8 }}>
       <Text
-        size={"b"}
         css={{
           marginBottom: 20,
           fontFamily: "$mono",

@@ -15,9 +15,9 @@ export function calculateWinRates(users?: User[] | null) {
   }));
 }
 
-export function calculateWinRate(user: User): number {
-  const total = user.hitids.length + user.missids.length;
+export function calculateWinRate(user: Partial<User>): number {
+  if (!user.hitids?.length) return 0;
+  const total = user.hitids.length + user.missids!.length;
   if (!total) return 0;
-  if (!user.hitids.length) return 0;
   return (user.hitids.length / total) * 100;
 }

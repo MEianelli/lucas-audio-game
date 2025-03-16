@@ -28,11 +28,10 @@ export function Header() {
               fontSize: "22px",
             },
           }}
-          weight={"700"}
         >
           {`MovieGuess`}
         </Text>
-        <Text size={"s"} weight={"normal"} css={{ textAlign: "center" }}></Text>
+        <Text css={{ textAlign: "center" }}></Text>
       </Div>
       <Bars />
     </FlexR>

@@ -16,7 +16,6 @@ export function TextMessage({ text }: { readonly text: string }) {
     <FlexC css={{ gap: 8 }}>
       <Text
         color={"text"}
-        size={"b"}
         css={{ marginBottom: 8, fontFamily: "$sans", fontWeight: 700 }}
       >
         {text}

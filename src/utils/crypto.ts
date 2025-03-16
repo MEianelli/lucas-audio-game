@@ -1,4 +1,5 @@
 import CryptoJS from "crypto-js";
+import { JSONParse } from "./json";
 
 export function crypto(data: Record<string, string>) {
   const json = JSON.stringify(data);
@@ -23,5 +24,5 @@ export const encryptData = (data: Record<string, string>) => {
 export const decryptData = (text: unknown) => {
   if (!text || typeof text !== "string") return {};
   const bytes = CryptoJS.AES.decrypt(text, process.env.ENCRYPT_KEY as string);
-  return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+  return JSONParse(bytes.toString(CryptoJS.enc.Utf8));
 };

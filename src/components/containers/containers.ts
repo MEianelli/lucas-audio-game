@@ -4,7 +4,7 @@ import { FlexR } from "./flex";
 export const Container = styled("div", {
   maxWidth: "$cell",
   marginX: "auto",
-  backgroundColor: "$black",
+  backgroundColor: "$darkPurple",
   height: "100vh",
 });
 

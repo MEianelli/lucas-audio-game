@@ -1,5 +1,4 @@
 import { Container } from "@/components/containers/containers";
-import { FlexC } from "@/components/containers/flex";
 import { DialogModal } from "@/components/custom/Modal/modal";
 import { COOKIE_NAME } from "@/lib/contants";
 import { useStore } from "@/lib/store";
@@ -50,10 +49,8 @@ export default function Home(props: HomeProps) {
 
   return (
     <Container>
-      <FlexC css={{ gap: "6px" }}>
-        <LoginPage />
-        <DialogModal />
-      </FlexC>
+      <LoginPage />
+      <DialogModal />
     </Container>
   );
 }

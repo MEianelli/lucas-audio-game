@@ -1,17 +1,14 @@
 import { useStore } from "@/lib/store";
-import { FlexC } from "../../containers/flex";
 import { crypto } from "@/utils/crypto";
 import { useState } from "react";
 import { Login } from "./Login";
-import { Cadastro } from "./Cadastro";
-import { Button } from "@/components/buttons/buttons";
 import { Response, TStatus } from "@/types/types";
 import api from "@/utils/api";
 import { LoginResult, RegisterResult } from "./LoginResult";
 
 const allowedPattern = /^[A-Za-z0-9!@#$%^&]*$/;
 
-export const LoginContainer = () => {
+export const LoginContent = () => {
   const name = useStore((s) => s.name);
   const pass = useStore((s) => s.pass);
   const setName = useStore((s) => s.setName);
@@ -85,39 +82,20 @@ export const LoginContainer = () => {
   }
 
   return (
-    <FlexC css={{ gap: 8 }}>
+    <>
       {loginState === "logged" && <LoginResult />}
       {loginState === "registered" && <RegisterResult />}
-      {loginState === "login" && (
+      {(loginState === "login" || loginState === "register") && (
         <Login
           name={name}
           pass={pass}
           handleChange={handleChange}
           handleLogin={handleLogin}
-          status={status}
-          loading={loading}
-        >
-          <Button
-            variant={"link"}
-            onClick={() => setLoginState("register")}
-          >{`register`}</Button>
-        </Login>
-      )}
-      {loginState === "register" && (
-        <Cadastro
-          name={name}
-          pass={pass}
-          handleChange={handleChange}
           handleCadastrar={handleCadastrar}
           status={status}
           loading={loading}
-        >
-          <Button
-            variant={"link"}
-            onClick={() => setLoginState("login")}
-          >{`Have account? Login`}</Button>
-        </Cadastro>
+        />
       )}
-    </FlexC>
+    </>
   );
 };

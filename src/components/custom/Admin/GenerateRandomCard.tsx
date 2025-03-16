@@ -13,7 +13,7 @@ export const GenerateRandomCard = () => {
       }}
     >
       <Button variant={"delete"}>Generate</Button>
-      <Text size={"b"}>Gerar card para vizualizacao:</Text>
+      <Text>Gerar card para vizualizacao:</Text>
     </FlexC>
   );
 };

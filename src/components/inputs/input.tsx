@@ -14,11 +14,15 @@ export const Input = styled("input", {
 });
 
 export const LoginInput = styled(Input, {
-  backgroundColor: "$grey",
+  backgroundColor: "transparent",
+  fontFamily: "Parkinsans",
+  border: "4px solid $purple",
   color: "$white",
   fontSize: "24px",
+  borderRadius: "20px",
   "&::placeholder": {
-    color: "#ffffff44",
+    color: "$white",
+    opacity: "0.6",
   },
 });
 

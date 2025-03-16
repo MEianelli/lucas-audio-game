@@ -28,7 +28,6 @@ export const Cadastro = ({
     <>
       <Text
         color={"text"}
-        size={"b"}
         css={{
           marginBottom: 8,
           fontFamily: "$sans",

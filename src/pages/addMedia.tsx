@@ -72,12 +72,7 @@ const AddMovie = () => {
 
   return (
     <FlexC css={{ border: "10px solid purple", padding: "40px", gap: "16px" }}>
-      <Text
-        color={"green"}
-        size={"b"}
-        weight={"700"}
-        css={{ textAlign: "center", marginBottom: "20px" }}
-      >
+      <Text color={"green"} css={{ textAlign: "center", marginBottom: "20px" }}>
         Add media DASHBOARD
       </Text>
       <Center>

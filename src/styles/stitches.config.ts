@@ -22,7 +22,7 @@ const colors = {
   black: "#000",
   lightblack: "#111",
 
-  green: "#43B971",
+  green: "#00FF55",
   green2: "#08B73E",
   darkGreen: "#257D46",
   darkGreen2: "#09520F",
@@ -45,8 +45,8 @@ const colors = {
 
   yellow: "#F7FE9D",
 
-  purple: "#8857ff",
-  purple2: "#9057DC",
+  purple: "#37167F",
+  darkPurple: "#0E0030",
 };
 
 export const {
@@ -138,7 +138,7 @@ export const globalStyles = globalCss({
   "html, body": {
     margin: 0,
     padding: 0,
-    fontFamily: "$sans",
+    fontFamily: "Parkinsans",
     backgroundColor: "$white",
     boxSizing: "border-box",
   },

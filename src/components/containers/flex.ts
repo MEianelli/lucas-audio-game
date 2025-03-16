@@ -26,6 +26,11 @@ export const Flex = styled("div", {
         alignItems: "center",
       },
     },
+    ac: {
+      true: {
+        alignItems: "center",
+      },
+    },
     s: {
       true: {
         justifyContent: "flex-start",
