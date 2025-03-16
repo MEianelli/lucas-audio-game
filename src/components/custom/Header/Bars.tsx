@@ -3,17 +3,15 @@ import { Div } from "@/components/containers/div";
 import { FlexR } from "@/components/containers/flex";
 import { useStore } from "@/lib/store";
 import { styled } from "@/styles/stitches.config";
-import { Text } from "@/components/text/text";
 
 const Basebar = styled(Div, {
-  width: "4px",
+  width: "2px",
   borderRadius: "2px",
-  backgroundColor: "$purple",
+  backgroundColor: "$white",
 });
 
 export function Bars() {
   const setModalOption = useStore((s) => s.setModalOption);
-  const hitids = useStore((s) => s.hitids);
 
   return (
     <ButtonClean onClick={() => setModalOption("ranking")}>
@@ -32,19 +30,10 @@ export function Bars() {
             height: "min-content",
           }}
         >
-          <Basebar css={{ height: "20px" }} />
-          <Basebar css={{ height: "25px" }} />
-          <Basebar css={{ height: "30px" }} />
+          <Basebar css={{ height: "24px" }} />
+          <Basebar css={{ height: "29px" }} />
+          <Basebar css={{ height: "34px" }} />
         </FlexR>
-        <Text
-          css={{
-            color: "$purple",
-            fontSize: "42px",
-            fontWeight: "700",
-          }}
-        >
-          {hitids.length}
-        </Text>
       </FlexR>
     </ButtonClean>
   );

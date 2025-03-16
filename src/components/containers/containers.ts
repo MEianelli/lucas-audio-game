@@ -5,6 +5,7 @@ export const Container = styled("div", {
   maxWidth: "$cell",
   marginX: "auto",
   backgroundColor: "$black",
+  height: "100vh",
 });
 
 export const Center = styled(FlexR, {

@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 const Content = (props: { cards: Card[] }) => {
   return (
-    <Container css={{ padding: "8px", height: "100vh" }}>
+    <Container>
       <FlexC css={{ gap: "6px" }}>
         <ContentComponent cards={props.cards} />
         <DialogModal />

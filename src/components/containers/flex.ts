@@ -20,6 +20,12 @@ export const Flex = styled("div", {
         justifyContent: "space-between",
       },
     },
+    sbc: {
+      true: {
+        justifyContent: "space-between",
+        alignItems: "center",
+      },
+    },
     s: {
       true: {
         justifyContent: "flex-start",

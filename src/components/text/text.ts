@@ -61,3 +61,16 @@ export const TextWarning = styled("p", {
   textTransform: "uppercase",
   fontSize: 12,
 });
+
+export const TitleText = styled("p", {
+  margin: 0,
+  fontFamily: "Parkinsans",
+  fontWeight: "500",
+  whiteSpace: "nowrap",
+  textAlign: "center",
+  color: "$white",
+  fontSize: "36px",
+  // "@s": {
+  //   fontSize: "22px",
+  // },
+});

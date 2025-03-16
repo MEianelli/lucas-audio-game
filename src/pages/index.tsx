@@ -49,7 +49,7 @@ export default function Home(props: HomeProps) {
   }, []);
 
   return (
-    <Container css={{ padding: "8px", height: "100vh" }}>
+    <Container>
       <FlexC css={{ gap: "6px" }}>
         <LoginPage />
         <DialogModal />
