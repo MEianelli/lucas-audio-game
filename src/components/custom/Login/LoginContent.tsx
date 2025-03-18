@@ -32,6 +32,10 @@ export const LoginContent = () => {
   }
 
   async function handleCadastrar() {
+    if (!name || !pass) {
+      setStatus("empty");
+      return;
+    }
     setLoading(true);
     try {
       const encryptedPass = crypto({ name, pass });
@@ -57,6 +61,10 @@ export const LoginContent = () => {
   }
 
   async function handleLogin() {
+    if (!name || !pass) {
+      setStatus("empty");
+      return;
+    }
     setLoading(true);
     try {
       const encryptedPass = crypto({ name, pass });

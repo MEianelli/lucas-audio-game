@@ -1,5 +1,8 @@
+import { calculateFontSize } from "@/lib/helpers/fontsize";
 import { colorPicker } from "@/lib/hooks";
 import { keyframes, styled } from "@/styles/stitches.config";
+import { type CardState } from "@/types/types";
+import { reduceAnsSize } from "@/utils/strings";
 import { CSS } from "@stitches/react";
 import { useState } from "react";
 
@@ -10,7 +13,7 @@ export interface AnswersButtonPros
   onRight: () => void;
   onWrong: () => void;
   onclick: () => void;
-  state: "ok" | "nok" | "neutral";
+  state: CardState;
   clickedIndex?: number;
   index: number;
   css?: CSS;
@@ -34,6 +37,8 @@ export function AnswersButton({
   const isRight = text === correct;
 
   const color = colorPicker(state, isRight, clickedIndex === index);
+  const parsedText = reduceAnsSize(text);
+  const fontSize = calculateFontSize(parsedText.length);
 
   const handleClick = () => {
     onclick();
@@ -49,13 +54,13 @@ export function AnswersButton({
 
   return (
     <ButtonAns
-      css={{ width: "85%", color, borderColor: color, ...css }}
+      css={{ width: "85%", fontSize, color, ...css }}
       onClick={handleClick}
       animate={animateRight}
       animateWrong={animateWrong}
       {...rest}
     >
-      {text}
+      {parsedText}
     </ButtonAns>
   );
 }
@@ -163,15 +168,15 @@ const glitchGhostWrong = keyframes({
 });
 
 const ButtonAns = styled("button", {
-  color: "$purple",
+  color: "$white",
   fontWeight: "800",
-  fontSize: "18px",
+  fontSize: `26px`,
   lineHeight: "18px",
   fontFamily: "Parkinsans",
-  backgroundColor: "#00000000",
-  borderRadius: "22px",
+  backgroundColor: "transparent",
+  borderRadius: "20px",
   padding: "18px",
-  border: "6px solid $purple",
+  border: "4px solid $purple",
   flex: 1,
   whiteSpace: "nowrap",
   cursor: "pointer",

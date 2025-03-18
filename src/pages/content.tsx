@@ -1,6 +1,7 @@
 import { Container } from "@/components/containers/containers";
 import { FlexC } from "@/components/containers/flex";
-import { ContentComponent } from "@/components/custom/Content/ContentComponent";
+import { GuessCards } from "@/components/custom/GuessCard/GuessCards";
+import { Header } from "@/components/custom/Header/Header";
 import { DialogModal } from "@/components/custom/Modal/modal";
 import { supabase } from "@/lib/supabase";
 import { type Card } from "@/types/types";
@@ -25,7 +26,8 @@ const Content = (props: { cards: Card[] }) => {
   return (
     <Container>
       <FlexC css={{ gap: "6px" }}>
-        <ContentComponent cards={props.cards} />
+        <Header />
+        <GuessCards cards={props.cards} />
         <DialogModal />
       </FlexC>
     </Container>

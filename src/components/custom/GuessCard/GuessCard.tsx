@@ -7,6 +7,9 @@ import { PlayButton } from "./PlayButton";
 import { OverLayOpacity } from "./ProgressBar";
 import { type Card } from "@/types/types";
 import { colorPicker, useAnsState } from "@/lib/hooks";
+import { StateIcon } from "./StateIcon";
+import Waveform from "./Waveform";
+import { Div } from "@/components/containers/div";
 
 export const GuessCard = ({
   card,
@@ -41,15 +44,16 @@ export const GuessCard = ({
       onClick={handleToggle}
       css={{
         position: "relative",
-        borderRadius: "30px",
+        borderRadius: "20px",
         overflow: "hidden",
         width: "100%",
         height: !isInView ? "80%" : "100%",
-        aspectRatio: 28 / 25,
-        border: `6px solid ${color}`,
+        aspectRatio: 2,
+        border: `4px solid ${color}`,
         padding: "0px",
         boxSizing: "border-box",
         transition: "height 0.5s ease",
+        userSelect: "none",
       }}
     >
       {isPlaying && <OverLayOpacity duration={duration} />}
@@ -57,18 +61,31 @@ export const GuessCard = ({
         src={`${storageBaseUrl}/${card.image_src}`}
         alt={card.image_src ?? ""}
         width={200}
-        height={200}
+        height={100}
         css={{
-          borderRadius: "20px",
+          borderRadius: "10px",
           width: "100%",
           height: "auto",
-          aspectRatio: 28 / 25,
+          aspectRatio: 2,
           objectFit: "cover",
+          opacity: state !== "neutral" ? "0.5" : "1",
         }}
         priority
       />
-      <PlayButton isPlaying={isPlaying} color={color} />
-      {/* <AlertPoint status={alert} id={card.id} /> */}
+      <Div
+        css={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        {state === "neutral" && (
+          <PlayButton isPlaying={isPlaying} color={color} />
+        )}
+        {isPlaying && <Waveform />}
+        <StateIcon state={state} />
+      </Div>
     </ButtonClean>
   );
 };

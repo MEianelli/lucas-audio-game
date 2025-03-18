@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { useEffect, useRef } from "react";
 import { useStore } from "./store";
+import { type CardState } from "@/types/types";
 
 export const useSkipRenders = (
   callbacks: ((...params: any[]) => unknown)[], // Accepts an array of functions
@@ -23,7 +24,7 @@ export const useSkipRenders = (
 };
 
 export function useAnsState(cardId: number): {
-  state: "ok" | "nok" | "neutral";
+  state: CardState;
   clickedIndex: number | undefined;
 } {
   const hitids = useStore((s) => s.hitids);
@@ -44,13 +45,13 @@ export function useAnsState(cardId: number): {
 }
 
 export function colorPicker(
-  state: "ok" | "nok" | "neutral",
+  state: CardState,
   isRight: boolean,
   isClicked?: boolean
 ) {
   if (state === "ok" && isRight) return "$green";
-  if (state === "ok") return "$purple";
+  if (state === "ok") return "$white";
   if (state === "nok" && isClicked) return "$red";
-  if (state === "nok") return "$purple";
-  return "$purple";
+  if (state === "nok") return "$white";
+  return "$white";
 }

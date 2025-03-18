@@ -1,5 +1,7 @@
 export type Tables = "media" | "users" | "cards";
 
+export type CardState = "ok" | "nok" | "neutral";
+
 export type TBuckets = "audio" | "images";
 
 export type TScreen = "login" | "content" | "";

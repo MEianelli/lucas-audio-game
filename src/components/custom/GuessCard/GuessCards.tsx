@@ -12,7 +12,7 @@ export const GuessCards = ({ cards }: { cards: Card[] }) => {
   const { current, emblaRef } = useEmbla();
 
   return (
-    <>
+    <FlexC>
       <EmblaCarousel emblaRef={emblaRef}>
         {cards?.map((it, index) => {
           const isInView = current === index;
@@ -30,6 +30,6 @@ export const GuessCards = ({ cards }: { cards: Card[] }) => {
           return <Answers card={it} key={it.audio_src} isInView={isInView} />;
         })}
       </FlexC>
-    </>
+    </FlexC>
   );
 };

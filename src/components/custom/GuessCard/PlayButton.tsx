@@ -12,15 +12,11 @@ export function PlayButton({
   return (
     <Div
       css={{
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
         width: "80px",
         height: "64px",
         backgroundColor: "$darkgrey",
         color,
-        border: `5px solid ${color}`,
+        border: `4px solid ${color}`,
         borderRadius: "14px",
         display: "flex",
         alignItems: "center",

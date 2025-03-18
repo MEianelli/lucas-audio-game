@@ -1,38 +1,23 @@
 import { FlexR } from "@/components/containers/flex";
 import { Menu } from "@/components/custom/Header/Menu/Menu";
 import { Text } from "@/components/text/text";
-import { Div } from "@/components/containers/div";
 import { Bars } from "./Bars";
 
 export function Header() {
   return (
-    <FlexR
-      css={{
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "8px 0",
-      }}
-    >
+    <FlexR sbc css={{ padding: "8px" }}>
       <Menu />
+      <Text g>{`MovieGuess`}</Text>
+      <Bars />
+    </FlexR>
+  );
+}
 
-      <Div>
-        <Text
-          css={{
-            fontFamily: "Parkinsans",
-            fontWeight: "600",
-            whiteSpace: "nowrap",
-            textAlign: "center",
-            color: "$purple",
-            fontSize: "36px",
-            "@s": {
-              fontSize: "22px",
-            },
-          }}
-        >
-          {`MovieGuess`}
-        </Text>
-        <Text css={{ textAlign: "center" }}></Text>
-      </Div>
+export function LoginHeader() {
+  return (
+    <FlexR sbc css={{ padding: "8px" }}>
+      <Menu />
+      <Text g>{`MediaGuess`}</Text>
       <Bars />
     </FlexR>
   );

@@ -3,7 +3,7 @@ import { FlexC, FlexR } from "@/components/containers/flex";
 import { ButtonClean } from "@/components/buttons/buttons";
 import { useStore } from "@/lib/store";
 import { useRouter } from "next/router";
-import { LoginHeader } from "@/components/custom/Header/LoginHeader";
+import { LoginHeader } from "@/components/custom/Header/Header";
 import { LoginContent } from "./LoginContent";
 import { Text } from "@/components/text/text";
 
