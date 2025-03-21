@@ -38,7 +38,7 @@ export function Answers({
         return (
           <AnswersButton
             key={option}
-            correct={card.title}
+            correct={card.media.title}
             onclick={handleClick}
             onRight={handleRight}
             onWrong={() => handleWrong(index)}

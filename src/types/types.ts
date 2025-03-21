@@ -39,6 +39,7 @@ export type User = {
   missids: string[];
   currentstreak: number;
   maxstreak: number;
+  winrate: number;
 };
 
 export type Base = {
@@ -56,7 +57,7 @@ export interface Media extends Base {
 
 export interface Card extends Base {
   media_id: number;
-  title: string;
+  media: { title: string };
   audio_src: string;
   image_src: string;
   options: string[];
@@ -67,4 +68,11 @@ export interface CardDTO {
   audio_src: string;
   image_src: string;
   options: string[];
+}
+
+export interface RankData {
+  top5winrate: { name: string; winrate: number }[];
+  top5streak: { name: string; maxstreak: number }[];
+  userWinRatePos: number;
+  userStreakPos: number;
 }

@@ -84,7 +84,7 @@ export const GuessCard = ({
           <PlayButton isPlaying={isPlaying} color={color} />
         )}
         {isPlaying && <Waveform />}
-        <StateIcon state={state} />
+        {!isPlaying && <StateIcon state={state} />}
       </Div>
     </ButtonClean>
   );

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Login } from "./Login";
 import { Response, TStatus } from "@/types/types";
 import api from "@/utils/api";
-import { LoginResult, RegisterResult } from "./LoginResult";
+import { LoginResult } from "./LoginResult";
 
 const allowedPattern = /^[A-Za-z0-9!@#$%^&]*$/;
 
@@ -92,7 +92,7 @@ export const LoginContent = () => {
   return (
     <>
       {loginState === "logged" && <LoginResult />}
-      {loginState === "registered" && <RegisterResult />}
+      {loginState === "registered" && <LoginResult />}
       {(loginState === "login" || loginState === "register") && (
         <Login
           name={name}

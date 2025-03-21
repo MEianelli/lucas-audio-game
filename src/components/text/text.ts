@@ -46,6 +46,11 @@ export const Text = styled("p", {
         color: "$green",
       },
     },
+    cp: {
+      true: {
+        color: "$purple",
+      },
+    },
   },
 });
 

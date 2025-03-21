@@ -1,22 +1,19 @@
 import { ButtonClean } from "@/components/buttons/buttons";
 import { FlexC, FlexR } from "@/components/containers/flex";
 import { Text } from "@/components/text/text";
-import { calculateWinRate } from "@/lib/helpers/ranking";
 import { useStore } from "@/lib/store";
 import { useShallow } from "zustand/shallow";
 
 export const LoginResult = () => {
-  const [name, hitids, missids, maxstreak, setModalOption] = useStore(
+  const [name, winrate, maxstreak, setModalOption, rankData] = useStore(
     useShallow((s) => [
       s.name,
-      s.hitids,
-      s.missids,
+      s.winrate,
       s.maxstreak,
       s.setModalOption,
+      s.rankData,
     ])
   );
-
-  const winRate = calculateWinRate({ hitids, missids }).toFixed(2);
 
   return (
     <FlexC
@@ -30,14 +27,26 @@ export const LoginResult = () => {
     >
       <Text u>{name}</Text>
       <ButtonLikeFlex
-        data={{ text1: `${winRate}%`, text2: "Winrate", pos: "1923" }}
+        data={{
+          text1: `${(winrate / 100).toFixed(2)}%`,
+          text2: "Winrate",
+          pos: rankData?.userWinRatePos,
+        }}
       />
       <FlexR ac css={{ gap: "10px", width: "100%" }}>
         <ButtonLikeFlexSmall
-          data={{ text1: maxstreak, text2: "Streak", pos: "54" }}
+          data={{
+            text1: maxstreak,
+            text2: "Streak",
+            pos: rankData?.userStreakPos,
+          }}
         />
         <ButtonLikeFlexSmall
-          data={{ text1: maxstreak, text2: "This Week", pos: "54" }}
+          data={{
+            text1: maxstreak,
+            text2: "This Week",
+            pos: rankData?.userStreakPos,
+          }}
         />
       </FlexR>
       <ButtonClean onClick={() => setModalOption("ranking")}>
@@ -52,14 +61,14 @@ export const LoginResult = () => {
 interface ButtonTexts {
   text1: number | string;
   text2: string;
-  pos: number | string;
+  pos?: number | string;
 }
 
 function ButtonLikeFlex({ data }: { data: ButtonTexts }) {
   return (
     <FlexR
       ac
-      sb
+      c
       css={{
         gap: "8px",
         border: "4px solid $purple",
@@ -85,7 +94,7 @@ function ButtonLikeFlexSmall({ data }: { data: ButtonTexts }) {
   return (
     <FlexR
       ac
-      sb
+      c
       css={{
         gap: "8px",
         border: "4px solid $purple",

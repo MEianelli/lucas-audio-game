@@ -65,7 +65,7 @@ export const Login = ({
           onClick={handleCadastrar}
           disabled={loading}
         >
-          {loading ? "Processing..." : "Register"}
+          {loading ? "Loading" : "Register"}
         </Button>
         <Button
           variant={"login"}
@@ -73,7 +73,7 @@ export const Login = ({
           onClick={handleLogin}
           disabled={loading}
         >
-          {loading ? "Processing..." : "Login"}
+          {loading ? "Loading" : "Login"}
         </Button>
       </FlexR>
     </FlexC>

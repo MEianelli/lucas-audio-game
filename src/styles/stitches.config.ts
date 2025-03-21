@@ -43,7 +43,7 @@ const colors = {
   lightBlue: "#1A90CA",
   darkBlue: "#1A7DA4",
 
-  yellow: "#F7FE9D",
+  yellow: "#FCFF6C",
 
   purple: "#37167F",
   darkPurple: "#0E0030",

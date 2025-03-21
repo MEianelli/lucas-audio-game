@@ -16,9 +16,9 @@ export function shuffleArray<T>(arr: T[]) {
   return arr;
 }
 
-export function getRndArrElements(arr: string[], amount = 3): string[] {
+export function getRndArrElements<T>(arr: T[], amount = 3): T[] {
   if (!arr?.length) return [];
-  const result: Set<string> = new Set();
+  const result: Set<T> = new Set();
   while (result.size < amount) {
     const rndIndex = Math.floor(Math.random() * arr.length);
     result.add(arr[rndIndex]);

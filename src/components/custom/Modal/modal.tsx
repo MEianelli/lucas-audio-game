@@ -20,10 +20,10 @@ export const Dialog = styled("dialog", {
   padding: "18px",
   borderRadius: "16px",
   width: "600px",
-  backgroundColor: "$darkgrey",
+  backgroundColor: "$darkPurple",
   border: "3px solid $purple",
   outline: "none",
-  marginTop: 12,
+  marginTop: 65,
   transformOrigin: "center",
   animation: `${grow} 0.3s ease-out forwards`,
   "&[open]": {

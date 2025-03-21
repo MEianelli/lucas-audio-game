@@ -1,95 +1,76 @@
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import { FlexC, FlexR } from "@/components/containers/flex";
 import { Text } from "@/components/text/text";
-import { Span } from "@/components/containers/div";
 import { useStore } from "@/lib/store";
-import { ButtonClean, ButtonG } from "@/components/buttons/buttons";
-import { User } from "@/types/types";
-import LoadingSkeleton from "../Misc/LoadingBars";
-import api from "@/utils/api";
-import { calculateWinRates, sortByWinRate } from "@/lib/helpers/ranking";
+import { ButtonClean } from "@/components/buttons/buttons";
+import { useShallow } from "zustand/shallow";
 
 type RankUser = {
   name: string;
-  winRate: string;
+  winrate: number;
 };
 
+const rankTypes = ["This Week", "WinRate", "Streak"];
+
 export const Ranking = () => {
-  const name = useStore((s) => s.name);
-  console.log("name :", name);
-  const [users, setUsers] = useState<User[] | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function getUsers() {
-      const data = await api(
-        `${process.env.NEXT_PUBLIC_APP_URL}/api/data/users`,
-        {
-          method: "GET",
-        }
-      );
-      setUsers(data as User[]);
-
-      setLoading(false);
-    }
-    getUsers();
-  }, []);
-
-  const ranks = useMemo(
-    () => calculateWinRates(users).sort(sortByWinRate),
-    [users]
+  const [name, rankData, winrate] = useStore(
+    useShallow((s) => [s.name, s.rankData, s.winrate])
   );
+  const [rankTypeInd, setRankTypeInd] = useState(0);
+
+  function handleClick(ind: number) {
+    setRankTypeInd(ind);
+  }
 
   return (
-    <FlexC css={{ gap: 8 }}>
-      <Text
-        css={{
-          marginBottom: 20,
-          fontFamily: "$mono",
-          fontWeight: 700,
-          color: "$purple",
-        }}
-      >{`Rankings`}</Text>
-      {loading && <LoadingSkeleton />}
-      <FlexR css={{ gap: 4 }}>
-        <ButtonG>Weekly</ButtonG>
-        <ButtonG notSelected>Alltime</ButtonG>
-        <ButtonG notSelected>Most Impossible</ButtonG>
+    <FlexC css={{ gap: 12, paddingX: 16, paddingTop: 16 }}>
+      <FlexR sb css={{ borderBottom: "4px solid $purple", paddingBottom: 6 }}>
+        {rankTypes.map((rank, i) => (
+          <ButtonClean key={rank} onClick={() => handleClick(i)}>
+            <Text ms cp={i !== rankTypeInd}>
+              {rank}
+            </Text>
+          </ButtonClean>
+        ))}
       </FlexR>
-      {!loading && (
-        <FlexC css={{ gap: 8, width: "100%" }}>
-          {ranks?.slice(0, 5).map((it, index) => {
-            return <RankRow key={it.name} user={it} index={index} />;
-          })}
-        </FlexC>
-      )}
-      <FlexR sb>
-        <ButtonClean>
-          <Text
-            css={{
-              fontSize: 12,
-              color: "white",
-              textDecoration: "underline",
-              textDecorationColor: "$grey",
-              textUnderlineOffset: "3px",
-            }}
-          >
-            Show All Rank and Prizes
-          </Text>
-        </ButtonClean>
-        <Text css={{ fontSize: 12, color: "white" }}>Resets in 78:51:33</Text>
-      </FlexR>
+
+      <FlexC css={{ gap: 8, width: "100%" }}>
+        {rankData?.top5winrate.map((user, index) => {
+          return <RankRow key={user.name} user={user} index={index} />;
+        })}
+      </FlexC>
+
+      <RankRow
+        key={name + "solo"}
+        user={{ name, winrate }}
+        index={rankData?.userWinRatePos || 0}
+        isUser
+      />
     </FlexC>
   );
 };
 
-const RankRow = ({ user, index }: { user: RankUser; index: number }) => {
+const RankRow = ({
+  user,
+  index,
+  isUser,
+}: {
+  user: RankUser;
+  index: number;
+  isUser?: boolean;
+}) => {
   return (
-    <FlexR css={{ color: "white", fontSize: "36px" }}>
-      <Text>{index + 1 + "."}</Text>
-      <Span>{user?.name[0].toUpperCase() + user?.name.slice(1)}</Span>
-      <Span css={{ translate: "0px -10px" }}>●</Span>
-      <Span>{user.winRate + "%"}</Span>
+    <FlexR css={{ gap: 4 }}>
+      <Text ms css={{ color: isUser ? "$green" : "$yellow" }}>
+        {index + 1 + "."}
+      </Text>
+      <Text ms>{user?.name[0]?.toUpperCase() + user?.name?.slice(1)}</Text>
+      <Text cp s>
+        ●
+      </Text>
+      <Text cg ms>
+        {((user?.winrate || 0) / 100).toFixed(2) + "%"}
+      </Text>
     </FlexR>
   );
 };

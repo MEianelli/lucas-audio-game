@@ -5,13 +5,16 @@ import { Header } from "@/components/custom/Header/Header";
 import { DialogModal } from "@/components/custom/Modal/modal";
 import { supabase } from "@/lib/supabase";
 import { type Card } from "@/types/types";
+import { getDailyCards } from "@/utils/admin";
 import { GetServerSideProps } from "next";
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { data, error } = await supabase.rpc("get_random_cards", {
-    num_cards: 10,
-    category_filter: "movie",
-  });
+  const dailyCards = getDailyCards();
+
+  const { data, error } = await supabase
+    .from("cards")
+    .select(`*, media (title)`)
+    .in("id", dailyCards);
   if (error) {
     console.error(error.message);
     return { props: {} };

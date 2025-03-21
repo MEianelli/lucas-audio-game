@@ -46,3 +46,12 @@ const Tests = () => {
 };
 
 export default Tests;
+
+/*
+  const { data, error } = await supabase.rpc("get_random_cards", {
+    num_cards: 10,
+    category_filter: "movie",
+  });
+
+  
+  */

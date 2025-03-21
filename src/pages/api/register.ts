@@ -10,7 +10,6 @@ async function Register(req: NextApiRequest, res: NextApiResponse) {
   const { name, pass }: User = JSONParse(req.body);
 
   if (!name || !pass) {
-    console.log("error: name and pass cant be empty");
     return res.status(200).json({ res: "error" });
   }
 
@@ -30,7 +29,6 @@ async function Register(req: NextApiRequest, res: NextApiResponse) {
       .single();
 
     if (error) {
-      console.log("error :", JSON.stringify(error, null, 2));
       return res.status(200).json({ res: "error" });
     }
 

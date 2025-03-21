@@ -1,13 +1,15 @@
 import { create } from "zustand";
 import { ModalOptions } from "@/components/custom/Modal/modal";
-import { LoginState, TScreen, User } from "@/types/types";
+import { LoginState, RankData, TScreen, User } from "@/types/types";
 import api from "@/utils/api";
+import { CalculateType, calculateWinRate } from "./helpers/ranking";
 
 type TStoreValues = {
   screen: TScreen;
   loginState: LoginState;
   loadingDB: boolean;
   modalOption: ModalOptions;
+  rankData?: RankData;
 } & User;
 
 type TStoreFuncs = {
@@ -18,6 +20,7 @@ type TStoreFuncs = {
     type: "hitids" | "missids"
   ) => Promise<void | boolean>;
   updateUserData: (user: User) => Promise<void>;
+  updateRankData: (rankData: RankData) => void;
   setScreen: (screen: TScreen) => void;
   setLoginState: (loginState: LoginState) => void;
   setLoadingDB: (loadingDB: boolean) => void;
@@ -33,6 +36,7 @@ const initialState: TStoreValues = {
   pass: "",
   currentstreak: 0,
   maxstreak: 0,
+  winrate: 0,
   hitids: [],
   missids: [],
   loadingDB: true,
@@ -47,6 +51,7 @@ export const useStore = create<TStore>((set, get) => ({
   setName: (name) => set({ name }),
   setPass: (pass) => set({ pass }),
   setModalOption: (option: ModalOptions) => set({ modalOption: option }),
+  updateRankData: (rankData) => set({ rankData }),
   updateUserData: async (user) => {
     if (!user?.id) return;
     set({
@@ -60,8 +65,15 @@ export const useStore = create<TStore>((set, get) => ({
     const maxstreak = get().maxstreak;
     const addArr = get()[type];
     const newhitids = [...new Set([...addArr, ...ids])];
+    const opposite = type === "hitids" ? "missids" : "hitids";
+    const oppositeIds = get()[opposite];
+    const winrate = calculateWinRate({
+      [type]: newhitids,
+      [opposite]: oppositeIds,
+    } as CalculateType);
     const payload = {
       [type]: newhitids,
+      winrate,
       ...(type === "hitids" && {
         currentstreak: newCurrentStreak,
         ...(newCurrentStreak > maxstreak && { maxstreak: newCurrentStreak }),
