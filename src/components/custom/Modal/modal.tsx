@@ -7,6 +7,7 @@ import { useStore } from "@/lib/store";
 import { LoginResult, RegisterResult } from "../Login/LoginResult";
 import { Ranking } from "../Misc/Ranking";
 import { LoginContent } from "../Login/LoginContent";
+import { Finished } from "../Misc/Finished";
 
 const grow = keyframes({
   "0%": { transform: "scale(0.1)" },
@@ -16,7 +17,6 @@ const grow = keyframes({
 export const Dialog = styled("dialog", {
   position: "relative",
   padding: "18px",
-  paddingTop: "46px",
   borderRadius: "16px",
   width: "600px",
   backgroundColor: "$darkPurple",
@@ -44,6 +44,7 @@ export type ModalOptions =
   | "menu"
   | "ranking"
   | "login"
+  | "finished"
   | "none";
 
 export const DialogModal = ({ css, ...props }: DialogModalProps) => {
@@ -78,5 +79,6 @@ const ModalContentMapper: Record<ModalOptions, JSX.Element | null> = {
   login: <LoginContent />,
   menu: <MenuContainer />,
   ranking: <Ranking />,
+  finished: <Finished />,
   none: <></>,
 };

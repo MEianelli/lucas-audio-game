@@ -1,16 +1,14 @@
 import { ButtonWhite } from "@/components/buttons/buttons";
 import { useStore } from "@/lib/store";
-import { deleteCookie } from "@/utils/cookie";
 import { useRouter } from "next/navigation";
 
-export const Logout = () => {
+export const GoHome = () => {
   const router = useRouter();
-  const resetStore = useStore((s) => s.resetStore);
+  const setModalOption = useStore((s) => s.setModalOption);
 
   function handleClick() {
-    deleteCookie();
-    resetStore();
+    setModalOption("none");
     router.push("/");
   }
-  return <ButtonWhite onClick={handleClick}>Logout</ButtonWhite>;
+  return <ButtonWhite onClick={handleClick}>Home</ButtonWhite>;
 };

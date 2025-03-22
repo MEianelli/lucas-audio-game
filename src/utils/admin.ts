@@ -16,12 +16,12 @@ export function generateYearlyDates(ids: number[]) {
       const dayS = String(day).padStart(2, "0");
       const monthS = String(month + 1).padStart(2, "0");
       const dateKey = `${year}-${monthS}-${dayS}`;
-      const rnd8Ids = getRndArrElements<number>(ids, 8);
+      const rnd8Ids = getRndArrElements<number>(ids, 10);
       dates[dateKey] = rnd8Ids;
     }
   }
 
-  const def = getRndArrElements<number>(ids, 8);
+  const def = getRndArrElements<number>(ids, 10);
   dates["default"] = def;
 
   return dates;

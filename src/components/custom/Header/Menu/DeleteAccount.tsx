@@ -3,7 +3,7 @@ import { useStore } from "@/lib/store";
 import { deleteCookie } from "@/utils/cookie";
 import { useRouter } from "next/navigation";
 
-export const Logout = () => {
+export const DeleteAccount = () => {
   const router = useRouter();
   const resetStore = useStore((s) => s.resetStore);
 
@@ -12,5 +12,12 @@ export const Logout = () => {
     resetStore();
     router.push("/");
   }
-  return <ButtonWhite onClick={handleClick}>Logout</ButtonWhite>;
+  return (
+    <ButtonWhite
+      css={{ color: "$red", borderColor: "$red", marginTop: "14px" }}
+      onClick={handleClick}
+    >
+      Delete Account
+    </ButtonWhite>
+  );
 };

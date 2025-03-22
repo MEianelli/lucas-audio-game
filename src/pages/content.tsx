@@ -29,7 +29,7 @@ const Content = (props: { cards: Card[] }) => {
   return (
     <Container>
       <FlexC css={{ gap: "6px" }}>
-        <Header />
+        <Header dailyIds={props.cards.map((it) => it.id)} />
         <GuessCards cards={props.cards} />
         <DialogModal />
       </FlexC>

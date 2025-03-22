@@ -9,6 +9,11 @@ export const Flex = styled("div", {
         justifyContent: "center",
       },
     },
+    se: {
+      true: {
+        justifyContent: "space-evenly",
+      },
+    },
     cc: {
       true: {
         justifyContent: "center",

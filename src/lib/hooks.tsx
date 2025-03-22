@@ -1,27 +1,16 @@
-/* eslint-disable */
-import { useEffect, useRef } from "react";
 import { useStore } from "./store";
 import { type CardState } from "@/types/types";
+import { missIdsToids, missIdsToObj } from "./helpers/missIdsParsers";
+import { countElementsInArray } from "@/utils/arrays";
 
-export const useSkipRenders = (
-  callbacks: ((...params: any[]) => unknown)[], // Accepts an array of functions
-  dependencyArray: unknown[] = []
-) => {
-  const firstRender = useRef(0);
-
-  useEffect(() => {
-    if (firstRender.current < 2) {
-      firstRender.current += 1;
-      return;
-    }
-
-    callbacks.forEach((callback) => {
-      if (typeof callback === "function") {
-        callback();
-      }
-    });
-  }, [...dependencyArray]); // Spread dependencyArray to avoid unnecessary re-renders
-};
+export function useDailyRights(dailyIds: number[]) {
+  const hitids = useStore((s) => s.hitids);
+  const missids = useStore((s) => s.missids);
+  const parsedMiss = missIdsToids(missids);
+  const hits = countElementsInArray(hitids, dailyIds);
+  const misses = countElementsInArray(parsedMiss, dailyIds);
+  return { hits, played: hits + misses };
+}
 
 export function useAnsState(cardId: number): {
   state: CardState;
@@ -32,10 +21,7 @@ export function useAnsState(cardId: number): {
 
   if (hitids.includes(cardId)) return { state: "ok", clickedIndex: undefined };
 
-  const parsed = missids.map((miss) => {
-    const [id, index] = miss.split(",").map(Number);
-    return { id, index };
-  });
+  const parsed = missIdsToObj(missids);
 
   const findMiss = parsed.find((miss) => miss.id === cardId);
 

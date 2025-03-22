@@ -27,7 +27,7 @@ async function Login(req: NextApiRequest, res: NextApiResponse) {
   setCookie(COOKIE_NAME, encryptData({ name }), {
     req,
     res,
-    maxAge: 60 * 60 * 24 * 10,
+    maxAge: 60 * 60 * 24 * 10, //10 days
   });
 
   return res.status(200).json({ res: "logged", user: data });

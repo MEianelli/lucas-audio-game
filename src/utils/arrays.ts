@@ -5,3 +5,12 @@ export function commaStringToArr(data: string) {
     .map((tag) => tag.trim().toLowerCase())
     .filter((it) => !!it);
 }
+
+export function countElementsInArray(array1: number[], array2: number[]) {
+  return array1.reduce((count, element) => {
+    if (array2.includes(element)) {
+      return count + 1;
+    }
+    return count;
+  }, 0);
+}

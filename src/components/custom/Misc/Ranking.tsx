@@ -11,7 +11,7 @@ type RankUser = {
   maxstreak?: number;
 };
 
-const rankMenuOptions = ["This Week", "WinRate", "Streak"];
+const rankMenuOptions = ["WinRate", "Streak"];
 
 type RankType = "winrate" | "streak";
 
@@ -20,7 +20,7 @@ export const Ranking = () => {
 
   return (
     <FlexC css={{ gap: 12, flex: 1 }}>
-      <FlexR sb css={{ borderBottom: "4px solid $purple", paddingBottom: 6 }}>
+      <FlexR se css={{ borderBottom: "4px solid $purple", paddingBottom: 6 }}>
         {rankMenuOptions.map((rank, i) => (
           <ButtonClean key={rank} onClick={() => setRankTypeInd(i)}>
             <Text ms cp={i !== rankTypeInd}>
@@ -53,17 +53,17 @@ const RankingList = ({ menuOption }: { menuOption: number }) => {
   return (
     <>
       <TopPlayers
-        topList={rankData?.[menuOption !== 2 ? "top5winrate" : "top5streak"]}
-        type={menuOption !== 2 ? "winrate" : "streak"}
+        topList={rankData?.[menuOption !== 1 ? "top5winrate" : "top5streak"]}
+        type={menuOption !== 1 ? "winrate" : "streak"}
       />
       {name && (
         <RankRow
           user={{ name, winrate, maxstreak }}
           index={
-            rankData?.[menuOption !== 2 ? "userWinRatePos" : "userStreakPos"]
+            rankData?.[menuOption !== 1 ? "userWinRatePos" : "userStreakPos"]
           }
           isUser
-          type={menuOption !== 2 ? "winrate" : "streak"}
+          type={menuOption !== 1 ? "winrate" : "streak"}
         />
       )}
       {!name && (

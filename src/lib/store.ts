@@ -7,7 +7,6 @@ import { CalculateType, calculateWinRate } from "./helpers/ranking";
 type TStoreValues = {
   screen: TScreen;
   loginState: LoginState;
-  loadingDB: boolean;
   modalOption: ModalOptions;
   rankData?: RankData;
 } & User;
@@ -23,7 +22,6 @@ type TStoreFuncs = {
   updateRankData: (rankData: RankData) => void;
   setScreen: (screen: TScreen) => void;
   setLoginState: (loginState: LoginState) => void;
-  setLoadingDB: (loadingDB: boolean) => void;
   setModalOption: (option: ModalOptions) => void;
   resetStore: () => void;
 };
@@ -39,7 +37,6 @@ const initialState: TStoreValues = {
   winrate: 0,
   hitids: [],
   missids: [],
-  loadingDB: true,
   modalOption: "none",
   screen: "login",
   loginState: "login",
@@ -47,7 +44,6 @@ const initialState: TStoreValues = {
 
 export const useStore = create<TStore>((set, get) => ({
   ...initialState,
-  setLoadingDB: (loadingDB) => set({ loadingDB }),
   setName: (name) => set({ name }),
   setPass: (pass) => set({ pass }),
   setModalOption: (option: ModalOptions) => set({ modalOption: option }),
@@ -56,7 +52,6 @@ export const useStore = create<TStore>((set, get) => ({
     if (!user?.id) return;
     set({
       ...user,
-      loadingDB: false,
     });
   },
   setIds: async (ids, type) => {
@@ -80,14 +75,16 @@ export const useStore = create<TStore>((set, get) => ({
       }),
       ...(type === "missids" && { currentstreak: 0 }),
     };
-    try {
-      await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/data/users`, {
-        method: "PUT",
-        body: JSON.stringify({ id, data: payload }),
-      });
-      set(payload);
-    } catch (error: unknown) {
-      console.log("Erro ao atualizar usuario", error);
+    set(payload);
+    if (get().id) {
+      try {
+        await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/data/users`, {
+          method: "PUT",
+          body: JSON.stringify({ id, data: payload }),
+        });
+      } catch (error: unknown) {
+        console.log("Erro ao atualizar usuario", error);
+      }
     }
   },
   setScreen: (screen: TScreen) => set({ screen }),

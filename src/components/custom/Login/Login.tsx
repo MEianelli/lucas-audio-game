@@ -3,6 +3,7 @@ import { Button } from "../../buttons/buttons";
 import { Warning } from "./Messages";
 import { TStatus } from "@/types/types";
 import { FlexC, FlexR } from "@/components/containers/flex";
+import { Text } from "@/components/text/text";
 
 export interface LoginProps {
   name: string;
@@ -29,6 +30,16 @@ export const Login = ({
         gap: "10px",
       }}
     >
+      <Text
+        css={{
+          fontSize: "28px",
+          color: "$purple",
+          fontWeight: 700,
+          marginBottom: "16px",
+        }}
+      >
+        Register / Login
+      </Text>
       <LoginInput
         type="text"
         placeholder="Nickname"

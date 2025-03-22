@@ -70,6 +70,38 @@ export const ButtonClean = styled("button", {
   cursor: "pointer",
 });
 
+export const ButtonWhite = styled("button", {
+  fontFamily: "$Parkinsans",
+  fontWeight: "600",
+  whiteSpace: "nowrap",
+  textAlign: "center",
+  color: "$white",
+  background: "transparent",
+  borderRadius: "14px",
+  fontSize: "24px",
+  border: "3px solid $white",
+  outline: "none",
+  padding: "10px",
+
+  variants: {
+    s: {
+      true: {
+        fontSize: "18px",
+      },
+    },
+    ms: {
+      true: {
+        fontSize: "20px",
+      },
+    },
+    m: {
+      true: {
+        fontSize: "28px",
+      },
+    },
+  },
+});
+
 export const ButtonG = styled("button", {
   color: "$purple",
   fontWeight: "700",

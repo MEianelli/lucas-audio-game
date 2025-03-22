@@ -1,14 +1,15 @@
-import { Div } from "@/components/containers/div";
 import { FlexR } from "@/components/containers/flex";
 import { Menu } from "@/components/custom/Header/Menu/Menu";
 import { Text } from "@/components/text/text";
+import { Bars } from "./Bars";
+import { Counter } from "./Counter";
 
-export function Header() {
+export function Header({ dailyIds }: { dailyIds: number[] }) {
   return (
     <FlexR sbc css={{ padding: "8px" }}>
       <Menu />
       <Text g>{`MovieGuess`}</Text>
-      <Div />
+      <Counter dailyIds={dailyIds} />
     </FlexR>
   );
 }
@@ -18,7 +19,7 @@ export function HomeHeader() {
     <FlexR sbc css={{ padding: "8px" }}>
       <Menu />
       <Text g>{`MediaGuess`}</Text>
-      <Div />
+      <Bars />
     </FlexR>
   );
 }
