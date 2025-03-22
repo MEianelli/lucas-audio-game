@@ -1,24 +1,24 @@
+import { Div } from "@/components/containers/div";
 import { FlexR } from "@/components/containers/flex";
 import { Menu } from "@/components/custom/Header/Menu/Menu";
 import { Text } from "@/components/text/text";
-import { Bars } from "./Bars";
 
 export function Header() {
   return (
     <FlexR sbc css={{ padding: "8px" }}>
       <Menu />
       <Text g>{`MovieGuess`}</Text>
-      <Bars />
+      <Div />
     </FlexR>
   );
 }
 
-export function LoginHeader() {
+export function HomeHeader() {
   return (
     <FlexR sbc css={{ padding: "8px" }}>
       <Menu />
       <Text g>{`MediaGuess`}</Text>
-      <Bars />
+      <Div />
     </FlexR>
   );
 }

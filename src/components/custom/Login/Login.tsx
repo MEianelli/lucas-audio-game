@@ -26,11 +26,6 @@ export const Login = ({
   return (
     <FlexC
       css={{
-        width: "90%",
-        margin: "0 auto",
-        border: "4px solid $purple",
-        borderRadius: "20px",
-        padding: "16px",
         gap: "10px",
       }}
     >

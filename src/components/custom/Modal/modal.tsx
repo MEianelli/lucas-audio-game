@@ -2,13 +2,11 @@ import { keyframes, styled } from "@/styles/stitches.config";
 import { CloseButton } from "../../buttons/closeButton";
 import { CSS } from "@stitches/react";
 import { JSX, useEffect, useRef } from "react";
-
 import { MenuContainer } from "../Header/Menu/MenuContainer";
-
 import { useStore } from "@/lib/store";
-import { NoLifes } from "./Nolifes";
 import { LoginResult, RegisterResult } from "../Login/LoginResult";
-import { Ranking } from "../Header/Ranking";
+import { Ranking } from "../Misc/Ranking";
+import { LoginContent } from "../Login/LoginContent";
 
 const grow = keyframes({
   "0%": { transform: "scale(0.1)" },
@@ -18,6 +16,7 @@ const grow = keyframes({
 export const Dialog = styled("dialog", {
   position: "relative",
   padding: "18px",
+  paddingTop: "46px",
   borderRadius: "16px",
   width: "600px",
   backgroundColor: "$darkPurple",
@@ -44,7 +43,7 @@ export type ModalOptions =
   | "loginResult"
   | "menu"
   | "ranking"
-  | "nolifes"
+  | "login"
   | "none";
 
 export const DialogModal = ({ css, ...props }: DialogModalProps) => {
@@ -53,8 +52,8 @@ export const DialogModal = ({ css, ...props }: DialogModalProps) => {
   const setModalOption = useStore((s) => s.setModalOption);
 
   const handleClose = () => {
-    dialogRef?.current?.close();
     setModalOption("none");
+    dialogRef?.current?.close();
   };
 
   useEffect(() => {
@@ -76,8 +75,8 @@ export const DialogModal = ({ css, ...props }: DialogModalProps) => {
 const ModalContentMapper: Record<ModalOptions, JSX.Element | null> = {
   loginResult: <LoginResult />,
   registerResult: <RegisterResult />,
+  login: <LoginContent />,
   menu: <MenuContainer />,
   ranking: <Ranking />,
-  nolifes: <NoLifes />,
   none: <></>,
 };

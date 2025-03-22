@@ -6,10 +6,6 @@ import { JSONParse } from "@/utils/json";
 async function Rank(req: NextApiRequest, res: NextApiResponse) {
   const { id }: User = JSONParse(req.body);
 
-  if (!id) {
-    return res.status(200).json({ error: "empty id" });
-  }
-
   const winRateRes = await supabase
     .from("users")
     .select("name, winrate")
@@ -28,6 +24,17 @@ async function Rank(req: NextApiRequest, res: NextApiResponse) {
 
   if (streakRes.error) {
     return res.status(200).json({ error: "no user data" });
+  }
+
+  if (!id) {
+    const payload = {
+      top5winrate: winRateRes.data,
+      top5streak: streakRes.data,
+      userWinRatePos: null,
+      userStreakPos: null,
+    };
+
+    res.status(200).json({ data: payload });
   }
 
   const userRankWinRateRes = await supabase.rpc("get_user_winrate_row_index", {

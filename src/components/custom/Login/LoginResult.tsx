@@ -1,18 +1,11 @@
-import { ButtonClean } from "@/components/buttons/buttons";
 import { FlexC, FlexR } from "@/components/containers/flex";
 import { Text } from "@/components/text/text";
 import { useStore } from "@/lib/store";
 import { useShallow } from "zustand/shallow";
 
 export const LoginResult = () => {
-  const [name, winrate, maxstreak, setModalOption, rankData] = useStore(
-    useShallow((s) => [
-      s.name,
-      s.winrate,
-      s.maxstreak,
-      s.setModalOption,
-      s.rankData,
-    ])
+  const [name, winrate, maxstreak, rankData] = useStore(
+    useShallow((s) => [s.name, s.winrate, s.maxstreak, s.rankData])
   );
 
   return (
@@ -49,11 +42,6 @@ export const LoginResult = () => {
           }}
         />
       </FlexR>
-      <ButtonClean onClick={() => setModalOption("ranking")}>
-        <Text s u>
-          {"See Everyone’s Ranks"}
-        </Text>
-      </ButtonClean>
     </FlexC>
   );
 };
