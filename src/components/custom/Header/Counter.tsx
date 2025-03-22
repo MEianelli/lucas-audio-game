@@ -1,6 +1,6 @@
 import { FlexR } from "@/components/containers/flex";
 import { Text } from "@/components/text/text";
-import { useDailyRights } from "@/lib/hooks";
+import { useDailyRights } from "@/lib/hooks/useDailyRights";
 import { useStore } from "@/lib/store";
 import { useEffect } from "react";
 

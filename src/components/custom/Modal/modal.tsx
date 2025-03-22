@@ -80,5 +80,5 @@ const ModalContentMapper: Record<ModalOptions, JSX.Element | null> = {
   menu: <MenuContainer />,
   ranking: <Ranking />,
   finished: <Finished />,
-  none: <></>,
+  none: null,
 };

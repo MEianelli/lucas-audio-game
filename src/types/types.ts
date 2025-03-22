@@ -8,8 +8,6 @@ export type TScreen = "login" | "content" | "";
 
 export type LoginState = "login" | "register" | "logged" | "registered";
 
-export type TDifficulty = 0 | 1 | 2 | 3 | 4;
-
 export type TStatus =
   | "unavailable"
   | "unexistant"
@@ -20,11 +18,11 @@ export type TStatus =
   | "error"
   | "";
 
-export interface ResponseError {
+interface ResponseError {
   res: Exclude<TStatus, "logged" | "registered">;
 }
 
-export interface ResponseData {
+interface ResponseData {
   res: "logged" | "registered";
   user: User;
 }

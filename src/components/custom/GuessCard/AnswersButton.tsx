@@ -1,5 +1,5 @@
 import { calculateFontSize } from "@/lib/helpers/fontsize";
-import { colorPicker } from "@/lib/hooks";
+import { colorPicker } from "@/lib/helpers/colorPicker";
 import { keyframes, styled } from "@/styles/stitches.config";
 import { type CardState } from "@/types/types";
 import { reduceAnsSize } from "@/utils/strings";

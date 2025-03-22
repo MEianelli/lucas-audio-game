@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AnswersButton } from "./AnswersButton";
 import { useStore } from "@/lib/store";
 import { type Card } from "@/types/types";
-import { useAnsState } from "@/lib/hooks";
+import { useAnsState } from "@/lib/hooks/useAnsState";
 
 export function Answers({
   card,

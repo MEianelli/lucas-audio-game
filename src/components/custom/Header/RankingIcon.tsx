@@ -10,7 +10,7 @@ const Basebar = styled(Div, {
   backgroundColor: "$white",
 });
 
-export function Bars() {
+export function RankingIcon() {
   const setModalOption = useStore((s) => s.setModalOption);
 
   return (

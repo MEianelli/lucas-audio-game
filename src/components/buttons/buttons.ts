@@ -101,32 +101,3 @@ export const ButtonWhite = styled("button", {
     },
   },
 });
-
-export const ButtonG = styled("button", {
-  color: "$purple",
-  fontWeight: "700",
-  fontSize: "14px",
-  lineHeight: "16px",
-  backgroundColor: "$darkgrey",
-  borderRadius: "8px",
-  padding: "8px",
-  border: "3px solid $purple",
-  flex: 1,
-  whiteSpace: "nowrap",
-  cursor: "pointer",
-
-  "&:disabled": {
-    borderColor: "$lightGrey",
-    color: "$lightGrey",
-    opacity: "0.5",
-  },
-
-  variants: {
-    notSelected: {
-      true: {
-        color: "$grey",
-        borderColor: "$grey",
-      },
-    },
-  },
-});

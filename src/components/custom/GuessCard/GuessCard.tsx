@@ -6,10 +6,11 @@ import { storageBaseUrl } from "@/lib/contants";
 import { PlayButton } from "./PlayButton";
 import { OverLayOpacity } from "./ProgressBar";
 import { type Card } from "@/types/types";
-import { colorPicker, useAnsState } from "@/lib/hooks";
+import { useAnsState } from "@/lib/hooks/useAnsState";
 import { StateIcon } from "./StateIcon";
 import Waveform from "./Waveform";
 import { Div } from "@/components/containers/div";
+import { colorPicker } from "@/lib/helpers/colorPicker";
 
 export const GuessCard = ({
   card,

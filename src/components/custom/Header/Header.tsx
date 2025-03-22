@@ -1,7 +1,7 @@
 import { FlexR } from "@/components/containers/flex";
-import { Menu } from "@/components/custom/Header/Menu/Menu";
+import { Menu } from "@/components/custom/Header/Menu/MenuIcon";
 import { Text } from "@/components/text/text";
-import { Bars } from "./Bars";
+import { RankingIcon } from "./RankingIcon";
 import { Counter } from "./Counter";
 
 export function Header({ dailyIds }: { dailyIds: number[] }) {
@@ -19,7 +19,7 @@ export function HomeHeader() {
     <FlexR sbc css={{ padding: "8px" }}>
       <Menu />
       <Text g>{`MediaGuess`}</Text>
-      <Bars />
+      <RankingIcon />
     </FlexR>
   );
 }
