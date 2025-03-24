@@ -1,0 +1,86 @@
+
+@keyframes brilhoV01 {
+  0%, 79% {opacity: 0%;}
+  85% {opacity: 100%;}
+  0%, 35% {text-shadow: 0 0 0.3em #00ff5500;}
+  0%, 45%, 100% {text-shadow: 0 0 0.3em #00ff5544;}
+}
+
+@keyframes brilhoV015 {
+  0%, 79% {opacity: 0%;}
+  85% {opacity: 100%;}
+  0%, 35% {text-shadow: 0 0 0.3em #00ff5500;}
+  0%, 45%, 100% {text-shadow: 0 0 0.3em #EC364C44;}
+}
+
+@keyframes shadowV01 {
+0% {text-shadow: 0 0 0 #EC364C;}
+10%, 15% {text-shadow: -1em 0 0 #EC364C;}
+18%, 40% {text-shadow: 1em 0 0 #EC364C;}
+45% {text-shadow: 0 0 0 #00ff55;}
+}
+
+@keyframes shadowV015 {
+  0% {text-shadow: 0 0 0 #00ff55;}
+  10%, 15% {text-shadow: -1em 0 0 #00ff55;}
+  18%, 40% {text-shadow: 1em 0 0 #00ff55;}
+  45% {text-shadow: 0 0 0 #EC364C;}
+  }
+
+@keyframes shadowV02 {
+0%, 10% {text-shadow: 0 0 0 #4e12d1; }
+15%, 25% {text-shadow: -1.5em 0 0 #4e12d1; }
+26%, 48% {text-shadow: 1em 0 0 #4e12d1; }
+53% {text-shadow: 0 0 0 #00ff55; }
+}
+
+@keyframes shadowV025 {
+  0%, 10% {text-shadow: 0 0 0 #4e12d1; }
+  15%, 25% {text-shadow: -1.5em 0 0 #4e12d1; }
+  26%, 48% {text-shadow: 1em 0 0 #4e12d1; }
+  53% {text-shadow: 0 0 0 #EC364C; }
+  }
+
+@keyframes shadowV03 {
+0%, 15% {text-shadow: 1em 0 0 #4e12d1; }
+19%, 32% {text-shadow: -1em 0 0 #00ff55; }
+40% {text-shadow: 0 0 0 #00ff55; }
+}
+
+@keyframes shadowV035 {
+  0%, 15% {text-shadow: 1em 0 0 #4e12d1; }
+  19%, 32% {text-shadow: -1em 0 0 #EC364C; }
+  40% {text-shadow: 0 0 0 #EC364C; }
+  }
+
+@keyframes moveV01 {
+  8%, 16% {transform: translateX(0.15em);}
+  19%, 35% {transform: translateX(-0.15em);}
+  45%, 100% {transform: translateX(0);}
+}
+
+@keyframes moveV02 {
+  10%, 15% {transform: translateX(-0.15em);}
+  25%, 35% {transform: translateX(0.15em);}
+  45%, 100% {transform: translateX(0);}
+}
+
+@keyframes corV01 {
+  30% {color: rgb(255, 255, 255);}
+  33%, 100% {color: #00ff55;}
+}
+
+@keyframes corV015 {
+  30% {color: rgb(255, 255, 255);}
+  33%, 100% {color: #EC364C;}
+}
+
+@keyframes ruidoV01 {
+  0%, 45%, 66%, 100% {
+  -webkit-mask-image: none;
+  mask-image: none; }
+
+  46%, 65% {
+  -webkit-mask-image: url('/svg/texturas/textura6.svg');
+  mask-image: url('/svg/texturas/textura6.svg'); }
+}

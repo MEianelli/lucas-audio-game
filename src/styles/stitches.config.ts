@@ -49,16 +49,7 @@ const colors = {
   darkPurple: "#0E0030",
 };
 
-export const {
-  styled,
-  css,
-  theme,
-  createTheme,
-  globalCss,
-  keyframes,
-  getCssText,
-  config,
-} = createStitches({
+export const { styled, css, theme, createTheme, globalCss, keyframes, getCssText, config } = createStitches({
   theme: {
     colors,
     fonts: {
@@ -96,6 +87,14 @@ export const {
     xl: "(max-width: 1440px)",
   },
   utils: {
+    marginX: (value: string | number) => ({
+      marginLeft: value,
+      marginRight: value,
+    }),
+    marginY: (value: string | number) => ({
+      marginTop: value,
+      marginBottom: value,
+    }),
     paddingX: (value: string | number) => ({
       paddingLeft: value,
       paddingRight: value,

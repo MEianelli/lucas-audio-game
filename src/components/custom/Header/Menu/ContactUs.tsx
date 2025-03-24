@@ -1,5 +1,5 @@
 import { ButtonWhite } from "@/components/buttons/buttons";
-import { Glitch } from "@/components/buttons/GlitchTexts/Version1/glitch";
+import { Text } from "@/components/text/text";
 
 export const ContactUs = () => {
   function handleClick() {
@@ -7,7 +7,7 @@ export const ContactUs = () => {
   }
   return (
     <ButtonWhite onClick={handleClick}>
-      <Glitch title="Contact Us" />
+      <Text>Contact Us</Text>
     </ButtonWhite>
   );
 };

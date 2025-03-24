@@ -4,13 +4,7 @@ import { useStore } from "@/lib/store";
 import { type Card } from "@/types/types";
 import { useAnsState } from "@/lib/hooks/useAnsState";
 
-export function Answers({
-  card,
-  isInView,
-}: {
-  readonly card: Card;
-  readonly isInView: boolean;
-}) {
+export function Answers({ card, isInView }: { readonly card: Card; readonly isInView: boolean }) {
   const [disableAll, setDisableAll] = useState(false);
   const setIds = useStore((s) => s.setIds);
   const { state, clickedIndex } = useAnsState(card.id);

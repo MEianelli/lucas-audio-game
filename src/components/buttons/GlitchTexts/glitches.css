@@ -1,0 +1,65 @@
+
+:root {
+  --base-duration: 1s; /* Define the base duration */
+}
+
+.brilho {
+  animation:
+  brilhoV01 var(--base-duration) forwards;
+}
+
+.brilho-v2 {
+  animation:
+  brilhoV015 var(--base-duration) forwards;
+}
+
+.glitch-cima {
+  clip-path: polygon(0 0, 100% 0, 100% 32%, 0 32%);
+  animation:
+      corV01 var(--base-duration) forwards,
+      moveV01 var(--base-duration) forwards,
+      shadowV03 var(--base-duration) forwards;
+}
+
+.glitch-cima-v2 {
+  clip-path: polygon(0 0, 100% 0, 100% 32%, 0 32%);
+  animation:
+      corV015 var(--base-duration) forwards,
+      moveV015 var(--base-duration) forwards,
+      shadowV035 var(--base-duration) forwards;
+}
+
+.glitch-meio {
+  clip-path: polygon(0 32%, 100% 32%, 100% 65%, 0 65%);
+  animation:
+      corV01 var(--base-duration) forwards calc(var(--base-duration) * 0.9),
+      moveV02 var(--base-duration) forwards calc(var(--base-duration) * 0.5),
+      shadow2 var(--base-duration) forwards;
+}
+
+.glitch-meio-v2 {
+  clip-path: polygon(0 32%, 100% 32%, 100% 65%, 0 65%);
+  animation:
+      corV015 var(--base-duration) forwards calc(var(--base-duration) * 0.9),
+      moveV02 var(--base-duration) forwards calc(var(--base-duration) * 0.5),
+      shadowV025 var(--base-duration) forwards;
+}
+
+.glitch-baixo {
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  animation:
+      corV01 var(--base-duration) forwards calc(var(--base-duration) * 0.6),
+      moveV02 var(--base-duration) forwards,
+      ruidoV01 var(--base-duration) forwards,
+      shadowV01 var(--base-duration) forwards;
+}
+
+.glitch-baixo-v2 {
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  animation:
+      corV015 var(--base-duration) forwards calc(var(--base-duration) * 0.6),
+      moveV025 var(--base-duration) forwards,
+      ruidoV01 var(--base-duration) forwards,
+      shadowV015 var(--base-duration) forwards;
+}
+

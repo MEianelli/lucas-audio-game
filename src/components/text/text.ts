@@ -1,5 +1,7 @@
 import { styled } from "@/styles/stitches.config";
 
+export const P = styled("p");
+
 export const Text = styled("p", {
   margin: 0,
   fontFamily: "$Parkinsans",
