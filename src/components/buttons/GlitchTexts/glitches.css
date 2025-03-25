@@ -18,14 +18,14 @@
   animation:
       corV01 var(--base-duration) forwards,
       moveV01 var(--base-duration) forwards,
-      shadowV03 var(--base-duration) forwards;
+      shadowV03 var(--base-duration) forwards; 
 }
 
 .glitch-cima-v2 {
   clip-path: polygon(0 0, 100% 0, 100% 32%, 0 32%);
   animation:
       corV015 var(--base-duration) forwards,
-      moveV015 var(--base-duration) forwards,
+      moveV01 var(--base-duration) forwards,
       shadowV035 var(--base-duration) forwards;
 }
 
@@ -34,7 +34,7 @@
   animation:
       corV01 var(--base-duration) forwards calc(var(--base-duration) * 0.9),
       moveV02 var(--base-duration) forwards calc(var(--base-duration) * 0.5),
-      shadow2 var(--base-duration) forwards;
+      shadowV02 var(--base-duration) forwards;
 }
 
 .glitch-meio-v2 {
@@ -58,8 +58,25 @@
   clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
   animation:
       corV015 var(--base-duration) forwards calc(var(--base-duration) * 0.6),
-      moveV025 var(--base-duration) forwards,
+      moveV02 var(--base-duration) forwards,
       ruidoV01 var(--base-duration) forwards,
       shadowV015 var(--base-duration) forwards;
+}
+
+
+.glitch-cima-version-1-0 {
+  clip-path:polygon(0 0, 100% 0, 100% 50%, 0 50%);
+  animation:
+  cor-version-1-0 var(--base-duration) forwards,
+  move-version-1-0 var(--base-duration) forwards,
+  shadow-version-1-0 var(--base-duration) forwards;
+}
+
+.glitch-baixo-version-1-0 {
+  clip-path:polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+  animation:
+  cor-version-1-0 var(--base-duration) forwards,
+  move-version-2-0 var(--base-duration) forwards,
+  shadow-version-1-0 var(--base-duration) forwards;
 }
 

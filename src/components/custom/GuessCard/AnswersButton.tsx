@@ -50,7 +50,7 @@ const ButtonAns = styled("button", {
   backgroundColor: "transparent",
   width: "85%",
   borderRadius: "20px",
-  padding: "18px",
+  padding: "16px 18px",
   border: "4px solid $purple",
   flex: 1,
   cursor: "pointer",

@@ -14,10 +14,10 @@
 }
 
 @keyframes shadowV01 {
-0% {text-shadow: 0 0 0 #EC364C;}
-10%, 15% {text-shadow: -1em 0 0 #EC364C;}
-18%, 40% {text-shadow: 1em 0 0 #EC364C;}
-45% {text-shadow: 0 0 0 #00ff55;}
+  0% {text-shadow: 0 0 0 #ff0055;}
+  10%, 15% {text-shadow: -1em 0 0 #ff0055;}
+  18%, 40% {text-shadow: 1em 0 0 #ff0055;}
+  45% {text-shadow: 0 0 0 #00ff55;}
 }
 
 @keyframes shadowV015 {
@@ -84,3 +84,50 @@
   -webkit-mask-image: url('/svg/texturas/textura6.svg');
   mask-image: url('/svg/texturas/textura6.svg'); }
 }
+
+
+@keyframes shadow-version-1-0 {
+
+  0%, 13% { text-shadow:
+      2em 0 0 rgb(255, 0, 17),
+      0 0 0 #4e12d1; }
+    
+  14%, 48% { text-shadow:
+      0 0 0 rgb(255, 0, 17),
+      0 0.3em 0 #4e12d1; } 
+  
+  49%, 58% { text-shadow:
+      -1.5em 0 0 rgb(255, 0, 17),
+      0 0 0 #4e12d1; }
+  
+  59%, 74% { text-shadow:
+      0 -0.2em 0 #4e12d1; }
+  
+  75%, 84% { text-shadow:
+        0 0 0 #4e12d1; }
+  
+  85%, 100% { text-shadow:
+      0 0 0 #4e12d1; }    
+  }
+  
+  @keyframes move-version-1-0 {
+    2%, 48% {transform: translateX(0.2em);}
+    49%, 65% {transform: translateX(-0.4em);}
+    66%, 90% {transform: translateX(-0.2em);}
+    91%, 100% {transform: translateX(0);}
+  }
+  
+  @keyframes move-version-2-0 {
+    2%, 12%, 54%, 64%, 69%, 79% {transform: translateX(0.1em);}
+  13%, 53%, 65%, 68%, 80%, 100% {transform: translateX(0);}
+  }
+  
+  @keyframes cor-version-1-0 {
+    19% {color: rgb(255, 255, 255);}
+    20%, 100% {color: #00ff55;}
+  }
+  
+  @keyframes ruido-version-1-0 {
+    0%, 1%, 26%, 49%, 63%, 100% {mask-image: none;}
+    2%, 25%, 50%, 62% {mask-image: url('/svg/texturas/textura5.svg');}
+  } 
