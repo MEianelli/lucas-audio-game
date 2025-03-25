@@ -5,12 +5,12 @@ import { styled } from "@/styles/stitches.config";
 
 const Tests = () => {
   return (
-    <FlexC css={{ background: "$darkPurple", width: "900px", height: "100vh", margin: "auto" }}>
-      <FlexC ac css={{ width: "90%", gap: 16, border: "1px solid $purple" }}>
-        <Text css={{ marginBottom: "64px" }}>TESTES</Text>
+    <FlexC css={{ background: "$darkPurple", width: "400px", height: "100vh", margin: "auto" }}>
+      <FlexC ac css={{ width: "100%", gap: 16 }}>
+        <Text>TESTES</Text>
         {glitchOptions.map((it) => (
           <ButtonAns key={it}>
-            <GlitchLoader variant={it} title={"The Matrix"} css={{ fontSize: "24px" }} />
+            <GlitchLoader variant={it} title={"The Matrix"} css={{ fontSize: "32px" }} />
           </ButtonAns>
         ))}
       </FlexC>
