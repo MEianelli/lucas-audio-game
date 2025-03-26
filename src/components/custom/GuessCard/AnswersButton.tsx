@@ -1,10 +1,13 @@
 import { calculateFontSize } from "@/lib/helpers/fontsize";
 import { colorPicker } from "@/lib/helpers/colorPicker";
-import { styled } from "@/styles/stitches.config";
 import { type CardState } from "@/types/types";
 import { reduceAnsSize } from "@/utils/strings";
 import { CSS } from "@stitches/react";
 import { GlitchLoader } from "@/components/buttons/GlitchTexts/GlitchLoader";
+import { ButtonAns } from "@/components/buttons/buttonAns";
+import { PowerGlitchBtn } from "@/components/buttons/powerGlitch";
+import { useMemo, useState } from "react";
+import { POWERGLITCH_ANIMATION_DURATION } from "@/lib/contants";
 
 export interface AnswersButtonPros extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
@@ -20,8 +23,12 @@ export interface AnswersButtonPros extends React.ButtonHTMLAttributes<HTMLButton
 
 export function AnswersButton({ text, onRight, onWrong, onclick, correct, css, state, clickedIndex, index, ...rest }: AnswersButtonPros) {
   const isRight = text === correct;
+  const [color, setColor] = useState(colorPicker(state, isRight, clickedIndex === index));
 
-  const color = colorPicker(state, isRight, clickedIndex === index);
+  useMemo(() => {
+    setTimeout(() => setColor(colorPicker(state, isRight, clickedIndex === index)), POWERGLITCH_ANIMATION_DURATION);
+    //eslint-disable-next-line
+  }, [state]);
   const parsedText = reduceAnsSize(text);
   const fontSize = calculateFontSize(parsedText.length);
 
@@ -35,6 +42,8 @@ export function AnswersButton({ text, onRight, onWrong, onclick, correct, css, s
     return;
   };
 
+  return <PowerGlitchBtn title={parsedText} handleClick={handleClick} css={{ fontSize, color, ...css }} />;
+
   return (
     <ButtonAns css={{ fontSize, color, ...css }} onClick={handleClick} {...rest}>
       {isRight ? (
@@ -45,13 +54,3 @@ export function AnswersButton({ text, onRight, onWrong, onclick, correct, css, s
     </ButtonAns>
   );
 }
-
-const ButtonAns = styled("button", {
-  backgroundColor: "transparent",
-  width: "85%",
-  borderRadius: "20px",
-  padding: "16px 18px",
-  border: "4px solid $purple",
-  flex: 1,
-  cursor: "pointer",
-});

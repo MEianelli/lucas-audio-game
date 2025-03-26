@@ -1,9 +1,5 @@
 import { GuessCard } from "./GuessCard";
-import {
-  EmblaCarousel,
-  EmblaCarouselSlide,
-  useEmbla,
-} from "@/components/containers/EmblaCarousel";
+import { EmblaCarousel, EmblaCarouselSlide, useEmbla } from "@/components/containers/EmblaCarousel";
 import { FlexC } from "@/components/containers/flex";
 import { Answers } from "./Answers";
 import { type Card } from "@/types/types";
@@ -23,7 +19,7 @@ export const GuessCards = ({ cards }: { cards: Card[] }) => {
           );
         })}
       </EmblaCarousel>
-      <FlexC css={{ padding: "25px 0px", alignItems: "center", gap: 6 }}>
+      <FlexC css={{ padding: "25px 0px", alignItems: "center", gap: 6, width: "85%", margin: "auto" }}>
         {cards?.map((it, index) => {
           const isInView = current === index;
 
