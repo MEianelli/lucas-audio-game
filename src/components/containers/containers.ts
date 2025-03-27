@@ -6,6 +6,7 @@ export const Container = styled("div", {
   marginX: "auto",
   backgroundColor: "$darkPurple",
   height: "100vh",
+  overflow: "hidden",
 });
 
 export const Center = styled(FlexR, {

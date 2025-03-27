@@ -48,3 +48,9 @@ export const PowerGlitchBtn = (props: PowerGlitchBtnProps) => {
     </Div>
   );
 };
+
+// return (
+//   <ButtonAns2 css={{ width: "100%", "& > div": { width: "100%" }, ...css }} onClick={handleClick} {...rest}>
+//     <span ref={glitch.ref}>{title}</span>
+//   </ButtonAns2>
+// );
