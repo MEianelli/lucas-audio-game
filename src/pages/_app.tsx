@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import "@/styles/fonts.css";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { VFXProvider } from "react-vfx";
 
 function MyApp({ Component, pageProps }: AppProps) {
   globalStyles();
@@ -25,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     };
   }, []);
 
-  return <>{pageLoading ? <div>Loading...</div> : <Component {...pageProps} />}</>;
+  return <VFXProvider>{pageLoading ? <div>Loading...</div> : <Component {...pageProps} />}</VFXProvider>;
 }
 
 export default MyApp;

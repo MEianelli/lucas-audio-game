@@ -7,5 +7,7 @@ export function calculateFontSize(textLength: number) {
   const minFontSize = 18; // Minimum font size in px
   const maxFontSize = 26; // Maximum font size in px
 
-  return mapValues(textLength, minLength, maxLength, maxFontSize, minFontSize, true);
+  const mappedValue = mapValues(textLength, minLength, maxLength, maxFontSize, minFontSize, true);
+
+  return Math.floor(mappedValue);
 }
