@@ -3,6 +3,7 @@ import { ButtonAns2 } from "./buttonAns";
 import { Div } from "../containers/div";
 import { CSS } from "@stitches/react";
 import { POWERGLITCH_ANIMATION_DURATION } from "@/lib/contants";
+import { useRandomSeed } from "@/lib/hooks/useRandomSeed";
 
 interface PowerGlitchBtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
@@ -12,6 +13,7 @@ interface PowerGlitchBtnProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
 
 export const PowerGlitchBtn = (props: PowerGlitchBtnProps) => {
   const { title, css, handleClick, ...rest } = props;
+  const { seed } = useRandomSeed();
   const glitch: GlitchHandle = useGlitch({
     playMode: "click",
     optimizeSeo: true,
@@ -26,19 +28,27 @@ export const PowerGlitchBtn = (props: PowerGlitchBtnProps) => {
       end: 1,
     },
     shake: {
-      velocity: 15,
-      amplitudeX: 0.2,
-      amplitudeY: 0.2,
+      velocity: 15 + seed * 30,
+      amplitudeX: 0.2 + seed,
+      amplitudeY: 0.2 + seed,
     },
     slice: {
-      count: 15,
-      velocity: 20,
-      minHeight: 0.02,
-      maxHeight: 0.15,
+      count: 15 + seed * 30,
+      velocity: 20 + seed * 30,
+      minHeight: 0.02 + seed / 10,
+      maxHeight: 0.15 + seed / 10,
       hueRotate: true,
     },
     pulse: false,
   });
+
+  if (seed < 0.5) {
+    return (
+      <ButtonAns2 css={{ width: "100%", "& > div": { width: "100%" }, ...css }} onClick={handleClick} {...rest}>
+        <span ref={glitch.ref}>{title}</span>
+      </ButtonAns2>
+    );
+  }
 
   return (
     <Div css={{ width: "100%", "& > div": { width: "100%" } }}>
@@ -48,9 +58,3 @@ export const PowerGlitchBtn = (props: PowerGlitchBtnProps) => {
     </Div>
   );
 };
-
-// return (
-//   <ButtonAns2 css={{ width: "100%", "& > div": { width: "100%" }, ...css }} onClick={handleClick} {...rest}>
-//     <span ref={glitch.ref}>{title}</span>
-//   </ButtonAns2>
-// );
