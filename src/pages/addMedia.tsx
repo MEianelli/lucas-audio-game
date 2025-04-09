@@ -39,11 +39,7 @@ const AddMovie = () => {
 
   const disableSave = !(!!data.title && !!data.wrongs && !!data.tags);
 
-  function handleChange(
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     e.preventDefault();
     setData((data) => ({ ...data, [e.target.name]: e.target.value }));
   }
@@ -72,33 +68,22 @@ const AddMovie = () => {
 
   return (
     <FlexC css={{ border: "10px solid purple", padding: "40px", gap: "16px" }}>
-      <Text color={"green"} css={{ textAlign: "center", marginBottom: "20px" }}>
+      <Text cp css={{ textAlign: "center", marginBottom: "20px" }}>
         Add media DASHBOARD
       </Text>
       <Center>
         <label htmlFor="mediaType">Select a Categorie:</label>
-        <select
-          id="mediaType"
-          name="cat"
-          value={data.cat}
-          onChange={handleChange}
-        >
+        <select id="mediaType" name="cat" value={data.cat} onChange={handleChange}>
           <option value="movie">Movie</option>
           <option value="music">Music</option>
         </select>
       </Center>
       <Center>
-        <Text color={"text"}>Respostas certa (nome do filme/musica):</Text>
-        <Input
-          type="text"
-          name="title"
-          value={data.title}
-          onChange={handleChange}
-          css={{ border: "1px solid $red" }}
-        />
+        <Text cp>Respostas certa (nome do filme/musica):</Text>
+        <Input type="text" name="title" value={data.title} onChange={handleChange} css={{ border: "1px solid $red" }} />
       </Center>
       <Center>
-        <Text color={"text"}>Possiveis erradas (separadas for virgula):</Text>
+        <Text cp>Possiveis erradas (separadas for virgula):</Text>
         <Textarea
           name="wrongs"
           value={data.wrongs}
@@ -107,14 +92,8 @@ const AddMovie = () => {
         />
       </Center>
       <Center>
-        <Text color={"text"}>Tags (separadas for virgula):</Text>
-        <Input
-          type="text"
-          name="tags"
-          value={data.tags}
-          onChange={handleChange}
-          css={{ border: "1px solid $purple" }}
-        />
+        <Text cp>Tags (separadas for virgula):</Text>
+        <Input type="text" name="tags" value={data.tags} onChange={handleChange} css={{ border: "1px solid $purple" }} />
       </Center>
       <Center>
         <Button onClick={() => setData(initialData)}>NEW</Button>

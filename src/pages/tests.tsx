@@ -1,6 +1,7 @@
 import { GlitchLoader, glitchOptions } from "@/components/buttons/GlitchTexts/GlitchLoader";
 import { PowerGlitchBtn } from "@/components/buttons/powerGlitch";
 import { FlexC } from "@/components/containers/flex";
+
 import { Text } from "@/components/text/text";
 import { styled } from "@/styles/stitches.config";
 

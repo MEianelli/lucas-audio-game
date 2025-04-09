@@ -22,14 +22,6 @@ export async function uploadFiles<T>(files: FileList, type: T) {
   }
 }
 
-export function sortFiles(arr: string[]) {
-  return arr.sort((a, b) => {
-    const titleA = a.split("_")[1].split(".")[0];
-    const titleB = b.split("_")[1].split(".")[0];
-    return titleA.localeCompare(titleB);
-  });
-}
-
 export const areFilesNamesTheSame = (files: {
   audio: FileList | null;
   images: FileList | null;
@@ -57,11 +49,7 @@ export const areFilesNamesTheSame = (files: {
   return true;
 };
 
-export function createFilesRef(
-  mediaId: number,
-  audioSrc: string[],
-  imagesSrc: string[]
-) {
+export function createFilesRef(mediaId: number, audioSrc: string[], imagesSrc: string[]) {
   const files = [];
   for (let i = 0; i < audioSrc.length; i++) {
     const card = {

@@ -11,8 +11,6 @@ import { StateIcon } from "./StateIcon";
 import Waveform from "./Waveform";
 import { Div } from "@/components/containers/div";
 import { colorPicker } from "@/lib/helpers/colorPicker";
-import { VFXImg } from "react-vfx";
-import { css } from "@/styles/stitches.config";
 
 export const GuessCard = ({ card, isInView }: { card: Card; isInView: boolean }) => {
   const { state } = useAnsState(card.id);
@@ -36,17 +34,6 @@ export const GuessCard = ({ card, isInView }: { card: Card; isInView: boolean })
     }
   };
 
-  const imgAtts = {
-    borderRadius: "10px",
-    width: "100%",
-    height: "auto",
-    aspectRatio: `${200 / 120}`,
-    objectFit: "cover",
-    opacity: state !== "neutral" ? "0.5" : "1",
-  };
-
-  const imgCls = css(imgAtts);
-
   return (
     <ButtonClean
       onClick={handleToggle}
@@ -62,20 +49,17 @@ export const GuessCard = ({ card, isInView }: { card: Card; isInView: boolean })
         boxSizing: "border-box",
         transition: "height 0.5s ease",
         userSelect: "none",
+        zIndex: "10",
       }}>
       {isPlaying && <OverLayOpacity duration={duration} />}
-      {isInView ? (
-        <VFXImg
-          src={`${storageBaseUrl}/${card.image_src}`}
-          alt={card.image_src ?? ""}
-          width={200}
-          height={120}
-          className={imgCls()}
-          shader={"glitch"}
-        />
-      ) : (
-        <ImageCss src={`${storageBaseUrl}/${card.image_src}`} alt={card.image_src ?? ""} width={200} height={120} css={{ ...imgAtts }} />
-      )}
+      <ImageCss
+        src={`${storageBaseUrl}/${card.image_src}`}
+        alt={card.image_src ?? ""}
+        width={200}
+        height={120}
+        css={{ borderRadius: "10px", width: "100%", height: "auto", aspectRatio: `${200 / 120}`, objectFit: "cover" }}
+      />
+
       <Div
         css={{
           position: "absolute",

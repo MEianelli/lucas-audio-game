@@ -22,6 +22,7 @@
     "react-dom": "^19.0.0",
     "react-powerglitch": "^1.1.0",
     "react-vfx": "^0.11.0",
+    "sharp": "^0.33.5",
     "url-loader": "^4.1.1",
     "use-sound": "^4.0.3",
     "zustand": "^5.0.3"

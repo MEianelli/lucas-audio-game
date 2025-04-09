@@ -11,12 +11,9 @@ import api from "@/utils/api";
 import { Cards } from "@/lib/classes/Cards";
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const media = await api<Media[]>(
-    `${process.env.NEXT_PUBLIC_APP_URL}/api/data/media?select=id,title,wrongs`,
-    {
-      method: "GET",
-    }
-  );
+  const media = await api<Media[]>(`${process.env.NEXT_PUBLIC_APP_URL}/api/data/media?select=id,title,wrongs`, {
+    method: "GET",
+  });
 
   if (!media.length) {
     return { props: {} };
@@ -50,10 +47,7 @@ const AddCards = (props: { media?: Media[] }) => {
     setSelectedmediaId(value === "" ? "" : Number(value));
   };
 
-  const handleFileUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>,
-    type: TBuckets
-  ) => {
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>, type: TBuckets) => {
     const files = event?.target?.files;
     if (!files?.length) return;
     setFiles((old) => ({ ...old, [type]: files }));
@@ -62,13 +56,12 @@ const AddCards = (props: { media?: Media[] }) => {
   async function submitData() {
     setSaving(true);
     try {
-      const selectedMedia = props.media?.find(
-        (it) => it.id === selectedmediaId
-      );
+      const selectedMedia = props.media?.find((it) => it.id === selectedmediaId);
       const cards = new Cards(files, selectedMedia!);
 
       cards.checkAll();
       await cards.uploadFiles();
+      cards.checkSrcs();
       await cards.uploadCards();
 
       reset("Novos Cards criados!");
@@ -94,11 +87,7 @@ const AddCards = (props: { media?: Media[] }) => {
       </Text>
       <Center>
         <label htmlFor="media-select">Choose a media:</label>
-        <select
-          id="media-select"
-          value={selectedmediaId}
-          onChange={handleChange}
-        >
+        <select id="media-select" value={selectedmediaId} onChange={handleChange}>
           <option value="">-- Select a media --</option>
           {props?.media?.map((it) => (
             <option key={it.id} value={it.id}>
@@ -108,22 +97,12 @@ const AddCards = (props: { media?: Media[] }) => {
         </select>
       </Center>
       <Center>
-        <Text color={"text"}>Audio (só .mp3 até 5Mb)</Text>
-        <Input
-          type="file"
-          onChange={(e) => handleFileUpload(e, "audio")}
-          ref={audioRef}
-          multiple
-          css={{ width: "200px", color: "#fff" }}
-        />
-        <Span>
-          {files.audio
-            ? `${Object.keys(files?.audio).length} files selected`
-            : "0 files"}
-        </Span>
+        <Text cp>Audio (só .mp3 até 5Mb)</Text>
+        <Input type="file" onChange={(e) => handleFileUpload(e, "audio")} ref={audioRef} multiple css={{ width: "200px", color: "#fff" }} />
+        <Span>{files.audio ? `${Object.keys(files?.audio).length} files selected` : "0 files"}</Span>
       </Center>
       <Center>
-        <Text color={"text"}>Imagens (até 5Mb)</Text>
+        <Text cp>Imagens (até 5Mb)</Text>
         <Input
           type="file"
           onChange={(e) => handleFileUpload(e, "images")}
@@ -131,11 +110,7 @@ const AddCards = (props: { media?: Media[] }) => {
           multiple
           css={{ width: "200px", color: "#fff" }}
         />
-        <Span>
-          {files.images
-            ? `${Object.keys(files?.images).length} files selected`
-            : "0 files"}
-        </Span>
+        <Span>{files.images ? `${Object.keys(files?.images).length} files selected` : "0 files"}</Span>
       </Center>
       <Center>
         <Button onClick={() => reset()}>NEW</Button>

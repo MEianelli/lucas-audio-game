@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import { TBuckets } from "@/types/types";
 import { NextApiRequest, NextApiResponse } from "next";
+import sharp from "sharp";
 
 export const config = {
   api: {
@@ -8,10 +9,7 @@ export const config = {
   },
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { bucket } = req.query as { bucket: TBuckets };
 
   if (!bucket) {
@@ -40,25 +38,36 @@ export default async function handler(
     const uploadResults: string[] = [];
     await Promise.all(
       files.map(async (file) => {
-        const filePath = `${Date.now()}_${file.filename}`;
-        const { data, error } = await supabase.storage
-          .from(bucket) // Replace with your bucket name
-          .upload(filePath, file.data, {
-            contentType: file.contentType,
-            upsert: true,
-          });
-
-        if (error) {
-          throw error;
+        if (bucket === "audio") {
+          const filePath = `${Date.now()}_${file.filename}`;
+          const { data, error } = await supabase.storage
+            .from(bucket) // Replace with your bucket name
+            .upload(filePath, file.data, {
+              contentType: file.contentType,
+              upsert: true,
+            });
+          if (error) throw error;
+          uploadResults.push(data.fullPath);
+        } else {
+          // Skip non-image files (optional)
+          if (!file.contentType.startsWith("image/")) {
+            return { filePath: null, message: `Skipped non-image file: ${file.filename}` };
+          }
+          const croppedImage = await sharp(file.data).resize(200, 100, { fit: "cover" }).toBuffer();
+          const filePath = `${Date.now()}_${file.filename}`;
+          const { data, error } = await supabase.storage
+            .from(bucket) // Replace with your bucket name
+            .upload(filePath, croppedImage, {
+              contentType: file.contentType,
+              upsert: true,
+            });
+          if (error) throw error;
+          uploadResults.push(data.fullPath);
         }
-
-        uploadResults.push(data.fullPath);
       })
     );
 
-    return res
-      .status(200)
-      .json({ message: "Files uploaded successfully", data: uploadResults });
+    return res.status(200).json({ message: "Files uploaded successfully", data: uploadResults });
   } catch (error: unknown) {
     console.error("Error uploading files:", error);
     return res.status(500).json({
