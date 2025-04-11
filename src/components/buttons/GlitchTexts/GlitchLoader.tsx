@@ -1,11 +1,11 @@
 import { styled } from "@/styles/stitches.config";
 import { CSS } from "@stitches/react";
 import classNames from "classnames";
-import { JSX, useState } from "react";
+import { ComponentType, JSX, useState } from "react";
 import "./glitches.css";
 import "./keyframes.css";
 
-export const glitchOptions = ["red", "green", "crank"] as const;
+export const glitchOptions = ["red", "green", "crank", "glow"] as const;
 
 export type GlitchOptions = (typeof glitchOptions)[number];
 interface GlitchLoaderProps {
@@ -16,9 +16,38 @@ interface GlitchLoaderProps {
 
 export function GlitchLoader({ variant, title, css }: GlitchLoaderProps) {
   const loaderMapper: Record<GlitchOptions, JSX.Element> = {
-    red: <GlitchBuilder title={title} css={{ ...css }} classes={["glitch-cima-v2", "glitch-meio-v2", "glitch-baixo-v2", "brilho-v2"]} />,
-    green: <GlitchBuilder title={title} css={{ ...css }} classes={["glitch-cima", "glitch-meio", "glitch-baixo", "brilho"]} />,
-    crank: <GlitchBuilder title={title} css={{ ...css }} classes={["glitch-cima-version-1-0", "glitch-baixo-version-1-0"]} />,
+    red: (
+      <GlitchBuilder
+        title={title}
+        css={{ ...css }}
+        TextComponent={T}
+        classes={["glitch-cima-v2", "glitch-meio-v2", "glitch-baixo-v2", "brilho-v2"]}
+      />
+    ),
+    green: (
+      <GlitchBuilder
+        title={title}
+        css={{ ...css }}
+        TextComponent={T}
+        classes={["glitch-cima", "glitch-meio", "glitch-baixo", "brilho"]}
+      />
+    ),
+    crank: (
+      <GlitchBuilder
+        title={title}
+        css={{ ...css }}
+        TextComponent={T}
+        classes={["glitch-cima-version-1-0", "glitch-baixo-version-1-0"]}
+      />
+    ),
+    glow: (
+      <GlitchBuilder
+        title={title}
+        css={{ ...css }}
+        TextComponent={TBlur}
+        classes={["glow", "text-shadow-glow", "text-shadow-glow2"]}
+      />
+    ),
   };
 
   return loaderMapper[variant];
@@ -27,10 +56,15 @@ export function GlitchLoader({ variant, title, css }: GlitchLoaderProps) {
 interface GlitchBuilderProps {
   classes: string[];
   title: string;
+  TextComponent: ComponentType<{
+    children?: React.ReactNode;
+    className?: string;
+    css?: CSS;
+  }>;
   css?: CSS;
 }
 
-export function GlitchBuilder({ classes, title, css }: GlitchBuilderProps) {
+export function GlitchBuilder({ classes, title, css, TextComponent }: GlitchBuilderProps) {
   const [animate, setAnimate] = useState(false);
 
   function handleClick() {
@@ -42,12 +76,12 @@ export function GlitchBuilder({ classes, title, css }: GlitchBuilderProps) {
 
   return (
     <Container onClick={handleClick}>
-      {!animate && <T css={{ ...css }}>{title}</T>}
+      {!animate && <TextComponent css={{ ...css }}>{title}</TextComponent>}
       {animate &&
         parsedClasses.map((it, i) => (
-          <T key={i} className={classNames(it)} css={{ fontSize: css?.fontSize }}>
+          <TextComponent key={i} className={classNames(it)} css={{ fontSize: css?.fontSize }}>
             {title}
-          </T>
+          </TextComponent>
         ))}
     </Container>
   );
@@ -75,6 +109,21 @@ const T = styled("p", {
   fontFamily: "Parkinsans",
   fontWeight: 700,
   fontSize: "1em",
+});
+
+const TBlur = styled("p", {
+  textAlign: "center",
+  width: "100%",
+  height: "30px",
+  position: "absolute",
+  color: "#ffffff",
+  fontFamily: "Parkinsans",
+  fontWeight: 800,
+  fontSize: "clamp(1.8rem, 10vw, 4rem)",
+  filter: "blur(1.3px)",
+  zIndex: 5,
+  textShadow: "0 0 8px #ff8000d6, 0 0 10px #ffe4169e",
+  animation: "sumindo 1s forwards",
 });
 
 /* 

@@ -80,3 +80,24 @@
   shadow-version-1-0 var(--base-duration) forwards;
 }
 
+.text-shadow-glow {
+  text-shadow:
+  0 0 0px #ff8000d6,
+  0 0 0px #ffe4169e;
+}
+
+.text-shadow-glow2 {
+  border-color: rgb(65, 255, 55);
+  color: rgb(65, 255, 55);
+  filter: blur(2px);
+  text-shadow:
+  0 0 70px rgb(65, 255, 55),
+  0 0 70px rgb(65, 255, 55);
+  animation: surgindo 3s forwards;
+}
+
+.glow {
+  text-shadow:
+  0 0 80px #fff156;
+  animation: pulse-brilho 1s infinite;
+}

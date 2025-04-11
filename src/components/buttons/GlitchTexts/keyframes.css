@@ -131,3 +131,22 @@
     0%, 1%, 26%, 49%, 63%, 100% {mask-image: none;}
     2%, 25%, 50%, 62% {mask-image: url('/svg/texturas/textura5.svg');}
   } 
+
+  @keyframes pulse-brilho {
+    0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100% {opacity: 0%;}
+    25%, 35%, 45%, 75% {opacity: 25%;}
+    15%, 65%, 85% {opacity: 30%;}
+    5%, 55%, 95% {opacity: 40%;}}
+  
+  @keyframes surgindo {
+    0% {opacity: 0%;}
+    25% {opacity: 100%;}
+    100% {opacity: 100%;}}
+  
+  @keyframes sumindo {
+    0%
+    {text-shadow:
+    0 0 0px #ff8000d6,
+    0 0 0px #ffe4169e;}
+  
+  }
