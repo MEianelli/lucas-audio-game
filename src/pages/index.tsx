@@ -81,10 +81,13 @@ export default function Home(props: HomeProps) {
   const updateUserData = useStore((s) => s.updateUserData);
   const updateRankData = useStore((s) => s.updateRankData);
   const setLoginState = useStore((s) => s.setLoginState);
+  const resetStore = useStore(s => s.resetStore);
 
   useEffect(() => {
     updateRankData(props.rank);
-    if (!props.user?.id) return;
+    if (!props.user?.id) {
+      resetStore();
+    };
     updateUserData(props.user);
     setLoginState("logged");
     //eslint-disable-next-line

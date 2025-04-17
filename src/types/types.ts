@@ -45,12 +45,13 @@ export interface Media extends Base {
   categorie: Categories;
 }
 
-export interface Card extends Base {
+export interface Card {
   media_id: number;
-  media: { title: string };
-  audio_src: string;
-  image_src: string;
+  title: string 
+  card_id: number;
   options: string[];
+  image_src: string;
+  audio_src: string;
 }
 
 export interface CardDTO {

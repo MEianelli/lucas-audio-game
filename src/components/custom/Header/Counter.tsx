@@ -9,7 +9,7 @@ export const Counter = ({ dailyIds }: { dailyIds: number[] }) => {
   const setModalOption = useStore((s) => s.setModalOption);
 
   useEffect(() => {
-    if (played === 10) setTimeout(() => setModalOption("finished"), 1500);
+    if (played === dailyIds.length) setTimeout(() => setModalOption("finished"), 1500);
     //eslint-disable-next-line
   }, [played]);
 

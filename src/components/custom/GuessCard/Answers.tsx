@@ -4,25 +4,29 @@ import { useStore } from "@/lib/store";
 import { type Card } from "@/types/types";
 import { useAnsState } from "@/lib/hooks/useAnsState";
 
-export function Answers({ card, isInView }: { readonly card: Card; readonly isInView: boolean }) {
+export function Answers({ card, isInView, goToNext }: { readonly card: Card; readonly isInView: boolean; readonly goToNext?: () => void }) {
   const [disableAll, setDisableAll] = useState(false);
   const setIds = useStore((s) => s.setIds);
-  const { state, clickedIndex } = useAnsState(card.id);
+  const setLifes = useStore((s) => s.setLifes);
+  const lifes = useStore((s) => s.lifes);
+  const { state, clickedIndex } = useAnsState(card.card_id);
 
   if (!isInView || !card.options?.length) return null;
 
   function handleClick() {
     setDisableAll(true);
+    goToNext?.();
     return;
   }
 
   function handleRight() {
-    setIds([card.id], "hitids");
+    setIds([card.card_id], "hitids");
     return;
   }
 
   function handleWrong(index: number) {
-    setIds([card.id + "," + index], "missids");
+    setIds([card.card_id + "," + index], "missids");
+    setLifes(lifes - 1);
     return;
   }
 
@@ -32,7 +36,7 @@ export function Answers({ card, isInView }: { readonly card: Card; readonly isIn
         return (
           <AnswersButton
             key={option}
-            correct={card.media.title}
+            correct={card.title}
             onclick={handleClick}
             onRight={handleRight}
             onWrong={() => handleWrong(index)}

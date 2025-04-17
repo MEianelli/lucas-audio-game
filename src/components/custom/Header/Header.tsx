@@ -3,23 +3,41 @@ import { Menu } from "@/components/custom/Header/Menu/MenuIcon";
 import { Text } from "@/components/text/text";
 import { RankingIcon } from "./RankingIcon";
 import { Counter } from "./Counter";
+import { Lifes } from "./Lifes";
+import { Score } from "./Score";
+import { styled } from "@/styles/stitches.config";
+
+const Wrapper = styled(FlexR, {
+  padding: "8px",
+  height: "60px",
+})
 
 export function Header({ dailyIds }: { dailyIds: number[] }) {
   return (
-    <FlexR sbc css={{ padding: "8px" }}>
+    <Wrapper sbc>
       <Menu />
       <Text g>{`MovieGuess`}</Text>
       <Counter dailyIds={dailyIds} />
-    </FlexR>
+    </Wrapper>
   );
 }
 
 export function HomeHeader() {
   return (
-    <FlexR sbc css={{ padding: "8px" }}>
+    <Wrapper sbc>
       <Menu />
       <Text g>{`MediaGuess`}</Text>
       <RankingIcon />
-    </FlexR>
+    </Wrapper>
+  );
+}
+
+export function GameHeader() {
+  return (
+    <Wrapper sbc>
+      <Menu />
+      <Score />
+      <Lifes />
+    </Wrapper>
   );
 }

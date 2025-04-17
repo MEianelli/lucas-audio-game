@@ -58,8 +58,27 @@ export const DialogModal = ({ css, ...props }: DialogModalProps) => {
   };
 
   useEffect(() => {
-    dialogRef.current?.showModal();
-  }, [modalOption, dialogRef]);
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    const handleNativeClose = () => {
+      if (modalOption !== "none") {
+        setModalOption("none");
+      }
+    };
+
+    dialog.addEventListener('close', handleNativeClose);
+
+    if (modalOption !== "none") {
+      dialog.showModal();
+    } else {
+      dialog.close();
+    }
+
+    return () => {
+      dialog.removeEventListener('close', handleNativeClose);
+    };
+  }, [modalOption, setModalOption]);
 
   if (modalOption === "none") {
     return null;

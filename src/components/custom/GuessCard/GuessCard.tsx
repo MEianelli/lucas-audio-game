@@ -13,7 +13,7 @@ import { Div } from "@/components/containers/div";
 import { colorPicker } from "@/lib/helpers/colorPicker";
 
 export const GuessCard = ({ card, isInView }: { card: Card; isInView: boolean }) => {
-  const { state } = useAnsState(card.id);
+  const { state } = useAnsState(card.card_id);
   const color = colorPicker(state, true, true);
 
   const soundUrl = `${storageBaseUrl}/${card.audio_src}`;

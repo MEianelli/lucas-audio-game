@@ -1,4 +1,4 @@
-import { JSX, useEffect, useState } from "react";
+import { JSX, useCallback, useEffect, useState } from "react";
 import useEmblaCarousel, { EmblaViewportRefType } from "embla-carousel-react";
 import "./EmblaCarousel.css";
 
@@ -28,14 +28,11 @@ export function EmblaCarouselSlide({
 
 export function useEmbla() {
   const [current, setCurrent] = useState(0);
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, dragFree: false, containScroll: "keepSnaps" });
 
-  useEffect(() => {
-    if (emblaApi)
-      emblaApi.on("scroll", () => {
-        setCurrent(emblaApi.selectedScrollSnap());
-      });
-  }, [emblaApi]);
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
 
-  return { current, emblaRef };
+  return { current, emblaRef, scrollNext };
 }

@@ -3,8 +3,10 @@ import { ModalOptions } from "@/components/custom/Modal/modal";
 import { LoginState, RankData, TScreen, User } from "@/types/types";
 import api from "@/utils/api";
 import { CalculateType, calculateWinRate } from "./helpers/ranking";
+import { persist } from 'zustand/middleware'
 
 type TStoreValues = {
+  lifes: number;
   screen: TScreen;
   loginState: LoginState;
   modalOption: ModalOptions;
@@ -24,6 +26,7 @@ type TStoreFuncs = {
   setLoginState: (loginState: LoginState) => void;
   setModalOption: (option: ModalOptions) => void;
   resetStore: () => void;
+  setLifes: (lifes: number) => void;
 };
 
 type TStore = TStoreValues & TStoreFuncs;
@@ -32,6 +35,7 @@ const initialState: TStoreValues = {
   id: 0,
   name: "",
   pass: "",
+  lifes: 3,
   currentstreak: 0,
   maxstreak: 0,
   winrate: 0,
@@ -42,9 +46,10 @@ const initialState: TStoreValues = {
   loginState: "login",
 };
 
-export const useStore = create<TStore>((set, get) => ({
+export const useStore = create<TStore>()(persist((set, get) => ({
   ...initialState,
   setName: (name) => set({ name }),
+  setLifes: (lifes) => set({ lifes }),
   setPass: (pass) => set({ pass }),
   setModalOption: (option: ModalOptions) => set({ modalOption: option }),
   updateRankData: (rankData) => set({ rankData }),
@@ -90,4 +95,4 @@ export const useStore = create<TStore>((set, get) => ({
   setScreen: (screen: TScreen) => set({ screen }),
   setLoginState: (loginState) => set({ loginState }),
   resetStore: () => set(initialState),
-}));
+}), { name: "persistedData" }));
