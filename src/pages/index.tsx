@@ -87,6 +87,7 @@ export default function Home(props: HomeProps) {
     updateRankData(props.rank);
     if (!props.user?.id) {
       resetStore();
+      return;
     };
     updateUserData(props.user);
     setLoginState("logged");

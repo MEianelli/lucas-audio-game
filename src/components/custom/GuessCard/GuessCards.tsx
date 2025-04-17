@@ -63,11 +63,11 @@ export const GuessCards = ({ cards }: { cards: Card[] }) => {
         </SliderTrack>
       </SliderContainer>
 
-      <FlexC css={{ padding: "25px 0px", alignItems: "center", gap: 6, width: "85%", margin: "auto" }}>
+      <FlexC css={{ padding: "25px 0px", alignItems: "center", gap: 12, width: "85%", margin: "auto" }}>
         {cards?.map((it, index) => {
           const isInView = currentIndex === index;
 
-          return <Answers card={it} key={it.audio_src} isInView={isInView} goToNext={goToNext} />;
+          return <Answers card={it} key={index} isInView={isInView} goToNext={goToNext} />;
         })}
       </FlexC>
     </FlexC>

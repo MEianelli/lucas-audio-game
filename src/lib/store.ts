@@ -46,7 +46,7 @@ const initialState: TStoreValues = {
   loginState: "login",
 };
 
-export const useStore = create<TStore>()(persist((set, get) => ({
+export const useStore = create<TStore>((set, get) => ({
   ...initialState,
   setName: (name) => set({ name }),
   setLifes: (lifes) => set({ lifes }),
@@ -61,6 +61,7 @@ export const useStore = create<TStore>()(persist((set, get) => ({
   },
   setIds: async (ids, type) => {
     const id = get().id;
+    const lifes = get().lifes;
     const newCurrentStreak = get().currentstreak + 1;
     const maxstreak = get().maxstreak;
     const addArr = get()[type];
@@ -79,6 +80,7 @@ export const useStore = create<TStore>()(persist((set, get) => ({
         ...(newCurrentStreak > maxstreak && { maxstreak: newCurrentStreak }),
       }),
       ...(type === "missids" && { currentstreak: 0 }),
+      ...(type === "missids" && { lifes: Math.max(lifes - 1, 0) }),
     };
     set(payload);
     if (get().id) {
@@ -95,4 +97,4 @@ export const useStore = create<TStore>()(persist((set, get) => ({
   setScreen: (screen: TScreen) => set({ screen }),
   setLoginState: (loginState) => set({ loginState }),
   resetStore: () => set(initialState),
-}), { name: "persistedData" }));
+}));

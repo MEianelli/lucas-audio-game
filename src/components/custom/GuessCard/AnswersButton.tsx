@@ -6,13 +6,14 @@ import { CSS } from "@stitches/react";
 import { PowerGlitchBtn } from "@/components/buttons/powerGlitch";
 import { useMemo, useState } from "react";
 import { POWERGLITCH_ANIMATION_DURATION } from "@/lib/contants";
+import { useStore } from "@/lib/store";
+import { ButtonAns } from "@/components/buttons/buttonAns";
+import { GlitchLoader } from "@/components/buttons/GlitchTexts/GlitchLoader";
 
 export interface AnswersButtonPros extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   correct: string;
-  onRight: () => void;
-  onWrong: () => void;
-  onclick: () => void;
+  onclick: (isRight: boolean, index: number) => void;
   state: CardState;
   clickedIndex?: number;
   index: number;
@@ -21,15 +22,12 @@ export interface AnswersButtonPros extends React.ButtonHTMLAttributes<HTMLButton
 
 export function AnswersButton({
   text,
-  onRight,
-  onWrong,
   onclick,
   correct,
   css,
   state,
   clickedIndex,
   index,
-  disabled,
   ...rest
 }: AnswersButtonPros) {
   const isRight = text === correct;
@@ -42,26 +40,13 @@ export function AnswersButton({
   const parsedText = reduceAnsSize(text);
   const fontSize = calculateFontSize(parsedText.length);
 
-  const handleClick = () => {
-    if (disabled) return;
-    onclick();
-    if (isRight) {
-      onRight();
-      return;
-    }
-    onWrong();
-    return;
-  };
-
-  return <PowerGlitchBtn title={parsedText} handleClick={handleClick} css={{ fontSize, color, ...css }} {...rest} />;
-
-  // return (
-  //   <ButtonAns css={{ fontSize, color, ...css }} onClick={handleClick} {...rest}>
-  //     {isRight ? (
-  //       <GlitchLoader title={parsedText} css={{ color, fontSize }} variant="green" />
-  //     ) : (
-  //       <GlitchLoader title={parsedText} css={{ color, fontSize }} variant="red" />
-  //     )}
-  //   </ButtonAns>
-  // );
+  return (
+    <ButtonAns css={{ fontSize, color, ...css }} onClick={() => onclick(isRight, index)} {...rest}>
+      {isRight ? (
+        <GlitchLoader title={parsedText} css={{ color, fontSize }} variant="green" />
+      ) : (
+        <GlitchLoader title={parsedText} css={{ color, fontSize }} variant="red" />
+      )}
+    </ButtonAns>
+  );
 }
