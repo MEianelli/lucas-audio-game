@@ -25,8 +25,10 @@ export type User = {
   id: number;
   name: string;
   pass: string;
+  lifes: number;
+  score: number;
   hitids: number[];
-  missids: string[];
+  missids: number[];
   currentstreak: number;
   maxstreak: number;
   winrate: number;
@@ -47,7 +49,7 @@ export interface Media extends Base {
 
 export interface Card {
   media_id: number;
-  title: string 
+  title: string
   card_id: number;
   options: string[];
   image_src: string;
@@ -64,7 +66,9 @@ export interface CardDTO {
 export interface RankData {
   top5winrate: { name: string; winrate: number }[];
   top5streak: { name: string; maxstreak: number }[];
+  top5score: { name: string; hitids: number }[];
   userWinRatePos: number;
+  userScorePos: number;
   userStreakPos: number;
 }
 
@@ -81,18 +85,18 @@ export interface PowerGlitchOptions {
     easing?: string; //like css "ease-out"
   };
   glitchTimeSpan:
-    | false
-    | {
-        start: number; //0 to 100%
-        end: number; //0 to 100%
-      };
+  | false
+  | {
+    start: number; //0 to 100%
+    end: number; //0 to 100%
+  };
   shake:
-    | false
-    | {
-        velocity: number; // 1 to 60
-        amplitudeX: number; //0 to 200%
-        amplitudeY: number; //0 to 200%
-      };
+  | false
+  | {
+    velocity: number; // 1 to 60
+    amplitudeX: number; //0 to 200%
+    amplitudeY: number; //0 to 200%
+  };
   slice: {
     count: number; // 1 to 60
     velocity: number; // 1 to 60
@@ -101,8 +105,8 @@ export interface PowerGlitchOptions {
     hueRotate: boolean;
   };
   pulse:
-    | false
-    | {
-        scale: number; // 1 to 6
-      };
+  | false
+  | {
+    scale: number; // 1 to 6
+  };
 }

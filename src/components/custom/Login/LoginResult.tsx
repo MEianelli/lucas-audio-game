@@ -4,8 +4,8 @@ import { useStore } from "@/lib/store";
 import { useShallow } from "zustand/shallow";
 
 export const LoginResult = () => {
-  const [name, winrate, maxstreak, rankData] = useStore(
-    useShallow((s) => [s.name, s.winrate, s.maxstreak, s.rankData])
+  const [name, score, maxstreak, rankData] = useStore(
+    useShallow((s) => [s.name, s.score, s.maxstreak, s.rankData])
   );
 
   return (
@@ -21,27 +21,18 @@ export const LoginResult = () => {
       <Text u>{name}</Text>
       <ButtonLikeFlex
         data={{
-          text1: `${(winrate / 100).toFixed(2)}%`,
-          text2: "Winrate",
-          pos: rankData?.userWinRatePos,
+          text1: score,
+          text2: "Score",
+          pos: rankData?.userScorePos ?? "",
         }}
       />
-      <FlexR ac css={{ gap: "10px", width: "100%" }}>
-        <ButtonLikeFlexSmall
-          data={{
-            text1: maxstreak,
-            text2: "Streak",
-            pos: rankData?.userStreakPos,
-          }}
-        />
-        <ButtonLikeFlexSmall
-          data={{
-            text1: maxstreak,
-            text2: "This Week",
-            pos: rankData?.userStreakPos,
-          }}
-        />
-      </FlexR>
+      <ButtonLikeFlex
+        data={{
+          text1: maxstreak,
+          text2: "Streak",
+          pos: rankData?.userStreakPos,
+        }}
+      />
     </FlexC>
   );
 };
@@ -72,7 +63,7 @@ function ButtonLikeFlex({ data }: { data: ButtonTexts }) {
         {data.text2}
       </Text>
       <Text m w cg>
-        {"#" + data.pos}
+        {data.pos ? "#" + data.pos : ""}
       </Text>
     </FlexR>
   );

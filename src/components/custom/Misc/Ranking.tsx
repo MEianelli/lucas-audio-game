@@ -4,16 +4,18 @@ import { Text } from "@/components/text/text";
 import { useStore } from "@/lib/store";
 import { ButtonClean } from "@/components/buttons/buttons";
 import { useShallow } from "zustand/shallow";
+import { useRouter } from "next/router";
+import { keyframes } from "@stitches/react";
 
 type RankUser = {
   name: string;
-  winrate?: number;
+  score?: number;
   maxstreak?: number;
 };
 
-const rankMenuOptions = ["WinRate", "Streak"];
+const rankMenuOptions = ["Score", "Streak"];
 
-type RankType = "winrate" | "streak";
+type RankType = "score" | "streak";
 
 export const Ranking = () => {
   const [rankTypeInd, setRankTypeInd] = useState(0);
@@ -36,11 +38,11 @@ export const Ranking = () => {
 };
 
 const RankingList = ({ menuOption }: { menuOption: number }) => {
-  const [name, rankData, winrate, maxstreak, setModalOption] = useStore(
+  const [name, rankData, score, maxstreak, setModalOption] = useStore(
     useShallow((s) => [
       s.name,
       s.rankData,
-      s.winrate,
+      s.score,
       s.maxstreak,
       s.setModalOption,
     ])
@@ -50,22 +52,30 @@ const RankingList = ({ menuOption }: { menuOption: number }) => {
     setModalOption("login");
   }
 
+  const chosenMenu = menuOption !== 1;
+  const rankPos = chosenMenu ? rankData?.userScorePos : rankData?.userStreakPos
+  const displayRank = chosenMenu ? "top5score" : "top5streak"
+  const userRankIndex = chosenMenu ? "userScorePos" : "userStreakPos"
+  const rankType = chosenMenu ? "score" : "streak"
+
   return (
     <>
       <TopPlayers
-        topList={rankData?.[menuOption !== 1 ? "top5winrate" : "top5streak"]}
-        type={menuOption !== 1 ? "winrate" : "streak"}
+        topList={rankData?.[displayRank]}
+        type={rankType}
+        playerInTop5Index={rankPos}
       />
-      {name && (
+      {(name && Number(rankPos) > 4) ? (
         <RankRow
-          user={{ name, winrate, maxstreak }}
+          user={{ name, score, maxstreak }}
           index={
-            rankData?.[menuOption !== 1 ? "userWinRatePos" : "userStreakPos"]
+            rankData?.[userRankIndex]
           }
           isUser
-          type={menuOption !== 1 ? "winrate" : "streak"}
+          type={rankType}
+          animate
         />
-      )}
+      ) : <BlankRankRow />}
       {!name && (
         <ButtonClean css={{ alignSelf: "center" }} onClick={handleClick}>
           <Text s>Wanna show on Rank?</Text>
@@ -80,52 +90,71 @@ const RankingList = ({ menuOption }: { menuOption: number }) => {
 
 const TopPlayers = ({
   topList,
-  type = "winrate",
+  type = "score",
+  playerInTop5Index,
 }: {
   topList?: { name: string }[];
   type?: RankType;
+  playerInTop5Index?: number;
 }) => {
   return (
     <FlexC css={{ gap: 8, width: "100%" }}>
       {topList?.map((user, index) => {
+        const playerInTop5 = playerInTop5Index === index + 1
         return (
-          <RankRow key={user.name} user={user} index={index + 1} type={type} />
+          <RankRow key={user.name} user={user} index={index + 1} type={type} animate={playerInTop5} />
         );
       })}
     </FlexC>
   );
 };
 
+const bounceAnimation = keyframes({
+  "0%": { transform: "scale(1)" },
+  "100%": { transform: "scale(1.1)" },
+})
+
 const RankRow = ({
   user,
   index,
   isUser,
-  type = "winrate",
+  type = "score",
+  animate,
 }: {
   user: RankUser;
   index?: number;
   isUser?: boolean;
   type?: RankType;
+  animate?: boolean;
 }) => {
   if (index === undefined) return null;
+
+  const displayPoints = type === "score" ? user.score : user.maxstreak;
+  const textLen = `${index}.${user?.name}${displayPoints}`.length
+  const fillerDifflen = 22 - textLen
+  const filler = "●".repeat(fillerDifflen);
+  const animation = animate ? `${bounceAnimation} 0.5s infinite alternate linear` : "none";
+
   return (
-    <FlexR css={{ gap: 4 }}>
+    <FlexR cc css={{ gap: 4, animation }}>
       <Text ms css={{ color: isUser ? "$green" : "$yellow" }}>
         {index + "."}
       </Text>
-      <Text ms>{user?.name[0]?.toUpperCase() + user?.name?.slice(1)}</Text>
+      <Text ms>{user?.name}</Text>
       <Text cp s>
-        ●
+        {filler}
       </Text>
-      {type === "winrate" ? (
-        <Text cg ms>
-          {((user?.winrate || 0) / 100).toFixed(2) + "%"}
-        </Text>
-      ) : (
-        <Text cg ms>
-          {user?.maxstreak}
-        </Text>
-      )}
+      <Text cg ms>
+        {displayPoints}
+      </Text>
     </FlexR>
   );
 };
+
+const BlankRankRow = () => {
+  return (
+    <FlexR cc >
+      <Text cp ms css={{ color: "transparent" }}>●</Text>
+    </FlexR>
+  )
+}

@@ -7,11 +7,10 @@ import { useAnsState } from "@/lib/hooks/useAnsState";
 export function Answers({ card, isInView, goToNext }: { readonly card: Card; readonly isInView: boolean; readonly goToNext?: () => void }) {
   const [disableAll, setDisableAll] = useState(false);
   const setIds = useStore((s) => s.setIds);
-  const setLifes = useStore((s) => s.setLifes);
   const setModalOption = useStore((s) => s.setModalOption);
   const lifes = useStore((s) => s.lifes);
 
-  const { state, clickedIndex } = useAnsState(card.card_id);
+  const { state } = useAnsState(card.card_id);
 
   if (!isInView || !card.options?.length) return null;
 
@@ -27,9 +26,8 @@ export function Answers({ card, isInView, goToNext }: { readonly card: Card; rea
       goToNext?.();
       return;
     }
-    setIds([card.card_id + "," + index], "missids");
+    setIds([card.card_id], "missids");
     const updatedLife = Math.max(lifes - 1, 0)
-    setLifes(updatedLife);
     updatedLife > 0 ? goToNext?.() : null;
     return;
   }
@@ -44,7 +42,6 @@ export function Answers({ card, isInView, goToNext }: { readonly card: Card; rea
             onclick={handleClick}
             text={option}
             state={state}
-            clickedIndex={clickedIndex}
             index={index}
           />
         );

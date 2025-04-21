@@ -1,15 +1,18 @@
 import { FlexR } from "@/components/containers/flex";
 import { Text } from "@/components/text/text";
 import { useStore } from "@/lib/store";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export const Lifes = () => {
   const lifes = useStore((s) => s.lifes);
-  const setModalOption = useStore((s) => s.setModalOption);
+  const router = useRouter()
 
   useEffect(() => {
     if (lifes <= 0) {
-      setModalOption("finished")
+      setTimeout(() => {
+        router.push("/");
+      }, 1500)
     }
   }, [lifes])
 

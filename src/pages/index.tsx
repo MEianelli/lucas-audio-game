@@ -11,9 +11,12 @@ import { useEffect } from "react";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import api from "@/utils/api";
 import { Ranking } from "@/components/custom/Misc/Ranking";
-import { Flex } from "@/components/containers/flex";
+import { Flex, FlexC, FlexR } from "@/components/containers/flex";
 import { HomeHeader } from "@/components/custom/Header/Header";
 import { CategoriesPlay } from "@/components/custom/Home/CategoriesPlay";
+import { Timer } from "@/components/custom/Misc/Timer";
+import { Text } from "@/components/text/text";
+import { GetMoreLifes } from "@/components/custom/Header/Menu/GetMoreLifes";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = context.req.headers.cookie;
@@ -82,11 +85,18 @@ export default function Home(props: HomeProps) {
   const updateRankData = useStore((s) => s.updateRankData);
   const setLoginState = useStore((s) => s.setLoginState);
   const resetStore = useStore(s => s.resetStore);
+  const setModalOption = useStore(s => s.setModalOption);
+  const lifes = useStore(s => s.lifes);
+  const store = useStore(s => s);
+  console.log('store :', store);
 
   useEffect(() => {
     updateRankData(props.rank);
     if (!props.user?.id) {
       resetStore();
+      if (window?.location?.search.includes("smlr")) {
+        setModalOption("login");
+      }
       return;
     };
     updateUserData(props.user);
@@ -97,10 +107,15 @@ export default function Home(props: HomeProps) {
   return (
     <Container>
       <HomeHeader />
-      <Flex css={{ padding: 18, width: "100%" }}>
+      <FlexC css={{ padding: 18, width: "100%" }}>
         <Ranking />
-      </Flex>
-      <CategoriesPlay />
+      </FlexC>
+      {lifes <= 0 && <FlexC css={{ paddingX: 18, gap: 10, width: "100%" }}>
+        <Text s>{`lifes: ${lifes}`}</Text>
+        <Timer />
+        <GetMoreLifes />
+      </FlexC>}
+      {lifes > 0 && <CategoriesPlay />}
       <DialogModal />
     </Container>
   );

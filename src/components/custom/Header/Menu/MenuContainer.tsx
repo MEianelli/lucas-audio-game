@@ -4,6 +4,7 @@ import { Text } from "@/components/text/text";
 import { DeleteAccount } from "./DeleteAccount";
 import { ContactUs } from "./ContactUs";
 import { GoHome } from "./GoHome";
+import { GetMoreLifes } from "./GetMoreLifes";
 
 export function MenuContainer() {
   return (
@@ -18,6 +19,7 @@ export function MenuContainer() {
       >
         Menu
       </Text>
+      <GetMoreLifes />
       <GoHome />
       <Logout />
       <ContactUs />

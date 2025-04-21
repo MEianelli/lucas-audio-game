@@ -112,6 +112,7 @@ export const LoginContent = () => {
         updateRankData(rankData.data);
         updateUserData(data.user);
         setLoginState("logged");
+        setTimeout(() => window.location.search = "", 100);
       }
       return;
     } catch (error) {

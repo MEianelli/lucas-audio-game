@@ -3,20 +3,22 @@ import { Div } from "@/components/containers/div";
 import { FlexC } from "@/components/containers/flex";
 import { useStore } from "@/lib/store";
 import { styled } from "@/styles/stitches.config";
+import { CSS } from "@stitches/react";
 
 const BaseBar = styled(Div, {
   width: "24px",
   height: "2px",
   borderRadius: "2px",
   backgroundColor: "$white",
+
 });
 
-export function Menu() {
+export function Menu({ css }: { css?: CSS }) {
   const setModalOption = useStore((s) => s.setModalOption);
 
   return (
     <ButtonClean
-      css={{ marginLeft: "left", "&:active div": { background: "red" } }}
+      css={{ ...css }}
       onClick={() => setModalOption("menu")}
     >
       <FlexC

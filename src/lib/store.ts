@@ -6,7 +6,6 @@ import { CalculateType, calculateWinRate } from "./helpers/ranking";
 import { persist } from 'zustand/middleware'
 
 type TStoreValues = {
-  lifes: number;
   screen: TScreen;
   loginState: LoginState;
   modalOption: ModalOptions;
@@ -36,6 +35,7 @@ const initialState: TStoreValues = {
   name: "",
   pass: "",
   lifes: 3,
+  score: 0,
   currentstreak: 0,
   maxstreak: 0,
   winrate: 0,
@@ -62,19 +62,15 @@ export const useStore = create<TStore>((set, get) => ({
   setIds: async (ids, type) => {
     const id = get().id;
     const lifes = get().lifes;
+    const score = get().score;
     const newCurrentStreak = get().currentstreak + 1;
     const maxstreak = get().maxstreak;
     const addArr = get()[type];
-    const newhitids = [...new Set([...addArr, ...ids])];
-    const opposite = type === "hitids" ? "missids" : "hitids";
-    const oppositeIds = get()[opposite];
-    const winrate = calculateWinRate({
-      [type]: newhitids,
-      [opposite]: oppositeIds,
-    } as CalculateType);
+    const newIDsArray = [...new Set([...addArr, ...ids])];
+    const newScore = type === "hitids" ? score + 1 : score - 1;
     const payload = {
-      [type]: newhitids,
-      winrate,
+      [type]: newIDsArray,
+      score: newScore,
       ...(type === "hitids" && {
         currentstreak: newCurrentStreak,
         ...(newCurrentStreak > maxstreak && { maxstreak: newCurrentStreak }),
@@ -83,7 +79,7 @@ export const useStore = create<TStore>((set, get) => ({
       ...(type === "missids" && { lifes: Math.max(lifes - 1, 0) }),
     };
     set(payload);
-    if (get().id) {
+    if (id) {
       try {
         await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/data/users`, {
           method: "PUT",

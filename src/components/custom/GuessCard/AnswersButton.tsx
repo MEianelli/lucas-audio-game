@@ -15,7 +15,6 @@ export interface AnswersButtonPros extends React.ButtonHTMLAttributes<HTMLButton
   correct: string;
   onclick: (isRight: boolean, index: number) => void;
   state: CardState;
-  clickedIndex?: number;
   index: number;
   css?: CSS;
 }
@@ -26,15 +25,14 @@ export function AnswersButton({
   correct,
   css,
   state,
-  clickedIndex,
   index,
   ...rest
 }: AnswersButtonPros) {
   const isRight = text === correct;
-  const [color, setColor] = useState(colorPicker(state, isRight, clickedIndex === index));
+  const [color, setColor] = useState(colorPicker(state, isRight));
 
   useMemo(() => {
-    setTimeout(() => setColor(colorPicker(state, isRight, clickedIndex === index)), POWERGLITCH_ANIMATION_DURATION);
+    setTimeout(() => setColor(colorPicker(state, isRight)), POWERGLITCH_ANIMATION_DURATION);
     //eslint-disable-next-line
   }, [state]);
   const parsedText = reduceAnsSize(text);
