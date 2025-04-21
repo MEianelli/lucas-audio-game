@@ -87,8 +87,6 @@ export default function Home(props: HomeProps) {
   const resetStore = useStore(s => s.resetStore);
   const setModalOption = useStore(s => s.setModalOption);
   const lifes = useStore(s => s.lifes);
-  const store = useStore(s => s);
-  console.log('store :', store);
 
   useEffect(() => {
     updateRankData(props.rank);
