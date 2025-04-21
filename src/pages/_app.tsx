@@ -24,6 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       router.events.off("routeChangeComplete", handleComplete);
       router.events.off("routeChangeError", handleComplete);
     };
+    //eslint-disable-next-line
   }, []);
 
   return <VFXProvider>{pageLoading ? <div>Loading...</div> : <Component {...pageProps} />}</VFXProvider>;

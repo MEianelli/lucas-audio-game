@@ -25,7 +25,7 @@ export default async function handler(
         console.error('Error fetching filtered cards:', error);
         return res.status(500).json({
             message: 'Internal server error',
-            error: (error as any)?.message
+            error: (error as { message: string })?.message
         });
     }
 }

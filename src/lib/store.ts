@@ -2,8 +2,6 @@ import { create } from "zustand";
 import { ModalOptions } from "@/components/custom/Modal/modal";
 import { LoginState, RankData, TScreen, User } from "@/types/types";
 import api from "@/utils/api";
-import { CalculateType, calculateWinRate } from "./helpers/ranking";
-import { persist } from 'zustand/middleware'
 
 type TStoreValues = {
   screen: TScreen;

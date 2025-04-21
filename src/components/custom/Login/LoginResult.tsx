@@ -69,31 +69,31 @@ function ButtonLikeFlex({ data }: { data: ButtonTexts }) {
   );
 }
 
-function ButtonLikeFlexSmall({ data }: { data: ButtonTexts }) {
-  return (
-    <FlexR
-      ac
-      c
-      css={{
-        gap: "8px",
-        border: "4px solid $purple",
-        borderRadius: "16px",
-        padding: "6px 10px",
-        flex: 1,
-      }}
-    >
-      <Text s w>
-        {data.text1}
-      </Text>
-      <Text s w>
-        {data.text2}
-      </Text>
-      <Text s w cg>
-        {"#" + data.pos}
-      </Text>
-    </FlexR>
-  );
-}
+// function ButtonLikeFlexSmall({ data }: { data: ButtonTexts }) {
+//   return (
+//     <FlexR
+//       ac
+//       c
+//       css={{
+//         gap: "8px",
+//         border: "4px solid $purple",
+//         borderRadius: "16px",
+//         padding: "6px 10px",
+//         flex: 1,
+//       }}
+//     >
+//       <Text s w>
+//         {data.text1}
+//       </Text>
+//       <Text s w>
+//         {data.text2}
+//       </Text>
+//       <Text s w cg>
+//         {"#" + data.pos}
+//       </Text>
+//     </FlexR>
+//   );
+// }
 
 export const RegisterResult = () => {
   return (

@@ -3,10 +3,8 @@ import { colorPicker } from "@/lib/helpers/colorPicker";
 import { type CardState } from "@/types/types";
 import { reduceAnsSize } from "@/utils/strings";
 import { CSS } from "@stitches/react";
-import { PowerGlitchBtn } from "@/components/buttons/powerGlitch";
 import { useMemo, useState } from "react";
 import { POWERGLITCH_ANIMATION_DURATION } from "@/lib/contants";
-import { useStore } from "@/lib/store";
 import { ButtonAns } from "@/components/buttons/buttonAns";
 import { GlitchLoader } from "@/components/buttons/GlitchTexts/GlitchLoader";
 

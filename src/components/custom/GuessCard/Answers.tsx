@@ -14,7 +14,7 @@ export function Answers({ card, isInView, goToNext }: { readonly card: Card; rea
 
   if (!isInView || !card.options?.length) return null;
 
-  function handleClick(isRight: boolean, index: number) {
+  function handleClick(isRight: boolean) {
     if (lifes <= 0) {
       setModalOption("finished");
       return;
@@ -27,8 +27,10 @@ export function Answers({ card, isInView, goToNext }: { readonly card: Card; rea
       return;
     }
     setIds([card.card_id], "missids");
-    const updatedLife = Math.max(lifes - 1, 0)
-    updatedLife > 0 ? goToNext?.() : null;
+    const updatedLife = Math.max(lifes - 1, 0);
+    if (updatedLife > 0) {
+      goToNext?.()
+    };
     return;
   }
 

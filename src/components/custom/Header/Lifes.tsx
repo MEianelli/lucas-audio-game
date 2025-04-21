@@ -14,6 +14,7 @@ export const Lifes = () => {
         router.push("/");
       }, 1500)
     }
+    //eslint-disable-next-line
   }, [lifes])
 
   return (

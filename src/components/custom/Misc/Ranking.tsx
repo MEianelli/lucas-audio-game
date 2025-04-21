@@ -4,7 +4,6 @@ import { Text } from "@/components/text/text";
 import { useStore } from "@/lib/store";
 import { ButtonClean } from "@/components/buttons/buttons";
 import { useShallow } from "zustand/shallow";
-import { useRouter } from "next/router";
 import { keyframes } from "@stitches/react";
 
 type RankUser = {

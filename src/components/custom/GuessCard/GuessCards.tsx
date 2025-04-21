@@ -28,12 +28,6 @@ const Slide = styled('div', {
 export const GuessCards = ({ cards }: { cards: Card[] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const goToPrevious = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1);
-    }
-  };
-
   const goToNext = () => {
     if (currentIndex < cards.length - 1) {
       setTimeout(() => setCurrentIndex((prev) => prev + 1), 1000);

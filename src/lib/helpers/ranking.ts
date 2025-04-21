@@ -20,7 +20,7 @@ export function calculateWinRates(users?: User[] | null) {
 
 export type CalculateType = {
   hitids: number[];
-  missids: string[];
+  missids: number[];
 };
 
 export function calculateWinRate({ hitids, missids }: CalculateType): number {

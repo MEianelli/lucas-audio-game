@@ -21,5 +21,6 @@ export function useUpdateRank() {
             updateRankData(rankData.data)
         }
         getRankData()
+        //eslint-disable-next-line
     }, [])
 }

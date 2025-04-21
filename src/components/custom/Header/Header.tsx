@@ -1,7 +1,6 @@
 import { FlexR } from "@/components/containers/flex";
 import { Menu } from "@/components/custom/Header/Menu/MenuIcon";
 import { Text } from "@/components/text/text";
-import { RankingIcon } from "./RankingIcon";
 import { Lifes } from "./Lifes";
 import { Score } from "./Score";
 import { styled } from "@/styles/stitches.config";

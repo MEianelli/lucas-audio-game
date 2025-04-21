@@ -1,4 +1,3 @@
-import { Text } from "@/components/text/text";
 import { Ranking } from "./Ranking";
 import { FlexC } from "@/components/containers/flex";
 import { GoHome } from "../Header/Menu/GoHome";

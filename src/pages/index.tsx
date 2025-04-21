@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import api from "@/utils/api";
 import { Ranking } from "@/components/custom/Misc/Ranking";
-import { Flex, FlexC, FlexR } from "@/components/containers/flex";
+import { FlexC } from "@/components/containers/flex";
 import { HomeHeader } from "@/components/custom/Header/Header";
 import { CategoriesPlay } from "@/components/custom/Home/CategoriesPlay";
 import { Timer } from "@/components/custom/Misc/Timer";

@@ -16,6 +16,7 @@ export function useFetchCards() {
             setCards((old) => ([...old, ...data]));
         }
         getCards();
+        //eslint-disable-next-line
     }, [hitids, missids])
 
     return { cards }
