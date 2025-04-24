@@ -58,9 +58,11 @@ export interface Card {
 
 export interface CardDTO {
   media_id: number;
-  audio_src: string;
+  title: string
+  card_id: number;
+  wrongs: string[];
   image_src: string;
-  options: string[];
+  audio_src: string;
 }
 
 export interface RankData {

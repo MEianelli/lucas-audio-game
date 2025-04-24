@@ -2,7 +2,7 @@
 export function commaStringToArr(data: string) {
   return data
     .split(",")
-    .map((tag) => tag.trim().toLowerCase())
+    .map((tag) => tag.trim())
     .filter((it) => !!it);
 }
 

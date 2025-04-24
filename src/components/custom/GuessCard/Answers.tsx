@@ -12,7 +12,7 @@ export function Answers({ card, isInView, goToNext }: { readonly card: Card; rea
 
   const { state } = useAnsState(card.card_id);
 
-  if (!isInView || !card.options?.length) return null;
+  if (!isInView) return null;
 
   function handleClick(isRight: boolean) {
     if (lifes <= 0) {
