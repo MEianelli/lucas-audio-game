@@ -8,7 +8,15 @@ export type TScreen = "login" | "content" | "";
 
 export type LoginState = "login" | "register" | "logged" | "registered";
 
-export type TStatus = "unavailable" | "unexistant" | "wrongPass" | "empty" | "logged" | "registered" | "error" | "";
+export type TStatus =
+  | "unavailable"
+  | "unexistant"
+  | "wrongPass"
+  | "empty"
+  | "logged"
+  | "registered"
+  | "error"
+  | "";
 
 interface ResponseError {
   res: Exclude<TStatus, "logged" | "registered">;
@@ -49,16 +57,22 @@ export interface Media extends Base {
 
 export interface Card {
   media_id: number;
-  title: string
+  title: string;
   card_id: number;
   options: string[];
   image_src: string;
   audio_src: string;
 }
 
+export interface UploadCard {
+  media_id: number;
+  image_src: string;
+  audio_src: string;
+}
+
 export interface CardDTO {
   media_id: number;
-  title: string
+  title: string;
   card_id: number;
   wrongs: string[];
   image_src: string;
@@ -87,18 +101,18 @@ export interface PowerGlitchOptions {
     easing?: string; //like css "ease-out"
   };
   glitchTimeSpan:
-  | false
-  | {
-    start: number; //0 to 100%
-    end: number; //0 to 100%
-  };
+    | false
+    | {
+        start: number; //0 to 100%
+        end: number; //0 to 100%
+      };
   shake:
-  | false
-  | {
-    velocity: number; // 1 to 60
-    amplitudeX: number; //0 to 200%
-    amplitudeY: number; //0 to 200%
-  };
+    | false
+    | {
+        velocity: number; // 1 to 60
+        amplitudeX: number; //0 to 200%
+        amplitudeY: number; //0 to 200%
+      };
   slice: {
     count: number; // 1 to 60
     velocity: number; // 1 to 60
@@ -107,8 +121,8 @@ export interface PowerGlitchOptions {
     hueRotate: boolean;
   };
   pulse:
-  | false
-  | {
-    scale: number; // 1 to 6
-  };
+    | false
+    | {
+        scale: number; // 1 to 6
+      };
 }

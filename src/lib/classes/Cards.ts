@@ -1,11 +1,10 @@
-import { CardDTO, Media } from "@/types/types";
+import { Media, UploadCard } from "@/types/types";
 import api from "@/utils/api";
-import { getRndArrElements, shuffleArray } from "@/utils/random";
 
 export class Cards {
   private audioSrc: string[] = [];
   private imageSrc: string[] = [];
-  private cards: CardDTO[] = [];
+  private cards: UploadCard[] = [];
 
   constructor(
     private readonly files: {
@@ -19,8 +18,12 @@ export class Cards {
     if (!this.checkFiles()) return false;
     if (!this.checkMedia()) return false;
 
-    const audioArr = Array.from(this.files.audio!).map((it) => it.name.slice(0, -4));
-    const imagesArr = Array.from(this.files.images!).map((it) => it.name.slice(0, -4));
+    const audioArr = Array.from(this.files.audio!).map((it) =>
+      it.name.slice(0, -4)
+    );
+    const imagesArr = Array.from(this.files.images!).map((it) =>
+      it.name.slice(0, -4)
+    );
 
     for (let i = 0; i < audioArr.length; i++) {
       if (audioArr[i] !== imagesArr[i]) {
@@ -60,10 +63,6 @@ export class Cards {
     return true;
   }
 
-  private buildOptions() {
-    return shuffleArray([...getRndArrElements(this.media.wrongs), this.media.title]);
-  }
-
   async uploadCards() {
     this.createCards();
     if (!this.cards.length) return;
@@ -83,7 +82,9 @@ export class Cards {
     this.imageSrc = (await this.uploadFilesType("images")) || [];
   }
 
-  private async uploadFilesType(type: "audio" | "images"): Promise<string[] | undefined> {
+  private async uploadFilesType(
+    type: "audio" | "images"
+  ): Promise<string[] | undefined> {
     const formData = new FormData();
 
     for (let i = 0; i < this.files[type]!.length; i++) {
@@ -123,7 +124,6 @@ export class Cards {
         audio_src: sortedAudioSrc[i],
         image_src: sortedImageSrc[i],
         media_id: this.media.id,
-        options: this.buildOptions(),
       };
       this.cards.push(card);
     }
