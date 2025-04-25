@@ -6,7 +6,9 @@ import { DialogModal } from "@/components/custom/Modal/modal";
 import { useFetchCards } from "@/lib/hooks/useFetchCards";
 
 const Content = () => {
-  const { cards } = useFetchCards()
+  const { loadingCards, cards } = useFetchCards();
+
+  if (!cards.length) return null;
 
   return (
     <Container>

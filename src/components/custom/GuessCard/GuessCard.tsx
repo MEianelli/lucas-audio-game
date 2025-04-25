@@ -12,7 +12,7 @@ import Waveform from "./Waveform";
 import { Div } from "@/components/containers/div";
 import { colorPicker } from "@/lib/helpers/colorPicker";
 
-export const GuessCard = ({ card, isInView }: { card: Card; isInView: boolean }) => {
+export const GuessCard = ({ card }: { card: Card }) => {
   const { state } = useAnsState(card.card_id);
   const color = colorPicker(state, true, true);
 
@@ -43,21 +43,28 @@ export const GuessCard = ({ card, isInView }: { card: Card; isInView: boolean })
         overflow: "hidden",
         width: "100%",
         aspectRatio: `${200 / 120}`,
-        height: !isInView ? "80%" : "100%",
+        height: "100%",
         border: `4px solid ${color}`,
         padding: "0px",
         boxSizing: "border-box",
         transition: "height 0.5s ease",
         userSelect: "none",
         zIndex: "10",
-      }}>
+      }}
+    >
       {isPlaying && <OverLayOpacity duration={duration} />}
       <ImageCss
         src={`${storageBaseUrl}/${card.image_src}`}
         alt={card.image_src ?? ""}
         width={200}
         height={120}
-        css={{ borderRadius: "10px", width: "100%", height: "auto", aspectRatio: `${200 / 120}`, objectFit: "cover" }}
+        css={{
+          borderRadius: "10px",
+          width: "100%",
+          height: "auto",
+          aspectRatio: `${200 / 120}`,
+          objectFit: "cover",
+        }}
       />
 
       <Div
@@ -66,8 +73,11 @@ export const GuessCard = ({ card, isInView }: { card: Card; isInView: boolean })
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-        }}>
-        {state === "neutral" && <PlayButton isPlaying={isPlaying} color={color} />}
+        }}
+      >
+        {state === "neutral" && (
+          <PlayButton isPlaying={isPlaying} color={color} />
+        )}
         {isPlaying && <Waveform />}
         {!isPlaying && <StateIcon state={state} />}
       </Div>
