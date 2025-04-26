@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { AnswersButton } from "./AnswersButton";
 import { useStore } from "@/lib/store";
 import { type Card } from "@/types/types";
-import { useAnsState } from "@/lib/hooks/useAnsState";
 
 export function Answers({
   card,
@@ -14,8 +13,6 @@ export function Answers({
   const [disableAll, setDisableAll] = useState(false);
   const setIds = useStore((s) => s.setIds);
   const lifes = useStore((s) => s.lifes);
-
-  const { state } = useAnsState(card.card_id);
 
   function handleClick(isRight: boolean) {
     if (disableAll) return;
@@ -39,15 +36,13 @@ export function Answers({
 
   return (
     <>
-      {card.options?.map((option, index) => {
+      {card.options?.map((option) => {
         return (
           <AnswersButton
             key={option}
             correct={card.title}
             onclick={handleClick}
             text={option}
-            state={state}
-            index={index}
           />
         );
       })}

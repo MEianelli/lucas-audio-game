@@ -3,24 +3,36 @@ import { ButtonClean } from "../../buttons/buttons";
 import { ImageCss } from "../../image/Image";
 import useSound from "use-sound";
 import { storageBaseUrl } from "@/lib/contants";
-import { PlayButton } from "./PlayButton";
-import { OverLayOpacity } from "./ProgressBar";
 import { type Card } from "@/types/types";
 import { useAnsState } from "@/lib/hooks/useAnsState";
 import { StateIcon } from "./StateIcon";
 import Waveform from "./Waveform";
 import { Div } from "@/components/containers/div";
-import { colorPicker } from "@/lib/helpers/colorPicker";
+import { keyframes } from "@/styles/stitches.config";
+
+const pulseBrilho = keyframes({
+  "0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100%": {
+    opacity: "90%",
+  },
+  "25%, 35%, 45%, 75%": {
+    opacity: "95%",
+  },
+  "15%, 65%, 85%": {
+    opacity: "92%",
+  },
+  "5%, 55%, 95%": {
+    opacity: "100%",
+  },
+});
 
 export const GuessCard = ({ card }: { card: Card }) => {
   const { state } = useAnsState(card.card_id);
-  const color = colorPicker(state, true, true);
 
   const soundUrl = `${storageBaseUrl}/${card.audio_src}`;
 
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const [play, { stop, duration }] = useSound(soundUrl, {
+  const [play, { stop }] = useSound(soundUrl, {
     onplay: () => setIsPlaying(true),
     onstop: () => setIsPlaying(false),
     onend: () => setIsPlaying(false),
@@ -38,13 +50,14 @@ export const GuessCard = ({ card }: { card: Card }) => {
     <ButtonClean
       onClick={handleToggle}
       css={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         position: "relative",
         borderRadius: "20px",
-        overflow: "hidden",
         width: "100%",
         aspectRatio: `${200 / 120}`,
         height: "100%",
-        border: `4px solid ${color}`,
         padding: "0px",
         boxSizing: "border-box",
         transition: "height 0.5s ease",
@@ -52,7 +65,6 @@ export const GuessCard = ({ card }: { card: Card }) => {
         zIndex: "10",
       }}
     >
-      {isPlaying && <OverLayOpacity duration={duration} />}
       <ImageCss
         src={`${storageBaseUrl}/${card.image_src}`}
         alt={card.image_src ?? ""}
@@ -61,8 +73,26 @@ export const GuessCard = ({ card }: { card: Card }) => {
         css={{
           borderRadius: "10px",
           width: "100%",
+          mixBlendMode: "screen",
+          filter: "blur(15px) saturate(200%) brightness(1.5)",
           height: "auto",
-          aspectRatio: `${200 / 120}`,
+          aspectRatio: `${5 / 3}`,
+          objectFit: "cover",
+          animation: `${pulseBrilho} 1s infinite`,
+        }}
+      />
+      <ImageCss
+        src={`${storageBaseUrl}/${card.image_src}`}
+        alt={card.image_src ?? ""}
+        width={200}
+        height={120}
+        css={{
+          position: "absolute",
+          borderRadius: "10px",
+          width: "93%",
+          filter: "blur(2px)",
+          height: "auto",
+          aspectRatio: `${5 / 3}`,
           objectFit: "cover",
         }}
       />
@@ -75,9 +105,6 @@ export const GuessCard = ({ card }: { card: Card }) => {
           transform: "translate(-50%, -50%)",
         }}
       >
-        {state === "neutral" && (
-          <PlayButton isPlaying={isPlaying} color={color} />
-        )}
         {isPlaying && <Waveform />}
         {!isPlaying && <StateIcon state={state} />}
       </Div>

@@ -2,7 +2,7 @@ import { css as clsGen, keyframes, styled } from "@/styles/stitches.config";
 import { CSS } from "@stitches/react";
 import { useState } from "react";
 
-const pulseBrilho = keyframes({
+export const pulseBrilho = keyframes({
   "0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100%": {
     opacity: "0%",
   },
