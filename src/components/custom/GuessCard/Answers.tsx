@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AnswersButton } from "./AnswersButton";
 import { useStore } from "@/lib/store";
 import { type Card } from "@/types/types";
+import { FlexC } from "@/components/containers/flex";
 
 export function Answers({
   card,
@@ -35,7 +36,7 @@ export function Answers({
   }, [card.card_id]);
 
   return (
-    <>
+    <FlexC css={{ width: "100%", gap: 12, paddingX: "10px" }}>
       {card.options?.map((option) => {
         return (
           <AnswersButton
@@ -46,6 +47,6 @@ export function Answers({
           />
         );
       })}
-    </>
+    </FlexC>
   );
 }

@@ -84,9 +84,10 @@ export default function Home(props: HomeProps) {
   const updateUserData = useStore((s) => s.updateUserData);
   const updateRankData = useStore((s) => s.updateRankData);
   const setLoginState = useStore((s) => s.setLoginState);
-  const resetStore = useStore(s => s.resetStore);
-  const setModalOption = useStore(s => s.setModalOption);
-  const lifes = useStore(s => s.lifes);
+  const resetStore = useStore((s) => s.resetStore);
+  const setModalOption = useStore((s) => s.setModalOption);
+  const lifes = useStore((s) => s.lifes);
+  const name = useStore((s) => s.name);
 
   useEffect(() => {
     updateRankData(props.rank);
@@ -96,7 +97,7 @@ export default function Home(props: HomeProps) {
         setModalOption("login");
       }
       return;
-    };
+    }
     updateUserData(props.user);
     setLoginState("logged");
     //eslint-disable-next-line
@@ -108,11 +109,14 @@ export default function Home(props: HomeProps) {
       <FlexC css={{ padding: 18, width: "100%" }}>
         <Ranking />
       </FlexC>
-      {lifes <= 0 && <FlexC css={{ paddingX: 18, gap: 10, width: "100%" }}>
-        <Text s>{`lifes: ${lifes}`}</Text>
-        <Timer />
-        <GetMoreLifes />
-      </FlexC>}
+      {lifes <= 0 && (
+        <FlexC css={{ paddingX: 18, gap: 10, width: "100%" }}>
+          <Text s>{`User: ${name}`}</Text>
+          <Text s>{`lifes: ${lifes}`}</Text>
+          <Timer />
+          <GetMoreLifes />
+        </FlexC>
+      )}
       {lifes > 0 && <CategoriesPlay />}
       <DialogModal />
     </Container>

@@ -14,7 +14,7 @@ export const GuessCards = ({ cards }: { cards: Card[] }) => {
   return (
     <FlexC
       css={{
-        padding: "0px 25px",
+        padding: "0px 15px",
         alignItems: "center",
         gap: 12,
         width: "100%",

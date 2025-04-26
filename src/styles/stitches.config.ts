@@ -49,7 +49,16 @@ const colors = {
   darkPurple: "#0E0030",
 };
 
-export const { styled, css, theme, createTheme, globalCss, keyframes, getCssText, config } = createStitches({
+export const {
+  styled,
+  css,
+  theme,
+  createTheme,
+  globalCss,
+  keyframes,
+  getCssText,
+  config,
+} = createStitches({
   theme: {
     colors,
     fonts: {
@@ -111,7 +120,7 @@ export const globalStyles = globalCss({
     margin: 0,
     padding: 0,
     fontFamily: "Parkinsans",
-    backgroundColor: "$white",
+    backgroundColor: "$darkPurple",
     boxSizing: "border-box",
   },
   "*": {
