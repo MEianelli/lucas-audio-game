@@ -39,15 +39,12 @@ export function AnswersButton({
   const parsedText = reduceAnsSize(text);
   const fontSize = calculateFontSize(parsedText.length);
 
-  return <Button />;
-
-  // return (
-  //   <ButtonAns css={{ fontSize, color, ...css }} onClick={() => onclick(isRight, index)} {...rest}>
-  //     {isRight ? (
-  //       <GlitchLoader title={parsedText} css={{ color, fontSize }} variant="green" />
-  //     ) : (
-  //       <GlitchLoader title={parsedText} css={{ color, fontSize }} variant="red" />
-  //     )}
-  //   </ButtonAns>
-  // );
+  return (
+    <Button
+      css={{ fontSize, ...css }}
+      title={parsedText}
+      isRight={isRight}
+      onclick={() => onclick(isRight, index)}
+    />
+  );
 }
