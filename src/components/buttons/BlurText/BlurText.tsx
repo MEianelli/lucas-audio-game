@@ -38,6 +38,8 @@ const Container = styled("button", {
   justifyContent: "center",
   alignItems: "center",
   position: "relative",
+  padding: 0,
+  whiteSpace: "nowrap",
 });
 
 const MainText = styled("p", {

@@ -59,14 +59,18 @@ const hiddenFont = {
   ...fontCss,
 };
 
+const commonSize = {
+  width: "100%",
+  height: "70px",
+};
+
 const Container = styled("button", {
   ...hiddenFont,
+  ...commonSize,
   backgroundColor: "transparent",
-  width: "100%",
   padding: "16px 18px",
   border: "none",
   borderRadius: "10px",
-  flex: 1,
   cursor: "pointer",
   display: "flex",
   justifyContent: "center",
@@ -76,10 +80,10 @@ const Container = styled("button", {
 
 const StaticBox = styled("div", {
   ...hiddenFont,
+  ...commonSize,
   backgroundColor: "rgb(15 0 41)",
   filter: "blur(2px)",
   position: "absolute",
-  width: "100%",
   padding: "16px 18px",
   border: "none",
   borderRadius: "10px",
@@ -88,16 +92,15 @@ const StaticBox = styled("div", {
 
 const BlinkBox = styled("div", {
   ...hiddenFont,
+  ...commonSize,
   backgroundColor: "rgb(15 0 41)",
   filter: "blur(2px)",
   position: "absolute",
-  width: "100%",
   padding: "16px 18px",
   border: "none",
   borderRadius: "10px",
   opacity: "0.8",
-  boxShadow:
-    "0px 0px 40px 20px rgb(49 9 150) inset, 0px 0px 5px 5px rgb(15 0 41)",
+  boxShadow: "0px 0px 40px 20px rgb(49 9 150) inset, 0px 0px 5px 5px rgb(15 0 41)",
   animation: `${pulseBrilho} 0.1s infinite;`,
 });
 
@@ -116,8 +119,7 @@ const BlinkText = styled("p", {
   position: "absolute",
   color: "$white",
   filter: "blur(0.7px)",
-  textShadow:
-    "0 0 3px #ff8000d6, 0 0 5px #ffe4169e, 0 0 40px rgba(255, 241, 86, 0.76)",
+  textShadow: "0 0 3px #ff8000d6, 0 0 5px #ffe4169e, 0 0 40px rgba(255, 241, 86, 0.76)",
   animation: `${pulseBrilho} 0.6s infinite;`,
 });
 
@@ -148,9 +150,7 @@ export const Button = ({
 
   const clickedBox = clsGen({
     backgroundColor: isRight ? "#08b73e" : "rgb(183 8 56)",
-    boxShadow: `0px 0px 40px 10px ${
-      isRight ? "#09520f" : "rgb(82 9 23)"
-    } inset`,
+    boxShadow: `0px 0px 40px 10px ${isRight ? "#09520f" : "rgb(82 9 23)"} inset`,
     filter: "blur(2px)",
     animation: `${surgindo} 1s forwards`,
   });
