@@ -36,11 +36,11 @@ export function Answers({
   }, [card.card_id]);
 
   return (
-    <FlexC css={{ width: "100%", gap: 12, paddingX: "10px" }}>
+    <FlexC css={{ width: "100%", gap: 12, paddingX: "2px" }}>
       {card.options?.map((option) => {
         return (
           <AnswersButton
-            key={option}
+            key={card.card_id + option}
             correct={card.title}
             onclick={handleClick}
             text={option}

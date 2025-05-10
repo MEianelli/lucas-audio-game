@@ -1,0 +1,91 @@
+.planet {
+  fill: rgb(255, 255, 255);
+  filter: blur(3px);
+  scale: 0.8;
+  mix-blend-mode: overlay;
+  z-index: 3;
+  position: absolute;
+  translate: 0px 2px;
+}
+
+.planetshine {
+  mix-blend-mode: screen;
+  scale: 0.95;
+  position: absolute;
+  fill: rgb(28, 244, 255);
+  filter: blur(5px);
+  translate: 0px 2px;
+}
+
+.planetglow {
+  position: absolute;
+  fill: rgba(2, 196, 255, 0.716);
+  scale: 1.1;
+  filter: blur(5px);
+  translate: 0px 2px;
+  animation: piscando 0.1s infinite steps(2, jump-end);
+}
+
+.circle-mask {
+  filter: blur(1.5px);
+  position: absolute;
+  overflow: hidden;
+  translate: 0px 2px;
+  mask-image: radial-gradient(circle, black 40%, transparent 60%);
+}
+
+.mundo {
+  fill: #004f19;
+  animation: girando 10s infinite linear;
+}
+
+.mundo2 {
+  fill: #004f19;
+  animation: girando2 10s infinite linear;
+}
+
+@keyframes piscando {
+  0%,
+  9%,
+  20%,
+  29%,
+  40%,
+  49%,
+  60%,
+  69%,
+  80%,
+  89%,
+  100% {
+    opacity: 50%;
+  }
+  10%,
+  19%,
+  30%,
+  39%,
+  50%,
+  59%,
+  70%,
+  79%,
+  90%,
+  99% {
+    opacity: 45%;
+  }
+}
+
+@keyframes girando {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-500px);
+  }
+}
+
+@keyframes girando2 {
+  0% {
+    transform: translateX(500px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}

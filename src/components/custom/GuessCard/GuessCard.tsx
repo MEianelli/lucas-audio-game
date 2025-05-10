@@ -12,16 +12,16 @@ import { keyframes } from "@/styles/stitches.config";
 
 const pulseBrilho = keyframes({
   "0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100%": {
-    opacity: "90%",
+    opacity: "50%",
   },
   "25%, 35%, 45%, 75%": {
-    opacity: "95%",
+    opacity: "55%",
   },
   "15%, 65%, 85%": {
-    opacity: "92%",
+    opacity: "52%",
   },
   "5%, 55%, 95%": {
-    opacity: "100%",
+    opacity: "60%",
   },
 });
 
@@ -54,7 +54,6 @@ export const GuessCard = ({ card }: { card: Card }) => {
         justifyContent: "center",
         alignItems: "center",
         position: "relative",
-        borderRadius: "20px",
         aspectRatio: `${5 / 3}`,
         width: "100%",
         height: "100%",
@@ -72,9 +71,9 @@ export const GuessCard = ({ card }: { card: Card }) => {
         height={120}
         css={{
           borderRadius: "10px",
-          width: "100%",
+          width: "90%",
           mixBlendMode: "screen",
-          filter: "blur(15px) saturate(200%) brightness(1.5)",
+          filter: "blur(10px) saturate(200%) brightness(1.5)",
           height: "auto",
           aspectRatio: `${5 / 3}`,
           objectFit: "cover",
@@ -89,11 +88,12 @@ export const GuessCard = ({ card }: { card: Card }) => {
         css={{
           position: "absolute",
           borderRadius: "10px",
-          width: "95%",
-          filter: "blur(1px)",
+          width: "98%",
           height: "auto",
+          filter: "blur(2px)",
           aspectRatio: `${5 / 3}`,
           objectFit: "cover",
+          opacity: "0.45",
         }}
       />
 

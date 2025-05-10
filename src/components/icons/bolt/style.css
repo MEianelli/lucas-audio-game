@@ -1,0 +1,29 @@
+.raio {
+  fill: rgb(255, 255, 255);
+  filter: blur(0.9px);
+  position: absolute;
+  scale: 0.8;
+}
+
+.raioglow {
+  position: absolute;
+  fill: rgb(255, 174, 0);
+  scale: 1.4;
+  filter: blur(5px);
+  animation: piscando 0.05s infinite steps(2, jump-end);
+}
+
+.raioborda {
+  fill: rgb(255, 238, 0);
+  filter: blur(1.1px);
+  position: absolute;
+}
+
+@keyframes piscando {
+  0% {
+    opacity: 65%;
+  }
+  50% {
+    opacity: 50%;
+  }
+}
