@@ -1,6 +1,5 @@
-import { css as clsGen, keyframes, styled } from "@/styles/stitches.config";
+import { keyframes, styled } from "@/styles/stitches.config";
 import { CSS } from "@stitches/react";
-import { useState } from "react";
 
 export const pulseBrilho = keyframes({
   "0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100%": {
@@ -61,10 +60,7 @@ const BlinkText = styled("p", {
 });
 
 export const BlurText = ({ title, onclick, css }: { title: string; onclick: () => void; css?: CSS }) => {
-  const [animate, setAnimate] = useState(false);
-
   function handleClick() {
-    setAnimate(true);
     onclick();
   }
 

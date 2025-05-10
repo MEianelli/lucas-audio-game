@@ -1,14 +1,11 @@
 import { FlexC, FlexR } from "@/components/containers/flex";
 import { Menu } from "@/components/custom/Header/Menu/MenuIcon";
 import { Text } from "@/components/text/text";
-import { Lifes } from "./Lifes";
-import { Score } from "./Score";
 import { styled } from "@/styles/stitches.config";
 import { Heart } from "@/components/icons/heart";
 import { World } from "@/components/icons/world";
 import { Bolt } from "@/components/icons/bolt";
 import { BlurText } from "@/components/buttons/BlurText/BlurText";
-import { Div } from "@/components/containers/div";
 import { BlurText2 } from "@/components/buttons/BlurText/BlurText2";
 import { BlurTextStrong } from "@/components/buttons/BlurText/BlurTextStrong";
 
