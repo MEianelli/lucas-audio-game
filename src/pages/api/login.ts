@@ -9,11 +9,7 @@ import { JSONParse } from "@/utils/json";
 async function Login(req: NextApiRequest, res: NextApiResponse) {
   const { name, pass }: User = JSONParse(req.body);
 
-  const { data, error } = await supabase
-    .from("users")
-    .select()
-    .eq("name", name)
-    .single();
+  const { data, error } = await supabase.from("users").select().eq("name", name).single();
 
   if (!data?.id) {
     if (error) console.log("error :", JSON.stringify(error, null, 2));
@@ -27,7 +23,7 @@ async function Login(req: NextApiRequest, res: NextApiResponse) {
   setCookie(COOKIE_NAME, encryptData({ name }), {
     req,
     res,
-    maxAge: 60 * 60 * 24 * 10, //10 days
+    maxAge: 60 * 60 * 24 * 100, //100 days
   });
 
   return res.status(200).json({ res: "logged", user: data });

@@ -32,7 +32,7 @@ export function HomeHeader() {
 
 export function GameHeader() {
   const lifes = useStore((s) => s.lifes);
-  const maxstreak = useStore((s) => s.maxstreak);
+  const currentstreak = useStore((s) => s.currentstreak);
   const score = useStore((s) => s.score);
   const name = useStore((s) => s.name);
 
@@ -54,7 +54,7 @@ export function GameHeader() {
           </IconWrapper>
           <IconWrapper>
             <Bolt size={"30px"} />
-            <BlurText2 title={maxstreak.toString()} variant="yellow" />
+            <BlurText2 title={currentstreak.toString()} variant="yellow" />
           </IconWrapper>
         </FlexR>
       </FlexR>

@@ -6,6 +6,7 @@ import { FlexC } from "@/components/containers/flex";
 
 export function Answers({ card, goToNext }: { readonly card: Card; readonly goToNext?: () => void }) {
   const [disableAll, setDisableAll] = useState(false);
+  console.log("disableAll :", disableAll);
   const setIds = useStore((s) => s.setIds);
   const lifes = useStore((s) => s.lifes);
 
@@ -32,7 +33,15 @@ export function Answers({ card, goToNext }: { readonly card: Card; readonly goTo
   return (
     <FlexC css={{ width: "100%", gap: 10, paddingX: "2px" }}>
       {card.options?.map((option) => {
-        return <AnswersButton key={card.card_id + option} correct={card.title} onclick={handleClick} text={option} />;
+        return (
+          <AnswersButton
+            key={card.card_id + option}
+            correct={card.title}
+            onclick={handleClick}
+            text={option}
+            disabled={disableAll}
+          />
+        );
       })}
     </FlexC>
   );

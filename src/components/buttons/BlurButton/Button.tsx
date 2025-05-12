@@ -128,12 +128,13 @@ export const Button = ({
   onclick,
   isRight,
   css,
+  disabled,
 }: {
   title: string;
   onclick: () => void;
   isRight: boolean;
   css?: CSS;
-}) => {
+} & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   const [animate, setAnimate] = useState(false);
 
   function handleClick() {
@@ -161,7 +162,7 @@ export const Button = ({
   const animateTxtBlinkCls = animate ? clickedBlinkText() : "";
 
   return (
-    <Container onClick={handleClick} css={{ ...css }}>
+    <Container onClick={handleClick} css={{ ...css }} disabled={disabled}>
       {title}
       <StaticBox className={animateBoxCls} css={{ ...css }}>
         {title}

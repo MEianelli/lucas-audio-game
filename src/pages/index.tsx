@@ -22,14 +22,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = context.req.headers.cookie;
   const parsed = parseCookies(cookies);
   const decrypted = decryptData(parsed[COOKIE_NAME]);
+  let savedName = decrypted?.name;
 
-  if (!decrypted.name) {
-    const rankData: { data: RankData } = await api(
-      `${process.env.NEXT_PUBLIC_APP_URL}/api/rank`,
-      {
-        method: "POST",
-      }
-    );
+  if (!savedName) {
+    const rankData: { data: RankData } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
+      method: "POST",
+    });
     return {
       props: {
         user: null,
@@ -45,12 +43,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     .single();
 
   if (!data?.id || error) {
-    const rankData: { data: RankData } = await api(
-      `${process.env.NEXT_PUBLIC_APP_URL}/api/rank`,
-      {
-        method: "POST",
-      }
-    );
+    const rankData: { data: RankData } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
+      method: "POST",
+    });
     return {
       props: {
         user: null,
@@ -59,13 +54,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const rankData: { data: RankData } = await api(
-    `${process.env.NEXT_PUBLIC_APP_URL}/api/rank`,
-    {
-      method: "POST",
-      body: JSON.stringify({ id: data.id }),
-    }
-  );
+  const rankData: { data: RankData } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
+    method: "POST",
+    body: JSON.stringify({ id: data.id }),
+  });
 
   return {
     props: {
@@ -85,7 +77,6 @@ export default function Home(props: HomeProps) {
   const updateRankData = useStore((s) => s.updateRankData);
   const setLoginState = useStore((s) => s.setLoginState);
   const resetStore = useStore((s) => s.resetStore);
-  const setModalOption = useStore((s) => s.setModalOption);
   const lifes = useStore((s) => s.lifes);
   const name = useStore((s) => s.name);
 
@@ -93,9 +84,6 @@ export default function Home(props: HomeProps) {
     updateRankData(props.rank);
     if (!props.user?.id) {
       resetStore();
-      if (window?.location?.search.includes("smlr")) {
-        setModalOption("login");
-      }
       return;
     }
     updateUserData(props.user);
