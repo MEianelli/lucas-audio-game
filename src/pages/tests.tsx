@@ -1,8 +1,6 @@
+import { BlurText } from "@/components/buttons/BlurText/BlurText";
 import { Div } from "@/components/containers/div";
 import { FlexC } from "@/components/containers/flex";
-import { Bolt } from "@/components/icons/bolt";
-import { Heart } from "@/components/icons/heart";
-import { World } from "@/components/icons/world";
 
 const Tests = () => {
   return (
@@ -25,9 +23,7 @@ const Tests = () => {
           backgroundColor: "#080858",
         }}
       >
-        <Heart />
-        <World />
-        <Bolt />
+        <BlurText title={"Leaderboard"} onclick={() => {}} css={{ fontSize: "18px" }} />
       </Div>
     </FlexC>
   );

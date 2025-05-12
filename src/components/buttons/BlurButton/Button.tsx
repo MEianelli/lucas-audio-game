@@ -61,7 +61,7 @@ const hiddenFont = {
 
 const commonSize = {
   width: "100%",
-  height: "70px",
+  height: "66px",
 };
 
 const Container = styled("button", {

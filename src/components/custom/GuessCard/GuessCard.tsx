@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ButtonClean } from "../../buttons/buttons";
 import { ImageCss } from "../../image/Image";
 import useSound from "use-sound";
@@ -25,6 +25,8 @@ const pulseBrilho = keyframes({
   },
 });
 
+const aspectR = 2.5;
+
 export const GuessCard = ({ card }: { card: Card }) => {
   const { state } = useAnsState(card.card_id);
 
@@ -46,6 +48,11 @@ export const GuessCard = ({ card }: { card: Card }) => {
     }
   };
 
+  useEffect(() => {
+    setTimeout(() => stop(), 500);
+    //eslint-disable-next-line
+  }, [state]);
+
   return (
     <ButtonClean
       onClick={handleToggle}
@@ -54,7 +61,7 @@ export const GuessCard = ({ card }: { card: Card }) => {
         justifyContent: "center",
         alignItems: "center",
         position: "relative",
-        aspectRatio: `${5 / 3}`,
+        aspectRatio: `${aspectR}`,
         width: "100%",
         height: "100%",
         padding: "0px",
@@ -75,7 +82,7 @@ export const GuessCard = ({ card }: { card: Card }) => {
           mixBlendMode: "screen",
           filter: "blur(10px) saturate(200%) brightness(1.5)",
           height: "auto",
-          aspectRatio: `${5 / 3}`,
+          aspectRatio: `${aspectR}`,
           objectFit: "cover",
           animation: `${pulseBrilho} 1s infinite`,
         }}
@@ -91,12 +98,11 @@ export const GuessCard = ({ card }: { card: Card }) => {
           width: "98%",
           height: "auto",
           filter: "blur(2px)",
-          aspectRatio: `${5 / 3}`,
+          aspectRatio: `${aspectR}`,
           objectFit: "cover",
           opacity: "0.45",
         }}
       />
-
       <Div
         css={{
           position: "absolute",
@@ -108,6 +114,18 @@ export const GuessCard = ({ card }: { card: Card }) => {
         {isPlaying && <Waveform />}
         {!isPlaying && <StateIcon state={state} />}
       </Div>
+      <Div
+        css={{
+          position: "absolute",
+          borderRadius: "10px",
+          width: "96%",
+          height: "96%",
+          aspectRatio: `${aspectR}`,
+          background: "rgba(79, 3, 255, 0.8)",
+          pointerEvents: "none",
+          mixBlendMode: "saturation",
+        }}
+      />
     </ButtonClean>
   );
 };
