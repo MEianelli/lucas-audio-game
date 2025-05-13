@@ -61,9 +61,9 @@ const BlinkText = styled("p", {
   animation: `${pulseBrilho} 0.6s infinite;`,
 });
 
-export const BlurText = ({ title, onclick, css }: { title: string; onclick: () => void; css?: CSS }) => {
+export const BlurText = ({ title, onclick, css }: { title: string; onclick?: () => void; css?: CSS }) => {
   function handleClick() {
-    onclick();
+    onclick?.();
   }
 
   return (

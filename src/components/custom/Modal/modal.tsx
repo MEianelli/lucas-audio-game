@@ -1,5 +1,4 @@
 import { keyframes, styled } from "@/styles/stitches.config";
-import { CloseButton } from "../../buttons/closeButton";
 import { CSS } from "@stitches/react";
 import { JSX, useEffect, useRef } from "react";
 import { MenuContainer } from "../Header/Menu/MenuContainer";
@@ -33,28 +32,21 @@ export const Dialog = styled("dialog", {
   },
 });
 
-interface DialogModalProps
-  extends React.DialogHTMLAttributes<HTMLDialogElement> {
+interface DialogModalProps extends React.DialogHTMLAttributes<HTMLDialogElement> {
   css?: CSS;
 }
 
-export type ModalOptions =
-  | "registerResult"
-  | "loginResult"
-  | "menu"
-  | "ranking"
-  | "login"
-  | "finished"
-  | "none";
+export type ModalOptions = "registerResult" | "loginResult" | "menu" | "ranking" | "login" | "finished" | "none";
 
 export const DialogModal = ({ css, ...props }: DialogModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const modalOption = useStore((s) => s.modalOption);
   const setModalOption = useStore((s) => s.setModalOption);
 
-  const handleClose = () => {
-    setModalOption("none");
-    dialogRef?.current?.close();
+  const handleClickOutside = (event: globalThis.MouseEvent) => {
+    if (event.target === dialogRef.current) {
+      setModalOption("none");
+    }
   };
 
   useEffect(() => {
@@ -67,7 +59,7 @@ export const DialogModal = ({ css, ...props }: DialogModalProps) => {
       }
     };
 
-    dialog.addEventListener('close', handleNativeClose);
+    dialog.addEventListener("close", handleNativeClose);
 
     if (modalOption !== "none") {
       dialog.showModal();
@@ -75,9 +67,13 @@ export const DialogModal = ({ css, ...props }: DialogModalProps) => {
       dialog.close();
     }
 
+    dialog.addEventListener("click", handleClickOutside);
+
     return () => {
-      dialog.removeEventListener('close', handleNativeClose);
+      dialog.removeEventListener("close", handleNativeClose);
+      dialog.removeEventListener("mousedown", handleClickOutside);
     };
+    //eslint-disable-next-line
   }, [modalOption, setModalOption]);
 
   if (modalOption === "none") {
@@ -87,7 +83,6 @@ export const DialogModal = ({ css, ...props }: DialogModalProps) => {
   return (
     <Dialog ref={dialogRef} css={{ ...css }} {...props}>
       {ModalContentMapper[modalOption]}
-      <CloseButton onClick={handleClose} />
     </Dialog>
   );
 };

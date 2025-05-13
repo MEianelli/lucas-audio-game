@@ -5,6 +5,10 @@
   translate: 0px 0.8px;
 }
 
+.heart-dark {
+  fill: rgb(0, 0, 0);
+}
+
 .heartshine {
   mix-blend-mode: screen;
   position: absolute;
@@ -14,6 +18,10 @@
   translate: 0px 1px;
 }
 
+.heartshine-dark {
+  fill: rgb(167, 167, 167);
+}
+
 .heartglow {
   position: absolute;
   fill: rgb(244 59 149);
@@ -21,6 +29,10 @@
   filter: blur(8px);
   translate: 0px 0px;
   animation: piscando 0.01s infinite;
+}
+
+.heartglow-dark {
+  fill: rgb(126, 126, 126);
 }
 
 @keyframes piscando {

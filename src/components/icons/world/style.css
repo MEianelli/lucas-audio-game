@@ -44,6 +44,21 @@
   animation: girando2 10s infinite linear;
 }
 
+.pulsing {
+  animation: piscando 0.1s infinite steps(2, jump-end), shrinkAndGrow 1s infinite;
+}
+
+@keyframes shrinkAndGrow {
+  0% {
+    transform: scale(2);
+    animation-timing-function: ease-in-out;
+  }
+  100% {
+    transform: scale(-2);
+    animation-timing-function: ease-in-out;
+  }
+}
+
 @keyframes piscando {
   0%,
   9%,

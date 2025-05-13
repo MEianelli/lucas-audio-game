@@ -6,7 +6,6 @@ import { FlexC } from "@/components/containers/flex";
 
 export function Answers({ card, goToNext }: { readonly card: Card; readonly goToNext?: () => void }) {
   const [disableAll, setDisableAll] = useState(false);
-  console.log("disableAll :", disableAll);
   const setIds = useStore((s) => s.setIds);
   const lifes = useStore((s) => s.lifes);
 

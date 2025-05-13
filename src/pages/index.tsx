@@ -22,9 +22,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = context.req.headers.cookie;
   const parsed = parseCookies(cookies);
   const decrypted = decryptData(parsed[COOKIE_NAME]);
-  let savedName = decrypted?.name;
 
-  if (!savedName) {
+  if (!decrypted?.name) {
     const rankData: { data: RankData } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
       method: "POST",
     });

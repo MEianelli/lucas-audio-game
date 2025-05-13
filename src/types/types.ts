@@ -8,15 +8,7 @@ export type TScreen = "login" | "content" | "";
 
 export type LoginState = "login" | "register" | "logged" | "registered";
 
-export type TStatus =
-  | "unavailable"
-  | "unexistant"
-  | "wrongPass"
-  | "empty"
-  | "logged"
-  | "registered"
-  | "error"
-  | "";
+export type TStatus = "unavailable" | "unexistant" | "wrongPass" | "empty" | "logged" | "registered" | "error" | "";
 
 interface ResponseError {
   res: Exclude<TStatus, "logged" | "registered">;
@@ -82,7 +74,7 @@ export interface CardDTO {
 export interface RankData {
   top5winrate: { name: string; winrate: number }[];
   top5streak: { name: string; maxstreak: number }[];
-  top5score: { name: string; hitids: number }[];
+  top5score: { name: string; score: number }[];
   userWinRatePos: number;
   userScorePos: number;
   userStreakPos: number;

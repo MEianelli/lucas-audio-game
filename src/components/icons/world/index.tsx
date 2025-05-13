@@ -1,10 +1,12 @@
 import { IconsContainer } from "@/components/containers/containers";
 import "./style.css";
 
-export function World({ size = 30 }: { size?: number }) {
+export function World({ size = 30, variant }: { size?: number; variant?: "pulsing" }) {
+  const pulsingAnimation = variant === "pulsing" ? "pulsing" : "";
+
   return (
     <IconsContainer css={{ width: `${size}px`, height: `${size}px` }}>
-      <svg className="planetglow" width={`${size}px`} height={`${size}px`} viewBox="0 0 100 100">
+      <svg className={`planetglow ${pulsingAnimation}`} width={`${size}px`} height={`${size}px`} viewBox="0 0 100 100">
         <circle cx="50" cy="50" r="50" />
       </svg>
 

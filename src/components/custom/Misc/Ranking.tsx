@@ -38,13 +38,7 @@ export const Ranking = () => {
 
 const RankingList = ({ menuOption }: { menuOption: number }) => {
   const [name, rankData, score, maxstreak, setModalOption] = useStore(
-    useShallow((s) => [
-      s.name,
-      s.rankData,
-      s.score,
-      s.maxstreak,
-      s.setModalOption,
-    ])
+    useShallow((s) => [s.name, s.rankData, s.score, s.maxstreak, s.setModalOption])
   );
 
   function handleClick() {
@@ -52,29 +46,19 @@ const RankingList = ({ menuOption }: { menuOption: number }) => {
   }
 
   const chosenMenu = menuOption !== 1;
-  const rankPos = chosenMenu ? rankData?.userScorePos : rankData?.userStreakPos
-  const displayRank = chosenMenu ? "top5score" : "top5streak"
-  const userRankIndex = chosenMenu ? "userScorePos" : "userStreakPos"
-  const rankType = chosenMenu ? "score" : "streak"
+  const rankPos = chosenMenu ? rankData?.userScorePos : rankData?.userStreakPos;
+  const displayRank = chosenMenu ? "top5score" : "top5streak";
+  const userRankIndex = chosenMenu ? "userScorePos" : "userStreakPos";
+  const rankType = chosenMenu ? "score" : "streak";
 
   return (
     <>
-      <TopPlayers
-        topList={rankData?.[displayRank]}
-        type={rankType}
-        playerInTop5Index={rankPos}
-      />
-      {(name && Number(rankPos) > 4) ? (
-        <RankRow
-          user={{ name, score, maxstreak }}
-          index={
-            rankData?.[userRankIndex]
-          }
-          isUser
-          type={rankType}
-          animate
-        />
-      ) : <BlankRankRow />}
+      <TopPlayers topList={rankData?.[displayRank]} type={rankType} playerInTop5Index={rankPos} />
+      {name && Number(rankPos) > 4 ? (
+        <RankRow user={{ name, score, maxstreak }} index={rankData?.[userRankIndex]} isUser type={rankType} animate />
+      ) : (
+        <BlankRankRow />
+      )}
       {!name && (
         <ButtonClean css={{ alignSelf: "center" }} onClick={handleClick}>
           <Text s>Wanna show on Rank?</Text>
@@ -99,10 +83,8 @@ const TopPlayers = ({
   return (
     <FlexC css={{ gap: 8, width: "100%" }}>
       {topList?.map((user, index) => {
-        const playerInTop5 = playerInTop5Index === index + 1
-        return (
-          <RankRow key={user.name} user={user} index={index + 1} type={type} animate={playerInTop5} />
-        );
+        const playerInTop5 = playerInTop5Index === index + 1;
+        return <RankRow key={user.name} user={user} index={index + 1} type={type} animate={playerInTop5} />;
       })}
     </FlexC>
   );
@@ -111,7 +93,7 @@ const TopPlayers = ({
 const bounceAnimation = keyframes({
   "0%": { transform: "scale(1)" },
   "100%": { transform: "scale(1.1)" },
-})
+});
 
 const RankRow = ({
   user,
@@ -129,8 +111,8 @@ const RankRow = ({
   if (index === undefined) return null;
 
   const displayPoints = type === "score" ? user.score : user.maxstreak;
-  const textLen = `${index}.${user?.name}${displayPoints}`.length
-  const fillerDifflen = 22 - textLen
+  const textLen = `${index}.${user?.name}${displayPoints}`.length;
+  const fillerDifflen = 22 - textLen;
   const filler = "●".repeat(fillerDifflen);
   const animation = animate ? `${bounceAnimation} 0.5s infinite alternate linear` : "none";
 
@@ -152,8 +134,10 @@ const RankRow = ({
 
 const BlankRankRow = () => {
   return (
-    <FlexR cc >
-      <Text cp ms css={{ color: "transparent" }}>●</Text>
+    <FlexR cc>
+      <Text cp ms css={{ color: "transparent" }}>
+        ●
+      </Text>
     </FlexR>
-  )
-}
+  );
+};
