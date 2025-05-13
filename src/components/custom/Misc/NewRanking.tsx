@@ -14,7 +14,7 @@ export function Ranking() {
       <FlexC css={{ gap: 4, flex: 1 }}>
         <BlurText title={"Leaderboard"} css={{ fontSize: "22px", width: "min-content" }} />
         {randData?.top5score.map((it, i) => (
-          <BlurText title={`${i + 1}. ${it.name}`} css={{ fontSize: "18px", width: "min-content" }} />
+          <BlurText title={`${i + 1}. ${it.name}`} css={{ fontSize: "18px", width: "min-content" }} key={it.name} />
         ))}
       </FlexC>
       <FlexC css={{ gap: 4 }}>
@@ -22,7 +22,7 @@ export function Ranking() {
           <World size={26} variant="pulsing" />
         </ButtonClean>
         {randData?.top5score.map((it) => (
-          <BlurText2 title={it.score.toString()} variant="blue" css={{ fontSize: "18px" }} key={it.name} />
+          <BlurText2 title={it.score.toString()} variant="blue" css={{ fontSize: "18px" }} key={it.name + "sd7gn87"} />
         ))}
       </FlexC>
       <FlexC css={{ gap: 4 }}>
