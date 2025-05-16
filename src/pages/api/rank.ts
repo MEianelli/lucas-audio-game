@@ -8,7 +8,7 @@ async function Rank(req: NextApiRequest, res: NextApiResponse) {
 
   const scoreRes = await supabase
     .from("users")
-    .select("name, score")
+    .select("name, score, maxstreak")
     .order("score", { ascending: false })
     .limit(5);
 
@@ -18,7 +18,7 @@ async function Rank(req: NextApiRequest, res: NextApiResponse) {
 
   const streakRes = await supabase
     .from("users")
-    .select("name, maxstreak")
+    .select("name, maxstreak, score")
     .order("maxstreak", { ascending: false })
     .limit(5);
 

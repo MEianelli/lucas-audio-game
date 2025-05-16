@@ -44,7 +44,7 @@
   animation: girando2 10s infinite linear;
 }
 
-.pulsing {
+.pulsingWorld {
   animation: piscando 0.1s infinite steps(2, jump-end), shrinkAndGrow 1s infinite;
 }
 

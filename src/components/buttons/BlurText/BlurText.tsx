@@ -16,10 +16,20 @@ export const pulseBrilho = keyframes({
   },
 });
 
+const scalePulse = keyframes({
+  "0%": {
+    scale: 1,
+  },
+  "100%": {
+    scale: 1.1,
+  },
+});
+
 const fontCss = {
   fontFamily: "Parkinsans",
   fontWeight: 800,
-  fontSize: "26px",
+  fontSize: "18px",
+  width: "min-content",
 };
 
 const hiddenFont = {
@@ -30,9 +40,7 @@ const hiddenFont = {
 const Container = styled("button", {
   ...hiddenFont,
   backgroundColor: "transparent",
-  width: "100%",
   border: "none",
-  flex: 1,
   cursor: "pointer",
   display: "flex",
   justifyContent: "center",
@@ -61,16 +69,35 @@ const BlinkText = styled("p", {
   animation: `${pulseBrilho} 0.6s infinite;`,
 });
 
-export const BlurText = ({ title, onclick, css }: { title: string; onclick?: () => void; css?: CSS }) => {
+export const BlurText = ({
+  title,
+  onclick,
+  css,
+  pulse,
+}: {
+  title: string;
+  onclick?: () => void;
+  css?: CSS;
+  pulse?: boolean;
+}) => {
   function handleClick() {
     onclick?.();
   }
 
+  const colorChange = pulse ? { textShadow: "0 0 3px rgba(9, 255, 0, 0.84), 0 0 5px rgba(22, 255, 80, 0.62)" } : {};
+  const colorChangeBlink = pulse
+    ? {
+        textShadow:
+          "0 0 3px rgba(0, 255, 34, 0.84), 0 0 5px rgba(22, 255, 61, 0.62), 0 0 40px rgba(86, 255, 190, 0.76))",
+      }
+    : {};
+  const animatePulseScale = pulse ? { animation: `${scalePulse} 0.2s infinite alternate` } : {};
+
   return (
     <Container onClick={handleClick} css={{ ...css }}>
       {title}
-      <MainText css={{ ...css }}>{title}</MainText>
-      <BlinkText css={{ ...css }}>{title}</BlinkText>
+      <MainText css={{ ...css, ...animatePulseScale, ...colorChange }}>{title}</MainText>
+      <BlinkText css={{ ...css, ...animatePulseScale, ...colorChangeBlink }}>{title}</BlinkText>
     </Container>
   );
 };

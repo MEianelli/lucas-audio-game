@@ -5,7 +5,6 @@ import useSound from "use-sound";
 import { storageBaseUrl } from "@/lib/contants";
 import { type Card } from "@/types/types";
 import { useAnsState } from "@/lib/hooks/useAnsState";
-import { StateIcon } from "./StateIcon";
 import Waveform from "./Waveform";
 import { Div } from "@/components/containers/div";
 import { keyframes } from "@/styles/stitches.config";
@@ -22,6 +21,28 @@ const pulseBrilho = keyframes({
   },
   "5%, 55%, 95%": {
     opacity: "60%",
+  },
+});
+
+const shadowSpread = keyframes({
+  "0%": {
+    mixBlendMode: "saturation",
+    boxShadow: "0px 0px 10px 0px black inset",
+  },
+  "100%": {
+    mixBlendMode: "color-burn",
+    boxShadow: "0px 0px 10px 60px black inset",
+  },
+});
+
+const startShadow = keyframes({
+  "0%": {
+    mixBlendMode: "color-burn",
+    boxShadow: "0px 0px 10px 60px black inset",
+  },
+  "100%": {
+    mixBlendMode: "saturation",
+    boxShadow: "0px 0px 10px 0px black inset",
   },
 });
 
@@ -52,6 +73,13 @@ export const GuessCard = ({ card }: { card: Card }) => {
     setTimeout(() => stop(), 500);
     //eslint-disable-next-line
   }, [state]);
+
+  const animationShadow =
+    state !== "neutral"
+      ? {
+          animation: `${shadowSpread} 1s normal`,
+        }
+      : {};
 
   return (
     <ButtonClean
@@ -112,7 +140,6 @@ export const GuessCard = ({ card }: { card: Card }) => {
         }}
       >
         {isPlaying && <Waveform />}
-        {!isPlaying && <StateIcon state={state} />}
       </Div>
       <Div
         css={{
@@ -123,7 +150,9 @@ export const GuessCard = ({ card }: { card: Card }) => {
           aspectRatio: `${aspectR}`,
           background: "rgba(79, 3, 255, 0.8)",
           pointerEvents: "none",
-          mixBlendMode: "saturation",
+          filter: "blur(2px)",
+          animation: `${startShadow} 1s forwards`,
+          ...animationShadow,
         }}
       />
     </ButtonClean>

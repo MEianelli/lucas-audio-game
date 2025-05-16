@@ -1,12 +1,17 @@
 import { ButtonAllUse } from "@/components/buttons/BlurButton/ButtonAllUse";
 import { FlexR } from "@/components/containers/flex";
-import { Heart } from "@/components/icons/heart";
+import { useStore } from "@/lib/store";
 
 export function GetMoreLifes() {
+  const setLifes = useStore((s) => s.setLifes);
   return (
     <FlexR css={{ gap: "10px" }}>
-      <Heart size={"50px"} variant="dark" />
-      <ButtonAllUse title="Get More Lifes" onclick={() => {}} css={{ fontSize: "20px" }} size={"50px"} />
+      <ButtonAllUse
+        title="Watch Ad to Refill Lifes"
+        onclick={() => setLifes(3)}
+        css={{ fontSize: "20px" }}
+        size={"50px"}
+      />
     </FlexR>
   );
 }

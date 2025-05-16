@@ -1,6 +1,6 @@
 import { css as clsGen, keyframes, styled } from "@/styles/stitches.config";
 import { CSS } from "@stitches/react";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 
 export const pulseBrilho = keyframes({
   "0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100%": {
@@ -81,26 +81,26 @@ const Container = styled("button", {
 const StaticBox = styled("div", {
   ...hiddenFont,
   ...commonSize,
-  backgroundColor: "rgb(15 0 41)",
+  backgroundColor: "#08b73e",
   filter: "blur(2px)",
   position: "absolute",
   padding: "16px 18px",
   border: "none",
   borderRadius: "10px",
-  boxShadow: "rgb(49 9 150 / 80%) 0px 0px 40px 10px inset",
+  boxShadow: `0px 0px 40px 10px "#09520f" inset`,
 });
 
 const BlinkBox = styled("div", {
   ...hiddenFont,
   ...commonSize,
-  backgroundColor: "rgb(15 0 41)",
+  backgroundColor: "#08b73e75",
   filter: "blur(2px)",
   position: "absolute",
   padding: "16px 18px",
   border: "none",
   borderRadius: "10px",
   opacity: "0.8",
-  boxShadow: "0px 0px 40px 20px rgb(49 9 150) inset, 0px 0px 5px 5px rgb(15 0 41)",
+  boxShadow: "none",
   animation: `${pulseBrilho} 0.1s infinite;`,
 });
 
@@ -123,17 +123,26 @@ const BlinkText = styled("p", {
   animation: `${pulseBrilho} 0.6s infinite;`,
 });
 
+const IconDiv = styled("div", {
+  position: "absolute",
+  top: "13px",
+  width: "24px",
+  height: "24px",
+});
+
 export const ButtonAllUse = ({
   title,
   onclick,
   css,
   disabled,
   size,
+  children,
 }: {
   title: string;
   onclick: () => void;
   css?: CSS;
   size?: string;
+  children?: ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   const [animate, setAnimate] = useState(false);
 
@@ -142,40 +151,22 @@ export const ButtonAllUse = ({
     onclick();
   }
 
-  const clickedBlinkBox = clsGen({
-    backgroundColor: "#08b73e75",
-    boxShadow: "none",
-    filter: "blur(2px)",
-    animation: `${surgindo} 1s linear, ${pulseBrilho} 0.6s infinite;`,
-  });
-
-  const clickedBox = clsGen({
-    backgroundColor: "#08b73e",
-    boxShadow: `0px 0px 40px 10px "#09520f" inset`,
-    filter: "blur(2px)",
-    animation: `${surgindo} 1s linear`,
-  });
-
-  const animateBoxBlinkCls = animate ? clickedBlinkBox() : "";
-  const animateBoxCls = animate ? clickedBox() : "";
   const animateTxtCls = animate ? clickedText() : "";
   const animateTxtBlinkCls = animate ? clickedBlinkText() : "";
 
   return (
     <Container onClick={handleClick} css={{ ...css, ...(!!size && { height: size }) }} disabled={disabled}>
       {title}
-      <StaticBox className={animateBoxCls} css={{ ...css, ...(!!size && { height: size }) }}>
-        {title}
-      </StaticBox>
-      <BlinkBox className={animateBoxBlinkCls} css={{ ...css, ...(!!size && { height: size }) }}>
-        {title}
-      </BlinkBox>
+      <StaticBox css={{ ...css, ...(!!size && { height: size }) }}>{title}</StaticBox>
+      <BlinkBox css={{ ...css, ...(!!size && { height: size }) }}>{title}</BlinkBox>
       <MainText className={animateTxtCls} css={{ ...css }}>
         {title}
       </MainText>
       <BlinkText className={animateTxtBlinkCls} css={{ ...css }}>
         {title}
       </BlinkText>
+      <IconDiv css={{ left: "12%" }}>{children}</IconDiv>
+      <IconDiv css={{ right: "12%" }}>{children}</IconDiv>
     </Container>
   );
 };

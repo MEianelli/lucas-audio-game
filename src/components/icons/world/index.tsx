@@ -2,7 +2,7 @@ import { IconsContainer } from "@/components/containers/containers";
 import "./style.css";
 
 export function World({ size = 30, variant }: { size?: number; variant?: "pulsing" }) {
-  const pulsingAnimation = variant === "pulsing" ? "pulsing" : "";
+  const pulsingAnimation = variant === "pulsing" ? "pulsingWorld" : "";
 
   return (
     <IconsContainer css={{ width: `${size}px`, height: `${size}px` }}>

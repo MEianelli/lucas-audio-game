@@ -32,7 +32,6 @@ const Container = styled("div", {
   backgroundColor: "transparent",
   width: "100%",
   border: "none",
-  flex: 1,
   cursor: "pointer",
   display: "flex",
   justifyContent: "center",

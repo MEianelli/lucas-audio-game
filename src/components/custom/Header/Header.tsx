@@ -57,12 +57,12 @@ export function GameHeader() {
       <FlexR css={{ justifyContent: "space-between" }}>
         <FlexC css={{ justifyContent: "flex-start" }}>
           <BlurTextStrong title="GuessGame" css={{ fontSize: "28px" }} />
-          <BlurText title={name || "No user"} onclick={() => {}} css={{ fontSize: "12px", width: "min-content" }} />
+          <BlurText title={name || "No user"} onclick={() => {}} css={{ fontSize: "12px" }} />
         </FlexC>
         <ButtonClean css={{ paddingTop: 5, display: "flex", flexFlow: "row nowrap" }} onClick={handleIconsClick}>
           <IconWrapper css={{ marginRight: 4 }}>
             <World size={26} />
-            <BlurText2 title={score.toString()} variant="blue" css={{ paddingTop: 2 }} />
+            <BlurText2 title={score.toString()} variant="blue" />
           </IconWrapper>
           <IconWrapper>
             <Heart size={"30px"} />

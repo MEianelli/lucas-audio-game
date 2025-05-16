@@ -72,9 +72,8 @@ export interface CardDTO {
 }
 
 export interface RankData {
-  top5winrate: { name: string; winrate: number }[];
-  top5streak: { name: string; maxstreak: number }[];
-  top5score: { name: string; score: number }[];
+  top5streak: { name: string; score: number; maxstreak: number }[];
+  top5score: { name: string; score: number; maxstreak: number }[];
   userWinRatePos: number;
   userScorePos: number;
   userStreakPos: number;
