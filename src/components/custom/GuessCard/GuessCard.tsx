@@ -26,23 +26,19 @@ const pulseBrilho = keyframes({
 
 const shadowSpread = keyframes({
   "0%": {
-    mixBlendMode: "saturation",
-    boxShadow: "0px 0px 10px 0px black inset",
+    boxShadow: "0px 0px 10px 0px #120226 inset, 0px 0px 10px 5px #120226",
   },
   "100%": {
-    mixBlendMode: "color-burn",
-    boxShadow: "0px 0px 10px 60px black inset",
+    boxShadow: "0px 0px 10px 60px #120226 inset, 0px 0px 10px 5px #120226",
   },
 });
 
 const startShadow = keyframes({
   "0%": {
-    mixBlendMode: "color-burn",
-    boxShadow: "0px 0px 10px 60px black inset",
+    boxShadow: "0px 0px 10px 60px #120226 inset, 0px 0px 10px 5px #120226",
   },
   "100%": {
-    mixBlendMode: "saturation",
-    boxShadow: "0px 0px 10px 0px black inset",
+    boxShadow: "0px 0px 10px 0px #120226 inset, 0px 0px 10px 0px #120226",
   },
 });
 
@@ -151,7 +147,20 @@ export const GuessCard = ({ card }: { card: Card }) => {
           background: "rgba(79, 3, 255, 0.8)",
           pointerEvents: "none",
           filter: "blur(2px)",
-          animation: `${startShadow} 1s forwards`,
+          mixBlendMode: "saturation",
+        }}
+      />
+      <Div
+        css={{
+          position: "absolute",
+          borderRadius: "10px",
+          width: "100%",
+          height: "100%",
+          aspectRatio: `${aspectR}`,
+          background: "transparent",
+          pointerEvents: "none",
+          filter: "blur(2px)",
+          animation: `${startShadow} 1s normal`,
           ...animationShadow,
         }}
       />

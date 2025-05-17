@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import { ButtonClean } from "@/components/buttons/buttons";
 
 const Wrapper = styled(FlexC, {
-  padding: "15px 20px 0px",
+  padding: "15px 16px 0px 26px",
 });
 
 const IconWrapper = styled(FlexC, {
