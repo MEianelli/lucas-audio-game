@@ -74,46 +74,6 @@ export interface CardDTO {
 export interface RankData {
   top5streak: { name: string; score: number; maxstreak: number }[];
   top5score: { name: string; score: number; maxstreak: number }[];
-  userWinRatePos: number;
   userScorePos: number;
   userStreakPos: number;
-}
-
-type PlayModes = "always" | "hover" | "click" | "manual";
-export interface PowerGlitchOptions {
-  optimizeSeo: boolean;
-  html?: string;
-  createContainers: boolean;
-  playMode: PlayModes;
-  hideOverflow: boolean;
-  timing: {
-    duration: number; //time in ms 1 to inf
-    iterations: number; //repeat 1 to 60
-    easing?: string; //like css "ease-out"
-  };
-  glitchTimeSpan:
-    | false
-    | {
-        start: number; //0 to 100%
-        end: number; //0 to 100%
-      };
-  shake:
-    | false
-    | {
-        velocity: number; // 1 to 60
-        amplitudeX: number; //0 to 200%
-        amplitudeY: number; //0 to 200%
-      };
-  slice: {
-    count: number; // 1 to 60
-    velocity: number; // 1 to 60
-    minHeight: number; //1 to 100%
-    maxHeight: number; //1 to 100%
-    hueRotate: boolean;
-  };
-  pulse:
-    | false
-    | {
-        scale: number; // 1 to 6
-      };
 }
