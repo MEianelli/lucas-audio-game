@@ -37,7 +37,7 @@ const hiddenFont = {
   ...fontCss,
 };
 
-const Container = styled("button", {
+const Container = styled("div", {
   ...hiddenFont,
   backgroundColor: "transparent",
   border: "none",

@@ -2,49 +2,13 @@ import React, { useEffect, useState } from "react";
 import { ButtonClean } from "../../buttons/buttons";
 import { ImageCss } from "../../image/Image";
 import useSound from "use-sound";
-import { storageBaseUrl } from "@/lib/contants";
+import { ASPECT_R, storageBaseUrl } from "@/lib/contants";
 import { type Card } from "@/types/types";
 import { useAnsState } from "@/lib/hooks/useAnsState";
 import { Div } from "@/components/containers/div";
-import { keyframes } from "@/styles/stitches.config";
-import "./test.css";
 import { BlurText } from "@/components/buttons/BlurText/BlurText";
 import { BarsWave } from "./BarsWave";
-
-const pulseBrilho = keyframes({
-  "0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100%": {
-    opacity: "50%",
-  },
-  "25%, 35%, 45%, 75%": {
-    opacity: "55%",
-  },
-  "15%, 65%, 85%": {
-    opacity: "52%",
-  },
-  "5%, 55%, 95%": {
-    opacity: "60%",
-  },
-});
-
-const shadowSpread = keyframes({
-  "0%": {
-    boxShadow: "0px 0px 10px 0px #120226 inset, 0px 0px 10px 5px #120226",
-  },
-  "100%": {
-    boxShadow: "0px 0px 10px 150px #120226 inset, 0px 0px 10px 5px #120226",
-  },
-});
-
-const startShadow = keyframes({
-  "0%": {
-    boxShadow: "0px 0px 10px 150px #120226 inset, 0px 0px 10px 5px #120226",
-  },
-  "100%": {
-    boxShadow: "0px 0px 10px 0px #120226 inset, 0px 0px 10px 0px #120226",
-  },
-});
-
-const aspectR = 2.5;
+import { pulseBrilho, shadowSpread, startShadow } from "./GuessCardAnimations";
 
 export const GuessCard = ({ card }: { card: Card }) => {
   const { state } = useAnsState(card.card_id);
@@ -72,13 +36,6 @@ export const GuessCard = ({ card }: { card: Card }) => {
     //eslint-disable-next-line
   }, [state]);
 
-  const animationShadow =
-    state !== "neutral"
-      ? {
-          animation: `${shadowSpread} 1s normal`,
-        }
-      : {};
-
   return (
     <ButtonClean
       onClick={handleToggle}
@@ -87,7 +44,7 @@ export const GuessCard = ({ card }: { card: Card }) => {
         justifyContent: "center",
         alignItems: "center",
         position: "relative",
-        aspectRatio: `${aspectR}`,
+        aspectRatio: `${ASPECT_R}`,
         width: "100%",
         height: "100%",
         padding: "0px",
@@ -108,7 +65,7 @@ export const GuessCard = ({ card }: { card: Card }) => {
           mixBlendMode: "screen",
           filter: "blur(10px) saturate(200%) brightness(1.5)",
           height: "auto",
-          aspectRatio: `${aspectR}`,
+          aspectRatio: `${ASPECT_R}`,
           objectFit: "cover",
           animation: `${pulseBrilho} 1s infinite`,
         }}
@@ -124,7 +81,7 @@ export const GuessCard = ({ card }: { card: Card }) => {
           width: "98%",
           height: "auto",
           filter: "blur(2px)",
-          aspectRatio: `${aspectR}`,
+          aspectRatio: `${ASPECT_R}`,
           objectFit: "cover",
           opacity: "0.45",
         }}
@@ -155,7 +112,7 @@ export const GuessCard = ({ card }: { card: Card }) => {
           borderRadius: "10px",
           width: "96%",
           height: "96%",
-          aspectRatio: `${aspectR}`,
+          aspectRatio: `${ASPECT_R}`,
           background: "rgba(79, 3, 255, 0.8)",
           pointerEvents: "none",
           filter: "blur(2px)",
@@ -168,12 +125,11 @@ export const GuessCard = ({ card }: { card: Card }) => {
           borderRadius: "10px",
           width: "100%",
           height: "100%",
-          aspectRatio: `${aspectR}`,
+          aspectRatio: `${ASPECT_R}`,
           background: "transparent",
           pointerEvents: "none",
           filter: "blur(2px)",
-          animation: `${startShadow} 1s normal`,
-          ...animationShadow,
+          animation: state !== "neutral" ? `${shadowSpread} 1s normal` : `${startShadow} 1s normal`,
         }}
       />
     </ButtonClean>

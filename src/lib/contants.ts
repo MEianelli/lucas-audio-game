@@ -4,6 +4,7 @@ export const NUMBER_OF_CARDS_PER_COLUMN = 3;
 export const COOKIE_NAME = "d187yd";
 export const MAX_ANS_LEN = 24;
 export const POWERGLITCH_ANIMATION_DURATION = 500;
+export const ASPECT_R = 2.5;
 
 export const supabaseUrl = "https://hiinnoepvfmkkdioyanc.supabase.co";
 export const storageBaseUrl = `${supabaseUrl}/storage/v1/object/public`;

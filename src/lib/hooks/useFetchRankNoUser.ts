@@ -16,5 +16,6 @@ export function useFetchRankNoUser() {
       }
     }
     getRankDataNoUser();
+    //eslint-disable-next-line
   }, []);
 }
