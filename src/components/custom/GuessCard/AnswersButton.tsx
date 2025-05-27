@@ -1,5 +1,5 @@
 import { RightWrongButton } from "@/components/buttons/RightWrongButton";
-import { calculateFontSize } from "@/lib/helpers/fontsize";
+import { calculateFontSize } from "@/utils/fontsize";
 import { reduceAnsSize } from "@/utils/strings";
 import { CSS } from "@stitches/react";
 export interface AnswersButtonPros extends React.ButtonHTMLAttributes<HTMLButtonElement> {

@@ -1,5 +1,5 @@
 import { mapValues } from "@/utils/map";
-import { MAX_ANS_LEN } from "../contants";
+import { MAX_ANS_LEN } from "../lib/contants";
 
 export function calculateFontSize(textLength: number) {
   const minLength = 15; // Minimum text length

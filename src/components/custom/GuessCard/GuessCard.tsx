@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { ButtonClean } from "../../buttons/buttons";
-import { ImageCss } from "../../image/Image";
+import { ButtonClean } from "@/components/buttons/buttons";
+import { ImageCss } from "@/components/image/Image";
 import useSound from "use-sound";
 import { ASPECT_R, storageBaseUrl } from "@/lib/contants";
 import { type Card } from "@/types/types";
 import { useAnsState } from "@/lib/hooks/useAnsState";
 import { Div } from "@/components/containers/div";
 import { BlurText } from "@/components/text/BlurText";
-import { BarsWave } from "./BarsWave";
+import { BarsAudioWave } from "@/components/icons/barsAudioWave/BarsAudioWave";
 import { pulseBrilho, shadowSpread, startShadow } from "./GuessCardAnimations";
 
 export const GuessCard = ({ card }: { card: Card }) => {
@@ -104,7 +104,7 @@ export const GuessCard = ({ card }: { card: Card }) => {
           transform: "translate(-50%, -50%)",
         }}
       >
-        {isPlaying && <BarsWave />}
+        {isPlaying && <BarsAudioWave />}
       </Div>
       <Div
         css={{

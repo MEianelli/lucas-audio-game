@@ -1,5 +1,5 @@
-import { LoginInput } from "../../inputs/input";
-import { Button } from "../../buttons/buttons";
+import { LoginInput } from "@/components/inputs/input";
+import { Button } from "@/components/buttons/buttons";
 import { Warning } from "./Messages";
 import { TStatus } from "@/types/types";
 import { FlexC, FlexR } from "@/components/containers/flex";
@@ -15,15 +15,7 @@ export interface LoginProps {
   loading: boolean;
 }
 
-export const Login = ({
-  name,
-  pass,
-  loading,
-  handleChange,
-  handleLogin,
-  handleCadastrar,
-  status,
-}: LoginProps) => {
+export const Login = ({ name, pass, loading, handleChange, handleLogin, handleCadastrar, status }: LoginProps) => {
   return (
     <FlexC
       css={{
@@ -60,25 +52,13 @@ export const Login = ({
         autoCapitalize="off"
         onChange={handleChange}
       />
-      {status === "empty" && (
-        <Warning text="Name and Password cant be empty!" />
-      )}
+      {status === "empty" && <Warning text="Name and Password cant be empty!" />}
       {status === "wrongPass" && <Warning text="wrong password!" />}
       <FlexR css={{ gap: 10 }}>
-        <Button
-          variant={"cadastrar"}
-          size={"full"}
-          onClick={handleCadastrar}
-          disabled={loading}
-        >
+        <Button variant={"cadastrar"} size={"full"} onClick={handleCadastrar} disabled={loading}>
           {loading ? "Loading" : "Register"}
         </Button>
-        <Button
-          variant={"login"}
-          size={"full"}
-          onClick={handleLogin}
-          disabled={loading}
-        >
+        <Button variant={"login"} size={"full"} onClick={handleLogin} disabled={loading}>
           {loading ? "Loading" : "Login"}
         </Button>
       </FlexR>
