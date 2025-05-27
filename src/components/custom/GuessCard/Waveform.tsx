@@ -1,47 +1,45 @@
+import { Barrinha } from "@/components/icons/audiowave/Barrinha";
+import { BarrinhaFundo } from "@/components/icons/audiowave/BarrinhaFundo";
 import { keyframes, styled } from "@/styles/stitches.config";
 
-// Define the bounce animation
-const bounce = keyframes({
-  "0%": { height: "10px" },
-  "100%": { height: "40px" },
-});
-
-// Styled components
-const WaveformContainer = styled("div", {
+const Container = styled("div", {
+  background: "$darkPurple",
+  position: "relative",
   display: "flex",
-  alignItems: "flex-end",
-  height: "50px",
-  gap: "5px",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "45px",
+  height: "45px",
+  borderRadius: 3,
 });
 
-const Line = styled("div", {
-  width: "4px",
-  backgroundColor: "$green",
-  animation: `${bounce} 0.5s infinite alternate`,
-  variants: {
-    size: {
-      small: { height: "20px" },
-      medium: { height: "30px" },
-      large: { height: "40px" },
-    },
-    delay: {
-      0: { animationDelay: "0s" },
-      1: { animationDelay: "0.22s" },
-      2: { animationDelay: "0.09s" },
-      3: { animationDelay: "0.3s" },
-    },
-  },
+const upAndDown = keyframes({
+  "0%, 40%, 80%, 100%": { maskPosition: "0px 60px" },
+  "20%, 60%": { maskPosition: "0px 15px" },
+  "30%, 50%, 90%": { maskPosition: "0px 30px" },
+  "10%, 70%": { maskPosition: "0px 10px" },
 });
 
-// Waveform Component
+//const upAndDown = keyframes({});
+
 const Waveform = () => {
   return (
-    <WaveformContainer>
-      <Line size="small" delay="0" />
-      <Line size="medium" delay="1" />
-      <Line size="large" delay="2" />
-      <Line size="medium" delay="3" />
-    </WaveformContainer>
+    <Container>
+      {/* <Div
+        css={{
+          backgroundColor: "$darkPurple",
+          filter: "blur(2px)",
+          borderRadius: 3,
+          position: "absolute",
+          width: "40px",
+          height: "40px",
+        }}
+      /> */}
+      <BarrinhaFundo css={{ opacity: 0.15, filter: "blur(1px)" }} />
+      <Barrinha css={{ translate: "13.2px", animation: `${upAndDown} 4s infinite` }} />
+      <Barrinha css={{ animation: `${upAndDown} 4s infinite 0.3s` }} />
+      <Barrinha css={{ translate: "-13.2px", animation: `${upAndDown} 4s infinite 0.15s` }} />
+    </Container>
   );
 };
 

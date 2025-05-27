@@ -10,7 +10,7 @@ import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import api from "@/utils/api";
-import { Ranking } from "@/components/custom/Misc/NewRanking";
+import { Ranking } from "@/components/custom/Misc/Ranking";
 import { FlexC } from "@/components/containers/flex";
 import { HomeHeader } from "@/components/custom/Header/Header";
 import { CategoriesPlay } from "@/components/custom/Home/CategoriesPlay";

@@ -1,28 +1,33 @@
 /* styles/fonts.css */
-@import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap");
 
 @font-face {
-  font-family: 'Bellota';
-  src: url('/fonts/bellota-regular.woff2') format('woff2'),
-       url('/fonts/bellota-regular.woff') format('woff');
+  font-family: "vcr";
+  src: url("/fonts/vcr-osd-mono.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap; /* Ensures text is visible while the font loads */
 }
 
 @font-face {
-  font-family: 'Bellota';
-  src: url('/fonts/bellota-bold.woff2') format('woff2'),
-       url('/fonts/bellota-bold.woff') format('woff');
+  font-family: "Bellota";
+  src: url("/fonts/bellota-regular.woff2") format("woff2"), url("/fonts/bellota-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; /* Ensures text is visible while the font loads */
+}
+
+@font-face {
+  font-family: "Bellota";
+  src: url("/fonts/bellota-bold.woff2") format("woff2"), url("/fonts/bellota-bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Bellota';
-  src: url('/fonts/bellota-light.woff2') format('woff2'),
-       url('/fonts/bellota-light.woff') format('woff');
+  font-family: "Bellota";
+  src: url("/fonts/bellota-light.woff2") format("woff2"), url("/fonts/bellota-light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;

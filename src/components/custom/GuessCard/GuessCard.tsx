@@ -5,9 +5,11 @@ import useSound from "use-sound";
 import { storageBaseUrl } from "@/lib/contants";
 import { type Card } from "@/types/types";
 import { useAnsState } from "@/lib/hooks/useAnsState";
-import Waveform from "./Waveform";
 import { Div } from "@/components/containers/div";
 import { keyframes } from "@/styles/stitches.config";
+import "./test.css";
+import { BlurText } from "@/components/buttons/BlurText/BlurText";
+import { BarsWave } from "./BarsWave";
 
 const pulseBrilho = keyframes({
   "0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100%": {
@@ -29,13 +31,13 @@ const shadowSpread = keyframes({
     boxShadow: "0px 0px 10px 0px #120226 inset, 0px 0px 10px 5px #120226",
   },
   "100%": {
-    boxShadow: "0px 0px 10px 60px #120226 inset, 0px 0px 10px 5px #120226",
+    boxShadow: "0px 0px 10px 150px #120226 inset, 0px 0px 10px 5px #120226",
   },
 });
 
 const startShadow = keyframes({
   "0%": {
-    boxShadow: "0px 0px 10px 60px #120226 inset, 0px 0px 10px 5px #120226",
+    boxShadow: "0px 0px 10px 150px #120226 inset, 0px 0px 10px 5px #120226",
   },
   "100%": {
     boxShadow: "0px 0px 10px 0px #120226 inset, 0px 0px 10px 0px #120226",
@@ -130,12 +132,22 @@ export const GuessCard = ({ card }: { card: Card }) => {
       <Div
         css={{
           position: "absolute",
-          top: "50%",
-          left: "50%",
+          top: "15%",
+          left: "12%",
           transform: "translate(-50%, -50%)",
         }}
       >
-        {isPlaying && <Waveform />}
+        {!isPlaying && <BlurText title="Play ▶" css={{ fontSize: "14px", color: "white", filter: "blur(0.6px)" }} />}
+      </Div>
+      <Div
+        css={{
+          position: "absolute",
+          top: "15%",
+          left: "10%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        {isPlaying && <BarsWave />}
       </Div>
       <Div
         css={{

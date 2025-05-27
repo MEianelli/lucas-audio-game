@@ -1,6 +1,6 @@
 import { FlexC } from "@/components/containers/flex";
 import { GetMoreLifes } from "./GetMoreLifes";
-import { Ranking } from "./NewRanking";
+import { Ranking } from "./Ranking";
 import { Timer } from "./Timer";
 
 export const Finished = () => {

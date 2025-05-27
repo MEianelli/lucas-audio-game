@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import "@/styles/fonts.css";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { VFXProvider } from "react-vfx";
+import { LoadingScreen } from "@/components/custom/Misc/LoadingScreen";
 
 function MyApp({ Component, pageProps }: AppProps) {
   globalStyles();
@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     //eslint-disable-next-line
   }, []);
 
-  return <VFXProvider>{pageLoading ? <div>Loading...</div> : <Component {...pageProps} />}</VFXProvider>;
+  return pageLoading ? <LoadingScreen /> : <Component {...pageProps} />;
 }
 
 export default MyApp;

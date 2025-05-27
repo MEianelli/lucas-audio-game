@@ -1,35 +1,28 @@
-import { Div } from "@/components/containers/div";
-import { PlayIcon } from "@/components/icons/play";
+import { Play } from "@/components/icons/audiowave/Play";
+import { PlayFundo } from "@/components/icons/audiowave/PlayFundo";
+import { styled } from "@/styles/stitches.config";
 
-export function PlayButton({
-  isPlaying,
-  color = "$purple",
-}: {
-  isPlaying: boolean;
-  color: string;
-}) {
-  if (isPlaying) return null;
+const Container = styled("div", {
+  position: "relative",
+  display: "flex",
+  width: "60px",
+  height: "60px",
+});
+
+export function PlayButton() {
   return (
-    <Div
-      css={{
-        width: "80px",
-        height: "64px",
-        backgroundColor: "$darkgrey",
-        color,
-        border: `4px solid ${color}`,
-        borderRadius: "14px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        "& svg": {
-          translate: "2px",
-        },
-        "& svg path": {
-          stroke: color,
-        },
-      }}
-    >
-      <PlayIcon />
-    </Div>
+    <Container>
+      <PlayFundo css={{ filter: "blur(1px)" }} />
+      <Play css={{ filter: "blur(2px)" }} />
+      <Play
+        css={{
+          position: "absolute",
+          scale: 0.75,
+          filter: "blur(2px)",
+          translate: "-1px",
+          "& path": { fill: "white" },
+        }}
+      />
+    </Container>
   );
 }

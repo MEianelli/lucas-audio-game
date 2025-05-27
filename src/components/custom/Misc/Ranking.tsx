@@ -1,143 +1,64 @@
-import { useState } from "react";
-import { FlexC, FlexR } from "@/components/containers/flex";
-import { Text } from "@/components/text/text";
-import { useStore } from "@/lib/store";
+import { BlurText } from "@/components/buttons/BlurText/BlurText";
+import { BlurText2 } from "@/components/buttons/BlurText/BlurText2";
 import { ButtonClean } from "@/components/buttons/buttons";
-import { useShallow } from "zustand/shallow";
-import { keyframes } from "@stitches/react";
+import { FlexC, FlexR } from "@/components/containers/flex";
+import { Bolt } from "@/components/icons/bolt";
+import { World } from "@/components/icons/world";
+import { useStore } from "@/lib/store";
+import { useState } from "react";
 
-type RankUser = {
-  name: string;
-  score?: number;
-  maxstreak?: number;
-};
+export function Ranking() {
+  const rankData = useStore((s) => s.rankData);
+  const name = useStore((s) => s.name);
+  const score = useStore((s) => s.score);
+  const maxstreak = useStore((s) => s.maxstreak);
+  const [isScore, setIsScore] = useState(true);
 
-const rankMenuOptions = ["Score", "Streak"];
-
-type RankType = "score" | "streak";
-
-export const Ranking = () => {
-  const [rankTypeInd, setRankTypeInd] = useState(0);
+  const selectedRank = isScore ? rankData?.top5score : rankData?.top5streak;
+  const userPos = isScore ? rankData?.userScorePos : rankData?.userStreakPos;
+  const isOnTop = selectedRank?.find((it) => it.name === name);
 
   return (
-    <FlexC css={{ gap: 12, flex: 1 }}>
-      <FlexR se css={{ borderBottom: "4px solid $purple", paddingBottom: 6 }}>
-        {rankMenuOptions.map((rank, i) => (
-          <ButtonClean key={rank} onClick={() => setRankTypeInd(i)}>
-            <Text ms cp={i !== rankTypeInd}>
-              {rank}
-            </Text>
-          </ButtonClean>
+    <FlexR
+      css={{
+        gap: 30,
+        height: 205,
+        scrollbarWidth: "none",
+        "-ms-overflow-style": "none",
+        "&::-webkit-scrollbar": { display: "none", width: "0 !important", height: "0 !important" },
+      }}
+    >
+      <FlexC css={{ gap: 6, flex: "1 0", justifyContent: "flex-start" }}>
+        <BlurText title={"Leaderboard"} css={{ fontSize: "22px" }} />
+        {selectedRank?.map((it, i) => (
+          <BlurText title={`${i + 1}. ${it.name}`} key={it.name} pulse={it.name === name} />
         ))}
-      </FlexR>
-
-      <RankingList menuOption={rankTypeInd} />
-    </FlexC>
-  );
-};
-
-const RankingList = ({ menuOption }: { menuOption: number }) => {
-  const [name, rankData, score, maxstreak, setModalOption] = useStore(
-    useShallow((s) => [s.name, s.rankData, s.score, s.maxstreak, s.setModalOption])
-  );
-
-  function handleClick() {
-    setModalOption("login");
-  }
-
-  const chosenMenu = menuOption !== 1;
-  const rankPos = chosenMenu ? rankData?.userScorePos : rankData?.userStreakPos;
-  const displayRank = chosenMenu ? "top5score" : "top5streak";
-  const userRankIndex = chosenMenu ? "userScorePos" : "userStreakPos";
-  const rankType = chosenMenu ? "score" : "streak";
-
-  return (
-    <>
-      <TopPlayers topList={rankData?.[displayRank]} type={rankType} playerInTop5Index={rankPos} />
-      {name && Number(rankPos) > 4 ? (
-        <RankRow user={{ name, score, maxstreak }} index={rankData?.[userRankIndex]} isUser type={rankType} animate />
-      ) : (
-        <BlankRankRow />
-      )}
-      {!name && (
-        <ButtonClean css={{ alignSelf: "center" }} onClick={handleClick}>
-          <Text s>Wanna show on Rank?</Text>
-          <Text u s>
-            Register/Login
-          </Text>
+        {!isOnTop && name && <BlurText title={`${userPos}. ${name}`} pulse={true} />}
+        {!name && <BlurText title={`?? . ${"No User"}`} pulse={true} />}
+      </FlexC>
+      <FlexC css={{ gap: 6 }}>
+        <ButtonClean css={{ paddingBottom: 4 }} onClick={() => setIsScore(true)}>
+          <World size={26} variant={isScore ? "pulsing" : undefined} />
         </ButtonClean>
-      )}
-    </>
-  );
-};
-
-const TopPlayers = ({
-  topList,
-  type = "score",
-  playerInTop5Index,
-}: {
-  topList?: { name: string }[];
-  type?: RankType;
-  playerInTop5Index?: number;
-}) => {
-  return (
-    <FlexC css={{ gap: 8, width: "100%" }}>
-      {topList?.map((user, index) => {
-        const playerInTop5 = playerInTop5Index === index + 1;
-        return <RankRow key={user.name} user={user} index={index + 1} type={type} animate={playerInTop5} />;
-      })}
-    </FlexC>
-  );
-};
-
-const bounceAnimation = keyframes({
-  "0%": { transform: "scale(1)" },
-  "100%": { transform: "scale(1.1)" },
-});
-
-const RankRow = ({
-  user,
-  index,
-  isUser,
-  type = "score",
-  animate,
-}: {
-  user: RankUser;
-  index?: number;
-  isUser?: boolean;
-  type?: RankType;
-  animate?: boolean;
-}) => {
-  if (index === undefined) return null;
-
-  const displayPoints = type === "score" ? user.score : user.maxstreak;
-  const textLen = `${index}.${user?.name}${displayPoints}`.length;
-  const fillerDifflen = 22 - textLen;
-  const filler = "●".repeat(fillerDifflen);
-  const animation = animate ? `${bounceAnimation} 0.5s infinite alternate linear` : "none";
-
-  return (
-    <FlexR cc css={{ gap: 4, animation }}>
-      <Text ms css={{ color: isUser ? "$green" : "$yellow" }}>
-        {index + "."}
-      </Text>
-      <Text ms>{user?.name}</Text>
-      <Text cp s>
-        {filler}
-      </Text>
-      <Text cg ms>
-        {displayPoints}
-      </Text>
+        {selectedRank?.map((it) => (
+          <BlurText2 title={it.score.toString()} variant="blue" key={it.name + "sd7gn87"} css={{ fontSize: "18px" }} />
+        ))}
+        {!isOnTop && <BlurText2 title={score.toString()} variant="blue" css={{ fontSize: "18px" }} />}
+      </FlexC>
+      <FlexC css={{ gap: 6 }}>
+        <ButtonClean onClick={() => setIsScore(false)}>
+          <Bolt size={"30px"} variant={!isScore ? "pulsing" : undefined} />
+        </ButtonClean>
+        {selectedRank?.map((it) => (
+          <BlurText2
+            title={it.maxstreak.toString()}
+            variant="yellow"
+            css={{ fontSize: "18px" }}
+            key={it.name + "3q45b"}
+          />
+        ))}
+        {!isOnTop && <BlurText2 title={maxstreak.toString()} variant="yellow" css={{ fontSize: "18px" }} />}
+      </FlexC>
     </FlexR>
   );
-};
-
-const BlankRankRow = () => {
-  return (
-    <FlexR cc>
-      <Text cp ms css={{ color: "transparent" }}>
-        ●
-      </Text>
-    </FlexR>
-  );
-};
+}

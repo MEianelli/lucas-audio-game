@@ -4,9 +4,11 @@ import { GuessCards } from "@/components/custom/GuessCard/GuessCards";
 import { GameHeader } from "@/components/custom/Header/Header";
 import { DialogModal } from "@/components/custom/Modal/modal";
 import { useFetchCards } from "@/lib/hooks/useFetchCards";
+import { useFetchRankNoUser } from "@/lib/hooks/useFetchRankNoUser";
 
 const Content = () => {
   const { cards } = useFetchCards();
+  useFetchRankNoUser();
 
   if (!cards.length) return null;
 

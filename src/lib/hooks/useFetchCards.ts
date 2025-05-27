@@ -1,7 +1,7 @@
 import { useStore } from "@/lib/store";
 import { useEffect, useState } from "react";
 import { Card } from "@/types/types";
-import { fetchFilteredCards } from "../apis/fetchCards/clientApi";
+import { fetchFilteredCardsBff } from "../apis/fetchCards/fetchFilteredCardsBff";
 
 export function useFetchCards() {
   const hitids = useStore((s) => s.hitids);
@@ -14,11 +14,7 @@ export function useFetchCards() {
       setLoadingCards(true);
       const limit = cards.length ? 1 : 2;
       const currentIds = cards.map((it) => it.card_id);
-      const data = await fetchFilteredCards("movie", limit, [
-        ...hitids,
-        ...missids,
-        ...currentIds,
-      ]);
+      const data = await fetchFilteredCardsBff("movie", limit, [...hitids, ...missids, ...currentIds]);
       setCards((old) => [...old, ...data]);
       setLoadingCards(false);
     }

@@ -30,7 +30,7 @@ export function Answers({ card, goToNext }: { readonly card: Card; readonly goTo
   }, [card.card_id]);
 
   return (
-    <FlexC css={{ width: "100%", gap: 10, paddingX: "2px" }}>
+    <FlexC css={{ width: "100%", gap: 10, paddingX: "7px" }}>
       {card.options?.map((option) => {
         return (
           <AnswersButton

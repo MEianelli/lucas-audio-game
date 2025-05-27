@@ -4,14 +4,16 @@ import { useStore } from "@/lib/store";
 
 export function GetMoreLifes() {
   const setLifes = useStore((s) => s.setLifes);
+  const setModalOption = useStore((s) => s.setModalOption);
+
+  function handleClick() {
+    setLifes(3);
+    setTimeout(() => setModalOption("none"), 1000);
+  }
+
   return (
     <FlexR css={{ gap: "10px" }}>
-      <ButtonAllUse
-        title="Watch Ad to Refill Lifes"
-        onclick={() => setLifes(3)}
-        css={{ fontSize: "20px" }}
-        size={"50px"}
-      />
+      <ButtonAllUse title="Watch Ad to Refill Lifes" onclick={handleClick} css={{ fontSize: "20px" }} size={"50px"} />
     </FlexR>
   );
 }
