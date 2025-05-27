@@ -5,9 +5,9 @@ import { styled } from "@/styles/stitches.config";
 import { Heart } from "@/components/icons/heart";
 import { World } from "@/components/icons/world";
 import { Bolt } from "@/components/icons/bolt";
-import { BlurText } from "@/components/buttons/BlurText/BlurText";
-import { BlurText2 } from "@/components/buttons/BlurText/BlurText2";
-import { BlurTextStrong } from "@/components/buttons/BlurText/BlurTextStrong";
+import { BlurText } from "@/components/text/BlurText";
+import { IconsText } from "@/components/text/IconsText";
+import { StrongBlurText } from "@/components/text/StrongBlurText";
 import { useStore } from "@/lib/store";
 import { useEffect } from "react";
 import { ButtonClean } from "@/components/buttons/buttons";
@@ -56,21 +56,21 @@ export function GameHeader() {
     <Wrapper>
       <FlexR css={{ justifyContent: "space-between" }}>
         <FlexC css={{ justifyContent: "flex-start" }}>
-          <BlurTextStrong title="GuessGame" css={{ fontSize: "28px" }} />
+          <StrongBlurText title="GuessGame" css={{ fontSize: "28px" }} />
           <BlurText title={name || "No user"} onclick={() => {}} css={{ fontSize: "12px" }} />
         </FlexC>
         <ButtonClean css={{ paddingTop: 5, display: "flex", flexFlow: "row nowrap" }} onClick={handleIconsClick}>
           <IconWrapper css={{ marginRight: 4 }}>
             <World size={26} />
-            <BlurText2 title={score.toString()} variant="blue" />
+            <IconsText title={score.toString()} variant="blue" />
           </IconWrapper>
           <IconWrapper>
             <Heart size={"30px"} />
-            <BlurText2 title={lifes.toString()} variant="red" />
+            <IconsText title={lifes.toString()} variant="red" />
           </IconWrapper>
           <IconWrapper>
             <Bolt size={"30px"} />
-            <BlurText2 title={currentstreak.toString()} variant="yellow" />
+            <IconsText title={currentstreak.toString()} variant="yellow" />
           </IconWrapper>
         </ButtonClean>
       </FlexR>

@@ -6,7 +6,7 @@ import { ASPECT_R, storageBaseUrl } from "@/lib/contants";
 import { type Card } from "@/types/types";
 import { useAnsState } from "@/lib/hooks/useAnsState";
 import { Div } from "@/components/containers/div";
-import { BlurText } from "@/components/buttons/BlurText/BlurText";
+import { BlurText } from "@/components/text/BlurText";
 import { BarsWave } from "./BarsWave";
 import { pulseBrilho, shadowSpread, startShadow } from "./GuessCardAnimations";
 

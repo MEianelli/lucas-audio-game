@@ -1,4 +1,4 @@
-import { ButtonAllUse } from "@/components/buttons/BlurButton/ButtonAllUse";
+import { BlurButton } from "@/components/buttons/BlurButton";
 import { FlexR } from "@/components/containers/flex";
 import { useStore } from "@/lib/store";
 
@@ -13,7 +13,7 @@ export function GetMoreLifes() {
 
   return (
     <FlexR css={{ gap: "10px" }}>
-      <ButtonAllUse title="Watch Ad to Refill Lifes" onclick={handleClick} css={{ fontSize: "20px" }} size={"50px"} />
+      <BlurButton title="Watch Ad to Refill Lifes" onclick={handleClick} css={{ fontSize: "20px" }} size={"50px"} />
     </FlexR>
   );
 }

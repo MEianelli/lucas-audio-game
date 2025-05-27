@@ -1,4 +1,4 @@
-import { BlurText } from "@/components/buttons/BlurText/BlurText";
+import { BlurText } from "@/components/text/BlurText";
 import useTimeUntilTomorrow from "@/lib/hooks/tomorrow";
 
 export function Timer() {

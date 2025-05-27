@@ -123,7 +123,7 @@ const BlinkText = styled("p", {
   animation: `${pulseBrilho} 0.6s infinite;`,
 });
 
-export const Button = ({
+export const RightWrongButton = ({
   title,
   onclick,
   isRight,

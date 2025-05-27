@@ -130,7 +130,7 @@ const IconDiv = styled("div", {
   height: "24px",
 });
 
-export const ButtonAllUse = ({
+export const BlurButton = ({
   title,
   onclick,
   css,

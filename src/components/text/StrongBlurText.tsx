@@ -29,7 +29,6 @@ const Container = styled("div", {
   backgroundColor: "transparent",
   width: "100%",
   border: "none",
-  flex: 1,
   cursor: "pointer",
   display: "flex",
   justifyContent: "center",
@@ -81,7 +80,7 @@ const Green = styled("p", {
   color: "rgb(0, 255, 0)",
 });
 
-export const BlurTextStrong = ({ title, css }: { title: string; css?: CSS }) => {
+export const StrongBlurText = ({ title, css }: { title: string; css?: CSS }) => {
   return (
     <Container css={{ ...css }}>
       {title}

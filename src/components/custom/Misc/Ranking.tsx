@@ -1,5 +1,5 @@
-import { BlurText } from "@/components/buttons/BlurText/BlurText";
-import { BlurText2 } from "@/components/buttons/BlurText/BlurText2";
+import { BlurText } from "@/components/text/BlurText";
+import { IconsText } from "@/components/text/IconsText";
 import { ButtonClean } from "@/components/buttons/buttons";
 import { FlexC, FlexR } from "@/components/containers/flex";
 import { Bolt } from "@/components/icons/bolt";
@@ -41,23 +41,23 @@ export function Ranking() {
           <World size={26} variant={isScore ? "pulsing" : undefined} />
         </ButtonClean>
         {selectedRank?.map((it) => (
-          <BlurText2 title={it.score.toString()} variant="blue" key={it.name + "sd7gn87"} css={{ fontSize: "18px" }} />
+          <IconsText title={it.score.toString()} variant="blue" key={it.name + "sd7gn87"} css={{ fontSize: "18px" }} />
         ))}
-        {!isOnTop && <BlurText2 title={score.toString()} variant="blue" css={{ fontSize: "18px" }} />}
+        {!isOnTop && <IconsText title={score.toString()} variant="blue" css={{ fontSize: "18px" }} />}
       </FlexC>
       <FlexC css={{ gap: 6 }}>
         <ButtonClean onClick={() => setIsScore(false)}>
           <Bolt size={"30px"} variant={!isScore ? "pulsing" : undefined} />
         </ButtonClean>
         {selectedRank?.map((it) => (
-          <BlurText2
+          <IconsText
             title={it.maxstreak.toString()}
             variant="yellow"
             css={{ fontSize: "18px" }}
             key={it.name + "3q45b"}
           />
         ))}
-        {!isOnTop && <BlurText2 title={maxstreak.toString()} variant="yellow" css={{ fontSize: "18px" }} />}
+        {!isOnTop && <IconsText title={maxstreak.toString()} variant="yellow" css={{ fontSize: "18px" }} />}
       </FlexC>
     </FlexR>
   );

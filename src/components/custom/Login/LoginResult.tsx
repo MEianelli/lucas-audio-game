@@ -4,9 +4,7 @@ import { useStore } from "@/lib/store";
 import { useShallow } from "zustand/shallow";
 
 export const LoginResult = () => {
-  const [name, score, maxstreak, rankData] = useStore(
-    useShallow((s) => [s.name, s.score, s.maxstreak, s.rankData])
-  );
+  const [name, score, maxstreak, rankData] = useStore(useShallow((s) => [s.name, s.score, s.maxstreak, s.rankData]));
 
   return (
     <FlexC
@@ -69,36 +67,6 @@ function ButtonLikeFlex({ data }: { data: ButtonTexts }) {
   );
 }
 
-// function ButtonLikeFlexSmall({ data }: { data: ButtonTexts }) {
-//   return (
-//     <FlexR
-//       ac
-//       c
-//       css={{
-//         gap: "8px",
-//         border: "4px solid $purple",
-//         borderRadius: "16px",
-//         padding: "6px 10px",
-//         flex: 1,
-//       }}
-//     >
-//       <Text s w>
-//         {data.text1}
-//       </Text>
-//       <Text s w>
-//         {data.text2}
-//       </Text>
-//       <Text s w cg>
-//         {"#" + data.pos}
-//       </Text>
-//     </FlexR>
-//   );
-// }
-
 export const RegisterResult = () => {
-  return (
-    <Text css={{ color: "$purple", fontWeight: 700 }}>
-      {"Register completed."}
-    </Text>
-  );
+  return <Text css={{ color: "$purple", fontWeight: 700 }}>{"Register completed."}</Text>;
 };

@@ -1,10 +1,10 @@
-import { BlurTextStrong } from "@/components/buttons/BlurText/BlurTextStrong";
+import { StrongBlurText } from "@/components/text/StrongBlurText";
 import { Container } from "@/components/containers/containers";
 
 export function LoadingScreen() {
   return (
     <Container css={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-      <BlurTextStrong title="GuessGame" css={{ fontSize: "38px" }} />
+      <StrongBlurText title="GuessGame" css={{ fontSize: "38px" }} />
     </Container>
   );
 }

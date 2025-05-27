@@ -88,7 +88,7 @@ const BlinkText = styled("p", {
   },
 });
 
-export const BlurText2 = ({
+export const IconsText = ({
   title,
   css,
   variant,

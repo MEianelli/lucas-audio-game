@@ -1,8 +1,7 @@
+import { RightWrongButton } from "@/components/buttons/RightWrongButton";
 import { calculateFontSize } from "@/lib/helpers/fontsize";
 import { reduceAnsSize } from "@/utils/strings";
 import { CSS } from "@stitches/react";
-import { Button } from "@/components/buttons/BlurButton/Button";
-
 export interface AnswersButtonPros extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   correct: string;
@@ -16,7 +15,7 @@ export function AnswersButton({ text, onclick, correct, css, disabled }: Answers
   const fontSize = calculateFontSize(parsedText.length);
 
   return (
-    <Button
+    <RightWrongButton
       css={{ fontSize, ...css }}
       title={parsedText}
       isRight={isRight}
