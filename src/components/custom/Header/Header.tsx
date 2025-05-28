@@ -1,6 +1,4 @@
 import { FlexC, FlexR } from "@/components/containers/flex";
-import { Menu } from "@/components/custom/Header/Menu/MenuIcon";
-import { Text } from "@/components/text/text";
 import { styled } from "@/styles/stitches.config";
 import { Heart } from "@/components/icons/heart";
 import { World } from "@/components/icons/world";
@@ -11,6 +9,7 @@ import { StrongBlurText } from "@/components/text/StrongBlurText";
 import { useStore } from "@/lib/store";
 import { useEffect } from "react";
 import { ButtonClean } from "@/components/buttons/buttons";
+import { useRouter } from "next/router";
 
 const Wrapper = styled(FlexC, {
   padding: "15px 16px 0px 26px",
@@ -24,11 +23,16 @@ const IconWrapper = styled(FlexC, {
 });
 
 export function HomeHeader() {
+  const lifes = useStore((s) => s.lifes);
+
   return (
-    <Wrapper cc>
-      <Menu css={{ marginRight: "auto" }} />
-      <Text g css={{ marginRight: "auto" }}>{`MediaGuess`}</Text>
-    </Wrapper>
+    <FlexR sb css={{ paddingX: "18px" }}>
+      <StrongBlurText title="GuessGame" css={{ fontSize: "32px", flex: 0 }} />
+      <FlexR cc css={{ gap: 6 }}>
+        <IconsText title={lifes.toString()} variant="red" />
+        <Heart size={"30px"} />
+      </FlexR>
+    </FlexR>
   );
 }
 
@@ -38,6 +42,7 @@ export function GameHeader() {
   const score = useStore((s) => s.score);
   const name = useStore((s) => s.name);
   const setModalOption = useStore((s) => s.setModalOption);
+  const router = useRouter();
 
   useEffect(() => {
     if (lifes <= 0) {
@@ -56,7 +61,9 @@ export function GameHeader() {
     <Wrapper>
       <FlexR css={{ justifyContent: "space-between" }}>
         <FlexC css={{ justifyContent: "flex-start" }}>
-          <StrongBlurText title="GuessGame" css={{ fontSize: "28px" }} />
+          <ButtonClean onClick={() => router.push("/")}>
+            <StrongBlurText title="GuessGame" css={{ fontSize: "28px" }} />
+          </ButtonClean>
           <BlurText title={name || "No user"} onclick={() => {}} css={{ fontSize: "12px" }} />
         </FlexC>
         <ButtonClean css={{ paddingTop: 5, display: "flex", flexFlow: "row nowrap" }} onClick={handleIconsClick}>
@@ -65,12 +72,12 @@ export function GameHeader() {
             <IconsText title={score.toString()} variant="blue" />
           </IconWrapper>
           <IconWrapper>
-            <Heart size={"30px"} />
-            <IconsText title={lifes.toString()} variant="red" />
-          </IconWrapper>
-          <IconWrapper>
             <Bolt size={"30px"} />
             <IconsText title={currentstreak.toString()} variant="yellow" />
+          </IconWrapper>
+          <IconWrapper>
+            <Heart size={"30px"} />
+            <IconsText title={lifes.toString()} variant="red" />
           </IconWrapper>
         </ButtonClean>
       </FlexR>

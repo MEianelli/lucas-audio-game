@@ -11,12 +11,11 @@ import { useEffect } from "react";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import api from "@/utils/api";
 import { Ranking } from "@/components/custom/Misc/Ranking";
-import { FlexC } from "@/components/containers/flex";
+import { FlexC, FlexR } from "@/components/containers/flex";
 import { HomeHeader } from "@/components/custom/Header/Header";
 import { CategoriesPlay } from "@/components/custom/Home/CategoriesPlay";
-import { Timer } from "@/components/custom/Misc/Timer";
-import { Text } from "@/components/text/text";
-import { GetMoreLifes } from "@/components/custom/Header/Menu/GetMoreLifes";
+import { BlurText } from "@/components/text/BlurText";
+import { ButtonClean } from "@/components/buttons/buttons";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = context.req.headers.cookie;
@@ -75,9 +74,8 @@ export default function Home(props: HomeProps) {
   const updateUserData = useStore((s) => s.updateUserData);
   const updateRankData = useStore((s) => s.updateRankData);
   const setLoginState = useStore((s) => s.setLoginState);
+  const setModalOption = useStore((s) => s.setModalOption);
   const resetStore = useStore((s) => s.resetStore);
-  const lifes = useStore((s) => s.lifes);
-  const name = useStore((s) => s.name);
 
   useEffect(() => {
     updateRankData(props.rank);
@@ -93,18 +91,19 @@ export default function Home(props: HomeProps) {
   return (
     <Container>
       <HomeHeader />
+      <CategoriesPlay />
       <FlexC css={{ padding: 18, width: "100%" }}>
         <Ranking />
       </FlexC>
-      {lifes <= 0 && (
-        <FlexC css={{ paddingX: 18, gap: 10, width: "100%" }}>
-          <Text s>{`User: ${name}`}</Text>
-          <Text s>{`lifes: ${lifes}`}</Text>
-          <Timer />
-          <GetMoreLifes />
-        </FlexC>
-      )}
-      {lifes > 0 && <CategoriesPlay />}
+      <FlexR cc css={{ padding: 18 }}>
+        <ButtonClean onClick={() => setModalOption("login")}>
+          <BlurText
+            title="Login"
+            onclick={() => {}}
+            css={{ textDecoration: "underline", textUnderlineOffset: "3px", fontSize: "22px" }}
+          />
+        </ButtonClean>
+      </FlexR>
       <DialogModal />
     </Container>
   );

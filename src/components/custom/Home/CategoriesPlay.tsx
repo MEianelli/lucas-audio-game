@@ -18,26 +18,26 @@ export const CategoriesPlay = () => {
         onClick={() => router.push("/content?cat=movies")}
         css={{
           border: "4px solid $white",
-          padding: "40px",
+          padding: "20px",
           borderRadius: "20px",
         }}
       >
         <FlexC cc>
-          <Text g>{"MovieGuess"}</Text>
-          <Text s>Play Now</Text>
+          <Text g>{"Play"}</Text>
+          <Text s>MovieGuess</Text>
         </FlexC>
       </ButtonClean>
       <ButtonClean
         onClick={() => router.push("/content?cat=music")}
         css={{
           border: "4px solid $white",
-          padding: "40px",
+          padding: "20px",
           borderRadius: "20px",
         }}
       >
         <FlexC cc>
-          <Text g>{"MusicGuess"}</Text>
-          <Text s>Play Now</Text>
+          <Text g>{"Play"}</Text>
+          <Text s>MusicGuess</Text>
         </FlexC>
       </ButtonClean>
     </FlexR>

@@ -19,46 +19,52 @@ export function Ranking() {
   const isOnTop = selectedRank?.find((it) => it.name === name);
 
   return (
-    <FlexR
-      css={{
-        gap: 30,
-        height: 205,
-        scrollbarWidth: "none",
-        "-ms-overflow-style": "none",
-        "&::-webkit-scrollbar": { display: "none", width: "0 !important", height: "0 !important" },
-      }}
-    >
-      <FlexC css={{ gap: 6, flex: "1 0", justifyContent: "flex-start" }}>
-        <BlurText title={"Leaderboard"} css={{ fontSize: "22px" }} />
-        {selectedRank?.map((it, i) => (
-          <BlurText title={`${i + 1}. ${it.name}`} key={it.name} pulse={it.name === name} />
-        ))}
-        {!isOnTop && name && <BlurText title={`${userPos}. ${name}`} pulse={true} />}
-        {!name && <BlurText title={`?? . ${"No User"}`} pulse={true} />}
-      </FlexC>
-      <FlexC css={{ gap: 6 }}>
-        <ButtonClean css={{ paddingBottom: 4 }} onClick={() => setIsScore(true)}>
-          <World size={26} variant={isScore ? "pulsing" : undefined} />
-        </ButtonClean>
-        {selectedRank?.map((it) => (
-          <IconsText title={it.score.toString()} variant="blue" key={it.name + "sd7gn87"} css={{ fontSize: "18px" }} />
-        ))}
-        {!isOnTop && <IconsText title={score.toString()} variant="blue" css={{ fontSize: "18px" }} />}
-      </FlexC>
-      <FlexC css={{ gap: 6 }}>
-        <ButtonClean onClick={() => setIsScore(false)}>
-          <Bolt size={"30px"} variant={!isScore ? "pulsing" : undefined} />
-        </ButtonClean>
-        {selectedRank?.map((it) => (
-          <IconsText
-            title={it.maxstreak.toString()}
-            variant="yellow"
-            css={{ fontSize: "18px" }}
-            key={it.name + "3q45b"}
-          />
-        ))}
-        {!isOnTop && <IconsText title={maxstreak.toString()} variant="yellow" css={{ fontSize: "18px" }} />}
-      </FlexC>
-    </FlexR>
+    <FlexC cc css={{ gap: 6 }}>
+      <BlurText title="Daily | Weekly | All" />
+      <FlexR
+        css={{
+          gap: 30,
+          height: 205,
+          width: "100%",
+        }}
+      >
+        <FlexC css={{ gap: 6, flex: "1 0", justifyContent: "flex-start" }}>
+          <BlurText title={"Leaderboard"} css={{ fontSize: "22px" }} />
+          {selectedRank?.map((it, i) => (
+            <BlurText title={`${i + 1}. ${it.name}`} key={it.name} pulse={it.name === name} />
+          ))}
+          {!isOnTop && name && <BlurText title={`${userPos}. ${name}`} pulse={true} />}
+          {!name && <BlurText title={`?? . ${"No User"}`} pulse={true} />}
+        </FlexC>
+        <FlexC css={{ gap: 6 }}>
+          <ButtonClean css={{ paddingBottom: 4 }} onClick={() => setIsScore(true)}>
+            <World size={26} variant={isScore ? "pulsing" : undefined} />
+          </ButtonClean>
+          {selectedRank?.map((it) => (
+            <IconsText
+              title={it.score.toString()}
+              variant="blue"
+              key={it.name + "sd7gn87"}
+              css={{ fontSize: "18px" }}
+            />
+          ))}
+          {!isOnTop && <IconsText title={score.toString()} variant="blue" css={{ fontSize: "18px" }} />}
+        </FlexC>
+        <FlexC css={{ gap: 6 }}>
+          <ButtonClean onClick={() => setIsScore(false)}>
+            <Bolt size={"30px"} variant={!isScore ? "pulsing" : undefined} />
+          </ButtonClean>
+          {selectedRank?.map((it) => (
+            <IconsText
+              title={it.maxstreak.toString()}
+              variant="yellow"
+              css={{ fontSize: "18px" }}
+              key={it.name + "3q45b"}
+            />
+          ))}
+          {!isOnTop && <IconsText title={maxstreak.toString()} variant="yellow" css={{ fontSize: "18px" }} />}
+        </FlexC>
+      </FlexR>
+    </FlexC>
   );
 }
