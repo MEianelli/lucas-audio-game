@@ -10,6 +10,7 @@ import { useState } from "react";
 export function Ranking() {
   const rankData = useStore((s) => s.rankData);
   const name = useStore((s) => s.name);
+  const id = useStore((s) => s.id);
   const score = useStore((s) => s.score);
   const maxstreak = useStore((s) => s.maxstreak);
   const [isScore, setIsScore] = useState(true);
@@ -23,7 +24,7 @@ export function Ranking() {
       <BlurText title="Daily | Weekly | All" />
       <FlexR
         css={{
-          gap: 30,
+          gap: 24,
           height: 205,
           width: "100%",
         }}
@@ -33,8 +34,8 @@ export function Ranking() {
           {selectedRank?.map((it, i) => (
             <BlurText title={`${i + 1}. ${it.name}`} key={it.name} pulse={it.name === name} />
           ))}
-          {!isOnTop && name && <BlurText title={`${userPos}. ${name}`} pulse={true} />}
-          {!name && <BlurText title={`?? . ${"No User"}`} pulse={true} />}
+          {!id && <BlurText title={`?? . ${"No User"}`} pulse={true} />}
+          {!isOnTop && !!id && <BlurText title={`${userPos}. ${name}`} pulse={true} />}
         </FlexC>
         <FlexC css={{ gap: 6 }}>
           <ButtonClean css={{ paddingBottom: 4 }} onClick={() => setIsScore(true)}>

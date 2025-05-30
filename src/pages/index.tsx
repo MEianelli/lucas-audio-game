@@ -10,12 +10,9 @@ import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import api from "@/utils/api";
-import { Ranking } from "@/components/custom/Misc/Ranking";
-import { FlexC, FlexR } from "@/components/containers/flex";
 import { HomeHeader } from "@/components/custom/Header/Header";
-import { CategoriesPlay } from "@/components/custom/Home/CategoriesPlay";
-import { BlurText } from "@/components/text/BlurText";
-import { ButtonClean } from "@/components/buttons/buttons";
+import { PlayAndRank } from "@/components/custom/Home/PlayAndRank";
+import { LoginButton } from "@/components/custom/Home/LoginButton";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = context.req.headers.cookie;
@@ -74,7 +71,6 @@ export default function Home(props: HomeProps) {
   const updateUserData = useStore((s) => s.updateUserData);
   const updateRankData = useStore((s) => s.updateRankData);
   const setLoginState = useStore((s) => s.setLoginState);
-  const setModalOption = useStore((s) => s.setModalOption);
   const resetStore = useStore((s) => s.resetStore);
 
   useEffect(() => {
@@ -91,19 +87,8 @@ export default function Home(props: HomeProps) {
   return (
     <Container>
       <HomeHeader />
-      <CategoriesPlay />
-      <FlexC css={{ padding: 18, width: "100%" }}>
-        <Ranking />
-      </FlexC>
-      <FlexR cc css={{ padding: 18 }}>
-        <ButtonClean onClick={() => setModalOption("login")}>
-          <BlurText
-            title="Login"
-            onclick={() => {}}
-            css={{ textDecoration: "underline", textUnderlineOffset: "3px", fontSize: "22px" }}
-          />
-        </ButtonClean>
-      </FlexR>
+      <PlayAndRank />
+      <LoginButton />
       <DialogModal />
     </Container>
   );
