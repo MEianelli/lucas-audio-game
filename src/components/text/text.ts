@@ -56,15 +56,6 @@ export const Text = styled("p", {
   },
 });
 
-export const TextWarning = styled("p", {
-  margin: 0,
-  color: "$red",
-  fontFamily: "sans-serif",
-  fontWeight: "bolder",
-  textTransform: "uppercase",
-  fontSize: 12,
-});
-
 export const TitleText = styled("p", {
   margin: 0,
   fontFamily: "Parkinsans",

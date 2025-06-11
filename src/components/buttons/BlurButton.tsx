@@ -137,12 +137,14 @@ export const BlurButton = ({
   disabled,
   size,
   children,
+  color,
 }: {
   title: string;
   onclick: () => void;
   css?: CSS;
   size?: string;
   children?: ReactNode;
+  color?: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   const [animate, setAnimate] = useState(false);
 
@@ -154,11 +156,14 @@ export const BlurButton = ({
   const animateTxtCls = animate ? clickedText() : "";
   const animateTxtBlinkCls = animate ? clickedBlinkText() : "";
 
+  const bgColor = color ? color : "#08b73e";
+  const bgColorAlpha = color ? `${color}75` : "#08b73e75";
+
   return (
     <Container onClick={handleClick} css={{ ...css, ...(!!size && { height: size }) }} disabled={disabled}>
       {title}
-      <StaticBox css={{ ...css, ...(!!size && { height: size }) }}>{title}</StaticBox>
-      <BlinkBox css={{ ...css, ...(!!size && { height: size }) }}>{title}</BlinkBox>
+      <StaticBox css={{ ...css, background: bgColor, ...(!!size && { height: size }) }}>{title}</StaticBox>
+      <BlinkBox css={{ ...css, background: bgColorAlpha, ...(!!size && { height: size }) }}>{title}</BlinkBox>
       <MainText className={animateTxtCls} css={{ ...css }}>
         {title}
       </MainText>

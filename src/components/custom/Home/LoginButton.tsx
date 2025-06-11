@@ -21,7 +21,7 @@ export function LoginButton() {
 
   if (id) {
     return (
-      <FlexR cc css={{ padding: 18 }}>
+      <FlexR cc css={{ padding: 22 }} id="logout">
         <ButtonClean onClick={handleLogout}>
           <BlurText
             title="Logout"
@@ -34,14 +34,14 @@ export function LoginButton() {
 
   if (view === "inputs") {
     return (
-      <FlexR cc css={{ paddingX: 18 }}>
+      <FlexR cc css={{ paddingX: 22 }} id="inputs">
         <LoginContent />
       </FlexR>
     );
   }
 
   return (
-    <FlexR cc css={{ padding: 18 }}>
+    <FlexR cc css={{ padding: 22 }} id="botao_login">
       <ButtonClean onClick={() => setView("inputs")}>
         <BlurText
           title="Login"

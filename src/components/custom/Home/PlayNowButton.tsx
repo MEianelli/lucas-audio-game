@@ -47,7 +47,7 @@ export function PlayNowButton({ categorie }: { categorie: "movies" | "music" }) 
         alignItems: "center",
         position: "relative",
         aspectRatio: `${ASPECT_R}`,
-        width: "280px",
+        width: "300px",
         height: "100%",
         padding: "0px",
         boxSizing: "border-box",

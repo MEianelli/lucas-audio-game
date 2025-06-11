@@ -41,5 +41,6 @@ export const LoginInputCrt = styled("input", {
   textShadow: "0 0 3px #ff8000d6, 0 0 5px #ffe4169e",
   "&::placeholder": {
     textShadow: "none",
+    fontWeight: "bolder",
   },
 });

@@ -98,6 +98,7 @@ export const LoginContent = () => {
       handleChange={handleChange}
       handleLogin={handleLogin}
       handleCadastrar={handleCadastrar}
+      onfocus={() => setStatus("")}
       status={status}
       loading={loading}
     />

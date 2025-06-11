@@ -16,14 +16,14 @@ const Tests = () => {
         padding: "60px",
       }}
     >
-      <RightWrongButton title="The Matrix" isRight={true} onclick={() => {}} />
-      <RightWrongButton title="The Matrix 2" isRight={false} onclick={() => {}} />
-      <BlurButton title="The Terminator" onclick={() => {}} />
-      <BlurText title="The Terminator" />
-      <IconsText title="The Terminator" variant="red" />
-      <IconsText title="The Terminator" variant="yellow" />
-      <IconsText title="The Terminator" variant="blue" />
-      <StrongBlurText title="The Terminator" />
+      <RightWrongButton title="Right Wrong Button" isRight={true} onclick={() => {}} />
+      <RightWrongButton title="Right Wrong Button" isRight={false} onclick={() => {}} />
+      <BlurButton title="Blur Button" onclick={() => {}} />
+      <BlurText title="TBlurText" />
+      <IconsText title="IconsText" variant="red" />
+      <IconsText title="IconsText" variant="yellow" />
+      <IconsText title="IconsText" variant="blue" />
+      <StrongBlurText title="StrongBlurText" />
     </FlexC>
   );
 };

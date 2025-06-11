@@ -26,7 +26,7 @@ export function HomeHeader() {
   const lifes = useStore((s) => s.lifes);
 
   return (
-    <FlexR sb css={{ paddingX: "18px" }}>
+    <FlexR sb css={{ padding: "10px 18px 0px 18px" }}>
       <StrongBlurText title="GuessGame" css={{ fontSize: "32px", flex: 0 }} />
       <FlexR cc css={{ gap: 6 }}>
         <IconsText title={lifes.toString()} variant="red" />
