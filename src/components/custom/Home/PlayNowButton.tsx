@@ -24,11 +24,11 @@ export function PlayNowButton({ categorie }: { categorie: "movies" | "music" }) 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex === imageList.length - 1 ? 0 : prevIndex + 1));
-      //eslint-disable-next-line
     }, 2000);
 
     return () => clearInterval(timer);
-  }, [imageList.length]);
+    //eslint-disable-next-line
+  }, []);
 
   function handleClick() {
     if (lifes <= 0) {
