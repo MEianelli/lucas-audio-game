@@ -8,9 +8,9 @@ import { useAnsState } from "@/lib/hooks/useAnsState";
 import { Div } from "@/components/containers/div";
 import { BlurText } from "@/components/text/BlurText";
 import { BarsAudioWave } from "@/components/icons/barsAudioWave/BarsAudioWave";
-import { pulseBrilho, shadowSpread, startShadow } from "./GuessCardAnimations";
+import { pulseBrilho } from "./GuessCardAnimations";
 
-export const GuessCard = ({ card }: { card: Card }) => {
+export const GuessCard = ({ card, ncard }: { card: Card; ncard: Card }) => {
   const { state } = useAnsState(card.card_id);
 
   const soundUrl = `${storageBaseUrl}/${card.audio_src}`;
@@ -54,6 +54,17 @@ export const GuessCard = ({ card }: { card: Card }) => {
         zIndex: "10",
       }}
     >
+      <ImageCss
+        src={`${storageBaseUrl}/${ncard.image_src}`}
+        alt={"hidden"}
+        width={200}
+        height={120}
+        priority
+        css={{
+          display: "none",
+          pointerEvents: "none",
+        }}
+      />
       <ImageCss
         src={`${storageBaseUrl}/${card.image_src}`}
         alt={card.image_src ?? ""}
@@ -129,7 +140,7 @@ export const GuessCard = ({ card }: { card: Card }) => {
           background: "transparent",
           pointerEvents: "none",
           filter: "blur(2px)",
-          animation: state !== "neutral" ? `${shadowSpread} 1s normal` : `${startShadow} 1s normal`,
+          //animation: state !== "neutral" ? `${shadowSpread} 1s normal` : `${startShadow} 1s normal`,
         }}
       />
     </ButtonClean>

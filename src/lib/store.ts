@@ -13,10 +13,7 @@ type TStoreValues = {
 type TStoreFuncs = {
   setName: (name: string) => void;
   setPass: (pass: string) => void;
-  setIds: (
-    id: number[] | string[],
-    type: "hitids" | "missids"
-  ) => Promise<void | boolean>;
+  setIds: (id: number[] | string[], type: "hitids" | "missids") => Promise<void | boolean>;
   updateUserData: (user: User) => Promise<void>;
   updateRankData: (rankData: RankData) => void;
   setScreen: (screen: TScreen) => void;
@@ -32,7 +29,7 @@ const initialState: TStoreValues = {
   id: 0,
   name: "",
   pass: "",
-  lifes: 3,
+  lifes: 30,
   score: 0,
   currentstreak: 0,
   maxstreak: 0,

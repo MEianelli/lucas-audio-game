@@ -32,3 +32,14 @@ export const startShadow = keyframes({
     boxShadow: "0px 0px 10px 0px #120226 inset, 0px 0px 10px 0px #120226",
   },
 });
+
+export const moveOutSide = keyframes({
+  "0%": { translate: "0px 0px", opacity: 1 },
+  "80%": { translate: "0px 0px", opacity: 1 },
+  "100%": { translate: "-300px 0px", opacity: 0 },
+});
+
+export const moveInSide = keyframes({
+  "0%": { translate: "300px 0px", opacity: 0 },
+  "100%": { translate: "0px 0px", opacity: 1 },
+});
