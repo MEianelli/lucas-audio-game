@@ -29,7 +29,7 @@ const initialState: TStoreValues = {
   id: 0,
   name: "",
   pass: "",
-  lifes: 30,
+  lifes: 5,
   score: 0,
   currentstreak: 0,
   maxstreak: 0,

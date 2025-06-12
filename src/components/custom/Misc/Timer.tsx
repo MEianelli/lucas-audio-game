@@ -4,5 +4,5 @@ import useTimeUntilTomorrow from "@/lib/hooks/tomorrow";
 export function Timer() {
   const timer = useTimeUntilTomorrow();
 
-  return <BlurText title={`More lifes in: ${timer}`} />;
+  return <BlurText title={`More lifes in: ${timer}`} css={{ width: "100%", textAlign: "center" }} />;
 }
