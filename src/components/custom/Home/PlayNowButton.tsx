@@ -27,7 +27,6 @@ export function PlayNowButton({ categorie }: { categorie: "movies" | "music" }) 
     }, 2000);
 
     return () => clearInterval(timer);
-    //eslint-disable-next-line
   }, []);
 
   function handleClick() {
