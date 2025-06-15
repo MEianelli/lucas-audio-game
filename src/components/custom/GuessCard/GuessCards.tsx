@@ -2,17 +2,13 @@ import { GuessCard } from "./GuessCard";
 import { FlexC } from "@/components/containers/flex";
 import { Answers } from "./Answers";
 import { type Card } from "@/types/types";
-import { useState } from "react";
 import { useAnsState } from "@/lib/hooks/useAnsState";
 import { moveInSide, moveOutSide } from "./GuessCardAnimations";
+import { useStore } from "@/lib/store";
 
 export const GuessCards = ({ cards }: { cards: Card[] }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const currentIndex = useStore((s) => s.currentIndex);
   const { state } = useAnsState(cards[currentIndex].card_id);
-
-  const goToNext = () => {
-    setTimeout(() => setCurrentIndex((prev) => prev + 1), 1000);
-  };
 
   return (
     <FlexC
@@ -28,7 +24,7 @@ export const GuessCards = ({ cards }: { cards: Card[] }) => {
       }}
     >
       <GuessCard card={cards[currentIndex]} ncard={cards[currentIndex + 1]} />
-      <Answers card={cards[currentIndex]} goToNext={goToNext} />
+      <Answers card={cards[currentIndex]} />
     </FlexC>
   );
 };

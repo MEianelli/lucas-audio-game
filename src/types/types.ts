@@ -49,11 +49,11 @@ export interface Media extends Base {
 
 export interface Card {
   media_id: number;
-  title: string;
   card_id: number;
   options: string[];
   image_src: string;
   audio_src: string;
+  archive: string;
 }
 
 export interface UploadCard {

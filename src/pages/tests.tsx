@@ -16,8 +16,8 @@ const Tests = () => {
         padding: "60px",
       }}
     >
-      <RightWrongButton title="Right Wrong Button" isRight={true} onclick={() => {}} />
-      <RightWrongButton title="Right Wrong Button" isRight={false} onclick={() => {}} />
+      <RightWrongButton title="Right Wrong Button" tc={true} onclick={() => {}} />
+      <RightWrongButton title="Right Wrong Button" tc={false} onclick={() => {}} />
       <BlurButton title="Blur Button" onclick={() => {}} />
       <BlurText title="TBlurText" />
       <IconsText title="IconsText" variant="red" />

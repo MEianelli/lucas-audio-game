@@ -126,13 +126,13 @@ const BlinkText = styled("p", {
 export const RightWrongButton = ({
   title,
   onclick,
-  isRight,
+  tc,
   css,
   disabled,
 }: {
   title: string;
   onclick: () => void;
-  isRight: boolean;
+  tc: boolean;
   css?: CSS;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   const [animate, setAnimate] = useState(false);
@@ -143,15 +143,15 @@ export const RightWrongButton = ({
   }
 
   const clickedBlinkBox = clsGen({
-    backgroundColor: isRight ? "#08b73e75" : "rgba(183 8 56 75)",
+    backgroundColor: tc ? "#08b73e75" : "rgba(183 8 56 75)",
     boxShadow: "none",
     filter: "blur(2px)",
     animation: `${surgindo} 1s forwards, ${pulseBrilho} 0.6s infinite;`,
   });
 
   const clickedBox = clsGen({
-    backgroundColor: isRight ? "#08b73e" : "rgb(183 8 56)",
-    boxShadow: `0px 0px 40px 10px ${isRight ? "#09520f" : "rgb(82 9 23)"} inset`,
+    backgroundColor: tc ? "#08b73e" : "rgb(183 8 56)",
+    boxShadow: `0px 0px 40px 10px ${tc ? "#09520f" : "rgb(82 9 23)"} inset`,
     filter: "blur(2px)",
     animation: `${surgindo} 1s forwards`,
   });

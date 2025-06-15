@@ -7,6 +7,7 @@ import { LoginResult, RegisterResult } from "../Login/LoginResult";
 import { Ranking } from "../Misc/Ranking";
 import { LoginContent } from "../Login/LoginContent";
 import { Finished } from "../Misc/Finished";
+import { NoLifesHome } from "../Misc/NolifesHome";
 
 const grow = keyframes({
   "0%": { transform: "scale(0.1)" },
@@ -36,7 +37,15 @@ interface DialogModalProps extends React.DialogHTMLAttributes<HTMLDialogElement>
   css?: CSS;
 }
 
-export type ModalOptions = "registerResult" | "loginResult" | "menu" | "ranking" | "login" | "finished" | "none";
+export type ModalOptions =
+  | "registerResult"
+  | "loginResult"
+  | "menu"
+  | "ranking"
+  | "login"
+  | "finished"
+  | "noLifesHome"
+  | "none";
 
 export const DialogModal = ({ css, ...props }: DialogModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -94,5 +103,6 @@ const ModalContentMapper: Record<ModalOptions, JSX.Element | null> = {
   menu: <MenuContainer />,
   ranking: <Ranking />,
   finished: <Finished />,
+  noLifesHome: <NoLifesHome />,
   none: null,
 };

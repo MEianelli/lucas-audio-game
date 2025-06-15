@@ -31,7 +31,7 @@ export function PlayNowButton({ categorie }: { categorie: "movies" | "music" }) 
 
   function handleClick() {
     if (lifes <= 0) {
-      setModalOption("finished");
+      setModalOption("noLifesHome");
       return;
     }
     router.push(`/content?cat=${categorie}`);

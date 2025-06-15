@@ -8,6 +8,7 @@ type TStoreValues = {
   loginState: LoginState;
   modalOption: ModalOptions;
   rankData?: RankData;
+  currentIndex: number;
 } & User;
 
 type TStoreFuncs = {
@@ -21,6 +22,8 @@ type TStoreFuncs = {
   setModalOption: (option: ModalOptions) => void;
   resetStore: () => void;
   setLifes: (lifes: number) => void;
+  setCurrentIndex: (index: number) => void;
+  goToNext: () => void;
 };
 
 type TStore = TStoreValues & TStoreFuncs;
@@ -32,6 +35,7 @@ const initialState: TStoreValues = {
   lifes: 5,
   score: 0,
   currentstreak: 0,
+  currentIndex: 0,
   maxstreak: 0,
   winrate: 0,
   hitids: [],
@@ -54,6 +58,8 @@ export const useStore = create<TStore>((set, get) => ({
       ...user,
     });
   },
+  setCurrentIndex: (currentIndex) => set({ currentIndex }),
+  goToNext: () => setTimeout(() => set((prev) => ({ currentIndex: prev.currentIndex + 1 })), 1000),
   setIds: async (ids, type) => {
     const id = get().id;
     const lifes = get().lifes;

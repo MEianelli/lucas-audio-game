@@ -2,6 +2,7 @@ import { supabase } from "@/lib/supabase";
 import { Card, CardDTO } from "@/types/types";
 import { getRndArrElements, shuffleArray } from "@/utils/random";
 import { PostgrestError } from "@supabase/supabase-js";
+import * as unit from "@/utils/unitTest";
 
 export const fetchFilteredCardsSsr = async (
   category: string,
@@ -25,13 +26,19 @@ export const fetchFilteredCardsSsr = async (
   const parsedData = data.map((card) => {
     const rndWrongs = getRndArrElements(card.wrongs);
     const options = shuffleArray([...rndWrongs, card.title]);
+    const titleIndex = options.indexOf(card.title);
+    let test = unit.test1(titleIndex);
+    test = unit.test2(test);
+    test = unit.test3(test);
+    test = unit.test4(test);
+    const archive = `${test}`;
     return {
       media_id: card.media_id,
-      title: card.title,
       card_id: card.card_id,
       options,
       image_src: card.image_src,
       audio_src: card.audio_src,
+      archive,
     };
   });
 

@@ -3,24 +3,26 @@ import { AnswersButton } from "./AnswersButton";
 import { useStore } from "@/lib/store";
 import { type Card } from "@/types/types";
 import { FlexC } from "@/components/containers/flex";
+import * as unit from "@/utils/unitTest";
 
-export function Answers({ card, goToNext }: { readonly card: Card; readonly goToNext?: () => void }) {
+export function Answers({ card }: { readonly card: Card }) {
   const [disableAll, setDisableAll] = useState(false);
   const setIds = useStore((s) => s.setIds);
   const lifes = useStore((s) => s.lifes);
+  const goToNext = useStore((s) => s.goToNext);
 
-  function handleClick(isRight: boolean) {
+  function handleClick(is: boolean) {
     if (disableAll) return;
     setDisableAll(true);
-    if (isRight) {
+    if (is) {
       setIds([card.card_id], "hitids");
-      goToNext?.();
+      goToNext();
       return;
     }
     setIds([card.card_id], "missids");
     const updatedLife = Math.max(lifes - 1, 0);
     if (updatedLife > 0) {
-      goToNext?.();
+      goToNext();
     }
     return;
   }
@@ -31,11 +33,17 @@ export function Answers({ card, goToNext }: { readonly card: Card; readonly goTo
 
   return (
     <FlexC css={{ width: "100%", gap: 10, paddingX: "7px" }}>
-      {card.options?.map((option) => {
+      {card.options?.map((option, index) => {
+        let dateAdded = Number(card.archive);
+        dateAdded = unit.detach4(dateAdded);
+        dateAdded = unit.detach3(dateAdded);
+        dateAdded = unit.detach2(dateAdded);
+        dateAdded = unit.detach1(dateAdded);
+        const isDated = dateAdded === index;
         return (
           <AnswersButton
             key={card.card_id + option}
-            correct={card.title}
+            date={isDated}
             onclick={handleClick}
             text={option}
             disabled={disableAll}
