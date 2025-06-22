@@ -10,10 +10,10 @@ import { BlurText } from "@/components/text/BlurText";
 import { BarsAudioWave } from "@/components/icons/barsAudioWave/BarsAudioWave";
 import { pulseBrilho } from "./GuessCardAnimations";
 
-export const GuessCard = ({ card, ncard }: { card: Card; ncard: Card }) => {
-  const { state } = useAnsState(card.card_id);
+export const GuessCard = ({ cards }: { cards: Card[] }) => {
+  const { state } = useAnsState(cards[0].card_id);
 
-  const soundUrl = `${storageBaseUrl}/${card.audio_src}`;
+  const soundUrl = `${storageBaseUrl}/${cards[0].audio_src}`;
 
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -55,7 +55,7 @@ export const GuessCard = ({ card, ncard }: { card: Card; ncard: Card }) => {
       }}
     >
       <ImageCss
-        src={`${storageBaseUrl}/${ncard.image_src}`}
+        src={`${storageBaseUrl}/${cards[1].image_src}`}
         alt={"hidden"}
         width={200}
         height={120}
@@ -66,8 +66,8 @@ export const GuessCard = ({ card, ncard }: { card: Card; ncard: Card }) => {
         }}
       />
       <ImageCss
-        src={`${storageBaseUrl}/${card.image_src}`}
-        alt={card.image_src ?? ""}
+        src={`${storageBaseUrl}/${cards[0].image_src}`}
+        alt={cards[0].image_src ?? ""}
         width={200}
         height={120}
         css={{
@@ -82,8 +82,8 @@ export const GuessCard = ({ card, ncard }: { card: Card; ncard: Card }) => {
         }}
       />
       <ImageCss
-        src={`${storageBaseUrl}/${card.image_src}`}
-        alt={card.image_src ?? ""}
+        src={`${storageBaseUrl}/${cards[0].image_src}`}
+        alt={cards[0].image_src ?? ""}
         width={200}
         height={120}
         css={{

@@ -138,8 +138,10 @@ export const RightWrongButton = ({
   const [animate, setAnimate] = useState(false);
 
   function handleClick() {
-    setAnimate(true);
     onclick();
+    if (!disabled) {
+      setAnimate(true);
+    }
   }
 
   const clickedBlinkBox = clsGen({
@@ -162,7 +164,7 @@ export const RightWrongButton = ({
   const animateTxtBlinkCls = animate ? clickedBlinkText() : "";
 
   return (
-    <Container onClick={handleClick} css={{ ...css }} disabled={disabled}>
+    <Container onClick={handleClick} css={{ ...css }}>
       {title}
       <StaticBox className={animateBoxCls} css={{ ...css }}>
         {title}

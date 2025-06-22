@@ -4,11 +4,9 @@ import { Answers } from "./Answers";
 import { type Card } from "@/types/types";
 import { useAnsState } from "@/lib/hooks/useAnsState";
 import { moveInSide, moveOutSide } from "./GuessCardAnimations";
-import { useStore } from "@/lib/store";
 
 export const GuessCards = ({ cards }: { cards: Card[] }) => {
-  const currentIndex = useStore((s) => s.currentIndex);
-  const { state } = useAnsState(cards[currentIndex].card_id);
+  const { state } = useAnsState(cards[0].card_id);
 
   return (
     <FlexC
@@ -23,8 +21,8 @@ export const GuessCards = ({ cards }: { cards: Card[] }) => {
         animation: state !== "neutral" ? `${moveOutSide} 1s forwards` : `${moveInSide} 0.2s forwards`,
       }}
     >
-      <GuessCard card={cards[currentIndex]} ncard={cards[currentIndex + 1]} />
-      <Answers card={cards[currentIndex]} />
+      <GuessCard cards={cards} />
+      <Answers card={cards[0]} />
     </FlexC>
   );
 };

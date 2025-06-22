@@ -8,11 +8,17 @@ import * as unit from "@/utils/unitTest";
 export function Answers({ card }: { readonly card: Card }) {
   const [disableAll, setDisableAll] = useState(false);
   const setIds = useStore((s) => s.setIds);
+  const setModalOption = useStore((s) => s.setModalOption);
   const lifes = useStore((s) => s.lifes);
+  const noLifes = lifes <= 0;
   const goToNext = useStore((s) => s.goToNext);
 
   function handleClick(is: boolean) {
-    if (disableAll) return;
+    if (noLifes) {
+      setModalOption("finished");
+      return;
+    }
+    if (disableAll || noLifes) return;
     setDisableAll(true);
     if (is) {
       setIds([card.card_id], "hitids");
@@ -46,7 +52,7 @@ export function Answers({ card }: { readonly card: Card }) {
             date={isDated}
             onclick={handleClick}
             text={option}
-            disabled={disableAll}
+            disabled={disableAll || noLifes}
           />
         );
       })}
