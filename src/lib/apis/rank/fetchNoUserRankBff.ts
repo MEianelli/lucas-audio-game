@@ -1,9 +1,9 @@
-import { RankData } from "@/types/types";
+import { RankDataWrapper } from "@/types/types";
 import api from "@/utils/api";
 
 export const fetchNoUserRankBff = async () => {
   try {
-    const rankData: { data: RankData } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
+    const rankData: { data: RankDataWrapper } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
       method: "POST",
     });
 

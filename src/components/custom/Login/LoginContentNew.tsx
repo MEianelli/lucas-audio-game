@@ -2,7 +2,7 @@ import { useStore } from "@/lib/store";
 import { crypto } from "@/utils/crypto";
 import { useState } from "react";
 import { Login } from "./LoginNew";
-import { RankData, Response, TStatus } from "@/types/types";
+import { RankDataWrapper, Response, TStatus } from "@/types/types";
 import api from "@/utils/api";
 import { useShallow } from "zustand/shallow";
 
@@ -43,7 +43,7 @@ export const LoginContent = () => {
 
       setStatus(data.res);
       if (data.res === "registered") {
-        const rankData: { data: RankData } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
+        const rankData: { data: RankDataWrapper } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
           method: "POST",
           body: JSON.stringify({ id: data.user.id }),
         });
@@ -74,7 +74,7 @@ export const LoginContent = () => {
 
       setStatus(data.res);
       if (data.res === "logged") {
-        const rankData: { data: RankData } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
+        const rankData: { data: RankDataWrapper } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
           method: "POST",
           body: JSON.stringify({ id: data.user.id }),
         });

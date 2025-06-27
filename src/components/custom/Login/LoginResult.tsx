@@ -21,14 +21,14 @@ export const LoginResult = () => {
         data={{
           text1: score,
           text2: "Score",
-          pos: rankData?.userScorePos ?? "",
+          pos: rankData?.all.userScorePos ?? "",
         }}
       />
       <ButtonLikeFlex
         data={{
           text1: maxstreak,
           text2: "Streak",
-          pos: rankData?.userStreakPos,
+          pos: rankData?.all.userStreakPos,
         }}
       />
     </FlexC>
