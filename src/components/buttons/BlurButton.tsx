@@ -150,6 +150,7 @@ export const BlurButton = ({
 
   function handleClick() {
     setAnimate(true);
+    setTimeout(() => setAnimate(false), 1000);
     onclick();
   }
 

@@ -1,13 +1,13 @@
 import { create } from "zustand";
 import { ModalOptions } from "@/components/custom/Modal/modal";
-import { LoginState, RankData, TScreen, User } from "@/types/types";
+import { LoginState, RankDataWrapper, TScreen, User } from "@/types/types";
 import api from "@/utils/api";
 
 type TStoreValues = {
   screen: TScreen;
   loginState: LoginState;
   modalOption: ModalOptions;
-  rankData?: RankData;
+  rankData?: RankDataWrapper;
   currentIndex: number;
 } & User;
 
@@ -16,7 +16,7 @@ type TStoreFuncs = {
   setPass: (pass: string) => void;
   setIds: (id: number[] | string[], type: "hitids" | "missids") => Promise<void | boolean>;
   updateUserData: (user: User) => Promise<void>;
-  updateRankData: (rankData: RankData) => void;
+  updateRankData: (rankData: RankDataWrapper) => void;
   setScreen: (screen: TScreen) => void;
   setLoginState: (loginState: LoginState) => void;
   setModalOption: (option: ModalOptions) => void;
@@ -34,9 +34,11 @@ const initialState: TStoreValues = {
   pass: "",
   lifes: 5,
   score: 0,
+  scoreweek: 0,
   currentstreak: 0,
   currentIndex: 0,
   maxstreak: 0,
+  maxstreakweek: 0,
   winrate: 0,
   hitids: [],
   missids: [],
@@ -72,9 +74,11 @@ export const useStore = create<TStore>((set, get) => ({
     const payload = {
       [type]: newIDsArray,
       score: newScore,
+      scoreweek: newScore,
       ...(type === "hitids" && {
         currentstreak: newCurrentStreak,
         ...(newCurrentStreak > maxstreak && { maxstreak: newCurrentStreak }),
+        ...(newCurrentStreak > maxstreak && { maxstreakweek: newCurrentStreak }),
       }),
       ...(type === "missids" && { currentstreak: 0 }),
       ...(type === "missids" && { lifes: Math.max(lifes - 1, 0) }),

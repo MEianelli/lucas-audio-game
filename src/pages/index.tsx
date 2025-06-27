@@ -3,7 +3,7 @@ import { DialogModal } from "@/components/custom/Modal/modal";
 import { COOKIE_NAME } from "@/lib/contants";
 import { useStore } from "@/lib/store";
 import { supabase } from "@/lib/supabase";
-import { RankData, User } from "@/types/types";
+import { RankDataWrapper, User } from "@/types/types";
 import { parseCookies } from "@/utils/cookie";
 import { decryptData } from "@/utils/crypto";
 import { GetServerSideProps } from "next";
@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const decrypted = decryptData(parsed[COOKIE_NAME]);
 
   if (!decrypted?.name) {
-    const rankData: { data: RankData } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
+    const rankData: { data: RankDataWrapper } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
       method: "POST",
     });
     return {
@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     .single();
 
   if (!data?.id || error) {
-    const rankData: { data: RankData } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
+    const rankData: { data: RankDataWrapper } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
       method: "POST",
     });
     return {
@@ -49,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const rankData: { data: RankData } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
+  const rankData: { data: RankDataWrapper } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
     method: "POST",
     body: JSON.stringify({ id: data.id }),
   });
@@ -64,7 +64,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 interface HomeProps {
   user: User;
-  rank: RankData;
+  rank: RankDataWrapper;
 }
 
 export default function Home(props: HomeProps) {

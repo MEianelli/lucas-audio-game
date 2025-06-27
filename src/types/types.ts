@@ -27,10 +27,12 @@ export type User = {
   pass: string;
   lifes: number;
   score: number;
+  scoreweek: number;
   hitids: number[];
   missids: number[];
   currentstreak: number;
   maxstreak: number;
+  maxstreakweek: number;
   winrate: number;
 };
 
@@ -71,6 +73,10 @@ export interface CardDTO {
   audio_src: string;
 }
 
+export interface RankDataWrapper {
+  all: RankData;
+  week: RankData;
+}
 export interface RankData {
   top5streak: { name: string; score: number; maxstreak: number }[];
   top5score: { name: string; score: number; maxstreak: number }[];

@@ -11,9 +11,9 @@ import { BarsAudioWave } from "@/components/icons/barsAudioWave/BarsAudioWave";
 import { pulseBrilho } from "./GuessCardAnimations";
 
 export const GuessCard = ({ cards }: { cards: Card[] }) => {
-  const { state } = useAnsState(cards[0].card_id);
+  const { state } = useAnsState(cards[0]?.card_id);
 
-  const soundUrl = `${storageBaseUrl}/${cards[0].audio_src}`;
+  const soundUrl = `${storageBaseUrl}/${cards[0]?.audio_src}`;
 
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -36,6 +36,8 @@ export const GuessCard = ({ cards }: { cards: Card[] }) => {
     //eslint-disable-next-line
   }, [state]);
 
+  if (!cards.length || cards.length < 2) return null;
+
   return (
     <ButtonClean
       onClick={handleToggle}
@@ -55,7 +57,7 @@ export const GuessCard = ({ cards }: { cards: Card[] }) => {
       }}
     >
       <ImageCss
-        src={`${storageBaseUrl}/${cards[1].image_src}`}
+        src={`${storageBaseUrl}/${cards[1]?.image_src}`}
         alt={"hidden"}
         width={200}
         height={120}
@@ -66,8 +68,8 @@ export const GuessCard = ({ cards }: { cards: Card[] }) => {
         }}
       />
       <ImageCss
-        src={`${storageBaseUrl}/${cards[0].image_src}`}
-        alt={cards[0].image_src ?? ""}
+        src={`${storageBaseUrl}/${cards[0]?.image_src}`}
+        alt={cards[0]?.image_src ?? ""}
         width={200}
         height={120}
         css={{
@@ -82,8 +84,8 @@ export const GuessCard = ({ cards }: { cards: Card[] }) => {
         }}
       />
       <ImageCss
-        src={`${storageBaseUrl}/${cards[0].image_src}`}
-        alt={cards[0].image_src ?? ""}
+        src={`${storageBaseUrl}/${cards[0]?.image_src}`}
+        alt={cards[0]?.image_src ?? ""}
         width={200}
         height={120}
         css={{

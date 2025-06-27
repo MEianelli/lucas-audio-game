@@ -13,7 +13,19 @@ async function Rank(req: NextApiRequest, res: NextApiResponse) {
     .limit(5);
 
   if (scoreRes.error) {
-    return res.status(200).json({ error: "no user data" });
+    console.log("scoreRes :", scoreRes);
+    return res.status(200).json({ error: "no user data", data: null });
+  }
+
+  const scoreweekRes = await supabase
+    .from("users")
+    .select("name, scoreweek, maxstreakweek")
+    .order("scoreweek", { ascending: false })
+    .limit(5);
+
+  if (scoreweekRes.error) {
+    console.log("scoreweekRes :", scoreweekRes);
+    return res.status(200).json({ error: "no user data", data: null });
   }
 
   const streakRes = await supabase
@@ -23,15 +35,35 @@ async function Rank(req: NextApiRequest, res: NextApiResponse) {
     .limit(5);
 
   if (streakRes.error) {
-    return res.status(200).json({ error: "no user data" });
+    console.log("streakRes :", streakRes);
+    return res.status(200).json({ error: "no user data", data: null });
+  }
+
+  const streakweekRes = await supabase
+    .from("users")
+    .select("name, maxstreakweek, scoreweek")
+    .order("maxstreakweek", { ascending: false })
+    .limit(5);
+
+  if (streakweekRes.error) {
+    console.log("streakweekRes :", streakweekRes);
+    return res.status(200).json({ error: "no user data", data: null });
   }
 
   if (!id) {
     const payload = {
-      top5score: scoreRes.data,
-      top5streak: streakRes.data,
-      userScorePos: null,
-      userStreakPos: null,
+      all: {
+        top5score: scoreRes.data,
+        top5streak: streakRes.data,
+        userScorePos: null,
+        userStreakPos: null,
+      },
+      week: {
+        top5score: scoreweekRes.data.map(convertWeekToNormal),
+        top5streak: streakweekRes.data.map(convertWeekToNormal),
+        userScorePos: null,
+        userStreakPos: null,
+      },
     };
 
     res.status(200).json({ data: payload });
@@ -42,7 +74,17 @@ async function Rank(req: NextApiRequest, res: NextApiResponse) {
   });
 
   if (userRankScoreRes.error) {
-    return res.status(200).json({ error: "no rank score" });
+    console.log("userRankScoreRes :", userRankScoreRes);
+    return res.status(200).json({ error: "no rank score", data: null });
+  }
+
+  const userRankScoreweekRes = await supabase.rpc("get_user_scoreweek_row_index", {
+    user_id: id,
+  });
+
+  if (userRankScoreweekRes.error) {
+    console.log("userRankScoreweekRes :", userRankScoreweekRes);
+    return res.status(200).json({ error: "no rank scoreweek", data: null });
   }
 
   const userStreakRes = await supabase.rpc("get_user_streak_row_index", {
@@ -50,17 +92,43 @@ async function Rank(req: NextApiRequest, res: NextApiResponse) {
   });
 
   if (userStreakRes.error) {
-    return res.status(200).json({ error: "no rank streak" });
+    console.log("userStreakRes :", userStreakRes);
+    return res.status(200).json({ error: "no rank streak", data: null });
+  }
+
+  const userStreakweekRes = await supabase.rpc("get_user_maxstreakweek_row_index", {
+    user_id: id,
+  });
+
+  if (userStreakweekRes.error) {
+    console.log("userStreakweekRes :", userStreakweekRes);
+    return res.status(200).json({ error: "no rank streak", data: null });
   }
 
   const payload = {
-    top5streak: streakRes.data,
-    top5score: scoreRes.data,
-    userScorePos: userRankScoreRes.data[0].row_index,
-    userStreakPos: userStreakRes.data[0].row_index,
+    all: {
+      top5score: scoreRes.data,
+      top5streak: streakRes.data,
+      userScorePos: userRankScoreRes.data[0].row_index,
+      userStreakPos: userStreakRes.data[0].row_index,
+    },
+    week: {
+      top5score: scoreweekRes.data.map(convertWeekToNormal),
+      top5streak: streakweekRes.data.map(convertWeekToNormal),
+      userScorePos: userRankScoreweekRes.data[0].row_index,
+      userStreakPos: userStreakweekRes.data[0].row_index,
+    },
   };
 
   res.status(200).json({ data: payload });
 }
 
 export default Rank;
+
+function convertWeekToNormal(it: { name: string; scoreweek: number | string; maxstreakweek: number | string }) {
+  return {
+    score: it.scoreweek,
+    maxstreak: it.maxstreakweek,
+    name: it.name,
+  };
+}
