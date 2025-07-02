@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ButtonClean } from "@/components/buttons/buttons";
 import { ImageCss } from "@/components/image/Image";
 import useSound from "use-sound";
@@ -16,31 +16,62 @@ export const GuessCard = ({ cards }: { cards: Card[] }) => {
   const soundUrl = `${storageBaseUrl}/${cards[0]?.audio_src}`;
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [hasUserInteracted, setHasUserInteracted] = useState(false);
+  const autoPlayTimeoutRef = useRef<NodeJS.Timeout>(null);
 
   const [play, { stop }] = useSound(soundUrl, {
     onplay: () => setIsPlaying(true),
     onstop: () => setIsPlaying(false),
     onend: () => setIsPlaying(false),
+    interrupt: true,
   });
 
-  const handleToggle = () => {
-    if (isPlaying) {
-      stop();
-    } else {
-      play();
+  useEffect(() => {
+    return () => {
+      if (autoPlayTimeoutRef.current) {
+        clearTimeout(autoPlayTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleClick = () => {
+    if (!hasUserInteracted) {
+      setHasUserInteracted(true);
     }
+
+    if (autoPlayTimeoutRef.current) {
+      clearTimeout(autoPlayTimeoutRef.current);
+    }
+
+    stop();
+    play();
+    setHasUserInteracted(false);
   };
 
   useEffect(() => {
-    setTimeout(() => stop(), 500);
-    //eslint-disable-next-line
-  }, [state]);
+    if (hasUserInteracted || !soundUrl) return;
+
+    if (autoPlayTimeoutRef.current) {
+      clearTimeout(autoPlayTimeoutRef.current);
+    }
+
+    autoPlayTimeoutRef.current = setTimeout(() => {
+      stop();
+      play();
+    }, 400);
+  }, [soundUrl, hasUserInteracted, play, stop]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => stop(), 200);
+    return () => clearTimeout(timer);
+  }, [state, stop]);
 
   if (!cards.length || cards.length < 2) return null;
 
   return (
     <ButtonClean
-      onClick={handleToggle}
+      onClick={handleClick}
+      onTouchStart={handleClick}
       css={{
         display: "flex",
         justifyContent: "center",
