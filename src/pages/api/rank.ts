@@ -66,7 +66,7 @@ async function Rank(req: NextApiRequest, res: NextApiResponse) {
       },
     };
 
-    res.status(200).json({ data: payload });
+    return res.status(200).json({ data: payload });
   }
 
   const userRankScoreRes = await supabase.rpc("get_user_score_row_index", {

@@ -34,17 +34,25 @@ export const GuessCard = ({ cards }: { cards: Card[] }) => {
     };
   }, []);
 
+  const handleTouch = (e: React.TouchEvent) => {
+    e.preventDefault();
+    handleClick();
+  };
+
   const handleClick = () => {
     if (!hasUserInteracted) {
-      setHasUserInteracted(true);
+      setHasUserInteracted((prev) => (!prev ? true : prev));
     }
 
     if (autoPlayTimeoutRef.current) {
       clearTimeout(autoPlayTimeoutRef.current);
     }
 
-    stop();
-    play();
+    if (isPlaying) {
+      stop();
+    } else {
+      play();
+    }
     setHasUserInteracted(false);
   };
 
@@ -71,7 +79,7 @@ export const GuessCard = ({ cards }: { cards: Card[] }) => {
   return (
     <ButtonClean
       onClick={handleClick}
-      onTouchStart={handleClick}
+      onTouchEnd={handleTouch}
       css={{
         display: "flex",
         justifyContent: "center",
