@@ -1,9 +1,8 @@
-import { LoginInput } from "@/components/inputs/input";
-import { Button } from "@/components/buttons/buttons";
+import { LoginInputCrt } from "@/components/inputs/input";
 import { Warning } from "./Messages";
 import { TStatus } from "@/types/types";
 import { FlexC, FlexR } from "@/components/containers/flex";
-import { Text } from "@/components/text/text";
+import { BlurButton } from "@/components/buttons/BlurButton";
 
 export interface LoginProps {
   name: string;
@@ -11,56 +10,63 @@ export interface LoginProps {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleLogin: () => void;
   handleCadastrar: () => void;
+  onfocus: () => void;
   status: TStatus;
   loading: boolean;
 }
 
-export const Login = ({ name, pass, loading, handleChange, handleLogin, handleCadastrar, status }: LoginProps) => {
+export const Login = ({
+  name,
+  pass,
+  loading,
+  handleChange,
+  handleLogin,
+  onfocus,
+  handleCadastrar,
+  status,
+}: LoginProps) => {
   return (
     <FlexC
       css={{
         gap: "10px",
+        width: "100%",
+        position: "relative",
       }}
     >
-      <Text
-        css={{
-          fontSize: "28px",
-          color: "$purple",
-          fontWeight: 700,
-          marginBottom: "16px",
-        }}
-      >
-        Register / Login
-      </Text>
-      <LoginInput
+      <LoginInputCrt
         type="text"
         placeholder="Nickname"
         value={name}
         name="name"
         autoComplete="off"
         autoCapitalize="off"
+        maxLength={20}
         onChange={handleChange}
+        onFocus={onfocus}
       />
       {status === "unexistant" && <Warning text="No user with that name!" />}
       {status === "unavailable" && <Warning text="Name already taken!" />}
-      <LoginInput
+      <LoginInputCrt
         type="text"
         placeholder="Password"
         value={pass}
         name="pass"
         autoComplete="off"
         autoCapitalize="off"
+        maxLength={20}
         onChange={handleChange}
+        onFocus={onfocus}
       />
       {status === "empty" && <Warning text="Name and Password cant be empty!" />}
       {status === "wrongPass" && <Warning text="wrong password!" />}
       <FlexR css={{ gap: 10 }}>
-        <Button variant={"cadastrar"} size={"full"} onClick={handleCadastrar} disabled={loading}>
-          {loading ? "Loading" : "Register"}
-        </Button>
-        <Button variant={"login"} size={"full"} onClick={handleLogin} disabled={loading}>
-          {loading ? "Loading" : "Login"}
-        </Button>
+        <BlurButton
+          title={loading ? "Loading" : "Register"}
+          onclick={handleCadastrar}
+          disabled={loading}
+          color="#2c08b7"
+        />
+        <BlurButton title={loading ? "Loading" : "Login"} onclick={handleLogin} disabled={loading} />
       </FlexR>
     </FlexC>
   );

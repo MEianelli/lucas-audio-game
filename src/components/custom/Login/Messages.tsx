@@ -1,7 +1,7 @@
-import { FlexC, FlexR } from "@/components/containers/flex";
+import { FlexR } from "@/components/containers/flex";
 import { WarningIcon } from "@/components/icons/warning";
 import { IconsText } from "@/components/text/IconsText";
-import { Text } from "@/components/text/text";
+
 import { styled } from "@/styles/stitches.config";
 
 export const TextWarningDiv = styled(FlexR, {
@@ -23,15 +23,5 @@ export function Warning({ text }: { readonly text: string }) {
       <WarningIcon />
       <IconsText title={text} variant="red" css={{ fontSize: "16px", whiteSpace: "nowrap" }} />
     </TextWarningDiv>
-  );
-}
-
-export function TextMessage({ text }: { readonly text: string }) {
-  return (
-    <FlexC css={{ gap: 8 }}>
-      <Text color={"text"} css={{ marginBottom: 8, fontFamily: "$sans", fontWeight: 700 }}>
-        {text}
-      </Text>
-    </FlexC>
   );
 }

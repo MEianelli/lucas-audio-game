@@ -9,8 +9,11 @@ import { Div } from "@/components/containers/div";
 import { BlurText } from "@/components/text/BlurText";
 import { BarsAudioWave } from "@/components/icons/barsAudioWave/BarsAudioWave";
 import { pulseBrilho } from "./GuessCardAnimations";
+import { useStore } from "@/lib/store";
 
 export const GuessCard = ({ cards }: { cards: Card[] }) => {
+  const lifes = useStore((s) => s.lifes);
+  const noLifes = lifes <= 0;
   const { state } = useAnsState(cards[0]?.card_id);
 
   const soundUrl = `${storageBaseUrl}/${cards[0]?.audio_src}`;
@@ -57,7 +60,7 @@ export const GuessCard = ({ cards }: { cards: Card[] }) => {
   };
 
   useEffect(() => {
-    if (hasUserInteracted || !soundUrl) return;
+    if (hasUserInteracted || !soundUrl || noLifes) return;
 
     if (autoPlayTimeoutRef.current) {
       clearTimeout(autoPlayTimeoutRef.current);
@@ -67,7 +70,7 @@ export const GuessCard = ({ cards }: { cards: Card[] }) => {
       stop();
       play();
     }, 400);
-  }, [soundUrl, hasUserInteracted, play, stop]);
+  }, [soundUrl, hasUserInteracted, play, stop, noLifes]);
 
   useEffect(() => {
     const timer = setTimeout(() => stop(), 200);

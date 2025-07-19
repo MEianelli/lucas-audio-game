@@ -11,7 +11,6 @@ export function Answers({ card }: { readonly card: Card }) {
   const setModalOption = useStore((s) => s.setModalOption);
   const lifes = useStore((s) => s.lifes);
   const noLifes = lifes <= 0;
-  const goToNext = useStore((s) => s.goToNext);
 
   function handleClick(is: boolean) {
     if (noLifes) {
@@ -22,13 +21,11 @@ export function Answers({ card }: { readonly card: Card }) {
     setDisableAll(true);
     if (is) {
       setIds([card.card_id], "hitids");
-      goToNext();
       return;
     }
     setIds([card.card_id], "missids");
     const updatedLife = Math.max(lifes - 1, 0);
     if (updatedLife > 0) {
-      goToNext();
     }
     return;
   }

@@ -1,5 +1,5 @@
 import { Ranking } from "@/components/custom/Misc/Ranking";
-import { FlexC, FlexR } from "@/components/containers/flex";
+import { FlexC } from "@/components/containers/flex";
 import { PlayNowButton } from "@/components/custom/Home/PlayNowButton";
 import { styled } from "@/styles/stitches.config";
 
@@ -23,29 +23,29 @@ const BlurBg = styled("div", {
 
 export function PlayAndRank() {
   return (
-    <FlexR css={{ padding: "18px 15px", gap: 14, overflow: "scroll", scrollbarWidth: "none" }}>
-      <FlexC css={{ gap: 16, alignItems: "center" }}>
-        <PlayNowButton categorie="movies" />
-        <RankContainer>
-          <BlurBg
-            css={{
-              background: "#1b005c",
-            }}
-          />
-          <Ranking />
-        </RankContainer>
-      </FlexC>
-      <FlexC css={{ gap: 16 }}>
-        <PlayNowButton categorie="music" />
-        <RankContainer>
-          <BlurBg
-            css={{
-              background: "rgb(1 0 79)",
-            }}
-          />
-          <Ranking />
-        </RankContainer>
-      </FlexC>
-    </FlexR>
+    <FlexC css={{ padding: "18px 15px", gap: 16, alignItems: "center" }}>
+      <PlayNowButton categorie="movies" />
+      <RankContainer>
+        <BlurBg
+          css={{
+            background: "#1b005c",
+          }}
+        />
+        <Ranking />
+      </RankContainer>
+    </FlexC>
+    // <FlexR css={{ padding: "18px 15px", gap: 14, overflow: "scroll", scrollbarWidth: "none" }}>
+    //   <FlexC css={{ gap: 16 }}>
+    //     <PlayNowButton categorie="music" />
+    //     <RankContainer>
+    //       <BlurBg
+    //         css={{
+    //           background: "rgb(1 0 79)",
+    //         }}
+    //       />
+    //       <Ranking />
+    //     </RankContainer>
+    //   </FlexC>
+    // </FlexR>
   );
 }

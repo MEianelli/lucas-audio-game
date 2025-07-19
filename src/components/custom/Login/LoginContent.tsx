@@ -4,23 +4,13 @@ import { useState } from "react";
 import { Login } from "./Login";
 import { RankDataWrapper, Response, TStatus } from "@/types/types";
 import api from "@/utils/api";
-import { LoginResult } from "./LoginResult";
 import { useShallow } from "zustand/shallow";
 
 const allowedPattern = /^[A-Za-z0-9!@#$%^&]*$/;
 
 export const LoginContent = () => {
-  const [name, pass, setName, setPass, updateUserData, loginState, setLoginState, updateRankData] = useStore(
-    useShallow((s) => [
-      s.name,
-      s.pass,
-      s.setName,
-      s.setPass,
-      s.updateUserData,
-      s.loginState,
-      s.setLoginState,
-      s.updateRankData,
-    ])
+  const [name, pass, setName, setPass, updateUserData, setLoginState, updateRankData] = useStore(
+    useShallow((s) => [s.name, s.pass, s.setName, s.setPass, s.updateUserData, s.setLoginState, s.updateRankData])
   );
 
   const [status, setStatus] = useState<TStatus>("");
@@ -102,20 +92,15 @@ export const LoginContent = () => {
   }
 
   return (
-    <>
-      {loginState === "logged" && <LoginResult />}
-      {loginState === "registered" && <LoginResult />}
-      {(loginState === "login" || loginState === "register") && (
-        <Login
-          name={name}
-          pass={pass}
-          handleChange={handleChange}
-          handleLogin={handleLogin}
-          handleCadastrar={handleCadastrar}
-          status={status}
-          loading={loading}
-        />
-      )}
-    </>
+    <Login
+      name={name}
+      pass={pass}
+      handleChange={handleChange}
+      handleLogin={handleLogin}
+      handleCadastrar={handleCadastrar}
+      onfocus={() => setStatus("")}
+      status={status}
+      loading={loading}
+    />
   );
 };

@@ -5,7 +5,7 @@ import { useStore } from "@/lib/store";
 import { deleteCookie } from "@/utils/cookie";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { LoginContent } from "../Login/LoginContentNew";
+import { LoginContent } from "../Login/LoginContent";
 
 export function LoginButton() {
   const router = useRouter();

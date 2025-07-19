@@ -1,15 +1,6 @@
 // stitches.config.ts
 import { createStitches } from "@stitches/react";
 
-export const cardDimentions = {
-  width: 140,
-  height: 125,
-  widthPadding: 0,
-  padding: 8,
-};
-
-cardDimentions.widthPadding = cardDimentions.width - cardDimentions.padding * 2;
-
 const colors = {
   primary: "#0070f3",
   secondary: "#1A1A1A",
@@ -49,16 +40,7 @@ const colors = {
   darkPurple: "#0E0030",
 };
 
-export const {
-  styled,
-  css,
-  theme,
-  createTheme,
-  globalCss,
-  keyframes,
-  getCssText,
-  config,
-} = createStitches({
+export const { styled, css, theme, createTheme, globalCss, keyframes, getCssText, config } = createStitches({
   theme: {
     colors,
     fonts: {
@@ -75,13 +57,7 @@ export const {
       32: "32px",
     },
     sizes: {
-      max: "1200px",
-      container: "960px",
-      cell: "640px",
-      button: "40px",
-      cardWidth: `${cardDimentions.width}px`,
-      cardWidthPadding: `${cardDimentions.widthPadding}px`,
-      cardHeight: `${cardDimentions.height}px`,
+      cell: "480px",
     },
     shadows: {
       ...colors,

@@ -5,13 +5,11 @@ import { useStore } from "@/lib/store";
 export function GetMoreLifes() {
   const setLifes = useStore((s) => s.setLifes);
   const setModalOption = useStore((s) => s.setModalOption);
-  const goToNext = useStore((s) => s.goToNext);
 
   function handleClick() {
     setLifes(3);
     setTimeout(() => {
       setModalOption("none");
-      goToNext();
     }, 1000);
   }
 

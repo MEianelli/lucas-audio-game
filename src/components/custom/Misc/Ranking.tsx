@@ -24,6 +24,7 @@ export function Ranking() {
   const selectedRank = isScore ? rankData?.top5score : rankData?.top5streak;
   const userPos = isScore ? rankData?.userScorePos : rankData?.userStreakPos;
   const isOnTop = selectedRank?.find((it) => it?.name === name);
+  const shortName = name.slice(0, 10);
 
   return (
     <FlexC cc css={{ gap: 6 }}>
@@ -38,10 +39,10 @@ export function Ranking() {
         <FlexC css={{ gap: 6, flex: "1 0", justifyContent: "flex-start" }}>
           <BlurText title={"Leaderboard"} css={{ fontSize: "22px" }} />
           {selectedRank?.map((it, i) => (
-            <BlurText title={`${i + 1}. ${it?.name}`} key={it?.name} pulse={it?.name === name} />
+            <BlurText title={`${i + 1}. ${it?.name.slice(0, 10)}`} key={it?.name} pulse={it?.name === name} />
           ))}
           {!id && <BlurText title={`?? . ${"No User"}`} pulse={true} />}
-          {!isOnTop && !!id && <BlurText title={`${userPos}. ${name}`} pulse={true} />}
+          {!isOnTop && !!id && <BlurText title={`${userPos}. ${shortName}`} pulse={true} />}
         </FlexC>
         <FlexC css={{ gap: 6 }}>
           <ButtonClean css={{ paddingBottom: 4 }} onClick={() => setIsScore(true)}>

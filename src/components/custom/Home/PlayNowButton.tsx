@@ -24,7 +24,7 @@ export function PlayNowButton({ categorie }: { categorie: "movies" | "music" }) 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex === imageList.length - 1 ? 0 : prevIndex + 1));
-    }, 2000);
+    }, 1500);
 
     return () => clearInterval(timer);
   }, []);
@@ -46,8 +46,7 @@ export function PlayNowButton({ categorie }: { categorie: "movies" | "music" }) 
         alignItems: "center",
         position: "relative",
         aspectRatio: `${ASPECT_R}`,
-        width: "300px",
-        height: "100%",
+        width: "100%",
         padding: "0px",
         boxSizing: "border-box",
         transition: "height 0.5s ease",
