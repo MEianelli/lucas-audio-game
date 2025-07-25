@@ -18,12 +18,8 @@ export class Cards {
     if (!this.checkFiles()) return false;
     if (!this.checkMedia()) return false;
 
-    const audioArr = Array.from(this.files.audio!).map((it) =>
-      it.name.slice(0, -4)
-    );
-    const imagesArr = Array.from(this.files.images!).map((it) =>
-      it.name.slice(0, -4)
-    );
+    const audioArr = Array.from(this.files.audio!).map((it) => it.name.slice(0, it.name.indexOf(".")));
+    const imagesArr = Array.from(this.files.images!).map((it) => it.name.slice(0, it.name.indexOf(".")));
 
     for (let i = 0; i < audioArr.length; i++) {
       if (audioArr[i] !== imagesArr[i]) {
@@ -82,9 +78,7 @@ export class Cards {
     this.imageSrc = (await this.uploadFilesType("images")) || [];
   }
 
-  private async uploadFilesType(
-    type: "audio" | "images"
-  ): Promise<string[] | undefined> {
+  private async uploadFilesType(type: "audio" | "images"): Promise<string[] | undefined> {
     const formData = new FormData();
 
     for (let i = 0; i < this.files[type]!.length; i++) {

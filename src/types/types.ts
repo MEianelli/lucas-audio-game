@@ -31,6 +31,7 @@ export type User = {
   hitids: number[];
   missids: number[];
   currentstreak: number;
+  currentstreakweek: number;
   maxstreak: number;
   maxstreakweek: number;
   winrate: number;

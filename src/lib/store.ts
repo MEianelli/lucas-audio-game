@@ -33,6 +33,7 @@ const initialState: TStoreValues = {
   score: 0,
   scoreweek: 0,
   currentstreak: 0,
+  currentstreakweek: 0,
   maxstreak: 0,
   maxstreakweek: 0,
   winrate: 0,
@@ -60,19 +61,25 @@ export const useStore = create<TStore>((set, get) => ({
     const id = get().id;
     const lifes = get().lifes;
     const score = get().score;
+    const scoreweek = get().scoreweek;
     const newCurrentStreak = get().currentstreak + 1;
+    const newCurrentStreakweek = get().currentstreakweek + 1;
     const maxstreak = get().maxstreak;
+    const maxstreakweek = get().maxstreakweek;
     const addArr = get()[type];
     const newIDsArray = [...new Set([...addArr, ...ids])];
     const newScore = type === "hitids" ? score + 1 : score - 1;
+    const newScoreweek = type === "hitids" ? scoreweek + 1 : scoreweek - 1;
     const payload = {
       [type]: newIDsArray,
       score: newScore,
-      scoreweek: newScore,
+      scoreweek: newScoreweek,
       ...(type === "hitids" && {
         currentstreak: newCurrentStreak,
+        currentstreakweek: newCurrentStreakweek,
         ...(newCurrentStreak > maxstreak && { maxstreak: newCurrentStreak }),
-        ...(newCurrentStreak > maxstreak && { maxstreakweek: newCurrentStreak }),
+        ...(newCurrentStreakweek > maxstreak && { maxstreak: newCurrentStreakweek }),
+        ...(newCurrentStreakweek > maxstreakweek && { maxstreakweek: newCurrentStreakweek }),
       }),
       ...(type === "missids" && { currentstreak: 0 }),
       ...(type === "missids" && { lifes: Math.max(lifes - 1, 0) }),

@@ -38,8 +38,8 @@ export function HomeHeader() {
 
 export function GameHeader() {
   const lifes = useStore((s) => s.lifes);
-  const currentstreak = useStore((s) => s.currentstreak);
-  const score = useStore((s) => s.score);
+  const currentstreak = useStore((s) => s.currentstreakweek);
+  const score = useStore((s) => s.scoreweek);
   const name = useStore((s) => s.name);
   const setModalOption = useStore((s) => s.setModalOption);
   const router = useRouter();
