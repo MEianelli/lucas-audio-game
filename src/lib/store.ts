@@ -82,6 +82,7 @@ export const useStore = create<TStore>((set, get) => ({
         ...(newCurrentStreakweek > maxstreakweek && { maxstreakweek: newCurrentStreakweek }),
       }),
       ...(type === "missids" && { currentstreak: 0 }),
+      ...(type === "missids" && { currentstreakweek: 0 }),
       ...(type === "missids" && { lifes: Math.max(lifes - 1, 0) }),
     };
     set(payload);

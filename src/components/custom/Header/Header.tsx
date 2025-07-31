@@ -27,7 +27,7 @@ export function HomeHeader() {
 
   return (
     <FlexR sb css={{ padding: "10px 18px 0px 18px" }}>
-      <StrongBlurText title="GuessGame" css={{ fontSize: "32px", flex: 0 }} />
+      <StrongBlurText title="GuessGame" css={{ fontSize: "32px", flex: 0, userSelect: "none" }} />
       <FlexR cc css={{ gap: 6 }}>
         <IconsText title={lifes.toString()} variant="red" />
         <Heart size={"30px"} />
