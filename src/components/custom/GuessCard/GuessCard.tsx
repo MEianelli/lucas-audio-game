@@ -103,7 +103,7 @@ export const GuessCard = ({ cards }: { cards: Card[] }) => {
         alt={"hidden"}
         width={200}
         height={120}
-        priority
+        priority={true}
         css={{
           display: "none",
           pointerEvents: "none",
@@ -114,6 +114,7 @@ export const GuessCard = ({ cards }: { cards: Card[] }) => {
         alt={cards[0]?.image_src ?? ""}
         width={200}
         height={120}
+        priority={true}
         css={{
           borderRadius: "10px",
           width: "90%",
@@ -130,6 +131,7 @@ export const GuessCard = ({ cards }: { cards: Card[] }) => {
         alt={cards[0]?.image_src ?? ""}
         width={200}
         height={120}
+        priority={true}
         css={{
           position: "absolute",
           borderRadius: "10px",
@@ -184,7 +186,6 @@ export const GuessCard = ({ cards }: { cards: Card[] }) => {
           background: "transparent",
           pointerEvents: "none",
           filter: "blur(2px)",
-          //animation: state !== "neutral" ? `${shadowSpread} 1s normal` : `${startShadow} 1s normal`,
         }}
       />
     </ButtonClean>

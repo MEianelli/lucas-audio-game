@@ -59,6 +59,7 @@ export function PlayNowButton({ categorie }: { categorie: "movies" | "music" }) 
         alt={imageList[currentImageIndex] ?? ""}
         width={200}
         height={120}
+        priority
         css={{
           borderRadius: "10px",
           width: "90%",
@@ -75,6 +76,7 @@ export function PlayNowButton({ categorie }: { categorie: "movies" | "music" }) 
         alt={imageList[currentImageIndex] ?? ""}
         width={200}
         height={120}
+        priority
         css={{
           position: "absolute",
           borderRadius: "10px",

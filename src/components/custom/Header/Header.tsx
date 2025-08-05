@@ -2,7 +2,6 @@ import { FlexC, FlexR } from "@/components/containers/flex";
 import { styled } from "@/styles/stitches.config";
 import { Heart } from "@/components/icons/heart";
 import { World } from "@/components/icons/world";
-import { Bolt } from "@/components/icons/bolt";
 import { BlurText } from "@/components/text/BlurText";
 import { IconsText } from "@/components/text/IconsText";
 import { StrongBlurText } from "@/components/text/StrongBlurText";
@@ -38,8 +37,7 @@ export function HomeHeader() {
 
 export function GameHeader() {
   const lifes = useStore((s) => s.lifes);
-  const currentstreak = useStore((s) => s.currentstreakweek);
-  const score = useStore((s) => s.scoreweek);
+  const score = useStore((s) => s.score);
   const name = useStore((s) => s.name);
   const setModalOption = useStore((s) => s.setModalOption);
   const router = useRouter();
@@ -70,10 +68,6 @@ export function GameHeader() {
           <IconWrapper css={{ marginRight: 4 }}>
             <World size={26} />
             <IconsText title={score.toString()} variant="blue" />
-          </IconWrapper>
-          <IconWrapper>
-            <Bolt size={"30px"} />
-            <IconsText title={currentstreak.toString()} variant="yellow" />
           </IconWrapper>
           <IconWrapper>
             <Heart size={"30px"} />

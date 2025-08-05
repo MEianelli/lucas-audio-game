@@ -3,68 +3,41 @@ import { DialogModal } from "@/components/custom/Modal/modal";
 import { COOKIE_NAME } from "@/lib/contants";
 import { useStore } from "@/lib/store";
 import { supabase } from "@/lib/supabase";
-import { RankDataWrapper, User } from "@/types/types";
+import { RankData, User } from "@/types/types";
 import { parseCookies } from "@/utils/cookie";
 import { decryptData } from "@/utils/crypto";
 import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
-import api from "@/utils/api";
 import { HomeHeader } from "@/components/custom/Header/Header";
 import { PlayAndRank } from "@/components/custom/Home/PlayAndRank";
 import { LoginButton } from "@/components/custom/Home/LoginButton";
+import { fetchRankBff } from "@/lib/apis/rank/fetchRankBff";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = context.req.headers.cookie;
   const parsed = parseCookies(cookies);
   const decrypted = decryptData(parsed[COOKIE_NAME]);
 
-  if (!decrypted?.name) {
-    const rankData: { data: RankDataWrapper } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
-      method: "POST",
-    });
-    return {
-      props: {
-        user: null,
-        rank: rankData?.data,
-      },
-    };
-  }
-
-  const { data, error }: PostgrestSingleResponse<User> = await supabase
+  const { data }: PostgrestSingleResponse<User> = await supabase
     .from("users")
     .select()
-    .eq("name", decrypted.name)
+    .eq("name", decrypted?.name)
     .single();
 
-  if (!data?.id || error) {
-    const rankData: { data: RankDataWrapper } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
-      method: "POST",
-    });
-    return {
-      props: {
-        user: null,
-        rank: rankData?.data,
-      },
-    };
-  }
-
-  const rankData: { data: RankDataWrapper } = await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/rank`, {
-    method: "POST",
-    body: JSON.stringify({ id: data.id }),
-  });
+  const rankData = await fetchRankBff(data?.id)
 
   return {
     props: {
-      user: data,
-      rank: rankData?.data,
+      user: data?.id ? data : null,
+      rank: rankData,
     },
   };
 };
 
 interface HomeProps {
   user: User;
-  rank: RankDataWrapper;
+  rank: RankData;
 }
 
 export default function Home(props: HomeProps) {
