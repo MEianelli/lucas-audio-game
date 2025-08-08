@@ -1,12 +1,13 @@
 import { FlexC } from "@/components/containers/flex";
-import { GetMoreLifes } from "./GetMoreLifes";
 import { Ranking } from "./Ranking";
 import { Timer } from "./Timer";
+import { useFetchRank } from "@/lib/hooks/useFetchRank";
 
 export const Finished = () => {
+  useFetchRank()
+  
   return (
     <FlexC css={{ gap: 20 }}>
-      <GetMoreLifes />
       <Ranking />
       <Timer />
     </FlexC>

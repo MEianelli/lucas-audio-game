@@ -1,13 +1,13 @@
 import { create } from "zustand";
 import { ModalOptions } from "@/components/custom/Modal/modal";
-import { LoginState, RankDataWrapper, TScreen, User } from "@/types/types";
+import { LoginState, RankData, TScreen, User } from "@/types/types";
 import api from "@/utils/api";
 
 type TStoreValues = {
   screen: TScreen;
   loginState: LoginState;
   modalOption: ModalOptions;
-  rankData?: RankDataWrapper;
+  rankData?: RankData;
 } & User;
 
 type TStoreFuncs = {
@@ -15,12 +15,13 @@ type TStoreFuncs = {
   setPass: (pass: string) => void;
   setIds: (id: number[] | string[], type: "hitids" | "missids") => Promise<void | boolean>;
   updateUserData: (user: User) => Promise<void>;
-  updateRankData: (rankData: RankDataWrapper) => void;
+  updateRankData: (rankData?: RankData) => void;
   setScreen: (screen: TScreen) => void;
   setLoginState: (loginState: LoginState) => void;
   setModalOption: (option: ModalOptions) => void;
   resetStore: () => void;
   setLifes: (lifes: number) => void;
+  updateUserDB: (user: Partial<User>) => void;
 };
 
 type TStore = TStoreValues & TStoreFuncs;
@@ -29,14 +30,8 @@ const initialState: TStoreValues = {
   id: 0,
   name: "",
   pass: "",
-  lifes: 5,
+  lifes: 3,
   score: 0,
-  scoreweek: 0,
-  currentstreak: 0,
-  currentstreakweek: 0,
-  maxstreak: 0,
-  maxstreakweek: 0,
-  winrate: 0,
   hitids: [],
   missids: [],
   modalOption: "none",
@@ -57,32 +52,17 @@ export const useStore = create<TStore>((set, get) => ({
       ...user,
     });
   },
+
   setIds: async (ids, type) => {
     const id = get().id;
     const lifes = get().lifes;
     const score = get().score;
-    const scoreweek = get().scoreweek;
-    const newCurrentStreak = get().currentstreak + 1;
-    const newCurrentStreakweek = get().currentstreakweek + 1;
-    const maxstreak = get().maxstreak;
-    const maxstreakweek = get().maxstreakweek;
     const addArr = get()[type];
     const newIDsArray = [...new Set([...addArr, ...ids])];
     const newScore = type === "hitids" ? score + 1 : score - 1;
-    const newScoreweek = type === "hitids" ? scoreweek + 1 : scoreweek - 1;
     const payload = {
       [type]: newIDsArray,
       score: newScore,
-      scoreweek: newScoreweek,
-      ...(type === "hitids" && {
-        currentstreak: newCurrentStreak,
-        currentstreakweek: newCurrentStreakweek,
-        ...(newCurrentStreak > maxstreak && { maxstreak: newCurrentStreak }),
-        ...(newCurrentStreakweek > maxstreak && { maxstreak: newCurrentStreakweek }),
-        ...(newCurrentStreakweek > maxstreakweek && { maxstreakweek: newCurrentStreakweek }),
-      }),
-      ...(type === "missids" && { currentstreak: 0 }),
-      ...(type === "missids" && { currentstreakweek: 0 }),
       ...(type === "missids" && { lifes: Math.max(lifes - 1, 0) }),
     };
     set(payload);
@@ -91,6 +71,19 @@ export const useStore = create<TStore>((set, get) => ({
         await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/data/users`, {
           method: "PUT",
           body: JSON.stringify({ id, data: payload }),
+        });
+      } catch (error: unknown) {
+        console.log("Erro ao atualizar usuario", error);
+      }
+    }
+  },
+  updateUserDB: async (user) => {
+    const id = get().id;
+    if (id) {
+      try {
+        await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/data/users`, {
+          method: "PUT",
+          body: JSON.stringify({ id, data: user }),
         });
       } catch (error: unknown) {
         console.log("Erro ao atualizar usuario", error);

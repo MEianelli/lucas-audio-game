@@ -34,18 +34,5 @@ export function PlayAndRank() {
         <Ranking />
       </RankContainer>
     </FlexC>
-    // <FlexR css={{ padding: "18px 15px", gap: 14, overflow: "scroll", scrollbarWidth: "none" }}>
-    //   <FlexC css={{ gap: 16 }}>
-    //     <PlayNowButton categorie="music" />
-    //     <RankContainer>
-    //       <BlurBg
-    //         css={{
-    //           background: "rgb(1 0 79)",
-    //         }}
-    //       />
-    //       <Ranking />
-    //     </RankContainer>
-    //   </FlexC>
-    // </FlexR>
   );
 }

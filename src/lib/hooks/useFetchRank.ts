@@ -1,21 +1,21 @@
 import { useEffect } from "react";
 import { useStore } from "../store";
-import { fetchNoUserRankBff } from "../apis/rank/fetchNoUserRankBff";
+import { fetchRankBff } from "../apis/rank/fetchRankBff";
 
-export function useFetchRankNoUser() {
+export function useFetchRank() {
   const updateRankData = useStore((s) => s.updateRankData);
   const rankData = useStore((s) => s.rankData);
-  const name = useStore((s) => s.name);
+  const id = useStore((s) => s.id);
 
   useEffect(() => {
-    if (name || rankData) return;
-    async function getRankDataNoUser() {
-      const rankData = await fetchNoUserRankBff();
+    if (rankData) return;
+    async function getRankData() {
+      const rankData = await fetchRankBff(id);
       if (rankData) {
         updateRankData(rankData);
       }
     }
-    getRankDataNoUser();
+    getRankData();
     //eslint-disable-next-line
   }, []);
 }
