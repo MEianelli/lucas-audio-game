@@ -15,12 +15,13 @@ type TStoreFuncs = {
   setPass: (pass: string) => void;
   setIds: (id: number[] | string[], type: "hitids" | "missids") => Promise<void | boolean>;
   updateUserData: (user: User) => Promise<void>;
-  updateRankData: (rankData: RankData) => void;
+  updateRankData: (rankData?: RankData) => void;
   setScreen: (screen: TScreen) => void;
   setLoginState: (loginState: LoginState) => void;
   setModalOption: (option: ModalOptions) => void;
   resetStore: () => void;
   setLifes: (lifes: number) => void;
+  updateUserDB: (user: Partial<User>) => void;
 };
 
 type TStore = TStoreValues & TStoreFuncs;
@@ -51,6 +52,7 @@ export const useStore = create<TStore>((set, get) => ({
       ...user,
     });
   },
+
   setIds: async (ids, type) => {
     const id = get().id;
     const lifes = get().lifes;
@@ -69,6 +71,19 @@ export const useStore = create<TStore>((set, get) => ({
         await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/data/users`, {
           method: "PUT",
           body: JSON.stringify({ id, data: payload }),
+        });
+      } catch (error: unknown) {
+        console.log("Erro ao atualizar usuario", error);
+      }
+    }
+  },
+  updateUserDB: async (user) => {
+    const id = get().id;
+    if (id) {
+      try {
+        await api(`${process.env.NEXT_PUBLIC_APP_URL}/api/data/users`, {
+          method: "PUT",
+          body: JSON.stringify({ id, data: user }),
         });
       } catch (error: unknown) {
         console.log("Erro ao atualizar usuario", error);

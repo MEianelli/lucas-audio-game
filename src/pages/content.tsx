@@ -5,8 +5,12 @@ import { GameHeader } from "@/components/custom/Header/Header";
 import { DialogModal } from "@/components/custom/Modal/modal";
 import { useFetchCards } from "@/lib/hooks/useFetchCards";
 import { useFetchRank } from "@/lib/hooks/useFetchRank";
+export { getServerSideProps } from "@/lib/context/getServerSideProps"
+import { PageProps } from "@/lib/context/getServerSideProps"
+import { useServerData } from "@/lib/hooks/useServerData";
 
-const Content = () => {
+const Content = (props: PageProps) => {
+  useServerData(props)
   const { cards } = useFetchCards();
   useFetchRank();
 

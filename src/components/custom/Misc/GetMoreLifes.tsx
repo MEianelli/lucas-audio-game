@@ -5,9 +5,11 @@ import { useStore } from "@/lib/store";
 export function GetMoreLifes() {
   const setLifes = useStore((s) => s.setLifes);
   const setModalOption = useStore((s) => s.setModalOption);
+  const updateUserDB = useStore((s) => s.updateUserDB);
 
   function handleClick() {
     setLifes(3);
+    updateUserDB({ lifes: 3})
     setTimeout(() => {
       setModalOption("none");
     }, 1000);
