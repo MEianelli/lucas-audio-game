@@ -9,10 +9,10 @@ export function useFetchRank() {
 
   useEffect(() => {
     if (rankData) return;
-    async function getRankData() {
-      const rankData = await fetchRankBff(id);
-      if (rankData) {
-        updateRankData(rankData);
+      async function getRankData() {
+      const newRankData = await fetchRankBff(id);
+      if (newRankData) {
+        updateRankData(newRankData);
       }
     }
     getRankData();
