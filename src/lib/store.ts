@@ -14,7 +14,7 @@ type TStoreFuncs = {
   setName: (name: string) => void;
   setPass: (pass: string) => void;
   setIds: (id: number[] | string[], type: "hitids" | "missids") => Promise<void | boolean>;
-  updateUserData: (user: User) => Promise<void>;
+  updateUserData: (user: User) => void;
   updateRankData: (rankData?: RankData) => void;
   setScreen: (screen: TScreen) => void;
   setLoginState: (loginState: LoginState) => void;
@@ -46,7 +46,7 @@ export const useStore = create<TStore>((set, get) => ({
   setPass: (pass) => set({ pass }),
   setModalOption: (option: ModalOptions) => set({ modalOption: option }),
   updateRankData: (rankData) => set({ rankData }),
-  updateUserData: async (user) => {
+  updateUserData: (user) => {
     if (!user?.id) return;
     set({
       ...user,

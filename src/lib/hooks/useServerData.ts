@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useStore } from "../store";
 import { PageProps } from "../context/getServerSideProps";
 
-export function useServerData(props: PageProps){
+export function useServerData(props: PageProps) {
+  const [loading, setLoading] = useState(true);
   const updateUserData = useStore((s) => s.updateUserData);
   const updateRankData = useStore((s) => s.updateRankData);
   const setLoginState = useStore((s) => s.setLoginState);
@@ -17,5 +18,8 @@ export function useServerData(props: PageProps){
     updateUserData(props.user);
     setLoginState("logged");
     //eslint-disable-next-line
+    setLoading(false);
   }, []);
+
+  return { loading };
 }

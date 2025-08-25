@@ -4,13 +4,13 @@ import { GuessCards } from "@/components/custom/GuessCard/GuessCards";
 import { GameHeader } from "@/components/custom/Header/Header";
 import { DialogModal } from "@/components/custom/Modal/modal";
 import { useFetchCards } from "@/lib/hooks/useFetchCards";
-export { getServerSideProps } from "@/lib/context/getServerSideProps"
-import { PageProps } from "@/lib/context/getServerSideProps"
+export { getServerSideProps } from "@/lib/context/getServerSideProps";
+import { PageProps } from "@/lib/context/getServerSideProps";
 import { useServerData } from "@/lib/hooks/useServerData";
 
 const Content = (props: PageProps) => {
-  useServerData(props)
-  const { cards } = useFetchCards();
+  const { loading } = useServerData(props);
+  const { cards } = useFetchCards(loading);
 
   if (!cards.length) return null;
 

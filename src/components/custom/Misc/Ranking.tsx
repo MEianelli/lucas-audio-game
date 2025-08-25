@@ -13,8 +13,8 @@ export function Ranking() {
   const id = useStore((s) => s.id);
   const score = useStore((s) => s.score);
 
-  const topScore = rankData?.top5score
-  const userPos = rankData?.userScorePos
+  const topScore = rankData?.top5score;
+  const userPos = rankData?.userScorePos;
   const isOnTop = topScore?.find((it) => it?.name === name);
   const shortName = name.slice(0, 10);
 
@@ -30,7 +30,7 @@ export function Ranking() {
         <FlexC css={{ gap: 6, flex: "1 0", justifyContent: "flex-start" }}>
           <BlurText title={"Leaderboard"} css={{ fontSize: "22px" }} />
           {topScore?.map((it, i) => (
-            <BlurText title={`${i + 1}. ${it?.name.slice(0, 10)}`} key={it?.name} pulse={it?.name === name} />
+            <BlurText title={`${i + 1}. ${it?.name.slice(0, 10)}`} key={it?.name} pulse={it?.name === name && !!id} />
           ))}
           {!id && <BlurText title={`?? . ${"No User"}`} pulse={true} />}
           {!isOnTop && !!id && <BlurText title={`${userPos}. ${shortName}`} pulse={true} />}
@@ -47,7 +47,7 @@ export function Ranking() {
               css={{ fontSize: "18px" }}
             />
           ))}
-          {!isOnTop && <IconsText title={score.toString()} variant="blue" css={{ fontSize: "18px" }} />}
+          {!isOnTop && !id && <IconsText title={score.toString()} variant="blue" css={{ fontSize: "18px" }} />}
         </FlexC>
       </FlexR>
     </FlexC>
