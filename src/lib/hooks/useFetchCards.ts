@@ -21,7 +21,7 @@ export function useFetchCards(loading: boolean) {
     }
     getCards();
     //eslint-disable-next-line
-  }, [hitids, missids]);
+  }, [hitids, missids, loading]);
 
   return { cards };
 }

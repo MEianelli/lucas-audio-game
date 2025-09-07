@@ -13,12 +13,13 @@ export function useServerData(props: PageProps) {
     updateRankData(props?.rank);
     if (!props.user?.id) {
       resetStore();
+      setLoading(false);
       return;
     }
     updateUserData(props.user);
     setLoginState("logged");
-    //eslint-disable-next-line
     setLoading(false);
+    //eslint-disable-next-line
   }, []);
 
   return { loading };

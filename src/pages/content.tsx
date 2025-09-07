@@ -12,7 +12,7 @@ const Content = (props: PageProps) => {
   const { loading } = useServerData(props);
   const { cards } = useFetchCards(loading);
 
-  if (!cards.length) return null;
+  if (!cards.length || loading) return null;
 
   return (
     <Container>
