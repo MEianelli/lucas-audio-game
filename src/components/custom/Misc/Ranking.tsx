@@ -12,10 +12,9 @@ export function Ranking() {
   const name = useStore((s) => s.name);
   const id = useStore((s) => s.id);
   const score = useStore((s) => s.score);
-
   const topScore = rankData?.top5score;
   const userPos = rankData?.userScorePos;
-  const isOnTop = topScore?.find((it) => it?.name === name);
+  const isOnTop = topScore?.find((it) => it?.id === id);
   const shortName = name.slice(0, 10);
 
   return (
@@ -47,7 +46,7 @@ export function Ranking() {
               css={{ fontSize: "18px" }}
             />
           ))}
-          {!isOnTop && !id && <IconsText title={score.toString()} variant="blue" css={{ fontSize: "18px" }} />}
+          {!isOnTop && <IconsText title={score.toString()} variant="blue" css={{ fontSize: "18px" }} />}
         </FlexC>
       </FlexR>
     </FlexC>

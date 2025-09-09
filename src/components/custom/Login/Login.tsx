@@ -46,6 +46,7 @@ export const Login = ({
       />
       {status === "unexistant" && <Warning text="No user with that name!" />}
       {status === "unavailable" && <Warning text="Name already taken!" />}
+      {status === "tooManyRequests" && <Warning text="Too many Attempts" />}
       <LoginInputCrt
         type="text"
         placeholder="Password"
@@ -63,7 +64,7 @@ export const Login = ({
         <BlurButton
           title={loading ? "Loading" : "Register"}
           onclick={handleCadastrar}
-          disabled={loading}
+          disabled={loading || status === "tooManyRequests"}
           color="#2c08b7"
         />
         <BlurButton title={loading ? "Loading" : "Login"} onclick={handleLogin} disabled={loading} />

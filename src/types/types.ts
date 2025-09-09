@@ -8,7 +8,16 @@ export type TScreen = "login" | "content" | "";
 
 export type LoginState = "login" | "register" | "logged" | "registered";
 
-export type TStatus = "unavailable" | "unexistant" | "wrongPass" | "empty" | "logged" | "registered" | "error" | "";
+export type TStatus =
+  | "unavailable"
+  | "unexistant"
+  | "wrongPass"
+  | "empty"
+  | "logged"
+  | "registered"
+  | "error"
+  | "tooManyRequests"
+  | "";
 
 interface ResponseError {
   res: Exclude<TStatus, "logged" | "registered">;
@@ -69,6 +78,6 @@ export interface CardDTO {
 }
 
 export interface RankData {
-  top5score: { name: string; score: number }[];
+  top5score: { id: number; name: string; score: number }[];
   userScorePos: number | null;
 }

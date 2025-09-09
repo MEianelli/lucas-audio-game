@@ -8,8 +8,8 @@ import { fetchRankBff } from "@/lib/apis/rank/fetchRankBff";
 import { RankData, User } from "@/types/types";
 
 export interface PageProps {
-  user: User | null
-  rank: RankData | undefined
+  user: User | null;
+  rank: RankData | undefined;
 }
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async (context) => {
@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (context)
     .eq("name", decrypted?.name)
     .single();
 
-  const rankData = await fetchRankBff(data?.id)
+  const rankData = await fetchRankBff(data?.id);
 
   return {
     props: {

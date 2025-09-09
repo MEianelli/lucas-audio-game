@@ -6,11 +6,7 @@ import { JSONParse } from "@/utils/json";
 async function Rank(req: NextApiRequest, res: NextApiResponse) {
   const { id }: User = JSONParse(req.body);
 
-  const scoreRes = await supabase
-    .from("users")
-    .select("name, score")
-    .order("score", { ascending: false })
-    .limit(5);
+  const scoreRes = await supabase.from("users").select("id, name, score").order("score", { ascending: false }).limit(5);
 
   if (scoreRes.error) {
     console.log("scoreRes :", scoreRes);

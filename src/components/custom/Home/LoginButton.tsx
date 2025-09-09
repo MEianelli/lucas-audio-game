@@ -34,7 +34,11 @@ export function LoginButton() {
 
   if (view === "inputs") {
     return (
-      <FlexR cc css={{ paddingX: 22 }} id="inputs">
+      <FlexR
+        cc
+        css={{ paddingX: 22, paddingBottom: 22, backgroundColor: "$darkPurple", position: "relative" }}
+        id="inputs"
+      >
         <LoginContent />
       </FlexR>
     );

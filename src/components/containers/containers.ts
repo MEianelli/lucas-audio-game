@@ -8,6 +8,7 @@ export const Container = styled("div", {
   backgroundColor: "$darkPurple",
   height: "100vh",
   overflow: "hidden",
+  boxShadow: "0px 0px 40px 4px black",
 });
 
 export const Center = styled(FlexR, {
