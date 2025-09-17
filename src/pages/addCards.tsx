@@ -10,7 +10,8 @@ import { GetServerSideProps } from "next";
 import api from "@/utils/api";
 import { Cards } from "@/lib/classes/Cards";
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const allowed = query.s === process.env.ADMIN_KEY;
   const media = await api<Media[]>(`${process.env.NEXT_PUBLIC_APP_URL}/api/data/media?select=id,title,wrongs`, {
     method: "GET",
   });
@@ -21,6 +22,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: {
+      allowed,
       media: media,
     },
   };
@@ -28,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 const initialFiles = { audio: null, images: null };
 
-const AddCards = (props: { media?: Media[] }) => {
+const AddCards = (props: { media?: Media[]; allowed: boolean }) => {
   const [files, setFiles] = useState<{
     audio: FileList | null;
     images: FileList | null;
@@ -41,6 +43,8 @@ const AddCards = (props: { media?: Media[] }) => {
   const disableSave = useMemo(() => {
     return !(Object.values(files).length === 2);
   }, [files]);
+
+  if (!props.allowed) return null;
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
@@ -98,7 +102,13 @@ const AddCards = (props: { media?: Media[] }) => {
       </Center>
       <Center>
         <Text cp>Audio (só .mp3 até 5Mb)</Text>
-        <Input type="file" onChange={(e) => handleFileUpload(e, "audio")} ref={audioRef} multiple css={{ width: "200px", color: "#fff" }} />
+        <Input
+          type="file"
+          onChange={(e) => handleFileUpload(e, "audio")}
+          ref={audioRef}
+          multiple
+          css={{ width: "200px", color: "#fff" }}
+        />
         <Span>{files.audio ? `${Object.keys(files?.audio).length} files selected` : "0 files"}</Span>
       </Center>
       <Center>

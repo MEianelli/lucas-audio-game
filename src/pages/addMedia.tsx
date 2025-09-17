@@ -33,9 +33,11 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   };
 };
 
-const AddMovie = () => {
+const AddMovie = ({ allowed }: { allowed: boolean }) => {
   const [data, setData] = useState<Data>(initialData);
   const [saving, setSaving] = useState(false);
+
+  if (!allowed) return null;
 
   const disableSave = !(!!data.title && !!data.wrongs && !!data.tags);
 
@@ -93,7 +95,13 @@ const AddMovie = () => {
       </Center>
       <Center>
         <Text cp>Tags (separadas for virgula):</Text>
-        <Input type="text" name="tags" value={data.tags} onChange={handleChange} css={{ border: "1px solid $purple" }} />
+        <Input
+          type="text"
+          name="tags"
+          value={data.tags}
+          onChange={handleChange}
+          css={{ border: "1px solid $purple" }}
+        />
       </Center>
       <Center>
         <Button onClick={() => setData(initialData)}>NEW</Button>

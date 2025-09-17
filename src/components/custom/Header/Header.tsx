@@ -39,19 +39,22 @@ export function GameHeader() {
   const lifes = useStore((s) => s.lifes);
   const score = useStore((s) => s.score);
   const name = useStore((s) => s.name);
-  const setModalOption = useStore((s) => s.setModalOption);
   const router = useRouter();
+
+  function sendHome() {
+    router.push("/");
+  }
 
   useEffect(() => {
     if (lifes <= 0) {
-      setTimeout(() => setModalOption("finished"), 1000);
+      setTimeout(sendHome, 1000);
     }
     //eslint-disable-next-line
   }, [lifes]);
 
   function handleIconsClick() {
     if (lifes <= 0) {
-      setModalOption("finished");
+      sendHome();
     }
   }
 
@@ -59,7 +62,7 @@ export function GameHeader() {
     <Wrapper>
       <FlexR css={{ justifyContent: "space-between" }}>
         <FlexC css={{ justifyContent: "flex-start" }}>
-          <ButtonClean onClick={() => router.push("/")}>
+          <ButtonClean onClick={sendHome}>
             <StrongBlurText title="GuessGame" css={{ fontSize: "28px" }} />
           </ButtonClean>
           <BlurText title={name || "No user"} onclick={() => {}} css={{ fontSize: "12px" }} />

@@ -5,11 +5,10 @@ import { PlayAndRank } from "@/components/custom/Home/PlayAndRank";
 import { LoginButton } from "@/components/custom/Home/LoginButton";
 import { useServerData } from "@/lib/hooks/useServerData";
 import { PageProps } from "@/lib/context/getServerSideProps";
-import { Disclaimer } from "@/components/custom/Misc/Disclaimer";
-export { getServerSideProps } from "@/lib/context/getServerSideProps"
+export { getServerSideProps } from "@/lib/context/getServerSideProps";
 
 export default function Home(props: PageProps) {
-  useServerData(props)
+  useServerData(props);
 
   return (
     <Container>
@@ -17,7 +16,6 @@ export default function Home(props: PageProps) {
       <PlayAndRank />
       <LoginButton />
       <DialogModal />
-      <Disclaimer />
     </Container>
   );
 }
