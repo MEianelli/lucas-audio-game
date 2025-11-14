@@ -14,7 +14,7 @@ export function Disclaimer() {
         maxWidth: "$cell",
         zIndex: 1,
       }}
-      title="©This game is for entertainment only. We do not own any audio, quotes, or movie references used. All rights belong to their respective owners. Requests for removal will be promptly honored."
+      title="©This game is for entertainment only. We do not own any audio, quotes, or movie references used. All rights belong to their respective owners. Requests for removal will be promptly honored.[0.02]"
     />
   );
 }
