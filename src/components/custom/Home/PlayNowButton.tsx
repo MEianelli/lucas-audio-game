@@ -15,7 +15,7 @@ const imageList = [
   "1745682394994_heymcfly.jpg",
 ];
 
-export function PlayNowButton({ categorie }: { categorie: "movies" | "music" }) {
+export function PlayNowButton() {
   const setModalOption = useStore((s) => s.setModalOption);
   const lifes = useStore((s) => s.lifes);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -34,7 +34,7 @@ export function PlayNowButton({ categorie }: { categorie: "movies" | "music" }) 
       setModalOption("noLifesHome");
       return;
     }
-    router.push(`/content?cat=${categorie}`);
+    router.push(`/content`);
   }
 
   return (
@@ -97,7 +97,7 @@ export function PlayNowButton({ categorie }: { categorie: "movies" | "music" }) 
         }}
       >
         <BlurText
-          title={`Play ${categorie}`}
+          title={`Play`}
           css={{ fontSize: "32px", color: "white", filter: "blur(0.6px)", textTransform: "capitalize" }}
         />
       </Div>

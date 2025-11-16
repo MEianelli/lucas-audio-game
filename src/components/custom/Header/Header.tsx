@@ -23,13 +23,14 @@ const IconWrapper = styled(FlexC, {
 
 export function HomeHeader() {
   const lifes = useStore((s) => s.lifes);
+    const setModalOption = useStore((s) => s.setModalOption);
 
   return (
     <FlexR sb css={{ padding: "10px 18px 0px 18px" }}>
-      <StrongBlurText title="GuessGame" css={{ fontSize: "32px", flex: 0, userSelect: "none" }} />
-      <FlexR cc css={{ gap: 6 }}>
-        <IconsText title={lifes.toString()} variant="red" />
-        <Heart size={"30px"} />
+      <StrongBlurText title="Filmguess" css={{ fontSize: "32px", flex: 0, userSelect: "none" }} />
+      <FlexR cc css={{ gap: 6, cursor: "pointer" }} onClick={() => setModalOption("noLifesHome")}>
+          <IconsText title={lifes.toString()} variant="red" />
+          <Heart size={"30px"} />
       </FlexR>
     </FlexR>
   );
@@ -39,6 +40,7 @@ export function GameHeader() {
   const lifes = useStore((s) => s.lifes);
   const score = useStore((s) => s.score);
   const name = useStore((s) => s.name);
+  const setModalOption = useStore((s) => s.setModalOption);
   const router = useRouter();
 
   function sendHome() {
@@ -63,7 +65,7 @@ export function GameHeader() {
       <FlexR css={{ justifyContent: "space-between" }}>
         <FlexC css={{ justifyContent: "flex-start" }}>
           <ButtonClean onClick={sendHome}>
-            <StrongBlurText title="GuessGame" css={{ fontSize: "28px" }} />
+            <StrongBlurText title="Filmguess" css={{ fontSize: "28px" }} />
           </ButtonClean>
           <BlurText title={name || "No user"} onclick={() => {}} css={{ fontSize: "12px" }} />
         </FlexC>
@@ -72,7 +74,7 @@ export function GameHeader() {
             <World size={26} />
             <IconsText title={score.toString()} variant="blue" />
           </IconWrapper>
-          <IconWrapper>
+          <IconWrapper css={{ cursor: 'pointer'}} onClick={() => setModalOption("noLifesHome")}>
             <Heart size={"30px"} />
             <IconsText title={lifes.toString()} variant="red" />
           </IconWrapper>

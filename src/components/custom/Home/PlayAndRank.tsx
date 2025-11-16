@@ -24,7 +24,7 @@ const BlurBg = styled("div", {
 export function PlayAndRank() {
   return (
     <FlexC css={{ padding: "18px 15px", gap: 16, alignItems: "center" }}>
-      <PlayNowButton categorie="movies" />
+      <PlayNowButton />
       <RankContainer>
         <BlurBg
           css={{

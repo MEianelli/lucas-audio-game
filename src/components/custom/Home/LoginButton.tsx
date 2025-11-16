@@ -50,7 +50,7 @@ export function LoginButton() {
     <FlexR cc css={{ padding: 22 }} id="botao_login">
       <ButtonClean onClick={() => setView("inputs")}>
         <BlurText
-          title="Login"
+          title="Register | Login"
           onclick={() => {}}
           css={{ textDecoration: "underline", textUnderlineOffset: "3px", fontSize: "22px" }}
         />

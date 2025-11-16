@@ -77,7 +77,6 @@ const AddMovie = ({ allowed }: { allowed: boolean }) => {
         <label htmlFor="mediaType">Select a Categorie:</label>
         <select id="mediaType" name="cat" value={data.cat} onChange={handleChange}>
           <option value="movie">Movie</option>
-          <option value="music">Music</option>
         </select>
       </Center>
       <Center>

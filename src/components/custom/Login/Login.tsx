@@ -61,13 +61,19 @@ export const Login = ({
       {status === "empty" && <Warning text="Name and Password cant be empty!" />}
       {status === "wrongPass" && <Warning text="wrong password!" />}
       <FlexR css={{ gap: 10 }}>
-        <BlurButton
-          title={loading ? "Loading" : "Register"}
-          onclick={handleCadastrar}
-          disabled={loading || status === "tooManyRequests"}
-          color="#2c08b7"
-        />
-        <BlurButton title={loading ? "Loading" : "Login"} onclick={handleLogin} disabled={loading} />
+        {!loading ? (
+          <>
+            <BlurButton
+              title={"Register"}
+              onclick={handleCadastrar}
+              disabled={status === "tooManyRequests"}
+              color="#2c08b7"
+            />
+            <BlurButton title={"Login"} onclick={handleLogin} disabled={loading} />
+          </>
+        ) : (
+          <BlurButton disabled={true} title="Loading" onclick={() => {}} color="#48435e" />
+        )}
       </FlexR>
     </FlexC>
   );
