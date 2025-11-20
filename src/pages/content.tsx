@@ -7,6 +7,7 @@ import { useFetchCards } from "@/lib/hooks/useFetchCards";
 export { getServerSideProps } from "@/lib/context/getServerSideProps";
 import { PageProps } from "@/lib/context/getServerSideProps";
 import { useServerData } from "@/lib/hooks/useServerData";
+import { AdsMobile, AdsDesk } from "@/components/custom/Misc/AdsContainer";
 
 const Content = (props: PageProps) => {
   const { loading } = useServerData(props);
@@ -20,7 +21,9 @@ const Content = (props: PageProps) => {
         <GameHeader />
         <GuessCards cards={cards} />
         <DialogModal />
+        <AdsMobile />
       </FlexC>
+      <AdsDesk />
     </Container>
   );
 };
