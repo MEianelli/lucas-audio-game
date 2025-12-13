@@ -14,7 +14,7 @@
     "babel-plugin-react-compiler": "^19.0.0-beta-40c6c23-20250301",
     "cookies-next": "^5.1.0",
     "crypto-js": "^4.2.0",
-    "next": "15.1.6",
+    "next": "15.1.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sharp": "^0.33.5",
