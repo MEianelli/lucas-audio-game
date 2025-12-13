@@ -9,6 +9,8 @@ import { useStore } from "@/lib/store";
 import { useEffect } from "react";
 import { ButtonClean } from "@/components/buttons/buttons";
 import { useRouter } from "next/router";
+import { Info } from "@/components/icons/info";
+import { GameTooltip } from "@/components/custom/Misc/GameTooltip";
 
 const Wrapper = styled(FlexC, {
   padding: "15px 16px 0px 26px",
@@ -64,9 +66,14 @@ export function GameHeader() {
     <Wrapper>
       <FlexR css={{ justifyContent: "space-between" }}>
         <FlexC css={{ justifyContent: "flex-start" }}>
-          <ButtonClean onClick={sendHome}>
-            <StrongBlurText title="Filmguess" css={{ fontSize: "28px" }} />
-          </ButtonClean>
+          <FlexR css={{ alignItems: "center", gap: "8px" }}>
+            <ButtonClean onClick={sendHome}>
+              <StrongBlurText title="Filmguess" css={{ fontSize: "28px" }} />
+            </ButtonClean>
+            <GameTooltip content="Click on the image to listen to the movie audio. Choose the correct answer from the 4 options. Getting it right increases your score, getting it wrong makes you lose a life.">
+              <Info size="18px" />
+            </GameTooltip>
+          </FlexR>
           <BlurText title={name || "No user"} onclick={() => {}} css={{ fontSize: "12px" }} />
         </FlexC>
         <ButtonClean css={{ paddingTop: 5, display: "flex", flexFlow: "row nowrap" }} onClick={handleIconsClick}>

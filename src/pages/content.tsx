@@ -8,6 +8,7 @@ export { getServerSideProps } from "@/lib/context/getServerSideProps";
 import { PageProps } from "@/lib/context/getServerSideProps";
 import { useServerData } from "@/lib/hooks/useServerData";
 import { AdsMobile, AdsDesk } from "@/components/custom/Misc/AdsContainer";
+import { SEO } from "@/components/custom/Misc/SEO";
 
 const Content = (props: PageProps) => {
   const { loading } = useServerData(props);
@@ -16,15 +17,23 @@ const Content = (props: PageProps) => {
   if (!cards.length || loading) return null;
 
   return (
-    <Container>
-      <FlexC css={{ gap: "6px" }}>
-        <GameHeader />
-        <GuessCards cards={cards} />
-        <DialogModal />
-        <AdsMobile />
-      </FlexC>
-      <AdsDesk />
-    </Container>
+    <>
+      <SEO
+        title="Play Filmguess - Guess the Movie"
+        description="Play now and test your movie knowledge! Listen to audio clips from movies and guess which movie is correct. Earn points and compete on the leaderboard."
+        keywords="play filmguess, guess movie, movie quiz, online cinema game"
+        canonicalUrl="/content"
+      />
+      <Container>
+        <FlexC css={{ gap: "6px" }}>
+          <GameHeader />
+          <GuessCards cards={cards} />
+          <DialogModal />
+          <AdsMobile />
+        </FlexC>
+        <AdsDesk />
+      </Container>
+    </>
   );
 };
 

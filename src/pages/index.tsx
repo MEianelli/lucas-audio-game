@@ -5,17 +5,31 @@ import { PlayAndRank } from "@/components/custom/Home/PlayAndRank";
 import { LoginButton } from "@/components/custom/Home/LoginButton";
 import { useServerData } from "@/lib/hooks/useServerData";
 import { PageProps } from "@/lib/context/getServerSideProps";
+import { SEO } from "@/components/custom/Misc/SEO";
+import { GameDescription, HowToPlay } from "@/components/custom/Misc/GameDescription";
+import { Footer } from "@/components/custom/Misc/Footer";
+import { FlexC } from "@/components/containers/flex";
 export { getServerSideProps } from "@/lib/context/getServerSideProps";
 
 export default function Home(props: PageProps) {
   useServerData(props);
 
   return (
-    <Container>
-      <HomeHeader />
-      <PlayAndRank />
-      <LoginButton />
-      <DialogModal />
-    </Container>
+    <>
+      <SEO
+        canonicalUrl="/"
+      />
+      <Container>
+        <FlexC css={{ minHeight: "100vh", flexDirection: "column" }}>
+          <HomeHeader />
+          <PlayAndRank />
+          <LoginButton />
+          <GameDescription />
+          <HowToPlay />
+          <Footer />
+          <DialogModal />
+        </FlexC>
+      </Container>
+    </>
   );
 }

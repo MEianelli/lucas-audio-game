@@ -6,7 +6,6 @@ import { deleteCookie } from "@/utils/cookie";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { LoginContent } from "../Login/LoginContent";
-import { Disclaimer } from "../Misc/Disclaimer";
 
 export function LoginButton() {
   const router = useRouter();
@@ -29,7 +28,6 @@ export function LoginButton() {
             css={{ textDecoration: "underline", textUnderlineOffset: "3px", fontSize: "22px" }}
           />
         </ButtonClean>
-        <Disclaimer />
       </FlexR>
     );
   }
@@ -55,7 +53,6 @@ export function LoginButton() {
           css={{ textDecoration: "underline", textUnderlineOffset: "3px", fontSize: "22px" }}
         />
       </ButtonClean>
-      <Disclaimer />
     </FlexR>
   );
 }

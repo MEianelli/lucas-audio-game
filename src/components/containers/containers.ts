@@ -2,12 +2,14 @@ import { styled } from "@/styles/stitches.config";
 import { FlexR } from "./flex";
 import { Div } from "./div";
 
-export const Container = styled("div", {
+export const Container = styled("main", {
   maxWidth: "$cell",
   marginX: "auto",
   backgroundColor: "$darkPurple",
-  height: "100vh",
-  overflow: "hidden",
+  minHeight: "100vh",
+  height: "auto",
+  overflowY: "auto",
+  overflowX: "hidden",
   boxShadow: "0px 0px 40px 4px black",
 });
 

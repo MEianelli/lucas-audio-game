@@ -7,8 +7,6 @@ export function Disclaimer() {
         fontSize: 10,
         whiteSpace: "unset",
         width: "100%",
-        position: "fixed",
-        bottom: 0,
         padding: 10,
         fontWeight: "lighter",
         maxWidth: "$cell",
