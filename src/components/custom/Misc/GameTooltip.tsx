@@ -76,7 +76,7 @@ export function GameTooltip({ children, content }: GameTooltipProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: Event) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setIsVisible(false);
       }

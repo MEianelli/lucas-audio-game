@@ -31,7 +31,7 @@ export function GameDescription() {
           Filmguess is a fun game that tests your movie knowledge! Listen to audio clips from famous movies and try to guess which movie is correct.
         </DescriptionText>
         <DescriptionText>
-          Each player has 3 lives per day. Getting a correct answer increases your score and takes you to the next question. Getting a wrong answer makes you lose a life. When your lives run out, you'll need to wait until the next day to continue playing.
+          Each player has 3 lives per day. Getting a correct answer increases your score and takes you to the next question. Getting a wrong answer makes you lose a life. When your lives run out, you&apos;ll need to wait until the next day to continue playing.
         </DescriptionText>
         <DescriptionText>
           Compete with other players on the leaderboard and see who can get the highest score! The leaderboard is updated in real-time and shows the best players of the week and of all time.
@@ -47,7 +47,7 @@ export function HowToPlay() {
       <FlexC css={{ gap: 12, alignItems: "center" }}>
         <BlurText title="How to Play" css={{ fontSize: "20px", marginBottom: "8px" }} />
         <DescriptionText>
-          <strong>1.</strong> Click the "Play" button to start the game.
+          <strong>1.</strong> Click the &quot;Play&quot; button to start the game.
         </DescriptionText>
         <DescriptionText>
           <strong>2.</strong> Click on the image to listen to an audio clip from a movie (2-4 seconds).
