@@ -6,7 +6,6 @@ import { LoginButton } from "@/components/custom/Home/LoginButton";
 import { useServerData } from "@/lib/hooks/useServerData";
 import { PageProps } from "@/lib/context/getServerSideProps";
 import { SEO } from "@/components/custom/Misc/SEO";
-import { GameDescription, HowToPlay } from "@/components/custom/Misc/GameDescription";
 import { Footer } from "@/components/custom/Misc/Footer";
 import { FlexC } from "@/components/containers/flex";
 export { getServerSideProps } from "@/lib/context/getServerSideProps";
@@ -24,8 +23,6 @@ export default function Home(props: PageProps) {
           <HomeHeader />
           <PlayAndRank />
           <LoginButton />
-          <GameDescription />
-          <HowToPlay />
           <Footer />
           <DialogModal />
         </FlexC>

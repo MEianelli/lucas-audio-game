@@ -9,6 +9,7 @@ import { PageProps } from "@/lib/context/getServerSideProps";
 import { useServerData } from "@/lib/hooks/useServerData";
 import { AdsMobile, AdsDesk } from "@/components/custom/Misc/AdsContainer";
 import { SEO } from "@/components/custom/Misc/SEO";
+import { Footer } from "@/components/custom/Misc/Footer";
 
 const Content = (props: PageProps) => {
   const { loading } = useServerData(props);
@@ -25,11 +26,12 @@ const Content = (props: PageProps) => {
         canonicalUrl="/content"
       />
       <Container>
-        <FlexC css={{ gap: "6px" }}>
+        <FlexC css={{ gap: "6px", minHeight: "100vh" }}>
           <GameHeader />
           <GuessCards cards={cards} />
           <DialogModal />
           <AdsMobile />
+          <Footer />
         </FlexC>
         <AdsDesk />
       </Container>
