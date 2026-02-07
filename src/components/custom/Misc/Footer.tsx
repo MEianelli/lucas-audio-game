@@ -13,17 +13,6 @@ const FooterContainer = styled("footer", {
   },
 });
 
-const FooterText = styled("p", {
-  color: "rgba(255, 255, 255, 0.6)",
-  fontSize: "11px",
-  lineHeight: "1.5",
-  textAlign: "center",
-  margin: "4px 0",
-  "@s": {
-    fontSize: "10px",
-  },
-});
-
 const FooterLink = styled("a", {
   color: "rgba(255, 255, 255, 0.7)",
   textDecoration: "none",
