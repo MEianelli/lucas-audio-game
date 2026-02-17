@@ -65,6 +65,9 @@ export function Footer() {
             <FooterLink href="/content">
               <BlurText title="Play" css={{ fontSize: "14px" }} />
             </FooterLink>
+            <FooterLink href="/blog">
+              <BlurText title="Blog" css={{ fontSize: "14px" }} />
+            </FooterLink>
             <FooterLink href="/privacy-policy">
               <BlurText title="Privacy Policy" css={{ fontSize: "14px" }} />
             </FooterLink>
@@ -73,9 +76,6 @@ export function Footer() {
             </FooterLink>
             <FooterLink href="/about">
               <BlurText title="About" css={{ fontSize: "14px" }} />
-            </FooterLink>
-            <FooterLink href="/how-to-play">
-              <BlurText title="How to Play" css={{ fontSize: "14px" }} />
             </FooterLink>
           </FlexR>
         </FooterNav>
