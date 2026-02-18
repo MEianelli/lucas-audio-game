@@ -1,194 +1,143 @@
 export default function PrivacyPolicyContent() {
   return (
     <>
-      <h1>Privacy Policy</h1>
-      <p>
-        <strong>Last Updated:</strong> January 11, 2026
-      </p>
 
-      <p>
-        Welcome to <strong>FilmGuess.com</strong> (&quot;FilmGuess,&quot; &quot;we,&quot; &quot;us,&quot; or
-        &quot;our&quot;). FilmGuess is an interactive entertainment platform that presents short, edited audio excerpts
-        derived from motion pictures in a quiz-based format. This Privacy Policy describes how we collect, use,
-        disclose, and safeguard personal information when you use our website (the &quot;Service&quot;).
-      </p>
+<h1>Privacy Policy</h1>
+<p><strong>Last Updated:</strong> January 11, 2026</p>
 
-      <p>
-        By accessing or using the Service, you agree to this Privacy Policy and our Terms of Use. If you do not
-        agree, please discontinue use of the Service.
-      </p>
+<p>Welcome to <strong>FilmGuess.com</strong> (“FilmGuess,” “we,” “us,” or “our”). FilmGuess is an interactive entertainment platform that presents short, transformed, and editorially modified audio excerpts derived from motion pictures within a quiz-based game format. This Privacy Policy explains in detail how we collect, process, store, use, disclose, and protect personal information when you access or use our website and related services (collectively, the “Service”).</p>
 
-      <hr />
+<p>By accessing or using the Service, you acknowledge that you have read and understood this Privacy Policy and agree to its terms. If you do not agree, you must discontinue use of the Service.</p>
 
-      <h2>1. Personal Information We Collect</h2>
+<hr />
 
-      <h3>Information You Provide to Us</h3>
+<h2>1. Scope of This Policy</h2>
 
-      <h4>Account Information</h4>
-      <ul>
-        <li>Name</li>
-        <li>Email address</li>
-        <li>Username</li>
-        <li>Password (encrypted)</li>
-        <li>Profile preferences</li>
-      </ul>
+<p>This Privacy Policy applies to all users of FilmGuess worldwide. It governs information collected directly from users, automatically through technology, and through third-party integrations necessary for the operation of the Service.</p>
 
-      <h4>Gameplay Information</h4>
-      <ul>
-        <li>Game scores</li>
-        <li>Guess history</li>
-        <li>Leaderboard participation</li>
-        <li>Performance statistics</li>
-      </ul>
+<p>This Policy does not apply to third-party websites or services that may be linked from FilmGuess. We encourage users to review the privacy policies of those external services.</p>
 
-      <h4>Communications</h4>
-      <p>We may collect information when you contact support, provide feedback, enter contests, or participate in promotions.</p>
+<hr />
 
-      <h4>Sensitive Personal Information</h4>
-      <p>
-        We do not request or require sensitive personal information, including racial origin, political beliefs,
-        religious beliefs, health data, biometric data, sexual orientation, or criminal history.
-      </p>
+<h2>2. Information We Collect</h2>
 
-      <hr />
+<p>We collect information necessary to operate, maintain, improve, and protect the Service. The categories of information collected depend on how you interact with FilmGuess.</p>
 
-      <h2>2. Information Collected Automatically</h2>
+<h3>Account and Registration Information</h3>
 
-      <p>We may automatically collect:</p>
-      <ul>
-        <li>IP address</li>
-        <li>Browser type and version</li>
-        <li>Device type</li>
-        <li>Operating system</li>
-        <li>Referring URLs</li>
-        <li>Interaction data</li>
-        <li>Session duration</li>
-        <li>Unique device identifiers</li>
-      </ul>
+<p>When you create an account, we may collect identifying and account-related information such as your name, username, email address, encrypted password credentials, and selected profile preferences. Passwords are stored using industry-standard cryptographic hashing methods and are not accessible in plain text.</p>
 
-      <p>We use cookies, analytics tools, and server logs to collect this information.</p>
+<h3>Gameplay and Interaction Data</h3>
 
-      <hr />
+<p>Because FilmGuess is an interactive quiz-based entertainment platform, we collect gameplay-related data, including scores, guesses submitted, completion times, leaderboard rankings, session frequency, performance statistics, and feature usage. This information enables us to deliver core gameplay functionality, ensure fairness, detect abuse, and enhance user engagement.</p>
 
-      <h2>3. Nature of the Service and Content Presentation</h2>
+<h3>Communications and Support</h3>
 
-      <p>
-        FilmGuess presents short, edited, and contextually transformed audio excerpts derived from motion pictures
-        for interactive quiz and entertainment purposes.
-      </p>
+<p>If you contact us for support, feedback, contest participation, promotional inquiries, or copyright concerns, we may collect the information you voluntarily provide, including your email address and message content. We retain this information for customer service, dispute resolution, and compliance purposes.</p>
 
-      <p>Audio excerpts are:</p>
-      <ul>
-        <li>Extremely short in duration</li>
-        <li>Edited or slightly modified</li>
-        <li>Used in a quiz-based guessing format</li>
-        <li>Not downloadable</li>
-        <li>Not a substitute for original works</li>
-      </ul>
+<h3>Sensitive Personal Information</h3>
 
-      <p>FilmGuess does not stream full-length films or provide complete audio tracks.</p>
+<p>FilmGuess does not request, require, or intentionally collect sensitive personal information such as racial or ethnic origin, political opinions, religious beliefs, biometric identifiers, health information, sexual orientation, or criminal history. If such information is voluntarily submitted, it will be handled solely for the purpose for which it was provided and in accordance with applicable law.</p>
 
-      <hr />
+<hr />
 
-      <h2>4. How We Use Your Personal Information</h2>
+<h2>3. Information Collected Automatically</h2>
 
-      <h3>To Provide the Service</h3>
-      <ul>
-        <li>Manage accounts</li>
-        <li>Deliver gameplay</li>
-        <li>Maintain leaderboards</li>
-        <li>Provide support</li>
-      </ul>
+<p>When you access the Service, certain technical and usage data may be collected automatically through cookies, analytics technologies, server logs, and similar tracking tools. This information may include IP address, browser type and version, operating system, device characteristics, referring URLs, session duration, interaction metrics, and unique device identifiers.</p>
 
-      <h3>To Improve and Personalize</h3>
-      <ul>
-        <li>Analyze gameplay trends</li>
-        <li>Improve performance</li>
-        <li>Personalize user experience</li>
-      </ul>
+<p>This data enables us to maintain system integrity, detect unauthorized access, analyze performance trends, prevent fraud or automated scraping, and improve overall user experience. We may use aggregated or anonymized data for analytics and product development.</p>
 
-      <h3>Marketing Communications</h3>
-      <p>You may opt out of marketing emails at any time.</p>
+<hr />
 
-      <h3>Security and Fraud Prevention</h3>
-      <p>We may monitor for abuse, scraping, automation, or misuse of content.</p>
+<h2>4. Nature of the Service and Editorial Transformation of Audio Content</h2>
 
-      <hr />
+<p>FilmGuess presents short, editorially modified audio excerpts derived from motion pictures for the sole purpose of interactive quiz gameplay and entertainment. These excerpts are not presented as substitutes for original films and are not intended to reproduce or distribute full-length copyrighted works.</p>
 
-      <h2>5. Sharing of Information</h2>
+<p>Each audio segment is intentionally limited in duration and context. In many cases, excerpts are edited, altered, or re-contextualized to serve a distinct interactive function within the game environment. The value provided by FilmGuess lies not in the underlying motion picture audio itself, but in the curated selection, transformation, editorial sequencing, interactive mechanics, scoring systems, competitive structure, and user engagement framework developed independently by FilmGuess.</p>
 
-      <h3>Service Providers</h3>
-      <p>We may share data with hosting providers, analytics services, payment processors, and customer support vendors.</p>
+<p>FilmGuess does not stream complete films, provide downloadable audio tracks, or offer full-length reproductions of copyrighted works. The Service is designed as a transformative, quiz-based entertainment experience that integrates audio fragments into a broader original game architecture.</p>
 
-      <h3>Legal Requirements</h3>
-      <p>We may disclose information to comply with legal obligations or enforce our rights.</p>
+<p>FilmGuess respects the intellectual property rights of content owners and does not claim ownership over underlying motion pictures or their original sound recordings. All rights in original works remain with their respective copyright holders.</p>
 
-      <h3>Business Transfers</h3>
-      <p>In the event of merger, acquisition, or sale, user data may be transferred.</p>
+<hr />
 
-      <hr />
+<h2>5. Legal Position Regarding Content Presentation</h2>
 
-      <h2>6. Payment Information</h2>
-      <p>Payments are processed by third-party providers. We do not store full payment card details.</p>
+<p>The Service is structured around editorial transformation and interactive implementation. The protected creative contribution of FilmGuess consists of the compilation methodology, selection process, editing approach, technological implementation, interface design, gameplay logic, scoring mechanics, and overall interactive structure. These elements constitute original creative expression owned by FilmGuess.</p>
 
-      <hr />
+<p>Nothing in this Policy should be interpreted as a transfer, assignment, or assertion of ownership over third-party copyrighted motion pictures. FilmGuess operates with respect for intellectual property laws and responds promptly to valid infringement notices submitted in accordance with applicable legal frameworks.</p>
 
-      <h2>7. Data Security</h2>
-      <p>We implement reasonable administrative, technical, and physical safeguards. However, no internet transmission is 100% secure.</p>
+<hr />
 
-      <hr />
+<h2>6. How We Use Personal Information</h2>
 
-      <h2>8. International Data Transfers</h2>
-      <p>Your information may be transferred and processed outside your country of residence.</p>
+<p>We process personal information on lawful bases including contractual necessity, legitimate interest, user consent where applicable, and compliance with legal obligations.</p>
 
-      <hr />
+<p>Personal information may be used to create and manage user accounts, deliver gameplay functionality, maintain leaderboards, prevent fraud or misuse, enforce our Terms of Use, communicate important service updates, provide customer support, and improve product performance.</p>
 
-      <h2>9. Data Retention</h2>
-      <p>We retain information as long as necessary to provide the Service and comply with legal obligations.</p>
+<p>We may also use anonymized or aggregated data for analytics, business planning, and product development purposes.</p>
 
-      <hr />
+<hr />
 
-      <h2>10. Children&apos;s Privacy</h2>
-      <p>FilmGuess is not directed at children under 13. We do not knowingly collect personal information from children under 13.</p>
+<h2>7. Sharing and Disclosure of Information</h2>
 
-      <hr />
+<p>We may share personal information with trusted service providers who assist in hosting, infrastructure, analytics, payment processing, security monitoring, customer support, and operational services. These providers are contractually obligated to process data solely on our instructions and to implement appropriate security safeguards.</p>
 
-      <h2>11. Copyright Notice</h2>
-      <p>
-        FilmGuess respects intellectual property rights. If you believe material on the Service infringes your copyright,
-        please contact us with sufficient detail so we may investigate.
-      </p>
+<p>We may disclose information where required by law, regulation, subpoena, court order, or governmental request, or when necessary to protect our legal rights, enforce contractual agreements, prevent fraud, or protect user safety.</p>
 
-      <hr />
+<p>In the event of a merger, acquisition, restructuring, or asset sale, user information may be transferred as part of the transaction, subject to confidentiality obligations.</p>
 
-      <h2>12. Your Rights</h2>
-      <p>You may request access, correction, deletion, or restriction of your personal information by contacting us.</p>
+<hr />
 
-      <hr />
+<h2>8. Payment Processing</h2>
 
-      <h2>13. California Residents</h2>
-      <p>California residents may have additional rights under applicable law.</p>
+<p>If the Service offers paid features, payments are processed by third-party payment processors. FilmGuess does not store complete payment card numbers. Payment data is handled directly by certified payment providers in accordance with applicable financial security standards.</p>
 
-      <hr />
+<hr />
 
-      <h2>14. European Union Users</h2>
-      <p>EU users may have additional rights under GDPR, including access, correction, deletion, and data portability.</p>
+<h2>9. Data Security</h2>
 
-      <hr />
+<p>We implement commercially reasonable administrative, technical, and organizational safeguards to protect personal information against unauthorized access, disclosure, alteration, or destruction. However, no system can guarantee absolute security, and users acknowledge that internet-based services carry inherent risk.</p>
 
-      <h2>15. Changes to This Policy</h2>
-      <p>We may update this Privacy Policy at any time. Changes are effective upon posting.</p>
+<hr />
 
-      <hr />
+<h2>10. Data Retention</h2>
 
-      <h2>16. Contact Information</h2>
-      <p>
-        FilmGuess Media, LLC
-        <br />
-        [Your Business Address]
-        <br />
-        Email: support@filmguess.com
-      </p>
+<p>We retain personal information only for as long as necessary to provide the Service, comply with legal obligations, resolve disputes, enforce agreements, and protect our legitimate business interests. When data is no longer required, it is securely deleted or anonymized.</p>
+
+<hr />
+
+<h2>11. Children’s Privacy</h2>
+
+<p>FilmGuess is not directed to children under the age of 13 (or the minimum age required by applicable law). We do not knowingly collect personal information from children. If we become aware of such collection, we will take appropriate steps to delete the information.</p>
+
+<hr />
+
+<h2>12. Your Rights</h2>
+
+<p>Depending on your jurisdiction, you may have rights including access, correction, deletion, restriction of processing, data portability, or objection to processing. You may exercise these rights by contacting us using the information provided below.</p>
+
+<hr />
+
+<h2>13. International Data Transfers</h2>
+
+<p>Your information may be processed in jurisdictions outside your country of residence. Where required, we implement appropriate safeguards to ensure that cross-border data transfers comply with applicable legal standards.</p>
+
+<hr />
+
+<h2>14. Changes to This Privacy Policy</h2>
+
+<p>We may update this Privacy Policy periodically to reflect changes in our practices, technology, or legal requirements. Continued use of the Service after updates constitutes acceptance of the revised Policy.</p>
+
+<hr />
+
+<h2>15. Contact Information</h2>
+
+<p>
+FilmGuess Media, LLC
+Email: support@filmguess.com
+</p>
+
     </>
   );
 }
