@@ -5,7 +5,7 @@ export default function PrivacyPolicyContent() {
 <h1>Privacy Policy</h1>
 <p><strong>Last Updated:</strong> January 11, 2026</p>
 
-<p>Welcome to <strong>FilmGuess.com</strong> (“FilmGuess,” “we,” “us,” or “our”). FilmGuess is an interactive entertainment platform that presents short, transformed, and editorially modified audio excerpts derived from motion pictures within a quiz-based game format. This Privacy Policy explains in detail how we collect, process, store, use, disclose, and protect personal information when you access or use our website and related services (collectively, the “Service”).</p>
+<p>Welcome to <strong>FilmGuess.com</strong>. FilmGuess is an interactive entertainment platform that presents short, transformed, and editorially modified audio excerpts derived from motion pictures within a quiz-based game format. This Privacy Policy explains in detail how we collect, process, store, use, disclose, and protect personal information when you access or use our website and related services (collectively, the “Service”).</p>
 
 <p>By accessing or using the Service, you acknowledge that you have read and understood this Privacy Policy and agree to its terms. If you do not agree, you must discontinue use of the Service.</p>
 
