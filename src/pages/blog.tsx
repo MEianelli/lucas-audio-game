@@ -1,8 +1,13 @@
 import { InfoPageLayout } from "@/components/custom/Misc/InfoPageLayout";
 import { SEO } from "@/components/custom/Misc/SEO";
 import BlogContent from "@/components/custom/Pages/blog";
+import { getArticlesMeta } from "@/lib/articles";
 
-export default function BlogPage() {
+type BlogPageProps = {
+  articles: ReturnType<typeof getArticlesMeta>;
+};
+
+export default function BlogPage({ articles }: BlogPageProps) {
   return (
     <>
       <SEO
@@ -11,8 +16,16 @@ export default function BlogPage() {
         canonicalUrl="/blog"
       />
       <InfoPageLayout>
-        <BlogContent />
+        <BlogContent articles={articles} />
       </InfoPageLayout>
     </>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      articles: getArticlesMeta(),
+    },
+  };
 }
