@@ -2,7 +2,7 @@ export default function TopMovieQuotesArticle() {
   return (
     <>
 
-    <h1>Top 50 Most Iconic Action Movie Quotes of All Time</h1>
+    <h1>Top 20 Most Iconic Action Movie Quotes of All Time</h1>
     <p>
       Action movies are built on high-stakes moments, bold characters, and unforgettable dialogue.
       These are the quotes people repeat for decades — from legendary one-liners to battle cries that defined entire franchises.
@@ -35,38 +35,6 @@ export default function TopMovieQuotesArticle() {
       </ol>
     </section>
 
-    <section aria-labelledby="why-action">
-      <h2 id="why-action">Why Action Movie Quotes Are So Recognizable</h2>
-      <ul>
-        <li><strong>Intensity:</strong> They land at peak tension.</li>
-        <li><strong>Character identity:</strong> The line becomes the hero (or villain).</li>
-        <li><strong>Repeatability:</strong> Short, punchy phrasing makes them easy to quote.</li>
-        <li><strong>Pop culture:</strong> Memes, trailers, and references keep them alive.</li>
-      </ul>
-    </section>
-
-    <section aria-labelledby="quiz-action">
-      <h2 id="quiz-action">Test Yourself: Action Movie Quote Quiz</h2>
-      <p>
-        Think you know action cinema? Try our audio quiz and guess the movie from a short sound clip.
-        Each question includes four options and a curated excerpt.
-      </p>
-      <p><a href="https://example.com/quiz/action-movie-quotes/">Take the Action Quote Quiz →</a></p>
-    </section>
-
-    <section aria-labelledby="faq-action">
-      <h2 id="faq-action">FAQ</h2>
-
-      <details>
-        <summary>What is the most famous action movie quote?</summary>
-        <p>“I’ll be back.” from <em>The Terminator</em> (1984) is one of the most recognizable action movie lines ever.</p>
-      </details>
-
-      <details>
-        <summary>Why are action movie one-liners so popular?</summary>
-        <p>They compress tension, attitude, and character into a memorable sentence that audiences love to repeat.</p>
-      </details>
-    </section>
     </>
   );
 }
