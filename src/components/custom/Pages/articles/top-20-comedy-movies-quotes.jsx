@@ -2,14 +2,17 @@ export default function TopMovieQuotesArticle() {
   return (
     <>
     
-    <h1>Top 50 Funniest Comedy Movie Quotes Ever</h1>
+    <h1>20 Comedy Movie Quotes That Are Pretty Iconic</h1>
+
     <p>
-      The best comedy quotes don’t just get laughs — they become part of everyday language.
-      From sharp sarcasm to absurd punchlines, these lines have survived for decades because they’re endlessly repeatable.
+      The best comedy movie quotes usually happen in the most ridiculous moments — when everything is falling apart and someone says
+      something that makes the whole scene even funnier. Think of stuff like <cite>Anchorman: The Legend of Ron Burgundy with Will Ferrell</cite>,
+      the chaos in <cite>The Hangover</cite>, or the awkward lines in <cite>Superbad</cite>. I mean, <cite>McLoving</cite> is the best character ever. That’s the kind of moment we try to pick for FilmGuess — though sometimes the
+      fun part is when the quote could come from a bunch of different comedies.
     </p>
 
     <section aria-labelledby="top-20-comedy">
-      <h2 id="top-20-comedy">Top 20 Comedy Movie Quotes</h2>
+      <h2 id="top-20-comedy">Top 20 Comedy Movie Quotes:</h2>
 
       <ol>
         <li><q>I am serious. And don’t call me Shirley.</q> <span>– <em>Airplane!</em> (1980)</span></li>
@@ -35,40 +38,13 @@ export default function TopMovieQuotesArticle() {
       </ol>
     </section>
 
-    <section aria-labelledby="why-comedy">
-      <h2 id="why-comedy">Why Comedy Quotes Go Viral</h2>
-      <ul>
-        <li><strong>Instant context:</strong> The joke is understandable even outside the movie.</li>
-        <li><strong>Everyday use:</strong> People can drop the line in real conversations.</li>
-        <li><strong>Meme culture:</strong> Screenshots and clips amplify the quote.</li>
-        <li><strong>Timing:</strong> Great delivery makes simple words legendary.</li>
-      </ul>
-    </section>
-
-    <section aria-labelledby="quiz-comedy">
-      <h2 id="quiz-comedy">Test Yourself: Comedy Movie Quote Quiz</h2>
+        <section aria-labelledby="quiz-action">
+      <h2 id="quiz-action">Test Yourself</h2>
       <p>
-        Think you know comedy classics? Try our audio quiz and guess the movie from a short sound clip.
-        Each round includes four options and a curated excerpt.
+        Think you know comedy cinema? Try our audio quiz and guess the movie from a short sound clip.
+        Each question includes four options and a curated excerpt.
       </p>
-      <p><a href="https://example.com/quiz/comedy-movie-quotes/">Take the Comedy Quote Quiz →</a></p>
-    </section>
-
-    <section aria-labelledby="faq-comedy">
-      <h2 id="faq-comedy">FAQ</h2>
-
-      <details>
-        <summary>What is the most famous comedy movie quote?</summary>
-        <p>“I am serious. And don’t call me Shirley.” from <em>Airplane!</em> (1980) is one of the most iconic comedy lines ever.</p>
-      </details>
-
-      <details>
-        <summary>Do comedy quote pages rank well on Google?</summary>
-        <p>
-          They can rank well when the page targets specific long-tail searches (e.g., “funniest comedy movie quotes”),
-          includes internal links to related genres, and uses FAQ schema to improve visibility and CTR.
-        </p>
-      </details>
+      <p><a href="https://filmguess.com/content">Play the game!</a></p>
     </section>
 
     </>
