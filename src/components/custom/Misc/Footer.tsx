@@ -50,10 +50,10 @@ export function Footer() {
     <FooterContainer>
       <FlexC css={{ gap: 8, alignItems: "center" }}>
         <SocialRow>
-          <SocialLink href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
+          <SocialLink href="https://www.instagram.com/film.guess.official/" target="_blank" rel="noreferrer" aria-label="Instagram">
             <InstagramLogo size={32} />
           </SocialLink>
-          <SocialLink href="https://x.com" target="_blank" rel="noreferrer" aria-label="Twitter">
+          <SocialLink href="https://www.tiktok.com/@filmguess8" target="_blank" rel="noreferrer" aria-label="TikTok">
             <XLogo size={32} />
           </SocialLink>
         </SocialRow>

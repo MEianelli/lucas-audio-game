@@ -2,14 +2,18 @@ export default function TopMovieQuotesArticle() {
   return (
     <>
 
-    <h1>Top 50 Most Iconic Action Movie Quotes of All Time</h1>
+
+    <h1>20 Action Movie Quotes That Are Pretty Iconic</h1>
+    
     <p>
-      Action movies are built on high-stakes moments, bold characters, and unforgettable dialogue.
-      These are the quotes people repeat for decades — from legendary one-liners to battle cries that defined entire franchises.
+    The best action movie quotes usually happen in the craziest moments — when the hero is fighting the villain and it’s basically life or death.
+    Think of scenes like <cite>Arnold Schwarzenegger</cite> facing the T-1000 in the steel mill in
+    <cite>Terminator 2: Judgment Day</cite>, <cite>John McClane</cite> crawling through the vents in <cite>Die Hard</cite>,
+    or <cite>Keanu Reeves</cite> as <cite>John Wick</cite>. That’s the kind of moment we try to pick for <a href="https://filmguess.com/content">FilmGuess</a> — though sometimes the fun part is when the quote isn’t that obvious.
     </p>
     
     <section aria-labelledby="top-20-action">
-      <h2 id="top-20-action">Top 20 Action Movie Quotes</h2>
+      <h2 id="top-20-action">Top 20 Action Movie Quotes:</h2>
 
       <ol>
         <li><q>I’ll be back.</q> <span>– <em>The Terminator</em> (1984)</span></li>
@@ -35,38 +39,15 @@ export default function TopMovieQuotesArticle() {
       </ol>
     </section>
 
-    <section aria-labelledby="why-action">
-      <h2 id="why-action">Why Action Movie Quotes Are So Recognizable</h2>
-      <ul>
-        <li><strong>Intensity:</strong> They land at peak tension.</li>
-        <li><strong>Character identity:</strong> The line becomes the hero (or villain).</li>
-        <li><strong>Repeatability:</strong> Short, punchy phrasing makes them easy to quote.</li>
-        <li><strong>Pop culture:</strong> Memes, trailers, and references keep them alive.</li>
-      </ul>
-    </section>
-
     <section aria-labelledby="quiz-action">
-      <h2 id="quiz-action">Test Yourself: Action Movie Quote Quiz</h2>
+      <h2 id="quiz-action">Test Yourself</h2>
       <p>
         Think you know action cinema? Try our audio quiz and guess the movie from a short sound clip.
         Each question includes four options and a curated excerpt.
       </p>
-      <p><a href="https://example.com/quiz/action-movie-quotes/">Take the Action Quote Quiz →</a></p>
+      <p><a href="https://filmguess.com/content">Play the Game!</a></p>
     </section>
 
-    <section aria-labelledby="faq-action">
-      <h2 id="faq-action">FAQ</h2>
-
-      <details>
-        <summary>What is the most famous action movie quote?</summary>
-        <p>“I’ll be back.” from <em>The Terminator</em> (1984) is one of the most recognizable action movie lines ever.</p>
-      </details>
-
-      <details>
-        <summary>Why are action movie one-liners so popular?</summary>
-        <p>They compress tension, attitude, and character into a memorable sentence that audiences love to repeat.</p>
-      </details>
-    </section>
     </>
   );
 }

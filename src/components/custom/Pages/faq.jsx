@@ -9,16 +9,17 @@ export default function FaqContent() {
         why we built it, and what makes it different.
       </p>
 
-      <h2>What is FilmGuess?</h2>
+      <h2>Where can you find us?</h2>
       <p>
-        <strong>FilmGuess is an interactive movie audio quiz game</strong> where players listen to short, carefully edited
-        sound excerpts from well-known motion pictures and select the correct title from four possible answers.
-        It combines film trivia, cinematic memory, competitive gameplay, and cultural recognition into one fast and engaging experience.
+      FilmGuess lives across the web and social media.
+      You can follow us, contact us, or share ideas anytime.
       </p>
       <p>
-        The project was created in 2026 by a small team of film enthusiasts who grew up quoting lines,
-        debating directors, analyzing scenes, and replaying unforgettable moments. FilmGuess transforms that passion into
-        a structured, competitive digital game that rewards knowledge, speed, and attention to detail.
+      Find us on 
+      <a href="https://www.instagram.com/film.guess.official/" target="_blank">Instagram</a>, 
+      <a href="https://www.tiktok.com/@filmguess8" target="_blank">TikTok</a>, 
+      or reach out directly by 
+      <a href="mailto:filmguessofficial@gmail.com">email</a>.
       </p>
 
       <h2>Why was FilmGuess created?</h2>
@@ -86,6 +87,21 @@ export default function FaqContent() {
         exclusive themed challenges, or enhanced competitive modes.
       </p>
 
+      <h2>Are you open to partnerships?</h2>
+      <p>
+      Yes. We welcome partnerships with creators, brands, and film communities
+      that share a passion for cinema and interactive entertainment.
+      </p>
+      <p>
+      If you run a movie page, create film content, or represent a brand that
+      connects with film culture, we would love to explore ideas together.
+      Collaborations can range from themed challenges to content partnerships.
+      </p>
+      <p>
+      Send us a message on Instagram or TikTok, or contact us by <a href="filmguessofficial@gmail.com">email</a>.
+      Let’s talk and see what we can build together.
+      </p>
+
       <h2>Do I need to create an account?</h2>
       <p>
         Creating an account is optional.
@@ -120,13 +136,18 @@ export default function FaqContent() {
 
       <h2>Can I suggest a movie for the quiz?</h2>
       <p>
-        Absolutely.
-        We value community input and welcome movie suggestions from passionate players.
+      Yes, and we would love to hear from you.
+      If a movie scene or quote stayed in your head,
+      it might be perfect for the game.
       </p>
       <p>
-        FilmGuess thrives on collective cinema culture.
-        If a film left a strong impression on you,
-        chances are it belongs in a recognition challenge.
+      Send us a message on Instagram or TikTok,
+      or reach out by <a href="filmguessofficial@gmail.com">email</a> with your suggestion.
+      Your idea might become the next challenge players try to solve.
+      </p>
+      <p>
+      FilmGuess grows with the community.
+      The movies you love help shape the game.
       </p>
 
       <h2>Is FilmGuess available worldwide?</h2>
@@ -160,6 +181,23 @@ export default function FaqContent() {
         We believe movies shape culture.
         FilmGuess transforms that cultural memory into an engaging,
         skill-based, community-driven game experience.
+      </p>
+
+      <h2>What can an online guessing game become?</h2>
+      <p>
+      The idea goes beyond guessing a movie from a single audio quote.
+      A guessing game can evolve into many creative variations that challenge
+      different types of knowledge and intuition.
+      </p>
+      <p>
+      Players might guess the movie from a famous line, identify an actor
+      just from their voice, recognize a city from a photo,
+      or discover a film through small clues revealed over time.
+      </p>
+      <p>
+      Each variation transforms the same core concept into a new experience.
+      The goal is simple: turn cultural knowledge into a fun,
+      interactive challenge that keeps players curious and engaged.
       </p>
 
     </>
