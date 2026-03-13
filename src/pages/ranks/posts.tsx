@@ -1,4 +1,3 @@
-import { Div } from "@/components/containers/div";
 import { InfoPageLayout } from "@/components/custom/Misc/InfoPageLayout";
 import { SEO } from "@/components/custom/Misc/SEO";
 import { getRankPosts, type RankPost } from "@/lib/ranks";
