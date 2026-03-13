@@ -4,6 +4,8 @@ import { Footer } from "@/components/custom/Misc/Footer";
 import { StrongBlurText } from "@/components/text/StrongBlurText";
 import { styled } from "@/styles/stitches.config";
 import type { ReactNode } from "react";
+import { useMemo } from "react";
+import { useRouter } from "next/router";
 
 const PageWrapper = styled(FlexC, {
   minHeight: "100vh",
@@ -18,9 +20,39 @@ const HeaderLink = styled("a", {
   color: "inherit",
 });
 
+const BreadcrumbsRow = styled("nav", {
+  marginTop: "8px",
+  marginBottom: "10px",
+  display: "flex",
+  alignItems: "center",
+  flexWrap: "wrap",
+  gap: "6px",
+});
+
+const BreadcrumbLink = styled("a", {
+  color: "#c084fc",
+  textDecoration: "none",
+  fontWeight: 700,
+  "&:hover": {
+    textDecoration: "underline",
+  },
+});
+
+const BreadcrumbCurrent = styled("span", {
+  color: "#c084fc",
+  fontWeight: 700,
+});
+
+const BreadcrumbSeparator = styled("span", {
+  color: "#c084fc",
+  fontSize: "10px",
+  lineHeight: 1,
+  fontWeight: 700,
+});
+
 const ContentSection = styled("section", {
   padding: "20px 18px",
-  maxWidth: "820px",
+  width: "100%",
   margin: "0 auto",
   "@s": {
     padding: "16px 12px",
@@ -80,7 +112,30 @@ type InfoPageLayoutProps = {
   children: ReactNode;
 };
 
+function toBreadcrumbLabel(segment: string) {
+  const decoded = decodeURIComponent(segment);
+  return decoded
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
 export function InfoPageLayout({ children }: InfoPageLayoutProps) {
+  const router = useRouter();
+  const path = router.asPath.split("?")[0].split("#")[0];
+
+  const breadcrumbItems = useMemo(() => {
+    const segments = path.split("/").filter(Boolean);
+    return segments.map((segment, index) => {
+      const href = `/${segments.slice(0, index + 1).join("/")}`;
+      return {
+        href,
+        label: toBreadcrumbLabel(segment),
+        isLast: index === segments.length - 1,
+      };
+    });
+  }, [path]);
+
   return (
     <Container>
       <PageWrapper>
@@ -90,7 +145,28 @@ export function InfoPageLayout({ children }: InfoPageLayoutProps) {
           </HeaderLink>
         </HeaderRow>
         <ContentSection>
-          <ContentBody>{children}</ContentBody>
+          <ContentBody>
+            <BreadcrumbsRow aria-label="Breadcrumb">
+              {breadcrumbItems.length === 0 ? (
+                <BreadcrumbCurrent>Home</BreadcrumbCurrent>
+              ) : (
+                <>
+                  <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                  {breadcrumbItems.map((item) => (
+                    <FlexR key={item.href} css={{ gap: "6px", alignItems: "center" }}>
+                      <BreadcrumbSeparator>{">"}</BreadcrumbSeparator>
+                      {item.isLast ? (
+                        <BreadcrumbCurrent>{item.label}</BreadcrumbCurrent>
+                      ) : (
+                        <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
+                      )}
+                    </FlexR>
+                  ))}
+                </>
+              )}
+            </BreadcrumbsRow>
+            {children}
+          </ContentBody>
         </ContentSection>
         <Footer />
       </PageWrapper>
