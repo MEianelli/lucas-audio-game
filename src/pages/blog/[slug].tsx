@@ -1,45 +1,174 @@
 import { InfoPageLayout } from "@/components/custom/Misc/InfoPageLayout";
 import { SEO } from "@/components/custom/Misc/SEO";
-import { getArticlesMeta, getArticleSlugs } from "@/lib/articles";
-import dynamic from "next/dynamic";
+import { estimateReadingTime, formatPostDate, getBlogPosts, type BlogPost } from "@/lib/posts";
+import { styled } from "@/styles/stitches.config";
+import type { GetServerSideProps } from "next";
 
 type BlogArticlePageProps = {
-  slug: string;
-  title: string;
-  description?: string;
+  currentPost: BlogPost | null;
+  previousPostSlug: string | null;
+  nextPostSlug: string | null;
+  previousPostDate: string | null;
+  nextPostDate: string | null;
 };
 
-export default function BlogArticlePage({ slug, title, description }: BlogArticlePageProps) {
-  const Article = dynamic(() => import(`@/components/custom/Pages/articles/${slug}`), { ssr: true });
+const MetaLine = styled("p", {
+  margin: "0 0 8px 0",
+  fontSize: "12px",
+  color: "rgba(255, 255, 255, 0.65)",
+});
+
+const MetaDate = styled("span", {
+  fontWeight: 700,
+});
+
+const PostTitle = styled("h1", {
+  margin: "0 0 10px 0",
+  fontSize: "32px",
+  lineHeight: 1.2,
+  fontWeight: 700,
+  color: "$white",
+});
+
+const NavLink = styled("a", {
+  display: "inline-block",
+  color: "#c084fc",
+  textDecoration: "none",
+  marginTop: "8px",
+  "&:hover": {
+    textDecoration: "underline",
+  },
+});
+
+const NavChevron = styled("span", {
+  color: "$white",
+});
+
+const NavDate = styled("span", {
+  color: "$white",
+});
+
+const PostsLink = styled("a", {
+  display: "inline-block",
+  marginTop: "14px",
+  color: "$white",
+  textDecoration: "underline",
+  "&:visited": {
+    color: "$white",
+  },
+  "&:hover": {
+    color: "$white",
+  },
+});
+
+const PostContent = styled("div", {
+  "& p": {
+    margin: "10px 0",
+  },
+  "& a": {
+    color: "#c084fc",
+    textDecoration: "underline",
+  },
+  "& ul, & ol": {
+    paddingLeft: "20px",
+    margin: "10px 0",
+  },
+  "& li": {
+    margin: "4px 0",
+  },
+  "& ol li": {
+    color: "#c084fc",
+  },
+  "& ol li::marker": {
+    color: "$white",
+    fontSize: "22px",
+    fontWeight: 700,
+  },
+  "& h1, & h2, & h3, & h4": {
+    marginTop: "12px",
+    marginBottom: "8px",
+  },
+});
+
+export default function BlogArticlePage({
+  currentPost,
+  previousPostSlug,
+  nextPostSlug,
+  previousPostDate,
+  nextPostDate,
+}: BlogArticlePageProps) {
+  if (!currentPost) {
+    return (
+      <>
+        <SEO title="Post Not Found" description="Blog post not found." canonicalUrl="/blog" />
+        <InfoPageLayout>
+          <h1>Post not found</h1>
+          <p>We could not find this post.</p>
+          <PostsLink href="/blog/posts">See all post</PostsLink>
+        </InfoPageLayout>
+      </>
+    );
+  }
+
+  const readingTime = estimateReadingTime(currentPost.html);
 
   return (
     <>
-      <SEO title={`${title} | FilmGuess`} description={description} canonicalUrl={`/blog/${slug}`} />
+      <SEO title={currentPost.title} description="Weekly updates and audio guessing challenges." canonicalUrl={`/blog/${currentPost.slug}`} />
       <InfoPageLayout>
-        <Article />
+        <MetaLine>
+          <MetaDate>{formatPostDate(currentPost.createdAt)}</MetaDate>
+          {` - ${readingTime} min read`}
+        </MetaLine>
+        <PostTitle>{currentPost.title}</PostTitle>
+        <PostContent dangerouslySetInnerHTML={{ __html: currentPost.html }} />
+        {previousPostSlug && previousPostDate && (
+          <>
+            <NavLink href={`/blog/${previousPostSlug}`}>
+              <NavChevron>{"< "}</NavChevron>
+              previous post: <NavDate>{formatPostDate(previousPostDate)}</NavDate>
+            </NavLink>
+            <br />
+          </>
+        )}
+        {nextPostSlug && nextPostDate && (
+          <>
+            <NavLink href={`/blog/${nextPostSlug}`}>
+              <NavChevron>{"> "}</NavChevron>
+              next post: <NavDate>{formatPostDate(nextPostDate)}</NavDate>
+            </NavLink>
+            <br />
+          </>
+        )}
+        <PostsLink href="/blog/posts">See all post</PostsLink>
       </InfoPageLayout>
     </>
   );
 }
 
-export async function getStaticPaths() {
-  const slugs = getArticleSlugs();
+export const getServerSideProps: GetServerSideProps<BlogArticlePageProps> = async (context) => {
+  const slug = context.params?.slug;
+  const currentSlug = String(Array.isArray(slug) ? slug[0] : slug || "");
+  const posts = await getBlogPosts();
+  const currentIndex = posts.findIndex((post) => post.slug === currentSlug || String(post.id) === currentSlug);
 
-  return {
-    paths: slugs.map((slug) => ({ params: { slug } })),
-    fallback: false,
-  };
-}
+  if (!currentSlug || currentIndex === -1) {
+    return {
+      notFound: true,
+    };
+  }
 
-export async function getStaticProps({ params }: { params: { slug: string } }) {
-  const slug = params.slug;
-  const meta = getArticlesMeta().find((article) => article.slug === slug);
+  const currentPost = posts[currentIndex];
+  const previousPost = posts[currentIndex + 1] ?? null;
+  const nextPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
 
   return {
     props: {
-      slug,
-      title: meta?.title || slug,
-      description: meta?.description ?? null,
+      currentPost,
+      previousPostSlug: previousPost?.slug ?? null,
+      nextPostSlug: nextPost?.slug ?? null,
+      previousPostDate: previousPost?.createdAt ?? null,
+      nextPostDate: nextPost?.createdAt ?? null,
     },
   };
-}
+};

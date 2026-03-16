@@ -1,12 +1,26 @@
 import { supabase } from "@/lib/supabase";
 import { Tables } from "@/types/types";
 import { JSONParse } from "@/utils/json";
+import { sanitizeSimpleHtml } from "@/utils/sanitizeSimpleHtml";
 import { NextApiRequest, NextApiResponse } from "next";
 
 type RequestBody = {
   id?: number;
-  data?: Record<string, string>;
+  data?: Record<string, unknown>;
 };
+
+function sanitizeDataForTable(table: Tables, data?: Record<string, unknown>) {
+  if (!data) return data;
+  if (table !== "posts") return data;
+
+  const html = data.html;
+  if (typeof html !== "string") return data;
+
+  return {
+    ...data,
+    html: sanitizeSimpleHtml(html),
+  };
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -42,9 +56,10 @@ export default async function handler(
 
       case "POST":
         // Insert data into the table
+        const postPayload = sanitizeDataForTable(table, body.data as Record<string, unknown>);
         const { data: postData, error: postError } = await supabase
           .from(table)
-          .insert(body.data)
+          .insert(postPayload)
           .select();
 
         if (postError) throw postError;
@@ -58,9 +73,10 @@ export default async function handler(
             .json({ error: "ID is required for updating a record" });
         }
 
+        const putPayload = sanitizeDataForTable(table, data);
         const { data: putData, error: putError } = await supabase
           .from(table)
-          .update(data)
+          .update(putPayload)
           .eq("id", id)
           .select();
 

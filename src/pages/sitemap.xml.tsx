@@ -1,5 +1,5 @@
 import type { GetServerSideProps } from "next";
-import { getArticlesMeta } from "@/lib/articles";
+import { getBlogPosts } from "@/lib/posts";
 import { getRankPosts } from "@/lib/ranks";
 
 type SitemapEntry = {
@@ -42,6 +42,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     { loc: buildAbsoluteUrl(siteUrl, "/"), changefreq: "daily", priority: 1.0 },
     { loc: buildAbsoluteUrl(siteUrl, "/content"), changefreq: "daily", priority: 0.9 },
     { loc: buildAbsoluteUrl(siteUrl, "/blog"), changefreq: "weekly", priority: 0.8 },
+    { loc: buildAbsoluteUrl(siteUrl, "/blog/posts"), changefreq: "weekly", priority: 0.7 },
     { loc: buildAbsoluteUrl(siteUrl, "/ranks"), changefreq: "weekly", priority: 0.8 },
     { loc: buildAbsoluteUrl(siteUrl, "/ranks/posts"), changefreq: "weekly", priority: 0.7 },
     { loc: buildAbsoluteUrl(siteUrl, "/about"), changefreq: "monthly", priority: 0.5 },
@@ -49,12 +50,18 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     { loc: buildAbsoluteUrl(siteUrl, "/privacy-policy"), changefreq: "monthly", priority: 0.4 },
   ];
 
-  const articleEntries: SitemapEntry[] = getArticlesMeta().map((article) => ({
-    loc: buildAbsoluteUrl(siteUrl, `/blog/${article.slug}`),
-    lastmod: article.updatedAt,
-    changefreq: "monthly",
-    priority: 0.7,
-  }));
+  let blogEntries: SitemapEntry[] = [];
+  try {
+    const posts = await getBlogPosts();
+    blogEntries = posts.map((post) => ({
+      loc: buildAbsoluteUrl(siteUrl, `/blog/${post.slug}`),
+      lastmod: post.createdAt,
+      changefreq: "monthly",
+      priority: 0.7,
+    }));
+  } catch {
+    blogEntries = [];
+  }
 
   let rankEntries: SitemapEntry[] = [];
   try {
@@ -69,7 +76,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     rankEntries = [];
   }
 
-  const xml = toXml([...staticEntries, ...articleEntries, ...rankEntries]);
+  const xml = toXml([...staticEntries, ...blogEntries, ...rankEntries]);
 
   res.setHeader("Content-Type", "text/xml; charset=utf-8");
   res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate=86400");

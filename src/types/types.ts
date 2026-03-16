@@ -1,4 +1,4 @@
-export type Tables = "media" | "users" | "cards";
+export type Tables = "media" | "users" | "cards" | "posts";
 
 export type CardState = "ok" | "nok" | "neutral";
 
