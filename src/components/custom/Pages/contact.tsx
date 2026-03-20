@@ -22,7 +22,7 @@ export default function ContactContent() {
   return (
     <>
       <h1>Contact Us</h1>
-      <p>We'd love to hear from you!</p>
+      <p>We&apos;d love to hear from you!</p>
 
       <p>
         Whether you have a question about the game, want to report a bug, have a feature request, or just want to

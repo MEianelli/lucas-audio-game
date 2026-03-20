@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "@/styles/stitches.config";
 import { BlurText } from "@/components/text/BlurText";
+import Link from "next/link";
 
 const BannerWrapper = styled("div", {
   position: "fixed",
@@ -88,7 +89,7 @@ export function CookieBanner() {
       <BannerText>
         We use cookies and similar technologies to enhance your experience, analyze site traffic, and serve
         personalized ads. By clicking &quot;Accept&quot;, you agree to our use of cookies as described in our{" "}
-        <a href="/privacy-policy">Privacy Policy</a>.
+        <Link href="/privacy-policy">Privacy Policy</Link>.
       </BannerText>
       <AcceptButton onClick={handleAccept}>
         <BlurText title="Accept" css={{ fontSize: "14px", color: "#ffaa00", letterSpacing: "1px" }} />

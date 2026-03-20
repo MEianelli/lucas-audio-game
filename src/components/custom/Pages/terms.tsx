@@ -9,8 +9,8 @@ export default function TermsContent() {
       </p>
 
       <p>
-        Welcome to <strong>FilmGuess.com</strong> ("we", "our", "us"). These Terms of Service ("Terms") govern your access to
-        and use of the FilmGuess website and services (the "Service"). By accessing or using the Service, you agree
+        Welcome to <strong>FilmGuess.com</strong> (&quot;we&quot;, &quot;our&quot;, &quot;us&quot;). These Terms of Service (&quot;Terms&quot;) govern your access to
+        and use of the FilmGuess website and services (the &quot;Service&quot;). By accessing or using the Service, you agree
         to be bound by these Terms and our Privacy Policy.
       </p>
 
@@ -18,7 +18,7 @@ export default function TermsContent() {
       <p>
         FilmGuess provides an interactive movie audio guessing game. You may use our Service only for your personal,
         non-commercial entertainment purposes. You must not misuse the Service, including but not limited to
-        attempting to gain unauthorized access, disrupting the platform's functionality, or using automated systems
+        attempting to gain unauthorized access, disrupting the platform&apos;s functionality, or using automated systems
         (like bots or scrapers) to interact with the game.
       </p>
 
@@ -44,8 +44,8 @@ export default function TermsContent() {
 
       <h2>4. Disclaimers and Limitations of Liability</h2>
       <p>
-        The Service is provided on an "AS IS" and "AS AVAILABLE" basis. We disclaim all warranties, express or
-        implied, regarding the Service's accuracy, availability, or suitability for any purpose. FilmGuess shall not
+        The Service is provided on an &quot;AS IS&quot; and &quot;AS AVAILABLE&quot; basis. We disclaim all warranties, express or
+        implied, regarding the Service&apos;s accuracy, availability, or suitability for any purpose. FilmGuess shall not
         be liable for any indirect, incidental, or consequential damages arising from your use of the Service.
       </p>
 
