@@ -4,6 +4,7 @@ import "@/styles/fonts.css";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { LoadingScreen } from "@/components/custom/Misc/LoadingScreen";
+import { CookieBanner } from "@/components/custom/Misc/CookieBanner";
 
 function MyApp({ Component, pageProps }: AppProps) {
   globalStyles();
@@ -27,7 +28,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     //eslint-disable-next-line
   }, []);
 
-  return pageLoading ? <LoadingScreen /> : <Component {...pageProps} />;
+  return pageLoading ? (
+    <LoadingScreen />
+  ) : (
+    <>
+      <Component {...pageProps} />
+      <CookieBanner />
+    </>
+  );
 }
 
 export default MyApp;

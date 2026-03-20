@@ -3,6 +3,7 @@ import { DialogModal } from "@/components/custom/Modal/modal";
 import { HomeHeader } from "@/components/custom/Header/Header";
 import { PlayAndRank } from "@/components/custom/Home/PlayAndRank";
 import { LoginButton } from "@/components/custom/Home/LoginButton";
+import { AboutIntro } from "@/components/custom/Home/AboutIntro";
 import { useServerData } from "@/lib/hooks/useServerData";
 import { PageProps } from "@/lib/context/getServerSideProps";
 import { SEO } from "@/components/custom/Misc/SEO";
@@ -23,6 +24,7 @@ export default function Home(props: PageProps) {
           <HomeHeader />
           <PlayAndRank />
           <LoginButton />
+          <AboutIntro />
           <Footer />
           <DialogModal />
         </FlexC>

@@ -73,11 +73,17 @@ export function Footer() {
             <FooterLink href="/privacy-policy">
               <BlurText title="Policy" css={{ fontSize: "14px" }} />
             </FooterLink>
+            <FooterLink href="/terms">
+              <BlurText title="Terms" css={{ fontSize: "14px" }} />
+            </FooterLink>
             <FooterLink href="/faq">
               <BlurText title="FAQ" css={{ fontSize: "14px" }} />
             </FooterLink>
             <FooterLink href="/about">
               <BlurText title="About" css={{ fontSize: "14px" }} />
+            </FooterLink>
+            <FooterLink href="/contact">
+              <BlurText title="Contact" css={{ fontSize: "14px" }} />
             </FooterLink>
           </FlexR>
         </FooterNav>
