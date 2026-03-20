@@ -24,7 +24,7 @@ const MetaDate = styled("span", {
 
 const PostTitle = styled("h1", {
   margin: "0 0 10px 0",
-  fontSize: "32px",
+  fontSize: "32px !important",
   lineHeight: 1.2,
   fontWeight: 700,
   color: "$white",
@@ -70,11 +70,31 @@ const PostContent = styled("div", {
     textDecoration: "underline",
   },
   "& ul, & ol": {
-    paddingLeft: "20px",
+    paddingLeft: "0",
     margin: "10px 0",
+    listStylePosition: "inside",
   },
   "& li": {
+    margin: "16px 0",
+  },
+  "& li p:nth-child(1)": {
+    color: "#c084fc",
+    fontWeight: 700,
+    fontSize: "22px",
+    display: "inline",
+    margin: 0,
+  },
+  "& li p:nth-child(2)": {
+    color: "$white",
+    fontWeight: 700,
+    fontSize: "12px",
     margin: "4px 0",
+  },
+  "& li p:nth-child(3)": {
+    color: "$white",
+    fontWeight: 400,
+    fontSize: "12px",
+    margin: 0,
   },
   "& ol li": {
     color: "#c084fc",
