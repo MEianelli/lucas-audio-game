@@ -2,8 +2,7 @@ import { FlexC, FlexR } from "@/components/containers/flex";
 import { BlurText } from "@/components/text/BlurText";
 import { styled } from "@/styles/stitches.config";
 import { Disclaimer } from "./Disclaimer";
-import { InstagramLogo, XLogo } from "@/components/icons/logos";
-
+import { InstagramLogo, TikTokLogo } from "@/components/icons/logos";
 const FooterContainer = styled("footer", {
   padding: "20px 18px",
   marginTop: "auto",
@@ -54,7 +53,7 @@ export function Footer() {
             <InstagramLogo size={32} />
           </SocialLink>
           <SocialLink href="https://www.tiktok.com/@filmguess8" target="_blank" rel="noreferrer" aria-label="TikTok">
-            <XLogo size={32} />
+            <TikTokLogo size={32} />
           </SocialLink>
         </SocialRow>
         <FooterNav>

@@ -37,18 +37,26 @@ const BlinkIcon = styled("svg", {
   animation: `${pulseBrilho} 0.6s infinite`,
 });
 
-export function XLogo({ size = 18 }: LogoProps) {
+export function TikTokLogo({ size = 18 }: LogoProps) {
   return (
     <IconContainer css={{ width: size, height: size, animation: `${scalePulse} 0.2s infinite alternate` }}>
-      <BaseIcon width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <BaseIcon width={size} height={size} viewBox="0 0 100 100" fill="none" aria-hidden="true">
         <path
-          d="M4.5 3h4.2l4.07 5.65L17.7 3H21l-6.71 7.62L21.5 21h-4.2l-4.47-6.2L7.56 21H4.25l7.06-8.04L4.5 3Zm3.1 2 8.26 11.5h1.53L9.12 5H7.6Z"
+          d="M39.76,89.95c-14.92,0-27.05-12.14-27.05-27.05s12.14-27.05,27.05-27.05c1.74,0,3.46.16,5.15.49l.09,13.52c-1.66-.67-3.43-1.01-5.24-1.01-7.75,0-14.05,6.3-14.05,14.05s6.3,14.05,14.05,14.05,14.05-6.3,14.05-14.05V10.05h13v52.85c0,14.92-12.14,27.05-27.05,27.05Z"
+          fill="currentColor"
+        />
+        <path
+          d="M87.3,43.53c-18.46,0-33.48-15.02-33.48-33.48h13c0,11.29,9.19,20.48,20.48,20.48v13Z"
           fill="currentColor"
         />
       </BaseIcon>
-      <BlinkIcon width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <BlinkIcon width={size} height={size} viewBox="0 0 100 100" fill="none" aria-hidden="true">
         <path
-          d="M4.5 3h4.2l4.07 5.65L17.7 3H21l-6.71 7.62L21.5 21h-4.2l-4.47-6.2L7.56 21H4.25l7.06-8.04L4.5 3Zm3.1 2 8.26 11.5h1.53L9.12 5H7.6Z"
+          d="M39.76,89.95c-14.92,0-27.05-12.14-27.05-27.05s12.14-27.05,27.05-27.05c1.74,0,3.46.16,5.15.49l.09,13.52c-1.66-.67-3.43-1.01-5.24-1.01-7.75,0-14.05,6.3-14.05,14.05s6.3,14.05,14.05,14.05,14.05-6.3,14.05-14.05V10.05h13v52.85c0,14.92-12.14,27.05-27.05,27.05Z"
+          fill="currentColor"
+        />
+        <path
+          d="M87.3,43.53c-18.46,0-33.48-15.02-33.48-33.48h13c0,11.29,9.19,20.48,20.48,20.48v13Z"
           fill="currentColor"
         />
       </BlinkIcon>
