@@ -55,8 +55,8 @@ export default async function handler(
         return res.status(200).json(getData);
 
       case "POST":
-        // Insert data into the table
         const postPayload = sanitizeDataForTable(table, body.data as Record<string, unknown>);
+        if (!postPayload) return res.status(400).json({ error: "Data is required" });
         const { data: postData, error: postError } = await supabase
           .from(table)
           .insert(postPayload)
@@ -74,6 +74,7 @@ export default async function handler(
         }
 
         const putPayload = sanitizeDataForTable(table, data);
+        if (!putPayload) return res.status(400).json({ error: "Data is required" });
         const { data: putData, error: putError } = await supabase
           .from(table)
           .update(putPayload)
