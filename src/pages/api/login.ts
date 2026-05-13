@@ -20,10 +20,10 @@ async function Login(req: NextApiRequest, res: NextApiResponse) {
     return res.status(200).json({ res: "wrongPass" });
   }
 
-  setCookie(COOKIE_NAME, encryptData({ name }), {
+  await setCookie(COOKIE_NAME, encryptData({ name }), {
     req,
     res,
-    maxAge: 60 * 60 * 24 * 100, //100 days
+    maxAge: 60 * 60 * 24 * 100,
   });
 
   return res.status(200).json({ res: "logged", user: data });

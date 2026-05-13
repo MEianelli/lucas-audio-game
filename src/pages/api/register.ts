@@ -32,7 +32,7 @@ async function Register(req: NextApiRequest, res: NextApiResponse) {
       return res.status(200).json({ res: "error" });
     }
 
-    setCookie(COOKIE_NAME, encryptData({ name }), {
+    await setCookie(COOKIE_NAME, encryptData({ name }), {
       req,
       res,
       maxAge: 60 * 60 * 24 * 10,
