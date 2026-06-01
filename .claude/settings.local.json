@@ -4,7 +4,13 @@
       "Bash(npm show *)",
       "Bash(npm install *)",
       "Bash(npm run *)",
-      "Bash(npm outdated *)"
+      "Bash(npm outdated *)",
+      "Bash(npx tsc *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(npx next *)",
+      "Bash(node_modules/.bin/next lint *)",
+      "Bash(node_modules/.bin/eslint src *)"
     ]
   }
 }

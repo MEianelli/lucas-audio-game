@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { InfoPageLayout } from "@/components/custom/Misc/InfoPageLayout";
 import { SEO } from "@/components/custom/Misc/SEO";
 import { estimateReadingTime, formatPostDate, getBlogPosts, type BlogPost } from "@/lib/posts";
@@ -132,9 +133,34 @@ export default function BlogArticlePage({
 
   const readingTime = estimateReadingTime(currentPost.html);
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://filmguess.com";
+  const postUrl = `${siteUrl}/blog/${currentPost.slug}`;
+  const blogPostingJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": postUrl,
+    url: postUrl,
+    headline: currentPost.title,
+    datePublished: currentPost.createdAt,
+    dateModified: currentPost.createdAt,
+    author: { "@type": "Organization", name: "Filmguess", url: siteUrl },
+    publisher: { "@type": "Organization", name: "Filmguess", url: siteUrl },
+    isPartOf: { "@id": `${siteUrl}/#website` },
+  };
+
   return (
     <>
-      <SEO title={currentPost.title} description="Weekly updates and audio guessing challenges." canonicalUrl={`/blog/${currentPost.slug}`} />
+      <SEO
+        title={currentPost.title}
+        description="Filmguess weekly blog: movie rankings, audio guessing challenges, film insights, and community highlights."
+        canonicalUrl={`/blog/${currentPost.slug}`}
+      />
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
+        />
+      </Head>
       <InfoPageLayout>
         <MetaLine>
           <MetaDate>{formatPostDate(currentPost.createdAt)}</MetaDate>

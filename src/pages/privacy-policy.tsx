@@ -7,7 +7,7 @@ export default function PrivacyPolicyPage() {
     <>
       <SEO
         title="Filmguess Privacy Policy"
-        description="Read about how Filmguess handles data and privacy."
+        description="Learn how Filmguess collects, uses, and protects your personal data. Read our full privacy policy here."
         canonicalUrl="/privacy-policy"
       />
       <InfoPageLayout>

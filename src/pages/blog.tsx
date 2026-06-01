@@ -113,7 +113,7 @@ export default function BlogPage({ posts }: BlogPageProps) {
   if (!currentPost) {
     return (
       <>
-        <SEO title="FilmGuess Blog" description="Weekly updates, rankings, and new audio guessing challenges." canonicalUrl="/blog" />
+        <SEO title="FilmGuess Blog" description="Explore the latest Filmguess blog posts — weekly rankings, new audio challenges, film trivia, and community highlights." canonicalUrl="/blog" />
         <InfoPageLayout>
           <h1>Blog</h1>
           <p>No posts yet.</p>
@@ -129,7 +129,7 @@ export default function BlogPage({ posts }: BlogPageProps) {
     <>
       <SEO
         title={currentPost.title}
-        description="Weekly updates, rankings, and new audio guessing challenges."
+        description="Explore the latest Filmguess blog posts — weekly rankings, new audio challenges, film trivia, and community highlights."
         canonicalUrl="/blog"
       />
       <InfoPageLayout>

@@ -7,6 +7,14 @@ export default function Document() {
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <link rel="icon" href="/favicon.ico" />
+
+        {/* Google Fonts — preconnect + stylesheet (replaces @import in fonts.css) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap"
+        />
         
         {/* Google AdSense */}
         <script

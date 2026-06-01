@@ -67,12 +67,12 @@ export default function RankByDatePage({ currentRank, previousRankDate, nextRank
     <>
       <SEO
         title={`Rank - ${currentRank.title}`}
-        description="This is the result of last week ranking. Congratulations to the winner."
+        description="Filmguess weekly leaderboard ranking — see who topped the charts and claimed their spot in movie audio guessing history."
         canonicalUrl={`/ranks/${currentRank.date}`}
       />
       <InfoPageLayout>
         <h1>{currentRank.title}</h1>
-        <RankImage src={currentRank.imageUrl} alt={`Ranking screenshot for ${currentRank.title}`} />
+        <RankImage src={currentRank.imageUrl} alt={`Ranking screenshot for ${currentRank.title}`} width={1200} height={800} />
         <p>
           This is the result of last week ranking. Congratulations to the winner. Come back everyday, challenge
           yourself to be forever remembered in the ranking screenshots.

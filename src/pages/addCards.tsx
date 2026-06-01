@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { Button } from "@/components/buttons/buttons";
 import { Center } from "@/components/containers/containers";
 import { Input } from "@/components/inputs/input";
@@ -44,7 +45,9 @@ const AddCards = (props: { media?: Media[]; allowed: boolean }) => {
     return !(Object.values(files).length === 2);
   }, [files]);
 
-  if (!props.allowed) return null;
+  if (!props.allowed) return (
+    <Head><meta name="robots" content="noindex, nofollow" /></Head>
+  );
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
@@ -85,7 +88,9 @@ const AddCards = (props: { media?: Media[]; allowed: boolean }) => {
   }
 
   return (
-    <FlexC css={{ border: "10px solid purple", padding: "40px", gap: "16px" }}>
+    <>
+      <Head><meta name="robots" content="noindex, nofollow" /></Head>
+      <FlexC css={{ border: "10px solid purple", padding: "40px", gap: "16px" }}>
       <Text color={"green"} css={{ textAlign: "center", marginBottom: "20px" }}>
         Add Card DASHBOARD
       </Text>
@@ -128,7 +133,8 @@ const AddCards = (props: { media?: Media[]; allowed: boolean }) => {
           Save
         </Button>
       </Center>
-    </FlexC>
+      </FlexC>
+    </>
   );
 };
 

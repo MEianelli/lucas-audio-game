@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { Button } from "@/components/buttons/buttons";
 import { Center } from "@/components/containers/containers";
 import { Input, Textarea } from "@/components/inputs/input";
@@ -37,7 +38,9 @@ const AddMovie = ({ allowed }: { allowed: boolean }) => {
   const [data, setData] = useState<Data>(initialData);
   const [saving, setSaving] = useState(false);
 
-  if (!allowed) return null;
+  if (!allowed) return (
+    <Head><meta name="robots" content="noindex, nofollow" /></Head>
+  );
 
   const disableSave = !(!!data.title && !!data.wrongs && !!data.tags);
 
@@ -69,7 +72,9 @@ const AddMovie = ({ allowed }: { allowed: boolean }) => {
   }
 
   return (
-    <FlexC css={{ border: "10px solid purple", padding: "40px", gap: "16px" }}>
+    <>
+      <Head><meta name="robots" content="noindex, nofollow" /></Head>
+      <FlexC css={{ border: "10px solid purple", padding: "40px", gap: "16px" }}>
       <Text cp css={{ textAlign: "center", marginBottom: "20px" }}>
         Add media DASHBOARD
       </Text>
@@ -108,7 +113,8 @@ const AddMovie = ({ allowed }: { allowed: boolean }) => {
           Save
         </Button>
       </Center>
-    </FlexC>
+      </FlexC>
+    </>
   );
 };
 

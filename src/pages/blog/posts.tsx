@@ -36,7 +36,7 @@ const PostLink = styled("a", {
 export default function BlogPostsPage({ posts }: BlogPostsPageProps) {
   return (
     <>
-      <SEO title="All Blog Posts" description="All FilmGuess blog posts ordered by date." canonicalUrl="/blog/posts" />
+      <SEO title="All Blog Posts" description="Browse all Filmguess blog posts — weekly updates, leaderboard rankings, and new movie audio guessing challenges." canonicalUrl="/blog/posts" />
       <InfoPageLayout>
         <ContentWrapper>
           <h1>All blog posts:</h1>

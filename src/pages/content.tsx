@@ -24,8 +24,9 @@ const Content = (props: PageProps) => {
         description="Play now and test your movie knowledge! Listen to audio clips from movies and guess which movie is correct. Earn points and compete on the leaderboard."
         keywords="play filmguess, guess movie, movie quiz, online cinema game"
         canonicalUrl="/content"
+        noIndex
       />
-      <Container>
+      <Container id="main-content">
         <FlexC css={{ gap: "6px", minHeight: "100vh" }}>
           <GameHeader />
           <GuessCards cards={cards} />

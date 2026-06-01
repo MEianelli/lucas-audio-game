@@ -56,7 +56,7 @@ const faqSchema = {
 export default function FaqPage() {
   return (
     <>
-      <SEO title="Filmguess FAQ" description="Frequently asked questions about Filmguess." canonicalUrl="/faq" />
+      <SEO title="Filmguess FAQ" description="Got questions about Filmguess? Find answers about gameplay, audio clips, scoring, rankings, and more." canonicalUrl="/faq" />
       <Head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       </Head>

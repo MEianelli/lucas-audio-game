@@ -1,5 +1,5 @@
 /* styles/fonts.css */
-@import url("https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap");
+/* Parkinsans loaded via <link> in _document.tsx */
 
 @font-face {
   font-family: "vcr";

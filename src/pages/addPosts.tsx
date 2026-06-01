@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { supabase } from "@/lib/supabase";
 import { styled } from "@/styles/stitches.config";
 import { GetServerSideProps } from "next";
@@ -142,7 +143,9 @@ const AddPosts = ({ allowed, posts: initialPosts }: { allowed: boolean; posts: P
   const [saving, setSaving] = useState(false);
   const [deletingId, setDeletingId] = useState<number | null>(null);
 
-  if (!allowed) return null;
+  if (!allowed) return (
+    <Head><meta name="robots" content="noindex, nofollow" /></Head>
+  );
 
   const disableSave = !(data.title.trim() && data.html.trim());
 
@@ -222,6 +225,8 @@ const AddPosts = ({ allowed, posts: initialPosts }: { allowed: boolean; posts: P
   }
 
   return (
+    <>
+      <Head><meta name="robots" content="noindex, nofollow" /></Head>
     <Page>
       <Title>Posts Admin</Title>
 
@@ -278,6 +283,7 @@ const AddPosts = ({ allowed, posts: initialPosts }: { allowed: boolean; posts: P
         </tbody>
       </Table>
     </Page>
+    </>
   );
 };
 

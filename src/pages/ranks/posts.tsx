@@ -36,7 +36,7 @@ const RankLink = styled("a", {
 export default function RankPostsPage({ ranks }: RankPostsPageProps) {
   return (
     <>
-      <SEO title="All Rank Posts" description="All weekly ranking screenshots ordered by date." canonicalUrl="/ranks/posts" />
+      <SEO title="All Rank Posts" description="Browse all weekly Filmguess leaderboard rankings — every snapshot celebrating top players in our movie audio guessing game." canonicalUrl="/ranks/posts" />
       <InfoPageLayout>
         <ContentWrapper>
           <h1>All rank posts:</h1>
