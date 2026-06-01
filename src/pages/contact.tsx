@@ -7,7 +7,7 @@ export default function ContactPage() {
     <>
       <SEO
         title="Contact Us - Filmguess"
-        description="Get in touch with the Filmguess team."
+        description="Have a question or feedback? Get in touch with the Filmguess team — we'd love to hear from you."
         canonicalUrl="/contact"
       />
       <InfoPageLayout>

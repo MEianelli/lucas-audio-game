@@ -54,7 +54,7 @@ export default function RanksPage({ ranks }: RanksPageProps) {
   if (!currentRank) {
     return (
       <>
-        <SEO title="Weekly Ranks" description="Weekly ranking screenshots from Filmguess." canonicalUrl="/ranks" />
+        <SEO title="Weekly Ranks" description="See who's topping the Filmguess leaderboard. Weekly ranking screenshots celebrating our top movie audio guessing players." canonicalUrl="/ranks" />
         <InfoPageLayout>
           <h1>Ranks</h1>
           <p>No rank posts yet.</p>
@@ -68,12 +68,12 @@ export default function RanksPage({ ranks }: RanksPageProps) {
     <>
       <SEO
         title={`Rank - ${currentRank.title}`}
-        description="This is the result of last week ranking. Congratulations to the winner."
+        description="See who's topping the Filmguess leaderboard. Weekly ranking screenshots celebrating our top movie audio guessing players."
         canonicalUrl="/ranks"
       />
       <InfoPageLayout>
         <h1>{currentRank.title}</h1>
-        <RankImage src={currentRank.imageUrl} alt={`Ranking screenshot for ${currentRank.title}`} />
+        <RankImage src={currentRank.imageUrl} alt={`Ranking screenshot for ${currentRank.title}`} width={1200} height={800} />
         <p>
           This is the result of last week ranking. Congratulations to the winner. Come back everyday, challenge
           yourself to be forever remembered in the ranking screenshots.

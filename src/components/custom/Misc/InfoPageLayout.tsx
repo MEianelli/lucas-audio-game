@@ -6,6 +6,7 @@ import { styled } from "@/styles/stitches.config";
 import type { ReactNode } from "react";
 import { useMemo } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const PageWrapper = styled(FlexC, {
   minHeight: "100vh",
@@ -123,6 +124,7 @@ function toBreadcrumbLabel(segment: string) {
 export function InfoPageLayout({ children }: InfoPageLayoutProps) {
   const router = useRouter();
   const path = router.asPath.split("?")[0].split("#")[0];
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://filmguess.com";
 
   const breadcrumbItems = useMemo(() => {
     const segments = path.split("/").filter(Boolean);
@@ -136,15 +138,53 @@ export function InfoPageLayout({ children }: InfoPageLayoutProps) {
     });
   }, [path]);
 
+  const jsonLd = useMemo(() => {
+    const currentUrl = `${siteUrl}${path === "/" ? "" : path}`;
+    const pageName =
+      breadcrumbItems.length > 0
+        ? breadcrumbItems[breadcrumbItems.length - 1].label
+        : "Home";
+    return {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": currentUrl,
+          url: currentUrl,
+          name: pageName,
+          isPartOf: { "@id": `${siteUrl}/#website` },
+        },
+        {
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+            ...breadcrumbItems.map((item, index) => ({
+              "@type": "ListItem",
+              position: index + 2,
+              name: item.label,
+              item: `${siteUrl}${item.href}`,
+            })),
+          ],
+        },
+      ],
+    };
+  }, [path, breadcrumbItems, siteUrl]);
+
   return (
-    <Container>
+    <Container id="main-content">
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </Head>
       <PageWrapper>
         <HeaderRow>
           <HeaderLink href="/" aria-label="Go to home">
             <StrongBlurText title="Filmguess" css={{ fontSize: "32px", userSelect: "none" }} />
           </HeaderLink>
         </HeaderRow>
-        <ContentSection>
+        <ContentSection aria-label="Page content">
           <ContentBody>
             <BreadcrumbsRow aria-label="Breadcrumb">
               {breadcrumbItems.length === 0 ? (

@@ -102,4 +102,18 @@ export const globalStyles = globalCss({
   "*": {
     boxSizing: "border-box",
   },
+  ".skip-link": {
+    position: "absolute",
+    top: "-100px",
+    left: "0",
+    backgroundColor: "#0E0030",
+    color: "#FFFFFF",
+    padding: "8px 16px",
+    textDecoration: "none",
+    zIndex: "9999",
+    fontWeight: "700",
+  },
+  ".skip-link:focus": {
+    top: "0",
+  },
 });
