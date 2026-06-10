@@ -3,6 +3,5 @@ Disallow: /addCards
 Disallow: /addMedia
 Disallow: /addPosts
 Disallow: /api/
-Disallow: /content
 
 Sitemap: https://filmguess.com/sitemap.xml

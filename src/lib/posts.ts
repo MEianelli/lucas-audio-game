@@ -34,6 +34,13 @@ export function formatPostDate(date: string) {
   }).format(toUtcDate(date));
 }
 
+export function excerptFromHtml(html: string, maxLength = 155) {
+  const plainText = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  if (plainText.length <= maxLength) return plainText;
+  const cut = plainText.slice(0, maxLength);
+  return `${cut.slice(0, cut.lastIndexOf(" "))}…`;
+}
+
 export function estimateReadingTime(html: string) {
   const plainText = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
   const words = plainText ? plainText.split(" ").length : 0;

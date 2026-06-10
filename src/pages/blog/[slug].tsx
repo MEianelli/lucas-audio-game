@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { InfoPageLayout } from "@/components/custom/Misc/InfoPageLayout";
 import { SEO } from "@/components/custom/Misc/SEO";
-import { estimateReadingTime, formatPostDate, getBlogPosts, type BlogPost } from "@/lib/posts";
+import { estimateReadingTime, excerptFromHtml, formatPostDate, getBlogPosts, type BlogPost } from "@/lib/posts";
 import { styled } from "@/styles/stitches.config";
 import type { GetServerSideProps } from "next";
 
@@ -125,7 +125,7 @@ export default function BlogArticlePage({
         <InfoPageLayout>
           <h1>Post not found</h1>
           <p>We could not find this post.</p>
-          <PostsLink href="/blog/posts">See all post</PostsLink>
+          <PostsLink href="/blog/posts">See all posts</PostsLink>
         </InfoPageLayout>
       </>
     );
@@ -152,7 +152,7 @@ export default function BlogArticlePage({
     <>
       <SEO
         title={currentPost.title}
-        description="Filmguess weekly blog: movie rankings, audio guessing challenges, film insights, and community highlights."
+        description={excerptFromHtml(currentPost.html) || "Filmguess weekly blog: movie rankings, audio guessing challenges, film insights, and community highlights."}
         canonicalUrl={`/blog/${currentPost.slug}`}
       />
       <Head>
@@ -186,7 +186,7 @@ export default function BlogArticlePage({
             <br />
           </>
         )}
-        <PostsLink href="/blog/posts">See all post</PostsLink>
+        <PostsLink href="/blog/posts">See all posts</PostsLink>
       </InfoPageLayout>
     </>
   );

@@ -12,7 +12,7 @@ export function Disclaimer() {
         maxWidth: "$cell",
         zIndex: 1,
       }}
-      title={`©${new Date().getFullYear()} Filmguess. All rights reserved. This game is for entertainment only. We do not own any audio, quotes, or movie references used. All rights belong to their respective owners. Requests for removal will be promptly honored.[0.06]`}
+      title={`©${new Date().getFullYear()} Filmguess. All rights reserved. Filmguess is an independent quiz game for entertainment purposes. Short, edited audio excerpts are used solely in a transformative quiz format; all movie titles, audio, and quotes remain the property of their respective owners. Rights holders can contact us for prompt removal.[0.06]`}
     />
   );
 }
