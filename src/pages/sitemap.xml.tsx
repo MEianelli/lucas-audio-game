@@ -48,6 +48,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     { loc: buildAbsoluteUrl(siteUrl, "/about"), changefreq: "monthly", priority: 0.5 },
     { loc: buildAbsoluteUrl(siteUrl, "/faq"), changefreq: "monthly", priority: 0.5 },
     { loc: buildAbsoluteUrl(siteUrl, "/privacy-policy"), changefreq: "monthly", priority: 0.4 },
+    { loc: buildAbsoluteUrl(siteUrl, "/terms"), changefreq: "monthly", priority: 0.4 },
+    { loc: buildAbsoluteUrl(siteUrl, "/contact"), changefreq: "monthly", priority: 0.4 },
   ];
 
   let blogEntries: SitemapEntry[] = [];

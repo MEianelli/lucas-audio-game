@@ -36,8 +36,6 @@ export function SEO({
       <meta name="keywords" content={keywords} />
       <meta name="author" content="Filmguess" />
       <meta name="robots" content={noIndex ? "noindex, nofollow" : "index, follow"} />
-      <meta name="language" content="English" />
-      <meta name="revisit-after" content="7 days" />
 
       {/* Canonical URL */}
       {canonical && <link rel="canonical" href={canonical} />}

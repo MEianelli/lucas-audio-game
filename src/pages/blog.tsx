@@ -117,7 +117,7 @@ export default function BlogPage({ posts }: BlogPageProps) {
         <InfoPageLayout>
           <h1>Blog</h1>
           <p>No posts yet.</p>
-          <PostsLink href="/blog/posts">See all post</PostsLink>
+          <PostsLink href="/blog/posts">See all posts</PostsLink>
         </InfoPageLayout>
       </>
     );
@@ -146,7 +146,7 @@ export default function BlogPage({ posts }: BlogPageProps) {
           </NavLink>
         )}
         <br />
-        <PostsLink href="/blog/posts">See all post</PostsLink>
+        <PostsLink href="/blog/posts">See all posts</PostsLink>
       </InfoPageLayout>
     </>
   );

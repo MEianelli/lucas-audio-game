@@ -57,7 +57,7 @@ export default function RankByDatePage({ currentRank, previousRankDate, nextRank
         <InfoPageLayout>
           <h1>Rank not found</h1>
           <p>We could not find this rank post.</p>
-          <PostsLink href="/ranks/posts">See all post</PostsLink>
+          <PostsLink href="/ranks/posts">See all posts</PostsLink>
         </InfoPageLayout>
       </>
     );
@@ -74,8 +74,13 @@ export default function RankByDatePage({ currentRank, previousRankDate, nextRank
         <h1>{currentRank.title}</h1>
         <RankImage src={currentRank.imageUrl} alt={`Ranking screenshot for ${currentRank.title}`} width={1200} height={800} />
         <p>
-          This is the result of last week ranking. Congratulations to the winner. Come back everyday, challenge
-          yourself to be forever remembered in the ranking screenshots.
+          These are the final standings for the week of {formatRankDate(currentRank.date)}. Congratulations to the
+          winner and to everyone who made the board — every point here came from correctly recognizing a movie by
+          its audio alone.
+        </p>
+        <p>
+          Rankings reset weekly, so there is always a fresh shot at the top. Play a few rounds each day, keep your
+          streak alive, and your name could be in next week&apos;s screenshot.
         </p>
         {previousRankDate && (
           <>
@@ -95,7 +100,7 @@ export default function RankByDatePage({ currentRank, previousRankDate, nextRank
             <br />
           </>
         )}
-        <PostsLink href="/ranks/posts">See all post</PostsLink>
+        <PostsLink href="/ranks/posts">See all posts</PostsLink>
       </InfoPageLayout>
     </>
   );

@@ -7,10 +7,7 @@ export function AdsContainerMobile({ children }: { children: React.ReactNode }) 
       css={{
         width: "300px",
         height: "250px",
-        position: "fixed",
-        bottom: 12,
-        right: "50%",
-        transform: "translate(50%, 0%)",
+        margin: "12px auto",
         "@s": {
           width: "300px",
           height: "150px",
@@ -31,6 +28,9 @@ export function AdsContainerDeskRight({ children }: { children: React.ReactNode 
         height: '600px',
         top: 16,
         right: 16,
+        "@media (max-width: 1240px)": {
+          display: "none",
+        },
         "@s": {
           display: "none",
           width: '120px',
@@ -52,6 +52,9 @@ export function AdsContainerDeskLeft({ children }: { children: React.ReactNode }
         height: '600px',
         top: 16,
         left: 16,
+        "@media (max-width: 1240px)": {
+          display: "none",
+        },
         "@s": {
           display: "none",
           width: '120px',
