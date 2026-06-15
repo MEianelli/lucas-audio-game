@@ -12,7 +12,7 @@ import { FlexC } from "@/components/containers/flex";
 import Head from "next/head";
 export { getServerSideProps } from "@/lib/context/getServerSideProps";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://filmguess.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.filmguess.com";
 
 const homeJsonLd = {
   "@context": "https://schema.org",

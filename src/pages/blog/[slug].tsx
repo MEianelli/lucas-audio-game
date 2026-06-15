@@ -133,7 +133,7 @@ export default function BlogArticlePage({
 
   const readingTime = estimateReadingTime(currentPost.html);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://filmguess.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.filmguess.com";
   const postUrl = `${siteUrl}/blog/${currentPost.slug}`;
   const blogPostingJsonLd = {
     "@context": "https://schema.org",

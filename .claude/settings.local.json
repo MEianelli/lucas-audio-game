@@ -10,7 +10,9 @@
       "Bash(git commit -m ' *)",
       "Bash(npx next *)",
       "Bash(node_modules/.bin/next lint *)",
-      "Bash(node_modules/.bin/eslint src *)"
+      "Bash(node_modules/.bin/eslint src *)",
+      "Bash(curl -sI https://filmguess.com/)",
+      "Bash(curl -sI https://www.filmguess.com/)"
     ]
   }
 }

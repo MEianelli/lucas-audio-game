@@ -9,7 +9,7 @@ export default function TopMovieQuotesArticle() {
     The best action movie quotes usually happen in the craziest moments — when the hero is fighting the villain and it’s basically life or death.
     Think of scenes like <cite>Arnold Schwarzenegger</cite> facing the T-1000 in the steel mill in
     <cite>Terminator 2: Judgment Day</cite>, <cite>John McClane</cite> crawling through the vents in <cite>Die Hard</cite>,
-    or <cite>Keanu Reeves</cite> as <cite>John Wick</cite>. That’s the kind of moment we try to pick for <a href="https://filmguess.com/content">FilmGuess</a> — though sometimes the fun part is when the quote isn’t that obvious.
+    or <cite>Keanu Reeves</cite> as <cite>John Wick</cite>. That’s the kind of moment we try to pick for <a href="/content">FilmGuess</a> — though sometimes the fun part is when the quote isn’t that obvious.
     </p>
     
     <section aria-labelledby="top-20-action">
@@ -45,7 +45,7 @@ export default function TopMovieQuotesArticle() {
         Think you know action cinema? Try our audio quiz and guess the movie from a short sound clip.
         Each question includes four options and a curated excerpt.
       </p>
-      <p><a href="https://filmguess.com/content">Play the Game!</a></p>
+      <p><a href="/content">Play the Game!</a></p>
     </section>
 
     </>

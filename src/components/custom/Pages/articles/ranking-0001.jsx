@@ -16,7 +16,7 @@ export default function TopMovieQuotesArticle() {
       <p>
         A Fazer!
       </p>
-      <p><a href="https://filmguess.com/content">Play the Game!</a></p>
+      <p><a href="/content">Play the Game!</a></p>
     </section>
 
     </>
