@@ -4,4 +4,4 @@ Disallow: /addMedia
 Disallow: /addPosts
 Disallow: /api/
 
-Sitemap: https://filmguess.com/sitemap.xml
+Sitemap: https://www.filmguess.com/sitemap.xml

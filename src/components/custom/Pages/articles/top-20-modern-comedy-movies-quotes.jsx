@@ -44,7 +44,7 @@ export default function TopMovieQuotesArticle() {
         Think you know comedy cinema? Try our audio quiz and guess the movie from a short sound clip.
         Each question includes four options and a curated excerpt.
       </p>
-      <p><a href="https://filmguess.com/content">Play the game!</a></p>
+      <p><a href="/content">Play the game!</a></p>
     </section>
 
     </>

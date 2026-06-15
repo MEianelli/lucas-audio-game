@@ -19,7 +19,7 @@ export function SEO({
   canonicalUrl,
   noIndex = false,
 }: SEOProps) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://filmguess.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.filmguess.com";
   const fullTitle = title.includes("Filmguess") ? title : `${title} | Filmguess`;
   const canonical = canonicalUrl
     ? canonicalUrl === "/"

@@ -124,7 +124,7 @@ function toBreadcrumbLabel(segment: string) {
 export function InfoPageLayout({ children }: InfoPageLayoutProps) {
   const router = useRouter();
   const path = router.asPath.split("?")[0].split("#")[0];
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://filmguess.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.filmguess.com";
 
   const breadcrumbItems = useMemo(() => {
     const segments = path.split("/").filter(Boolean);
