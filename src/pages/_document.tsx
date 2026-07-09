@@ -15,15 +15,7 @@ export default function Document() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap"
         />
-        
-        {/* Google AdSense */}
-        <script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}`}
-          crossOrigin="anonymous"
-        ></script>
-        <meta name="google-adsense-account" content={process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}/>
-        
+
         {/* Additional SEO Meta Tags */}
         <meta name="application-name" content="Filmguess" />
         <meta name="apple-mobile-web-app-capable" content="yes" />

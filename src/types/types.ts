@@ -34,6 +34,7 @@ export type User = {
   id: number;
   name: string;
   pass: string;
+  auth_id?: string | null;
   lifes: number;
   score: number;
   hitids: number[];

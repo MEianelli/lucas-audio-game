@@ -29,11 +29,13 @@ Uses `src/pages/` (Pages Router). `src/app/layout.tsx` exists but is vestigial �
 
 ### Auth
 
-Custom auth, no Supabase Auth. Flow:
-1. Login POST → `/api/login` → verify user in Supabase `users` table
-2. Response: AES-encrypt `{name, pass}` → store in cookie `d187yd`
-3. Every page uses shared `getServerSideProps` (`src/lib/context/getServerSideProps.ts`) → reads cookie → decrypts → fetches user from Supabase → passes as `PageProps`
-4. `useServerData(props)` hook hydrates the Zustand store on client
+Two mechanisms (see `docs/SUPABASE_AUTH_SETUP.md` for dashboard setup):
+
+**Supabase Auth social login (primary):** server-side OAuth via `@supabase/ssr` (anon key never ships to browser). `GET /api/auth/signin?provider=google` → provider → `GET /api/auth/callback` exchanges code, sets `sb-*` session cookies, finds-or-creates `users` row by `auth_id`. Logout via `POST /api/auth/logout` (`logoutClient()` in `src/utils/logout.ts`).
+
+**Legacy username/password:** Login POST → `/api/login` → verify in `users` table → AES-encrypt `{name}` → cookie `d187yd`.
+
+Shared `getServerSideProps` (`src/lib/context/getServerSideProps.ts`) checks Supabase session first (by `auth_id`), falls back to legacy cookie (by `name`), passes user as `PageProps`. `useServerData(props)` hydrates the Zustand store on client.
 
 ### State (Zustand)
 
