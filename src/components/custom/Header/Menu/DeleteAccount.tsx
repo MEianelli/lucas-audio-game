@@ -1,14 +1,14 @@
 import { ButtonWhite } from "@/components/buttons/buttons";
 import { useStore } from "@/lib/store";
-import { deleteCookie } from "@/utils/cookie";
+import { logoutClient } from "@/utils/logout";
 import { useRouter } from "next/navigation";
 
 export const DeleteAccount = () => {
   const router = useRouter();
   const resetStore = useStore((s) => s.resetStore);
 
-  function handleClick() {
-    deleteCookie();
+  async function handleClick() {
+    await logoutClient();
     resetStore();
     router.push("/");
   }

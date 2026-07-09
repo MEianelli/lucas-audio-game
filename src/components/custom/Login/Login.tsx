@@ -75,6 +75,16 @@ export const Login = ({
           <BlurButton disabled={true} title="Loading" onclick={() => {}} color="#48435e" />
         )}
       </FlexR>
+      <FlexR css={{ gap: 10 }}>
+        <BlurButton
+          title={"Continue with Google"}
+          onclick={() => {
+            window.location.href = "/api/auth/signin?provider=google";
+          }}
+          disabled={loading}
+          color="#b73508"
+        />
+      </FlexR>
     </FlexC>
   );
 };

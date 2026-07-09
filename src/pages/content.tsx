@@ -8,7 +8,6 @@ import { useFetchCards } from "@/lib/hooks/useFetchCards";
 export { getServerSideProps } from "@/lib/context/getServerSideProps";
 import { PageProps } from "@/lib/context/getServerSideProps";
 import { useServerData } from "@/lib/hooks/useServerData";
-import { AdsMobile, AdsDesk } from "@/components/custom/Misc/AdsContainer";
 import { SEO } from "@/components/custom/Misc/SEO";
 import { Footer } from "@/components/custom/Misc/Footer";
 import { styled } from "@/styles/stitches.config";
@@ -63,10 +62,8 @@ const Content = (props: PageProps) => {
             </HowToPlay>
           )}
           <DialogModal />
-          <AdsMobile />
           <Footer />
         </FlexC>
-        <AdsDesk />
       </Container>
     </>
   );

@@ -2,7 +2,7 @@ import { ButtonClean } from "@/components/buttons/buttons";
 import { FlexR } from "@/components/containers/flex";
 import { BlurText } from "@/components/text/BlurText";
 import { useStore } from "@/lib/store";
-import { deleteCookie } from "@/utils/cookie";
+import { logoutClient } from "@/utils/logout";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { LoginContent } from "../Login/LoginContent";
@@ -13,8 +13,8 @@ export function LoginButton() {
   const resetStore = useStore((s) => s.resetStore);
   const [view, setView] = useState<"login" | "inputs">("login");
 
-  function handleLogout() {
-    deleteCookie();
+  async function handleLogout() {
+    await logoutClient();
     resetStore();
     router.push("/");
   }
