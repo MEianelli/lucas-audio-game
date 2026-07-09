@@ -87,9 +87,8 @@ export function CookieBanner() {
     <BannerWrapper>
       <BannerBg />
       <BannerText>
-        We use cookies and similar technologies to enhance your experience, analyze site traffic, and serve
-        personalized ads. By clicking &quot;Accept&quot;, you agree to our use of cookies as described in our{" "}
-        <Link href="/privacy-policy">Privacy Policy</Link>.
+        We use cookies to keep you logged in and remember your game progress. By clicking &quot;Accept&quot;, you
+        agree to our use of cookies as described in our <Link href="/privacy-policy">Privacy Policy</Link>.
       </BannerText>
       <AcceptButton onClick={handleAccept}>
         <BlurText title="Accept" css={{ fontSize: "14px", color: "#ffaa00", letterSpacing: "1px" }} />
